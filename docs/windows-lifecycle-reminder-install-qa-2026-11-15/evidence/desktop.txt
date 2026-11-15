@@ -1,0 +1,64 @@
+=== RUN   TestReminderAcknowledgementWritesResponseBeforeScheduling
+--- PASS: TestReminderAcknowledgementWritesResponseBeforeScheduling (0.05s)
+=== RUN   TestReminderAcknowledgementDelayedQueryUsesSwitchedDatabase
+    api_service_test.go:300: real directory switching is supported on desktop Linux
+--- SKIP: TestReminderAcknowledgementDelayedQueryUsesSwitchedDatabase (0.00s)
+=== RUN   TestDailyReviewSwitchStartsTodayAndStopsCalculation
+--- PASS: TestDailyReviewSwitchStartsTodayAndStopsCalculation (0.03s)
+=== RUN   TestDailyReviewPerProjectOnlyListsMissedTargets
+--- PASS: TestDailyReviewPerProjectOnlyListsMissedTargets (0.03s)
+=== RUN   TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable
+--- PASS: TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable (0.02s)
+=== RUN   TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork
+--- PASS: TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork (0.00s)
+=== RUN   TestDesktopShutdownWaitsForActualAPICall
+--- PASS: TestDesktopShutdownWaitsForActualAPICall (0.02s)
+=== RUN   TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe
+--- PASS: TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe (0.00s)
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task
+--- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase (0.79s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone (0.07s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error (0.08s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task (0.08s)
+=== RUN   TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown
+--- PASS: TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown (0.00s)
+=== RUN   TestSecondLaunchActiveCallbackDrainsBeforeQuit
+--- PASS: TestSecondLaunchActiveCallbackDrainsBeforeQuit (0.00s)
+=== RUN   TestReminderGateDeliversFirstReminderImmediately
+--- PASS: TestReminderGateDeliversFirstReminderImmediately (0.00s)
+=== RUN   TestReminderGateDropsRepeatedActivityWhileActive
+--- PASS: TestReminderGateDropsRepeatedActivityWhileActive (0.00s)
+=== RUN   TestReminderGateUpdatesSameKindPlanWhileActive
+--- PASS: TestReminderGateUpdatesSameKindPlanWhileActive (0.00s)
+=== RUN   TestReminderGateQueuesDifferentKindsAndReleasesInOrder
+--- PASS: TestReminderGateQueuesDifferentKindsAndReleasesInOrder (0.00s)
+=== RUN   TestReminderGateReplacesQueuedSameKindInPlace
+--- PASS: TestReminderGateReplacesQueuedSameKindInPlace (0.00s)
+=== RUN   TestReminderGateHoldsRemindersDuringReview
+--- PASS: TestReminderGateHoldsRemindersDuringReview (0.00s)
+=== RUN   TestReminderGateReplacesQueuedSameKindDuringReview
+--- PASS: TestReminderGateReplacesQueuedSameKindDuringReview (0.00s)
+=== RUN   TestReminderGateKeepsActiveDialogAcrossReview
+--- PASS: TestReminderGateKeepsActiveDialogAcrossReview (0.00s)
+=== RUN   TestReminderGateReleaseDuringReviewDoesNotDeliver
+--- PASS: TestReminderGateReleaseDuringReviewDoesNotDeliver (0.00s)
+=== RUN   TestDesktopTransportPublicStartStopJoinsCleanupWorker
+--- PASS: TestDesktopTransportPublicStartStopJoinsCleanupWorker (0.00s)
+PASS

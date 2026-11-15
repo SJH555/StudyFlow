@@ -1,0 +1,81 @@
+Window: "StudyFlow", App: StudyFlow.exe.
+	0 window (窗口) StudyFlow Secondary Actions: Raise
+		89 pane (窗格) StudyFlow
+			90 pane (窗格) (disabled)
+			91 pane (区域) StudyFlow - Web 内容
+				92 pane (区域)
+					93 pane (区域)
+					94 pane (区域)
+						95 pane (区域)
+							96 document (文档) StudyFlow Value: http://wails.localhost/ ID: RootWebArea
+								97 text (文本) StudyFlow
+								98 button (按钮) 最小化 Description: 最小化
+								99 button (按钮) 最大化或还原 Description: 最大化或还原
+								100 button (按钮) 关闭窗口 Description: 关闭窗口
+								101 group (补充)
+									102 text (文本) StudyFlow
+									103 list (列表) 主导航
+										104 list item (列表项目) 今日计划
+											105 text (文本) 今日计划
+										106 list item (列表项目) 学习项目
+											107 text (文本) 学习项目
+										108 list item (列表项目) 学习计划
+											109 text (文本) 学习计划
+										110 list item (列表项目) 学习统计
+											111 text (文本) 学习统计
+										112 list item (列表项目) 学情追踪
+											113 text (文本) 学情追踪
+										114 list item (列表项目) 活动提醒
+											115 text (文本) 活动提醒
+									116 separator (分隔符)
+									117 list (列表) 设置导航
+										118 list item (列表项目) 设置
+											119 text (文本) 设置
+									120 thumb (缩略图) 调整侧边栏宽度 Value: 250
+								121 group (主要)
+									122 text (标题) 今日计划
+									123 button (按钮) 暂停今日计划
+									124 text (标题) 准备开始学习
+									125 text (文本) 当前没有正在进行的学习计划
+									126 button (按钮) 开始学习
+									127 text (文本) 计划学习
+									128 text (文本) 01:00:00
+									129 button (按钮) (disabled) 进入专注模式 ↗
+									130 text (标题) 今日安排
+									131 text (文本) 0 个计划时段
+									132 button (按钮) 定位当前
+									133 button (按钮) 查看全部
+									134 text (文本) 无计划
+									135 text (文本) 计划完成度
+									136 button (按钮) 管理计划 ↗
+									137 text (文本) 0%
+									138 text (文本) 实际 / 计划
+									139 text (文本) 计划 0分钟
+									140 text (文本) 0%
+									141 text (标题) 阶段目标倒计时
+									142 button (按钮) 管理目标
+									143 text (文本) 暂无进行中的阶段目标
+									144 text (标题) 学习记录
+									145 text (文本) 0 条记录
+									146 button (按钮) ＋ 补充记录
+									147 text (文本) 暂无学习记录
+								148 window (对话框) Secondary Actions: Raise
+									149 group (组)
+										150 text (文本) 活动提醒 · 记录当前活动
+										151 group (组)
+											152 text field (编辑) (settable, string) 当前活动 Description: 填写正在进行的活动 ID: input-v-18
+											153 group (组)
+												154 text (文本) 当前活动
+										155 button (按钮) 关闭
+										156 button (按钮) 提交记录并停止铃声
+							157 pane (区域)
+		68 title bar (标题栏) (settable, string) Value: StudyFlow
+			69 menu bar (菜单栏) 系统 ID: MenuBar
+				70 menu item (菜单项) 系统
+			71 button (按钮) 最小化
+			72 button (按钮) 最大化
+			73 button (按钮) 关闭
+
+Document text: ```
+￼
+```

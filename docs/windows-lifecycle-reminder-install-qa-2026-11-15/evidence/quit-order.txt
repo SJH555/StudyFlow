@@ -1,0 +1,11 @@
+=== RUN   TestRunReturnAndSecondQuitOrdering
+=== RUN   TestRunReturnAndSecondQuitOrdering/before-dispatch
+=== RUN   TestRunReturnAndSecondQuitOrdering/queued
+=== RUN   TestRunReturnAndSecondQuitOrdering/executing
+=== RUN   TestRunReturnAndSecondQuitOrdering/normal
+--- PASS: TestRunReturnAndSecondQuitOrdering (0.35s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/before-dispatch (0.09s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/queued (0.09s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/executing (0.08s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/normal (0.09s)
+PASS

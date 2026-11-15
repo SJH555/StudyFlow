@@ -1,0 +1,153 @@
+Window: "StudyFlow", App: StudyFlow.exe.
+	0 window (窗口) StudyFlow Secondary Actions: Raise
+		7 pane (窗格) StudyFlow
+			8 pane (窗格) (disabled)
+			9 pane (区域) StudyFlow - Web 内容
+				10 pane (区域)
+					11 pane (区域)
+					12 pane (区域)
+						13 pane (区域)
+							14 document (文档) StudyFlow Value: http://wails.localhost/ ID: RootWebArea
+								15 text (文本) StudyFlow
+								16 button (按钮) 最小化 Description: 最小化
+								17 button (按钮) 最大化或还原 Description: 最大化或还原
+								18 button (按钮) 关闭窗口 Description: 关闭窗口
+								19 group (补充)
+									20 text (文本) StudyFlow
+									21 list (列表) 主导航
+										22 list item (列表项目) 今日计划
+											23 text (文本) 今日计划
+										24 list item (列表项目) 学习项目
+											25 text (文本) 学习项目
+										26 list item (列表项目) 学习计划
+											27 text (文本) 学习计划
+										28 list item (列表项目) 学习统计
+											29 text (文本) 学习统计
+										30 list item (列表项目) 学情追踪
+											31 text (文本) 学情追踪
+										32 list item (列表项目) 活动提醒
+											33 text (文本) 活动提醒
+									34 separator (分隔符)
+									35 list (列表) 设置导航
+										36 list item (列表项目) 设置
+											37 text (文本) 设置
+									38 thumb (缩略图) 调整侧边栏宽度 Value: 250
+								39 group (主要)
+									40 text (标题) 今日计划
+									41 button (按钮) 暂停今日计划
+									43 text (标题) QA-plan-B
+									44 text (文本) 19:37 – 20:07
+									132 button (按钮) 开始学习
+									47 text (文本) 计划学习
+									133 text (文本) 30:00
+									160 text (文本) 剩余 29:45
+									49 button (按钮) (disabled) 进入专注模式 ↗
+									50 text (标题) 今日安排
+									51 text (文本) 2 个计划时段
+									52 button (按钮) 定位当前
+									53 button (按钮) 查看全部
+									54 text (文本) 19:35
+									55 text (文本) 19:37
+									56 text (文本) QA-plan-A
+									57 text (文本) 时段 2 分钟 · 学习 2 分钟
+									58 text (文本) · 19:35–19:37
+									59 button (按钮) (disabled) 开始学习 → Description: 该时段已结束
+									60 text (文本) 19:37
+									61 text (文本) 20:07
+									62 text (文本) QA-plan-B
+									63 text (文本) 时段 30 分钟 · 学习 30 分钟
+									64 text (文本) · 19:37–20:07
+									65 button (按钮) 开始学习 → Description: 开始学习
+									66 text (文本) 计划完成度
+									67 button (按钮) 管理计划 ↗
+									135 text (文本) 0%
+									69 text (文本) 实际 / 计划
+									70 text (文本) 计划 32分钟
+									136 text (文本) 0%
+									72 text (标题) 阶段目标倒计时
+									73 button (按钮) 管理目标
+									74 text (文本) 暂无进行中的阶段目标
+									75 text (标题) 学习记录
+									137 text (文本) 0 条记录
+									77 button (按钮) ＋ 补充记录
+									138 text (文本) 暂无学习记录
+								139 window (对话框) Secondary Actions: Raise
+									140 group (组) 学习时段已结束 「QA-plan-A」已结束。本次不足 10 分钟，未计入学习记录。 当前计划「QA-plan-B」现在可以开始。 知道了
+										141 text (文本) 学习时段已结束
+										142 text (文本) 「QA-plan-A」已结束。
+										143 text (文本) 本次不足 10 分钟，未计入学习记录。
+										144 text (文本) 当前计划「QA-plan-B」现在可以开始。
+										145 button (按钮) 知道了
+							82 pane (区域)
+		1 title bar (标题栏) (settable, string) Value: StudyFlow
+			2 menu bar (菜单栏) 系统 ID: MenuBar
+				3 menu item (菜单项) 系统
+			4 button (按钮) 最小化
+			5 button (按钮) 最大化
+			6 button (按钮) 关闭
+
+Document text: ```
+StudyFlow
+−
+□
+×
+StudyFlow
+今日计划
+学习项目
+学习计划
+学习统计
+学情追踪
+活动提醒
+￼
+设置
+调整侧边栏宽度
+今日计划
+暂停今日计划
+QA-plan-B
+19:37 – 20:07
+开始学习
+计划学习
+30:00
+剩余 29:45
+进入专注模式 ↗
+今日安排
+2 个计划时段
+定位当前
+查看全部
+19:35
+19:37
+￼
+￼
+QA-plan-A
+时段 2 分钟 · 学习 2 分钟 · 19:35–19:37
+开始学习
+→
+19:37
+20:07
+￼
+￼
+QA-plan-B
+时段 30 分钟 · 学习 30 分钟 · 19:37–20:07
+开始学习
+→
+计划完成度
+管理计划 ↗
+0%
+实际 / 计划
+计划 32分钟
+0%
+阶段目标倒计时
+管理目标
+暂无进行中的阶段目标
+学习记录
+0 条记录
+＋ 补充记录
+￼
+暂无学习记录
+￼
+￼
+学习时段已结束
+「QA-plan-A」已结束。本次不足 10 分钟，未计入学习记录。
+当前计划「QA-plan-B」现在可以开始。
+知道了
+```

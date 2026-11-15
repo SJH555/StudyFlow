@@ -1,0 +1,98 @@
+Window: "StudyFlow", App: StudyFlow.exe.
+	0 window (窗口) StudyFlow Secondary Actions: Raise
+		1 pane (窗格) StudyFlow
+			2 pane (窗格) (disabled)
+			3 pane (区域) StudyFlow - Web 内容
+				4 pane (区域)
+					5 pane (区域)
+					6 pane (区域)
+						7 pane (区域)
+							8 document (文档) StudyFlow Value: http://wails.localhost/ ID: RootWebArea
+								9 text (文本) StudyFlow
+								10 button (按钮) 最小化 Description: 最小化
+								11 button (按钮) 最大化或还原 Description: 最大化或还原
+								12 button (按钮) 关闭窗口 Description: 关闭窗口
+								13 group (补充)
+									14 text (文本) StudyFlow
+									15 list (列表) 主导航
+										16 list item (列表项目) 今日计划
+											17 text (文本) 今日计划
+										18 list item (列表项目) 学习项目
+											19 text (文本) 学习项目
+										20 list item (列表项目) 学习计划
+											21 text (文本) 学习计划
+										22 list item (列表项目) 学习统计
+											23 text (文本) 学习统计
+										24 list item (列表项目) 学情追踪
+											25 text (文本) 学情追踪
+										26 list item (列表项目) 活动提醒
+											27 text (文本) 活动提醒
+									28 separator (分隔符)
+									29 list (列表) 设置导航
+										30 list item (列表项目) 设置
+											31 text (文本) 设置
+									32 thumb (缩略图) 调整侧边栏宽度 Value: 250
+								33 group (主要)
+									67 text (标题) 学习项目
+									68 button (按钮) 添加项目
+									69 group (组) 学习项目状态
+										70 button (按钮) 启用 2
+										71 button (按钮) 隐藏 0
+									72 text (文本) 项目名称
+									73 text (文本) 关联计划
+									74 text (文本) 操作
+									75 text (文本) QA-upgrade-preserve
+									76 group (组) 无关联计划
+										77 text (文本) —
+									78 button (按钮) 编辑
+									79 button (按钮) 隐藏
+									80 button (按钮) 删除
+									81 text (文本) QA-uninstall-73
+									82 group (组) 无关联计划
+										83 text (文本) —
+									84 button (按钮) 编辑
+									85 button (按钮) 隐藏
+									86 button (按钮) 删除
+							60 pane (区域)
+		61 title bar (标题栏) (settable, string) Value: StudyFlow
+			62 menu bar (菜单栏) 系统 ID: MenuBar
+				63 menu item (菜单项) 系统
+			64 button (按钮) 最小化
+			65 button (按钮) 最大化
+			66 button (按钮) 关闭
+
+Document text: ```
+StudyFlow
+−
+□
+×
+StudyFlow
+今日计划
+学习项目
+学习计划
+学习统计
+学情追踪
+活动提醒
+￼
+设置
+调整侧边栏宽度
+学习项目
+添加项目
+启用
+2
+隐藏
+0
+项目名称
+关联计划
+操作
+QA-upgrade-preserve
+—
+编辑
+隐藏
+删除
+QA-uninstall-73
+—
+编辑
+隐藏
+删除
+```

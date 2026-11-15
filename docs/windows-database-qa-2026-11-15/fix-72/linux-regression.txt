@@ -1,0 +1,4 @@
+ok  	exam_notify/desktop	0.942s
+ok  	exam_notify/internal/infrastructure/persistence	(cached)
+ok  	exam_notify/internal/infrastructure/storage	(cached)
+ok  	exam_notify/internal/app	(cached)

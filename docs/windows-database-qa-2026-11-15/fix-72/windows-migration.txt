@@ -1,0 +1,22 @@
+=== RUN   TestLegacyBindingKeepsDataDirectoryBehavior
+--- PASS: TestLegacyBindingKeepsDataDirectoryBehavior (0.10s)
+=== RUN   TestChangingDataDirectoryMovesBackupFiles
+--- PASS: TestChangingDataDirectoryMovesBackupFiles (0.03s)
+=== RUN   TestWindowsQASwitchConnectionSettings
+    database_windows_qa_test.go:53: foreign_keys before=1 after=1
+--- PASS: TestWindowsQASwitchConnectionSettings (0.06s)
+=== RUN   TestWindowsQAFailedSwitchRestoresUsableConnection
+--- PASS: TestWindowsQAFailedSwitchRestoresUsableConnection (0.07s)
+=== RUN   TestWindowsQACopyFailureRollbackSettings
+=== RUN   TestWindowsQACopyFailureRollbackSettings/copy
+    database_windows_qa_test.go:93: migration failed as intended: open C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettingscopy1425498991\001\deny-create\study.db: Access is denied.
+=== RUN   TestWindowsQACopyFailureRollbackSettings/open
+    database_windows_qa_test.go:93: migration failed as intended: unable to open database file: out of memory (14)
+--- PASS: TestWindowsQACopyFailureRollbackSettings (1.54s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/copy (0.09s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/open (1.45s)
+=== RUN   TestWindowsQAConcurrentSwitchRequestsAndBackups
+--- PASS: TestWindowsQAConcurrentSwitchRequestsAndBackups (0.09s)
+=== RUN   TestWindowsQABackupWALAndRetention
+--- PASS: TestWindowsQABackupWALAndRetention (0.04s)
+PASS

@@ -1,0 +1,48 @@
+[
+  {
+    "name": "existing",
+    "integrity": "ok",
+    "tables": 9,
+    "subjects": [
+      [
+        "package-marker"
+      ]
+    ]
+  },
+  {
+    "name": "legacy1",
+    "integrity": "ok",
+    "tables": 9,
+    "subjects": [
+      [
+        "legacy subject"
+      ]
+    ]
+  },
+  {
+    "name": "legacy2",
+    "integrity": "ok",
+    "tables": 9,
+    "subjects": [
+      [
+        "legacy subject"
+      ]
+    ]
+  },
+  {
+    "name": "legacy3",
+    "integrity": "ok",
+    "tables": 9,
+    "subjects": [
+      [
+        "legacy subject"
+      ]
+    ]
+  },
+  {
+    "name": "fresh",
+    "integrity": "ok",
+    "tables": 9,
+    "subjects": []
+  }
+]

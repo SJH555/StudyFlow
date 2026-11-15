@@ -1,0 +1,3 @@
+ok  	exam_notify/internal/infrastructure/storage	1.527s
+ok  	exam_notify/internal/infrastructure/persistence	9.161s
+ok  	exam_notify/desktop	25.059s

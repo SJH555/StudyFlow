@@ -1,0 +1,14 @@
+=== RUN   TestUnsupportedStartupRejectsPendingNames
+=== RUN   TestUnsupportedStartupRejectsPendingNames/.pending
+=== RUN   TestUnsupportedStartupRejectsPendingNames/.pending.cleanup
+--- PASS: TestUnsupportedStartupRejectsPendingNames (0.02s)
+    --- PASS: TestUnsupportedStartupRejectsPendingNames/.pending (0.02s)
+    --- PASS: TestUnsupportedStartupRejectsPendingNames/.pending.cleanup (0.00s)
+=== RUN   TestStorageBaseDir
+    storage_test.go:11: Linux base directory = "\\home\\user\\.StudyFlow"
+--- FAIL: TestStorageBaseDir (0.00s)
+=== RUN   TestResolveDataDirectoryMigratesOldDefault
+--- PASS: TestResolveDataDirectoryMigratesOldDefault (0.01s)
+=== RUN   TestResolveDataDirectoryKeepsCustomChoice
+--- PASS: TestResolveDataDirectoryKeepsCustomChoice (0.02s)
+FAIL

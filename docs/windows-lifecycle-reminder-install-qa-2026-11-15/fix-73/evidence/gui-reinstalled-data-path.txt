@@ -1,0 +1,127 @@
+Window: "StudyFlow", App: StudyFlow.exe.
+	0 window (窗口) StudyFlow Secondary Actions: Raise
+		1 pane (窗格) StudyFlow
+			2 pane (窗格) (disabled)
+			3 pane (区域) StudyFlow - Web 内容
+				4 pane (区域)
+					5 pane (区域)
+					6 pane (区域)
+						7 pane (区域)
+							8 document (文档) StudyFlow Value: http://wails.localhost/ ID: RootWebArea
+								9 text (文本) StudyFlow
+								10 button (按钮) 最小化 Description: 最小化
+								11 button (按钮) 最大化或还原 Description: 最大化或还原
+								12 button (按钮) 关闭窗口 Description: 关闭窗口
+								13 group (补充)
+									14 text (文本) StudyFlow
+									15 list (列表) 主导航
+										16 list item (列表项目) 今日计划
+											17 text (文本) 今日计划
+										18 list item (列表项目) 学习项目
+											19 text (文本) 学习项目
+										20 list item (列表项目) 学习计划
+											21 text (文本) 学习计划
+										22 list item (列表项目) 学习统计
+											23 text (文本) 学习统计
+										24 list item (列表项目) 学情追踪
+											25 text (文本) 学情追踪
+										26 list item (列表项目) 活动提醒
+											27 text (文本) 活动提醒
+									28 separator (分隔符)
+									29 list (列表) 设置导航
+										30 list item (列表项目) 设置
+											31 text (文本) 设置
+									32 thumb (缩略图) 调整侧边栏宽度 Value: 250
+								33 group (主要)
+									87 text (文本) PREFERENCES
+									88 text (标题) 常规
+									89 text (文本) 开机自启动、铃声与窗口行为等基础设置
+									90 group (导航) 设置分类
+										91 text (文本) 系统设置
+										92 list (列表)
+											93 list item (列表项目) 常规
+												94 text (文本) 常规
+											95 list item (列表项目) 数据与备份
+												96 text (文本) 数据与备份
+											97 list item (列表项目) 日志
+												98 text (文本) 日志
+											99 list item (列表项目) 重置数据
+												100 text (文本) 重置数据
+										101 thumb (缩略图) 调整二级导航宽度 Value: 240
+									102 text (文本) 开机后自动启动
+									103 text (文本) 开机后自动运行 StudyFlow。
+									104 group (组)
+									105 group (组)
+										106 checkbox (复选框) (settable, string) 开机后自动启动 ID: switch-v-21
+									107 separator (分隔符)
+									108 text (文本) 铃声大小
+									109 text (文本) 提醒铃声的播放音量，拖动后立即生效；0 为静音。
+									110 group (组)
+										111 slider (滑块) (settable, float) 铃声大小 Value: 37
+									112 text (文本) 37
+									113 separator (分隔符)
+									114 text (文本) 启动后窗口
+									115 text (文本) 控制应用启动时主窗口的显示方式。
+									116 group (组) 启动后窗口
+										117 button (按钮) 显示窗口
+										118 button (按钮) 驻留托盘
+									119 separator (分隔符)
+									120 text (文本) 关闭按钮
+									121 text (文本) 控制点击窗口关闭按钮后的行为。
+									122 group (组) 关闭按钮
+										123 button (按钮) 最小化
+										124 button (按钮) 退出
+									125 separator (分隔符)
+									126 text (文本) 版本信息
+									127 text (文本) 当前安装的 StudyFlow 版本
+									128 text (文本) v0.4.0-73
+							60 pane (区域)
+		61 title bar (标题栏) (settable, string) Value: StudyFlow
+			62 menu bar (菜单栏) 系统 ID: MenuBar
+				63 menu item (菜单项) 系统
+			64 button (按钮) 最小化
+			65 button (按钮) 最大化
+			66 button (按钮) 关闭
+
+Document text: ```
+StudyFlow
+−
+□
+×
+StudyFlow
+今日计划
+学习项目
+学习计划
+学习统计
+学情追踪
+活动提醒
+￼
+设置
+调整侧边栏宽度
+￼
+PREFERENCES
+数据与备份
+选择数据存储位置，管理自动备份
+本地存储
+系统设置
+常规
+数据与备份
+日志
+重置数据
+调整二级导航宽度
+￼
+数据目录
+数据库与备份随存储位置一起迁移。
+￼
+￼
+D:\CLink\Desktop\studyflow\uninstall-fix-qa-73\外部数据 #100%
+￼
+选择目录
+若目标目录已存在 study.db，迁移会停止，以免覆盖原有数据。
+自动备份
+开启后立即备份一次，此后每隔 2 天备份；每份保留 2 天。
+备份目录：D:\CLink\Desktop\studyflow\uninstall-fix-qa-73\外部数据 #100%\backups
+￼
+自动备份
+￼
+```

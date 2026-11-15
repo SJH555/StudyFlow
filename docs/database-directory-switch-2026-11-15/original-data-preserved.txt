@@ -1,0 +1,1 @@
+PASS: original 71 database full SQL dump unchanged after both GUI test rounds; original closeBehavior restored before restarting original app

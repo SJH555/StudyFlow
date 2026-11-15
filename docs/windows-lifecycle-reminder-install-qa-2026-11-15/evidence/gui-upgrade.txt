@@ -1,0 +1,36 @@
+Window: "StudyFlow Setup", App: StudyFlow-0.4.0-72-amd64-installer.exe.
+	0 window (对话框) StudyFlow Setup Secondary Actions: Raise
+		25 button (按钮) (disabled) < Back ID: 3
+		1 button (按钮) Next > ID: 1
+		2 button (按钮) (disabled) Cancel ID: 2
+		26 image (图像) ID: 1035
+		3 image (图像) ID: 1036
+		27 text (文本) Nullsoft Install System v3.11-1 ID: 1256
+		28 text (文本) Nullsoft Install System v3.11-1 ID: 1028
+		5 text (文本) Nullsoft Install System v3.11-1 ID: 1034
+		15 text (文本) Installation Complete ID: 1037
+		16 text (文本) Setup was completed successfully. ID: 1038
+		17 image (图像) Setup was completed successfully. ID: 1039
+		29 progress bar (进度栏) Value: 30000 ID: 1004
+		30 text (文本) Completed ID: 1006
+		31 list (列表) Completed ID: 1016
+			32 list item (列表项目) (selectable) Output folder: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\installed
+				33 text (文本) Output folder: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\installed
+			34 list item (列表项目) (selectable) Extract: StudyFlow.exe... 100%
+				35 text (文本) Extract: StudyFlow.exe... 100%
+			36 list item (列表项目) (selectable) Create shortcut: C:\Users\jhsong\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\StudyFlow.lnk
+				37 text (文本) Create shortcut: C:\Users\jhsong\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\StudyFlow.lnk
+			38 list item (列表项目) (selectable) Create shortcut: D:\CLink\Desktop\StudyFlow.lnk
+				39 text (文本) Create shortcut: D:\CLink\Desktop\StudyFlow.lnk
+			40 list item (列表项目) (selectable) Created uninstaller: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\installed\uninstall.exe
+				41 text (文本) Created uninstaller: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\installed\uninstall.exe
+			42 list item (列表项目) (selectable) Completed
+				43 text (文本) Completed
+		9 title bar (标题栏) (settable, string) Value: StudyFlow Setup
+			10 menu bar (菜单栏) 系统 ID: MenuBar
+				45 menu item (菜单项) 系统
+			12 button (按钮) 最小化
+			13 button (按钮) (disabled) 最大化
+			14 button (按钮) (disabled) 关闭
+
+The focused UI element is 0 window (对话框) StudyFlow Setup Secondary Actions: Raise.

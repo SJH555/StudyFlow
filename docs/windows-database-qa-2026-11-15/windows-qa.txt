@@ -1,0 +1,24 @@
+=== RUN   TestWindowsQASwitchPreservesResources
+    database_windows_qa_test.go:52: old resource lost: study.db: GetFileAttributesEx C:\Users\jhsong\AppData\Local\Temp\TestWindowsQASwitchPreservesResources1749655496\001\原目录 #100%\study.db: The system cannot find the file specified.
+    database_windows_qa_test.go:52: old resource lost: backups/study-20261115-100000.db: GetFileAttributesEx C:\Users\jhsong\AppData\Local\Temp\TestWindowsQASwitchPreservesResources1749655496\001\原目录 #100%\backups\study-20261115-100000.db: The system cannot find the path specified.
+    database_windows_qa_test.go:52: old resource lost: backups/user-notes.txt: GetFileAttributesEx C:\Users\jhsong\AppData\Local\Temp\TestWindowsQASwitchPreservesResources1749655496\001\原目录 #100%\backups\user-notes.txt: The system cannot find the path specified.
+--- FAIL: TestWindowsQASwitchPreservesResources (0.12s)
+=== RUN   TestWindowsQASwitchConnectionSettings
+    database_windows_qa_test.go:70: foreign_keys before=1 after=0
+    database_windows_qa_test.go:72: foreign key enforcement disabled after switch
+    database_windows_qa_test.go:75: orphan plan accepted after switch
+--- FAIL: TestWindowsQASwitchConnectionSettings (0.07s)
+=== RUN   TestWindowsQAFailedSwitchRestoresUsableConnection
+--- PASS: TestWindowsQAFailedSwitchRestoresUsableConnection (0.07s)
+=== RUN   TestWindowsQACopyFailureRollbackSettings
+    database_windows_qa_test.go:124: copy failed as intended: open C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettings4205703632\001\deny-create\study.db: Access is denied.
+    database_windows_qa_test.go:138: rollback connection foreign_keys=0, want 1
+--- FAIL: TestWindowsQACopyFailureRollbackSettings (0.11s)
+=== RUN   TestWindowsQASwitchWithExternalWALConnection
+    database_windows_qa_test.go:168: committed WAL row after switch=0, err=<nil>
+--- FAIL: TestWindowsQASwitchWithExternalWALConnection (0.08s)
+=== RUN   TestWindowsQAConcurrentSwitchRequestsAndBackups
+--- PASS: TestWindowsQAConcurrentSwitchRequestsAndBackups (0.13s)
+=== RUN   TestWindowsQABackupWALAndRetention
+--- PASS: TestWindowsQABackupWALAndRetention (0.07s)
+FAIL

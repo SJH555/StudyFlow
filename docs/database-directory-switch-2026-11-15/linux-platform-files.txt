@@ -1,0 +1,3 @@
+[activities.go api_routes.go api_service.go app.go backup.go break.go daily_review.go data_directory.go data_directory_linux.go goals.go lifecycle.go main.go plans.go reminder_gate.go reset_tables.go sessions.go settings.go startup_database.go subjects.go transport.go]
+[backup.go database.go directory_paths.go directory_prepare.go directory_publish_linux.go directory_resources.go directory_snapshot.go directory_switch.go directory_switch_flow.go directory_switch_linux.go legacy_snapshot.go sqlite.go]
+[location_retirement.go location_switch.go location_switch_linux.go startup_location.go storage.go]

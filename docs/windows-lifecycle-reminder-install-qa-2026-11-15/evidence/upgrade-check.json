@@ -1,0 +1,8 @@
+{
+  "same_data_hashes": {
+    "data/qa-user-file.txt": "17b71e5362daab5c23674127ef88f0745a15f6cabf0dee582554d3741d268139",
+    "data/study.db": "d632995ce65bfff226ec2acffe006f3897a32fa0c0138db09f2a8c008e7f16db",
+    "data/backups/qa-backup.txt": "2aa9f4cdc5727b04d6649638743569ad8bd875dcf1c2006fca802260b129ada8"
+  },
+  "exe72": true
+}

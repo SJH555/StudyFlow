@@ -1,0 +1,14 @@
+=== RUN   TestCheckBackupSnapshotFailureSkipsCleanup
+=== RUN   TestCheckBackupSnapshotFailureSkipsCleanup/create
+=== RUN   TestCheckBackupSnapshotFailureSkipsCleanup/publish
+--- PASS: TestCheckBackupSnapshotFailureSkipsCleanup (0.10s)
+    --- PASS: TestCheckBackupSnapshotFailureSkipsCleanup/create (0.06s)
+    --- PASS: TestCheckBackupSnapshotFailureSkipsCleanup/publish (0.04s)
+=== RUN   TestCheckBackupReturnsCleanupErrorWhileDisabled
+    backup_test.go:84: directory permissions do not block deletion on this platform: <nil>
+--- SKIP: TestCheckBackupReturnsCleanupErrorWhileDisabled (0.03s)
+=== RUN   TestSchedulerBackupIntervalBoundaryAndCleanupWhileDisabled
+--- PASS: TestSchedulerBackupIntervalBoundaryAndCleanupWhileDisabled (0.05s)
+=== RUN   TestSchedulerAutomaticBackupCreatesUsableSnapshotAndRotates
+--- PASS: TestSchedulerAutomaticBackupCreatesUsableSnapshotAndRotates (0.05s)
+PASS

@@ -1,0 +1,7 @@
+EXCLUSIVE OPEN OK: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\portable\StudyFlow.exe
+EXCLUSIVE OPEN OK: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\portable\window-state.json
+EXCLUSIVE OPEN OK: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\portable\data\activity-ringtone.mp3
+EXCLUSIVE OPEN OK: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\portable\data\break-ringtone.mp3
+EXCLUSIVE OPEN OK: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\portable\data\plan-ringtone.mp3
+EXCLUSIVE OPEN OK: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\portable\data\study.db
+EXCLUSIVE OPEN OK: D:\CLink\Desktop\studyflow\lifecycle-reminder-install-qa\portable\logs\error-2026-11-15.log

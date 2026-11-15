@@ -1,0 +1,93 @@
+task: [package] go run ./tools/release prepare
+构建版本: 0.4.0-76
+task: [windows:common:go:mod:tidy] go mod tidy
+task: Task "windows:common:generate:icons" is up to date
+task: [windows:common:install:frontend:deps:npm] npm install
+task: [windows:common:generate:bindings] go run ./tools/syncassets
+task: [windows:common:generate:bindings] wails3 generate bindings -f '-tags production -trimpath -buildvcs=false -ldflags="-w -s -H windowsgui"' -clean=true -d vue/bindings -ts -i ./desktop
+npm warn Unknown project config "minimum-release-age". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+Wails v3.0.0 › Generate Bindings
+[30;46m[30;46m INFO [0m[0m [96m[96mProcessed: 287 Packages, 1 Service, 7 Methods, 0 Enums, 0 Models, 5 Events in 3.796977847s.[0m[0m
+[30;46m[30;46m INFO [0m[0m [96m[96mOutput directory: /home/jhsong/programming/code/StudyFlow/vue/bindings[0m[0m
+
+up to date, audited 61 packages in 5s
+
+13 packages are looking for funding
+  run `npm fund` for details
+
+1 moderate severity vulnerability
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm warn install-scripts 1 package has install scripts not yet covered by allowScripts:
+npm warn install-scripts   vue-demi@0.14.10 (postinstall: node -e "try{require('./scripts/postinstall.js')}catch(e){}")
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+task: [windows:common:frontend:run:npm] npm run build -q
+npm warn Unknown project config "minimum-release-age". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> studyflow-frontend@0.4.0-76 build
+> vue-tsc && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 1313 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                             0.45 kB │ gzip:   0.31 kB
+dist/assets/materialdesignicons-webfont-Dp5v-WZN.woff2    403.21 kB
+dist/assets/materialdesignicons-webfont-PXm3-2wK.woff     587.98 kB
+dist/assets/materialdesignicons-webfont-B7mPwVP_.ttf    1,307.66 kB
+dist/assets/materialdesignicons-webfont-CSr8KVlo.eot    1,307.88 kB
+dist/assets/index-XFElPOHv.css                            816.42 kB │ gzip: 120.43 kB
+dist/assets/index-C3MNeoN2.js                           1,584.21 kB │ gzip: 515.34 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.03s
+task: [build:frontend (DEV= RUNNER=npm)] go run ./tools/syncassets
+task: [windows:generate:syso] wails3 generate syso -arch amd64 -icon windows/icon.ico -manifest windows/wails.exe.manifest -info windows/info.json -out ../desktop/wails_windows_amd64.syso
+task: [windows:build:native] go build -tags production -trimpath -buildvcs=false -ldflags="-w -s -H windowsgui" -o "bin/StudyFlow.exe" ./desktop
+task: [windows:build:native] rm -f desktop/*.syso
+task: [windows:create:nsis:installer] wails3 generate webview2bootstrapper -dir "/home/jhsong/programming/code/StudyFlow/build/windows/nsis"
+options.Directory /home/jhsong/programming/code/StudyFlow/build/windows/nsis
+cleaned options.Directory /home/jhsong/programming/code/StudyFlow/build/windows/nsis
+[92m[0m
+[92mNeed documentation? Run: [0m[94m]8;;https://v3.wails.io/getting-started/your-first-app/\[4mwails3 docs[0m[94m]8;;\[0m
+[31;107m[31;107m ♥  [0m[0m [92m[92mIf Wails is useful to you or your company, please consider sponsoring the project: [94m]8;;https://github.com/sponsors/leaanthony\[4mwails3 sponsor[0m[92m[94m]8;;\[0m[92m[0m[0m
+task: [windows:create:nsis:installer] 
+makensis -DWAILS_INSTALL_SCOPE=user -DREQUEST_EXECUTION_LEVEL=user -DARG_WAILS_AMD64_BINARY="/home/jhsong/programming/code/StudyFlow/bin/StudyFlow.exe" project.nsi
+
+
+Command line defined: "WAILS_INSTALL_SCOPE=user"
+Command line defined: "REQUEST_EXECUTION_LEVEL=user"
+Command line defined: "ARG_WAILS_AMD64_BINARY=/home/jhsong/programming/code/StudyFlow/bin/StudyFlow.exe"
+Processing config: /etc/nsisconf.nsh
+Processing script file: "project.nsi" (UTF8)
+
+Processed 1 file, writing output (x86-unicode):
+
+Output: "../../../bin/StudyFlow-0.4.0-76-amd64-installer.exe"
+Install: 4 pages (256 bytes), 1 section (1 required) (4120 bytes), 665 instructions (18620 bytes), 242 strings (7464 bytes), 1 language table (302 bytes).
+Uninstall: 1 page (128 bytes), 1 section (4120 bytes), 48 instructions (1344 bytes), 80 strings (2294 bytes), 1 language table (226 bytes).
+
+Using zlib compression.
+
+EXE header size:              244736 / 101888 bytes
+Install code:                   5365 / 29178 bytes
+Install data:               13261133 / 25632649 bytes
+Uninstall code+data:          144610 / 144653 bytes
+CRC (0xCA87FF7C):                  4 / 4 bytes
+
+Total size:                 13655848 / 25908372 bytes (52.7%)
+task: [package] go run ./tools/release binary windows amd64
+可执行文件: bin/StudyFlow-0.4.0-76-windows-amd64.exe
+task: [package] go run ./tools/release packages windows amd64
+[92m[0m
+[92mNeed documentation? Run: [0m[94m]8;;https://v3.wails.io/getting-started/your-first-app/\[4mwails3 docs[0m[94m]8;;\[0m
+[31;107m[31;107m ♥  [0m[0m [92m[92mIf Wails is useful to you or your company, please consider sponsoring the project: [94m]8;;https://github.com/sponsors/leaanthony\[4mwails3 sponsor[0m[92m[94m]8;;\[0m[92m[0m[0m

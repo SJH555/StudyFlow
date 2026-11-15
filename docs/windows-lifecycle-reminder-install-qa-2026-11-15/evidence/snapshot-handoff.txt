@@ -1,0 +1,3 @@
+=== RUN   TestWindowsQADailySnapshotAndExactPlanHandoff
+--- PASS: TestWindowsQADailySnapshotAndExactPlanHandoff (0.08s)
+PASS

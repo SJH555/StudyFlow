@@ -1,0 +1,48 @@
+=== RUN   TestWindowsBindingKeepsDataDirectoryBehavior
+--- PASS: TestWindowsBindingKeepsDataDirectoryBehavior (0.14s)
+=== RUN   TestChangingDataDirectoryMovesBackupFiles
+--- PASS: TestChangingDataDirectoryMovesBackupFiles (0.10s)
+=== RUN   TestWindowsQASwitchConnectionSettings
+    database_windows_qa_test.go:53: foreign_keys before=1 after=1
+--- PASS: TestWindowsQASwitchConnectionSettings (0.10s)
+=== RUN   TestWindowsQAFailedSwitchRestoresUsableConnection
+--- PASS: TestWindowsQAFailedSwitchRestoresUsableConnection (0.05s)
+=== RUN   TestWindowsQACopyFailureRollbackSettings
+=== RUN   TestWindowsQACopyFailureRollbackSettings/copy
+    database_windows_qa_test.go:92: migration failed as intended: prepare database directory: 发布目标数据库 C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettingscopy962248489\001\deny-create\study.db: Access is denied.
+=== RUN   TestWindowsQACopyFailureRollbackSettings/open
+    database_windows_qa_test.go:92: migration failed as intended: prepare database directory: 创建数据库快照 C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettingsopen2428384597\001\deny-create\.studyflow-snapshot-490503411\.studyflow-1566127877.tmp: unable to open database file: out of memory (14)
+--- PASS: TestWindowsQACopyFailureRollbackSettings (1.55s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/copy (0.09s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/open (1.46s)
+=== RUN   TestWindowsQAConcurrentSwitchRequestsAndBackups
+--- PASS: TestWindowsQAConcurrentSwitchRequestsAndBackups (0.15s)
+=== RUN   TestWindowsQABackupWALAndRetention
+--- PASS: TestWindowsQABackupWALAndRetention (0.05s)
+=== RUN   TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable
+2026/11/15 21:36:11 数据目录已提交，旧文件清理尚未完成: retired storage cleanup is incomplete
+retired database identity changed: C:\Users\jhsong\AppData\Local\Temp\TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable1354365429\001\base\data\study.db
+--- PASS: TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable (0.09s)
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/committed
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/unchanged_with_implicit_default
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/interrupted_cleanup
+--- PASS: TestStartupPendingRestoresCommittedAndUnchanged (0.29s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/committed (0.11s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/unchanged_with_implicit_default (0.09s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/interrupted_cleanup (0.09s)
+=== RUN   TestStartupPendingFailurePreservesEvidence
+=== RUN   TestStartupPendingFailurePreservesEvidence/identity_conflict
+=== RUN   TestStartupPendingFailurePreservesEvidence/corrupt_marker
+=== RUN   TestStartupPendingFailurePreservesEvidence/uncertain_publication
+=== RUN   TestStartupPendingFailurePreservesEvidence/candidate_schema_failure
+--- PASS: TestStartupPendingFailurePreservesEvidence (0.37s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/identity_conflict (0.12s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/corrupt_marker (0.09s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/uncertain_publication (0.09s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/candidate_schema_failure (0.07s)
+=== RUN   TestStartupPendingUnchangedRechecksHistoricalSelection
+--- PASS: TestStartupPendingUnchangedRechecksHistoricalSelection (0.13s)
+=== RUN   TestStartupPendingClearFailureClosesValidatedConnection
+--- PASS: TestStartupPendingClearFailureClosesValidatedConnection (0.11s)
+PASS

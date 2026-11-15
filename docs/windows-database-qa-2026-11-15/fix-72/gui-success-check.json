@@ -1,0 +1,11 @@
+{
+  "version": "0.4.0-72",
+  "targetIntegrity": "ok",
+  "projects": [
+    [
+      "qa-72-project"
+    ]
+  ],
+  "location": "D:\\CLink\\Desktop\\studyflow\\db-fix-qa-72\\迁移成功 #100%",
+  "restartProjectVisible": "qa-72-project"
+}

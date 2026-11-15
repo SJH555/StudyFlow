@@ -1,0 +1,1 @@
+PASS: final build 76 GUI B to A; database and backup integrity ok; source DB and empty backups removed; original notes and user file retained; no pending marker

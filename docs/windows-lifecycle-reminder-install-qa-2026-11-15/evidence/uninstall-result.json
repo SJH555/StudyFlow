@@ -1,0 +1,10 @@
+{
+  "InstallDirExists": false,
+  "DefaultDatabaseExists": false,
+  "DefaultBackupExists": false,
+  "DefaultUserFileExists": false,
+  "ExternalFilesPreserved": true,
+  "UninstallRegistryExists": false,
+  "DesktopShortcutExists": false,
+  "SharedWebviewExists": false
+}

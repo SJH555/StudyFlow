@@ -1,0 +1,5 @@
+=== RUN   TestBackupChecksSerializeWithDatabaseRequests
+--- PASS: TestBackupChecksSerializeWithDatabaseRequests (0.10s)
+=== RUN   TestEnableAutomaticBackupRespondsWithoutDeadlock
+--- PASS: TestEnableAutomaticBackupRespondsWithoutDeadlock (0.05s)
+PASS

@@ -1,0 +1,36 @@
+=== RUN   TestSchedulerActivityReminderSkipsOnlyRestAndGaps
+--- PASS: TestSchedulerActivityReminderSkipsOnlyRestAndGaps (0.06s)
+=== RUN   TestCheckBackupSnapshotFailureSkipsCleanup
+=== RUN   TestCheckBackupSnapshotFailureSkipsCleanup/create
+=== RUN   TestCheckBackupSnapshotFailureSkipsCleanup/publish
+--- PASS: TestCheckBackupSnapshotFailureSkipsCleanup (0.06s)
+    --- PASS: TestCheckBackupSnapshotFailureSkipsCleanup/create (0.03s)
+    --- PASS: TestCheckBackupSnapshotFailureSkipsCleanup/publish (0.03s)
+=== RUN   TestCheckBackupReturnsCleanupErrorWhileDisabled
+    backup_test.go:84: directory permissions do not block deletion on this platform: <nil>
+--- SKIP: TestCheckBackupReturnsCleanupErrorWhileDisabled (0.03s)
+=== RUN   TestSchedulerBreakReminderFiresOnceWhenDue
+--- PASS: TestSchedulerBreakReminderFiresOnceWhenDue (0.03s)
+=== RUN   TestSchedulerPendingReviewThresholdCatchupAndPlanSnapshot
+--- PASS: TestSchedulerPendingReviewThresholdCatchupAndPlanSnapshot (0.04s)
+=== RUN   TestSchedulerPendingReviewBulkReasonAfterFourDaysWithoutRecords
+--- PASS: TestSchedulerPendingReviewBulkReasonAfterFourDaysWithoutRecords (0.04s)
+=== RUN   TestSchedulerPendingReviewReopenUsesSamePendingRule
+--- PASS: TestSchedulerPendingReviewReopenUsesSamePendingRule (0.04s)
+=== RUN   TestApplyScheduleChangeFreezesBeforeChangeAndKeepsSnapshotOnFailure
+--- PASS: TestApplyScheduleChangeFreezesBeforeChangeAndKeepsSnapshotOnFailure (0.04s)
+=== RUN   TestSchedulerPlanReminderUsesCurrentPlanAfterMissedPlan
+--- PASS: TestSchedulerPlanReminderUsesCurrentPlanAfterMissedPlan (0.03s)
+=== RUN   TestSchedulerPlanReminderContinuesAfterFinishError
+--- PASS: TestSchedulerPlanReminderContinuesAfterFinishError (0.03s)
+=== RUN   TestPlanReminderSkipsStartedPlanWithActiveTimer
+--- PASS: TestPlanReminderSkipsStartedPlanWithActiveTimer (0.03s)
+=== RUN   TestReminderQueuePrioritizesReviewAndReplacesWaitingKind
+--- PASS: TestReminderQueuePrioritizesReviewAndReplacesWaitingKind (0.00s)
+=== RUN   TestReminderQueueLookupFailureDoesNotEnqueue
+--- PASS: TestReminderQueueLookupFailureDoesNotEnqueue (0.00s)
+=== RUN   TestSchedulerBackupIntervalBoundaryAndCleanupWhileDisabled
+--- PASS: TestSchedulerBackupIntervalBoundaryAndCleanupWhileDisabled (0.04s)
+=== RUN   TestSchedulerAutomaticBackupCreatesUsableSnapshotAndRotates
+--- PASS: TestSchedulerAutomaticBackupCreatesUsableSnapshotAndRotates (0.04s)
+PASS

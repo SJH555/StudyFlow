@@ -1,0 +1,1 @@
+PASS: final build 76 GUI A to B; database and backup integrity ok; source migrated files removed; notes retained

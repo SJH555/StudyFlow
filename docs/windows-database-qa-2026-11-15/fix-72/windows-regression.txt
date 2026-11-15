@@ -1,0 +1,64 @@
+=== RUN   TestBackupChecksSerializeWithDatabaseRequests
+--- PASS: TestBackupChecksSerializeWithDatabaseRequests (0.06s)
+=== RUN   TestEnableAutomaticBackupRespondsWithoutDeadlock
+--- PASS: TestEnableAutomaticBackupRespondsWithoutDeadlock (0.03s)
+=== RUN   TestLegacyBindingKeepsDataDirectoryBehavior
+--- PASS: TestLegacyBindingKeepsDataDirectoryBehavior (0.06s)
+=== RUN   TestChangingDataDirectoryMovesBackupFiles
+--- PASS: TestChangingDataDirectoryMovesBackupFiles (0.03s)
+=== RUN   TestWindowsQASwitchConnectionSettings
+    database_windows_qa_test.go:70: foreign_keys before=1 after=1
+--- PASS: TestWindowsQASwitchConnectionSettings (0.05s)
+=== RUN   TestWindowsQAFailedSwitchRestoresUsableConnection
+--- PASS: TestWindowsQAFailedSwitchRestoresUsableConnection (0.05s)
+=== RUN   TestWindowsQACopyFailureRollbackSettings
+    database_windows_qa_test.go:124: copy failed as intended: open C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettings1984840372\001\deny-create\study.db: Access is denied.
+--- PASS: TestWindowsQACopyFailureRollbackSettings (0.09s)
+=== RUN   TestWindowsQAConcurrentSwitchRequestsAndBackups
+--- PASS: TestWindowsQAConcurrentSwitchRequestsAndBackups (0.08s)
+=== RUN   TestWindowsQABackupWALAndRetention
+--- PASS: TestWindowsQABackupWALAndRetention (0.06s)
+=== RUN   TestStartupDatabaseFirstLaunchAndDefaultReopen
+--- PASS: TestStartupDatabaseFirstLaunchAndDefaultReopen (0.03s)
+=== RUN   TestStartupDatabaseHonorsFormalLocation
+=== RUN   TestStartupDatabaseHonorsFormalLocation/complete
+=== RUN   TestStartupDatabaseHonorsFormalLocation/missing
+=== RUN   TestStartupDatabaseHonorsFormalLocation/damaged
+=== RUN   TestStartupDatabaseHonorsFormalLocation/unknown
+--- PASS: TestStartupDatabaseHonorsFormalLocation (0.19s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/complete (0.06s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/missing (0.04s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/damaged (0.04s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/unknown (0.05s)
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study-legacy
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/exam-notify-legacy
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study
+--- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas (0.24s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study-legacy (0.08s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/exam-notify-legacy (0.08s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study (0.08s)
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/no_formal_location
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/empty_formal_location
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/invalid_legacy_database
+--- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation (0.14s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/no_formal_location (0.06s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/empty_formal_location (0.05s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/invalid_legacy_database (0.03s)
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault/valid_copy
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault/invalid_copy
+--- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault (0.09s)
+    --- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault/valid_copy (0.07s)
+    --- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault/invalid_copy (0.02s)
+=== RUN   TestStartupDatabaseLegacySnapshotIncludesUncheckpointedWAL
+--- PASS: TestStartupDatabaseLegacySnapshotIncludesUncheckpointedWAL (0.10s)
+=== RUN   TestStartupDatabaseLegacySnapshotStillRejectsUnknownSchema
+--- PASS: TestStartupDatabaseLegacySnapshotStillRejectsUnknownSchema (0.02s)
+=== RUN   TestStartupDatabasePositionReadFailureStopsSelection
+--- PASS: TestStartupDatabasePositionReadFailureStopsSelection (0.00s)
+=== RUN   TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork
+    startup_database_test.go:387: isolated HOME and APPIMAGE exercise the Linux main entry point
+--- SKIP: TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork (0.00s)
+PASS

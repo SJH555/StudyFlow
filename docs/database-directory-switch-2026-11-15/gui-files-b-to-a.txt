@@ -1,0 +1,1 @@
+PASS: B to A; B database and empty backups directory removed; original user files preserved; both SQLite integrity_check=ok; synthetic subject present

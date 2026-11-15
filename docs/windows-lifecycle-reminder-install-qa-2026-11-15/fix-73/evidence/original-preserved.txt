@@ -1,0 +1,5 @@
+Original close setting restored; complete SQL dump unchanged
+{
+  "Id": 15652,
+  "Path": "D:\\CLink\\Desktop\\studyflow\\StudyFlow-0.4.0-71-portable\\StudyFlow.exe"
+}

@@ -1,0 +1,3 @@
+=== RUN   TestWindowsQAAudioShutdownAndRecreate
+--- PASS: TestWindowsQAAudioShutdownAndRecreate (1.95s)
+PASS

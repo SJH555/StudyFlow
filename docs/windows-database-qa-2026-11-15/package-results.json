@@ -1,0 +1,65 @@
+[
+  {
+    "name": "existing",
+    "exited": false,
+    "exitCode": null,
+    "unchanged": true,
+    "log": null
+  },
+  {
+    "name": "legacy1",
+    "exited": false,
+    "exitCode": null,
+    "unchanged": false,
+    "log": null
+  },
+  {
+    "name": "legacy2",
+    "exited": false,
+    "exitCode": null,
+    "unchanged": false,
+    "log": null
+  },
+  {
+    "name": "legacy3",
+    "exited": false,
+    "exitCode": null,
+    "unchanged": false,
+    "log": null
+  },
+  {
+    "name": "corrupt",
+    "exited": true,
+    "exitCode": 1,
+    "unchanged": true,
+    "log": null
+  },
+  {
+    "name": "empty",
+    "exited": true,
+    "exitCode": 1,
+    "unchanged": true,
+    "log": null
+  },
+  {
+    "name": "unknown",
+    "exited": true,
+    "exitCode": 1,
+    "unchanged": true,
+    "log": null
+  },
+  {
+    "name": "missing",
+    "exited": true,
+    "exitCode": 1,
+    "unchanged": true,
+    "log": null
+  },
+  {
+    "name": "incomplete",
+    "exited": true,
+    "exitCode": 1,
+    "unchanged": true,
+    "log": null
+  }
+]

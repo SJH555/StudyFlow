@@ -1,0 +1,8 @@
+{
+  "packageVersion": "0.4.0-72",
+  "sourceRetained": true,
+  "targetAbsent": true,
+  "locationRestoredToDefault": true,
+  "projectVisibleAfterFailure": "qa-72-project",
+  "temporaryACLRestored": true
+}

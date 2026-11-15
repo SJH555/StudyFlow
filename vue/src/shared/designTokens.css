@@ -1,0 +1,32 @@
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --shape-small: 8px;
+  --shape-medium: 12px;
+  --shape-large: 16px;
+  --text-caption: 11px;
+  --text-small: 12px;
+  --text-body: 13px;
+  --text-title: 16px;
+  --text-heading: 20px;
+  --text-metric: 27px;
+  --weight-medium: 600;
+  --weight-strong: 650;
+  --size-list-action: 36px;
+  --size-list-action-width: 76px;
+  --size-field: 48px;
+  --size-section-header: 117px;
+  --nav-resize-handle-active: #9bb4f4;
+  --nav-resize-handle-focus: #2863f4;
+  --canvas-study: rgb(247 249 254);
+  --outline-note: #a4afb8;
+  --surface-version-tag: rgb(232 232 232);
+  --color-plan-learning: rgb(40 99 244);
+  --elevation-panel: 0 8px 26px color-mix(in srgb, var(--ink) 4%, transparent);
+  --elevation-panel-raised: 0 4px 14px color-mix(in srgb, var(--ink) 6%, transparent);
+  --elevation-item: 0 4px 16px color-mix(in srgb, var(--ink) 4%, transparent);
+}

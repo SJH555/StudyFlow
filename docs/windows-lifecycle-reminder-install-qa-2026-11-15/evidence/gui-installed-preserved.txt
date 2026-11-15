@@ -1,0 +1,87 @@
+Window: "StudyFlow", App: StudyFlow.exe.
+	0 window (窗口) StudyFlow Secondary Actions: Raise
+		7 pane (窗格) StudyFlow
+			8 pane (窗格) (disabled)
+			9 pane (区域) StudyFlow - Web 内容
+				10 pane (区域)
+					11 pane (区域)
+					12 pane (区域)
+						13 pane (区域)
+							14 document (文档) StudyFlow Value: http://wails.localhost/ ID: RootWebArea
+								15 text (文本) StudyFlow
+								16 button (按钮) 最小化 Description: 最小化
+								17 button (按钮) 最大化或还原 Description: 最大化或还原
+								18 button (按钮) 关闭窗口 Description: 关闭窗口
+								19 group (补充)
+									20 text (文本) StudyFlow
+									21 list (列表) 主导航
+										22 list item (列表项目) 今日计划
+											23 text (文本) 今日计划
+										24 list item (列表项目) 学习项目
+											25 text (文本) 学习项目
+										26 list item (列表项目) 学习计划
+											27 text (文本) 学习计划
+										28 list item (列表项目) 学习统计
+											29 text (文本) 学习统计
+										30 list item (列表项目) 学情追踪
+											31 text (文本) 学情追踪
+										32 list item (列表项目) 活动提醒
+											33 text (文本) 活动提醒
+									34 separator (分隔符)
+									35 list (列表) 设置导航
+										36 list item (列表项目) 设置
+											37 text (文本) 设置
+									38 thumb (缩略图) 调整侧边栏宽度 Value: 250
+								39 group (主要)
+									67 text (标题) 学习项目
+									68 button (按钮) 添加项目
+									69 group (组) 学习项目状态
+										70 button (按钮) 启用 1
+										71 button (按钮) 隐藏 0
+									72 text (文本) 项目名称
+									73 text (文本) 关联计划
+									74 text (文本) 操作
+									75 text (文本) QA-upgrade-preserve
+									76 group (组) 无关联计划
+										77 text (文本) —
+									78 button (按钮) 编辑
+									79 button (按钮) 隐藏
+									80 button (按钮) 删除
+							66 pane (区域)
+		1 title bar (标题栏) (settable, string) Value: StudyFlow
+			2 menu bar (菜单栏) 系统 ID: MenuBar
+				3 menu item (菜单项) 系统
+			4 button (按钮) 最小化
+			5 button (按钮) 最大化
+			6 button (按钮) 关闭
+
+Document text: ```
+StudyFlow
+−
+□
+×
+StudyFlow
+今日计划
+学习项目
+学习计划
+学习统计
+学情追踪
+活动提醒
+￼
+设置
+调整侧边栏宽度
+学习项目
+添加项目
+启用
+1
+隐藏
+0
+项目名称
+关联计划
+操作
+QA-upgrade-preserve
+—
+编辑
+隐藏
+删除
+```
