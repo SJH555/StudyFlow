@@ -1,0 +1,18 @@
+2026/11/18 18:25:30 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+2026/11/18 18:25:30 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+2026/11/18 18:25:30 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+2026/11/18 18:25:30 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+2026/11/18 18:25:30 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+2026/11/18 18:25:30 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+2026/11/18 18:25:31 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+2026/11/18 18:25:31 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+2026/11/18 18:25:31 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation

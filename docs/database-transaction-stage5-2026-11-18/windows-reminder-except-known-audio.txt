@@ -1,0 +1,7 @@
+=== RUN   TestWindowsQAAudioShutdownAndRecreate
+--- PASS: TestWindowsQAAudioShutdownAndRecreate (1.92s)
+=== RUN   TestRingtonesUseSeparateFiles
+--- PASS: TestRingtonesUseSeparateFiles (0.02s)
+=== RUN   TestWindowsRingtoneClosesAfterAcknowledgement
+--- PASS: TestWindowsRingtoneClosesAfterAcknowledgement (0.22s)
+PASS

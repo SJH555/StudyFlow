@@ -1,0 +1,301 @@
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.12s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.06s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.15s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestDatabaseReplacementWaitsForBorrower
+--- PASS: TestDatabaseReplacementWaitsForBorrower (0.05s)
+=== RUN   TestDatabaseCloseWaitsAndRejectsNewBorrowers
+--- PASS: TestDatabaseCloseWaitsAndRejectsNewBorrowers (0.03s)
+=== RUN   TestDatabaseCloseIsIdempotentAndRetainsFirstError
+=== RUN   TestDatabaseCloseIsIdempotentAndRetainsFirstError/success
+=== RUN   TestDatabaseCloseIsIdempotentAndRetainsFirstError/driver_close_error
+--- PASS: TestDatabaseCloseIsIdempotentAndRetainsFirstError (0.00s)
+    --- PASS: TestDatabaseCloseIsIdempotentAndRetainsFirstError/success (0.00s)
+    --- PASS: TestDatabaseCloseIsIdempotentAndRetainsFirstError/driver_close_error (0.00s)
+=== RUN   TestAdoptDatabaseKeepsValidatedConnectionAndSkipsInitialization
+--- PASS: TestAdoptDatabaseKeepsValidatedConnectionAndSkipsInitialization (0.03s)
+=== RUN   TestAdoptDatabaseRejectsInvalidHandles
+=== RUN   TestAdoptDatabaseRejectsInvalidHandles/nil
+=== RUN   TestAdoptDatabaseRejectsInvalidHandles/zero_value
+=== RUN   TestAdoptDatabaseRejectsInvalidHandles/closed
+--- PASS: TestAdoptDatabaseRejectsInvalidHandles (0.03s)
+    --- PASS: TestAdoptDatabaseRejectsInvalidHandles/nil (0.00s)
+    --- PASS: TestAdoptDatabaseRejectsInvalidHandles/zero_value (0.00s)
+    --- PASS: TestAdoptDatabaseRejectsInvalidHandles/closed (0.00s)
+=== RUN   TestAdoptDatabaseFailedHandoffLeavesCloseToCaller
+--- PASS: TestAdoptDatabaseFailedHandoffLeavesCloseToCaller (0.00s)
+=== RUN   TestPrepareDirectorySnapshotIncludesWALAndPreservesRowID
+--- PASS: TestPrepareDirectorySnapshotIncludesWALAndPreservesRowID (0.10s)
+=== RUN   TestPrepareDirectoryBackupConflictRollsBackOnlyOwnedResources
+--- PASS: TestPrepareDirectoryBackupConflictRollsBackOnlyOwnedResources (0.13s)
+=== RUN   TestPrepareDirectoryRecoversFromBackupIOFailures
+=== RUN   TestPrepareDirectoryRecoversFromBackupIOFailures/partial_copy
+=== RUN   TestPrepareDirectoryRecoversFromBackupIOFailures/source_changed
+=== RUN   TestPrepareDirectoryRecoversFromBackupIOFailures/file_sync
+=== RUN   TestPrepareDirectoryRecoversFromBackupIOFailures/directory_sync
+--- PASS: TestPrepareDirectoryRecoversFromBackupIOFailures (0.34s)
+    --- PASS: TestPrepareDirectoryRecoversFromBackupIOFailures/partial_copy (0.09s)
+    --- PASS: TestPrepareDirectoryRecoversFromBackupIOFailures/source_changed (0.08s)
+    --- PASS: TestPrepareDirectoryRecoversFromBackupIOFailures/file_sync (0.08s)
+    --- PASS: TestPrepareDirectoryRecoversFromBackupIOFailures/directory_sync (0.09s)
+=== RUN   TestPrepareDirectoryRejectsBackupFIFOWithoutWaitingForWriter
+    directory_prepare_test.go:230: requires a Unix FIFO
+--- SKIP: TestPrepareDirectoryRejectsBackupFIFOWithoutWaitingForWriter (0.00s)
+=== RUN   TestPrepareDirectoryKeepsLegacyBackupSelection
+--- PASS: TestPrepareDirectoryKeepsLegacyBackupSelection (0.06s)
+=== RUN   TestPrepareDirectorySnapshotFailureAndCleanup
+--- PASS: TestPrepareDirectorySnapshotFailureAndCleanup (0.05s)
+=== RUN   TestPrepareDirectoryReleasesFailedSQLiteBackup
+--- PASS: TestPrepareDirectoryReleasesFailedSQLiteBackup (0.06s)
+=== RUN   TestPreparedDirectoryCleanupRetainsReplacementAndUserFiles
+--- PASS: TestPreparedDirectoryCleanupRetainsReplacementAndUserFiles (0.09s)
+=== RUN   TestPreparedDirectoryCleanupDoesNotRemovePopulatedDirectories
+--- PASS: TestPreparedDirectoryCleanupDoesNotRemovePopulatedDirectories (0.07s)
+=== RUN   TestDirectoryPreparationPathRisks
+=== RUN   TestDirectoryPreparationPathRisks/symlink_aliases
+    directory_prepare_test.go:388: directory symlinks unavailable: symlink C:\Users\jhsong\AppData\Local\Temp\TestDirectoryPreparationPathRisks2198033441\001\old C:\Users\jhsong\AppData\Local\Temp\TestDirectoryPreparationPathRisks2198033441\001\alias: A required privilege is not held by the client.
+--- PASS: TestDirectoryPreparationPathRisks (0.07s)
+    --- SKIP: TestDirectoryPreparationPathRisks/symlink_aliases (0.00s)
+=== RUN   TestDirectoryPreparationPreservesPathWhitespace
+    directory_prepare_test.go:412: Windows normalizes trailing spaces in ordinary Win32 paths
+--- SKIP: TestDirectoryPreparationPreservesPathWhitespace (0.00s)
+=== RUN   TestDirectoryPreparationWindowsAliases
+=== RUN   TestDirectoryPreparationWindowsAliases/case_alias
+=== RUN   TestDirectoryPreparationWindowsAliases/junction_to_backups
+--- PASS: TestDirectoryPreparationWindowsAliases (0.10s)
+    --- PASS: TestDirectoryPreparationWindowsAliases/case_alias (0.00s)
+    --- PASS: TestDirectoryPreparationWindowsAliases/junction_to_backups (0.06s)
+=== RUN   TestSwitchDirectoryReturnsToOriginalDirectory
+--- PASS: TestSwitchDirectoryReturnsToOriginalDirectory (0.22s)
+=== RUN   TestSwitchDirectoryRecoveryAfterCleanupBeforeMarkerClear
+--- PASS: TestSwitchDirectoryRecoveryAfterCleanupBeforeMarkerClear (0.13s)
+=== RUN   TestSwitchDirectoryConcurrentSwitchesAndWrites
+--- PASS: TestSwitchDirectoryConcurrentSwitchesAndWrites (0.23s)
+=== RUN   TestSwitchDirectoryCommitsRealDatabaseFromWAL
+--- PASS: TestSwitchDirectoryCommitsRealDatabaseFromWAL (0.12s)
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/prepare
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/target_sync
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/candidate_open
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/candidate_validation
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/candidate_close_during_open
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/stage_without_pending
+=== RUN   TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/stage_with_pending
+--- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase (0.53s)
+    --- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/prepare (0.08s)
+    --- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/target_sync (0.06s)
+    --- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/candidate_open (0.07s)
+    --- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/candidate_validation (0.08s)
+    --- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/candidate_close_during_open (0.06s)
+    --- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/stage_without_pending (0.09s)
+    --- PASS: TestSwitchDirectoryPrecommitFailuresKeepOldDatabase/stage_with_pending (0.09s)
+=== RUN   TestSwitchDirectoryNoOpAndExistingPending
+--- PASS: TestSwitchDirectoryNoOpAndExistingPending (0.09s)
+=== RUN   TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear
+=== RUN   TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear/none
+=== RUN   TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear/candidate_close
+=== RUN   TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear/clear
+--- PASS: TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear (0.30s)
+    --- PASS: TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear/none (0.11s)
+    --- PASS: TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear/candidate_close (0.10s)
+    --- PASS: TestSwitchDirectoryUnchangedOrdersCandidateCloseBeforeClear/clear (0.09s)
+=== RUN   TestSwitchDirectoryCommitKeepsWarningsSeparate
+--- PASS: TestSwitchDirectoryCommitKeepsWarningsSeparate (0.11s)
+=== RUN   TestSwitchDirectoryUncertainPausesAndPreservesBothDatabases
+--- PASS: TestSwitchDirectoryUncertainPausesAndPreservesBothDatabases (0.11s)
+=== RUN   TestSwitchDirectoryKeepsCandidateCloseErrorInBlockedState
+=== RUN   TestSwitchDirectoryKeepsCandidateCloseErrorInBlockedState/uncertain_publication
+=== RUN   TestSwitchDirectoryKeepsCandidateCloseErrorInBlockedState/stage_with_pending
+--- PASS: TestSwitchDirectoryKeepsCandidateCloseErrorInBlockedState (0.18s)
+    --- PASS: TestSwitchDirectoryKeepsCandidateCloseErrorInBlockedState/uncertain_publication (0.09s)
+    --- PASS: TestSwitchDirectoryKeepsCandidateCloseErrorInBlockedState/stage_with_pending (0.09s)
+=== RUN   TestSwitchDirectoryDoesNotRemoveDataBearingWAL
+--- PASS: TestSwitchDirectoryDoesNotRemoveDataBearingWAL (0.08s)
+=== RUN   TestSwitchDirectoryKeepsCandidateDataIfWALGainsFrames
+--- PASS: TestSwitchDirectoryKeepsCandidateDataIfWALGainsFrames (0.10s)
+=== RUN   TestSwitchDirectoryWaitsForActiveBorrowAndLendsOnlyCommittedHandle
+--- PASS: TestSwitchDirectoryWaitsForActiveBorrowAndLendsOnlyCommittedHandle (0.11s)
+=== RUN   TestSwitchDirectoryPauseRejectsQueuedAndNewBorrows
+--- PASS: TestSwitchDirectoryPauseRejectsQueuedAndNewBorrows (0.09s)
+=== RUN   TestSwitchDirectoryCloseWhilePausedOnlyClosesCurrentHandle
+--- PASS: TestSwitchDirectoryCloseWhilePausedOnlyClosesCurrentHandle (0.09s)
+=== RUN   TestStartupShortManualCleanupIsScopedAndIdempotent
+--- PASS: TestStartupShortManualCleanupIsScopedAndIdempotent (0.04s)
+=== RUN   TestOpenInitializesAndOpenExistingLeavesDataUntouched
+--- PASS: TestOpenInitializesAndOpenExistingLeavesDataUntouched (0.03s)
+=== RUN   TestOpenExistingRejectsMissingCorruptAndUninitializedFiles
+--- PASS: TestOpenExistingRejectsMissingCorruptAndUninitializedFiles (0.01s)
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/subjects
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/plans
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/sessions
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/activity_logs
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/settings
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/daily_reviews
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/daily_review_items
+=== RUN   TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/daily_plan_targets
+--- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating (0.25s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/subjects (0.03s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/plans (0.03s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/sessions (0.03s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/activity_logs (0.03s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/settings (0.03s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/daily_reviews (0.03s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/daily_review_items (0.03s)
+    --- PASS: TestOpenExistingRejectsMissingRequiredColumnsWithoutMigrating/daily_plan_targets (0.03s)
+=== RUN   TestOpenExistingValidatesPreparedWALSnapshotWithoutWritingData
+    sqlite_test.go:163: candidate validation created -wal (0 bytes)
+    sqlite_test.go:163: candidate validation created -shm (32768 bytes)
+--- PASS: TestOpenExistingValidatesPreparedWALSnapshotWithoutWritingData (0.05s)
+=== RUN   TestSQLiteForeignKeysOnReplacementConnections
+--- PASS: TestSQLiteForeignKeysOnReplacementConnections (0.03s)
+=== RUN   TestSQLiteInitializationFailureClosesHandle
+--- PASS: TestSQLiteInitializationFailureClosesHandle (0.02s)
+=== RUN   TestCloseAfterErrorPreservesBothErrors
+--- PASS: TestCloseAfterErrorPreservesBothErrors (0.00s)
+=== RUN   TestOpenForStartupUpgradesVerifiedFiveTableSchemas
+=== RUN   TestOpenForStartupUpgradesVerifiedFiveTableSchemas/study-legacy
+=== RUN   TestOpenForStartupUpgradesVerifiedFiveTableSchemas/exam-notify-legacy
+=== RUN   TestOpenForStartupUpgradesVerifiedFiveTableSchemas/study
+--- PASS: TestOpenForStartupUpgradesVerifiedFiveTableSchemas (0.22s)
+    --- PASS: TestOpenForStartupUpgradesVerifiedFiveTableSchemas/study-legacy (0.08s)
+    --- PASS: TestOpenForStartupUpgradesVerifiedFiveTableSchemas/exam-notify-legacy (0.07s)
+    --- PASS: TestOpenForStartupUpgradesVerifiedFiveTableSchemas/study (0.08s)
+=== RUN   TestOpenForStartupAcceptsCompleteSchemaAndKeepsStartupWrites
+--- PASS: TestOpenForStartupAcceptsCompleteSchemaAndKeepsStartupWrites (0.04s)
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_subjects
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_plans
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_sessions
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_activity_logs
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_settings
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_reviews
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_review_items
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_plan_targets
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/ALTER_TABLE_activity_logs_DROP_COLUMN_content
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/ALTER_TABLE_plans_DROP_COLUMN_note
+=== RUN   TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_plan_targets;_DROP_TABLE_daily_review_items;_DROP_TABLE_daily_reviews
+--- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites (0.39s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_subjects (0.03s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_plans (0.03s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_sessions (0.04s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_activity_logs (0.03s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_settings (0.03s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_reviews (0.03s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_review_items (0.03s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_plan_targets (0.04s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/ALTER_TABLE_activity_logs_DROP_COLUMN_content (0.04s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/ALTER_TABLE_plans_DROP_COLUMN_note (0.03s)
+    --- PASS: TestOpenForStartupRejectsIncompleteModernSchemasWithoutWrites/DROP_TABLE_daily_plan_targets;_DROP_TABLE_daily_review_items;_DROP_TABLE_daily_reviews (0.04s)
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/partial_review_schema
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/mixed_historical_columns
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/missing_historical_column
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/unknown_table
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/unexpected_trigger
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_primary_key
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/nonunique_subject_name
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_unique_key
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_foreign_key
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_nullability
+=== RUN   TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_default
+--- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites (0.17s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/partial_review_schema (0.02s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/mixed_historical_columns (0.02s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/missing_historical_column (0.02s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/unknown_table (0.02s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/unexpected_trigger (0.02s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_primary_key (0.01s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/nonunique_subject_name (0.01s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_unique_key (0.01s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_foreign_key (0.01s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_nullability (0.02s)
+    --- PASS: TestOpenForStartupRejectsUnsupportedFiveTableSchemasWithoutWrites/wrong_default (0.02s)
+=== RUN   TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles
+=== RUN   TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/two_table_migration_fixture
+=== RUN   TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/zero_bytes
+=== RUN   TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/SQLite_with_no_user_tables
+=== RUN   TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/unrelated_SQLite
+=== RUN   TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/non-SQLite
+=== RUN   TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/quick_check_fails
+--- PASS: TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles (0.04s)
+    --- PASS: TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/two_table_migration_fixture (0.01s)
+    --- PASS: TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/zero_bytes (0.00s)
+    --- PASS: TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/SQLite_with_no_user_tables (0.01s)
+    --- PASS: TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/unrelated_SQLite (0.01s)
+    --- PASS: TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/non-SQLite (0.00s)
+    --- PASS: TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles/quick_check_fails (0.01s)
+=== RUN   TestOpenForStartupReportsPossiblePartialMigration
+--- PASS: TestOpenForStartupReportsPossiblePartialMigration (0.05s)
+=== RUN   TestStartupAddsGoalSchemaAndPreservesExistingData
+=== RUN   TestStartupAddsGoalSchemaAndPreservesExistingData/without-goals
+=== RUN   TestStartupAddsGoalSchemaAndPreservesExistingData/without-acceptance
+--- PASS: TestStartupAddsGoalSchemaAndPreservesExistingData (0.10s)
+    --- PASS: TestStartupAddsGoalSchemaAndPreservesExistingData/without-goals (0.05s)
+    --- PASS: TestStartupAddsGoalSchemaAndPreservesExistingData/without-acceptance (0.05s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.16s)
+    --- PASS: TestTransactionOutcomes/commit (0.03s)
+    --- PASS: TestTransactionOutcomes/business_error (0.03s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.03s)
+    --- PASS: TestTransactionOutcomes/panic (0.03s)
+    --- PASS: TestTransactionOutcomes/cancel (0.03s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.06s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.03s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.03s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.03s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.06s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:13:58 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:13:58 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.01s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.01s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.01s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.03s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:13:58 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.03s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.06s)
+PASS

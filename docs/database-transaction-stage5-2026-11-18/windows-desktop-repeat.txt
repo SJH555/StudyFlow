@@ -1,0 +1,111 @@
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.37s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.13s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.13s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.33s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.11s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.11s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.11s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.31s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.11s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.29s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.11s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.10s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.30s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.10s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.29s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.09s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.29s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.10s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.29s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.11s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.09s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.29s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.10s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.30s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.11s)
+PASS

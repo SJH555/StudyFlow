@@ -1,0 +1,15 @@
+=== RUN   TestElapsedPreservesOptionalTimestamps
+=== RUN   TestElapsedPreservesOptionalTimestamps/absent_uses_start_and_truncates
+=== RUN   TestElapsedPreservesOptionalTimestamps/resumed_takes_precedence
+=== RUN   TestElapsedPreservesOptionalTimestamps/present_empty_does_not_fall_back
+=== RUN   TestElapsedPreservesOptionalTimestamps/paused_returns_stored
+=== RUN   TestElapsedPreservesOptionalTimestamps/negative_time_clamps
+--- PASS: TestElapsedPreservesOptionalTimestamps (0.00s)
+    --- PASS: TestElapsedPreservesOptionalTimestamps/absent_uses_start_and_truncates (0.00s)
+    --- PASS: TestElapsedPreservesOptionalTimestamps/resumed_takes_precedence (0.00s)
+    --- PASS: TestElapsedPreservesOptionalTimestamps/present_empty_does_not_fall_back (0.00s)
+    --- PASS: TestElapsedPreservesOptionalTimestamps/paused_returns_stored (0.00s)
+    --- PASS: TestElapsedPreservesOptionalTimestamps/negative_time_clamps (0.00s)
+=== RUN   TestBreakElapsedSecondsHandlesInvalidAndFractionalTime
+--- PASS: TestBreakElapsedSecondsHandlesInvalidAndFractionalTime (0.00s)
+PASS

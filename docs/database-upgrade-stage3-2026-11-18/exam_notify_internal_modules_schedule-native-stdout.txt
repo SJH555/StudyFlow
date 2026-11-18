@@ -1,0 +1,9 @@
+=== RUN   TestPlanConflictCrossesWeekBoundary
+--- PASS: TestPlanConflictCrossesWeekBoundary (0.00s)
+=== RUN   TestScheduledPlanEndAcrossMidnight
+--- PASS: TestScheduledPlanEndAcrossMidnight (0.01s)
+=== RUN   TestBoundaryEndAnchorsEarlyStartToUpcomingWindow
+--- PASS: TestBoundaryEndAnchorsEarlyStartToUpcomingWindow (0.00s)
+=== RUN   TestBoundaryEndKeepsInWindowAndAfterWindowSemantics
+--- PASS: TestBoundaryEndKeepsInWindowAndAfterWindowSemantics (0.00s)
+PASS

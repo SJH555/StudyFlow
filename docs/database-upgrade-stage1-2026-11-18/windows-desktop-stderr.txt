@@ -1,0 +1,54 @@
+2026/11/18 19:50:52 API error: context canceled
+2026/11/18 19:50:52 API error: 本次计划的休息时间已用完，请继续学习或结束本次学习
+2026/11/18 19:50:52 API error: 本次计划的休息时间已用完，请继续学习或结束本次学习
+2026/11/18 19:50:52 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 19:50:52 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 19:50:52 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 19:50:52 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 19:50:52 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 19:50:52 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 19:50:52 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 19:50:52 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 19:50:52 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 19:50:52 API error: SQL logic error: integer overflow (1)
+2026/11/18 19:50:52 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 19:50:52 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 19:50:52 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 19:50:52 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:52 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 19:50:52 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 19:50:52 API error: 开始时间无效
+2026/11/18 19:50:52 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 19:50:52 API error: 重复星期无效
+2026/11/18 19:50:52 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 19:50:52 检查昨日总结失败: study database is closed
+2026/11/18 19:50:54 API error: invalid syntax
+2026/11/18 19:50:55 API error: 与“数学”在 08:45–09:45 的学习记录时间冲突
+2026/11/18 19:50:55 API error: 与“数学”在 10:00–11:00 的学习记录时间冲突
+2026/11/18 19:50:55 API error: 学习记录不能少于 10 分钟，请调整时间
+2026/11/18 19:50:55 API error: 与“数学”在 09:00–09:10 的学习记录时间冲突
+2026/11/18 19:50:55 API error: 与“数学”在 18:50–19:50（进行中） 的学习记录时间冲突
+2026/11/18 19:50:55 API error: 与“数学”在 09:00–12:00（进行中） 的学习记录时间冲突
+2026/11/18 19:50:55 API error: 休息时长必须小于计划时长
+2026/11/18 19:50:55 API error: 时间冲突：周一的计划与“数学” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:55 API error: 时间冲突：周一的计划与“数学” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 19:50:55 API error: 学习项目已有相关数据，无法删除
+2026/11/18 19:50:55 API error: 计划备注最多 100 字
+2026/11/18 19:50:55 API error: 不支持重置此表
+2026/11/18 19:50:55 API error: 请先重置学习记录和学习计划，再重置学习项目
+2026/11/18 19:50:55 API error: 请先重置学习记录和学习计划，再重置学习项目
+2026/11/18 19:50:56 数据目录已提交，旧文件清理尚未完成: retired storage cleanup is incomplete
+retired database identity changed: C:\Users\jhsong\AppData\Local\Temp\TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable2690913714\001\base\data\study.db

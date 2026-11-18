@@ -1,0 +1,153 @@
+{
+  "passed": true,
+  "scenarios": [
+    {
+      "order": "deadline",
+      "completed": true,
+      "before": {
+        "title": "当前目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA A",
+          "QA B",
+          "QA C"
+        ]
+      },
+      "after": {
+        "title": "当前目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA B",
+          "QA C"
+        ]
+      },
+      "accepted": {
+        "title": "已验收目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA A",
+          "QA D"
+        ]
+      },
+      "changed": {
+        "title": "已验收目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA D",
+          "QA A"
+        ]
+      }
+    },
+    {
+      "order": "deadline",
+      "completed": false,
+      "before": {
+        "title": "当前目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA A",
+          "QA B",
+          "QA C"
+        ]
+      },
+      "after": {
+        "title": "当前目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA B",
+          "QA C"
+        ]
+      },
+      "accepted": {
+        "title": "已验收目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA A",
+          "QA D"
+        ]
+      },
+      "changed": {
+        "title": "已验收目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA D",
+          "QA A"
+        ]
+      }
+    },
+    {
+      "order": "created",
+      "completed": true,
+      "before": {
+        "title": "当前目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA B",
+          "QA C",
+          "QA A"
+        ]
+      },
+      "after": {
+        "title": "当前目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA C",
+          "QA A"
+        ]
+      },
+      "accepted": {
+        "title": "已验收目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA D",
+          "QA B"
+        ]
+      },
+      "changed": {
+        "title": "已验收目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA B",
+          "QA D"
+        ]
+      }
+    },
+    {
+      "order": "created",
+      "completed": false,
+      "before": {
+        "title": "当前目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA B",
+          "QA C",
+          "QA A"
+        ]
+      },
+      "after": {
+        "title": "当前目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA C",
+          "QA A"
+        ]
+      },
+      "accepted": {
+        "title": "已验收目标",
+        "sort": "新建优先",
+        "goals": [
+          "QA D",
+          "QA B"
+        ]
+      },
+      "changed": {
+        "title": "已验收目标",
+        "sort": "截止优先",
+        "goals": [
+          "QA B",
+          "QA D"
+        ]
+      }
+    }
+  ]
+}

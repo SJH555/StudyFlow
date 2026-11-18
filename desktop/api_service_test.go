@@ -162,8 +162,43 @@ func TestDatabaseFreeAPIsCompleteWhileWriterHoldsLock(t *testing.T) {
 	}
 }
 
+func TestAPIQueuedDatabaseCallObservesTaskCancellation(t *testing.T) {
+	api := newAPITestService(t)
+	entered, release := make(chan struct{}), make(chan struct{})
+	unblock := sync.OnceFunc(func() { close(release) })
+	defer unblock()
+	writer := make(chan error, 1)
+	go func() {
+		writer <- api.app.database.WithWrite(func(*sql.DB, string) error {
+			close(entered)
+			<-release
+			return nil
+		})
+	}()
+	readAPIResult(t, entered)
+	result, started := make(chan string, 1), make(chan string, 1)
+	go func() {
+		var stack [128]byte
+		n := runtime.Stack(stack[:], false)
+		id, _, _ := strings.Cut(string(stack[:n]), " [")
+		started <- id
+		result <- api.Call("snapshot", http.MethodGet, "")
+	}()
+	waitForAPIReadLock(t, readAPIResult(t, started), result)
+	api.app.tasks.mu.Lock()
+	api.app.tasks.stopLocked()
+	api.app.tasks.mu.Unlock()
+	unblock()
+	if err := readAPIResult(t, writer); err != nil {
+		t.Fatal(err)
+	}
+	if got := readAPIResult(t, result); got != `{"error":"context canceled"}` {
+		t.Fatalf("queued API ignored cancellation: %q", got)
+	}
+}
+
 // 协程启动信号并不能证明它真的发起了加锁。在走快速路径之前，
-// 需确认普通请求已经阻塞在 Database.WithRead 上。
+// 需确认普通请求已经阻塞在 Database.WithAccess 的生命周期锁上。
 func waitForAPIReadLock(t *testing.T, id string, result <-chan string) {
 	t.Helper()
 	timeout := time.After(apiTestTimeout)
@@ -182,8 +217,8 @@ func waitForAPIReadLock(t *testing.T, id string, result <-chan string) {
 			continue
 		}
 		for _, entry := range strings.Split(string(stack[:n]), "\n\n") {
-			if strings.HasPrefix(entry, id+" [sync.") && strings.Contains(entry, "sync.(*RWMutex).RLock(") &&
-				strings.Contains(entry, "persistence.(*Database).WithRead(") {
+			if strings.HasPrefix(entry, id+" [sync.") && strings.Contains(entry, "sync.(*RWMutex).Lock(") &&
+				strings.Contains(entry, "persistence.(*Database).WithAccess(") {
 				return
 			}
 		}

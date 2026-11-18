@@ -3,18 +3,19 @@ package sessions
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"time"
 )
 
 // CountForSubject 统计某科目下未删除的学习记录数量。
-func CountForSubject(db *sql.DB, subjectID any) (int, error) {
+func CountForSubject(db *persistence.Queries, subjectID any) (int, error) {
 	var count int
 	err := db.QueryRow(`SELECT count(*) FROM sessions WHERE subject_id=? AND deleted=0`, subjectID).Scan(&count)
 	return count, err
 }
 
 // HasActiveRest 判断当前是否存在未结束的休息。
-func HasActiveRest(db *sql.DB, now time.Time) (bool, error) {
+func HasActiveRest(db *persistence.Queries, now time.Time) (bool, error) {
 	var startedRaw string
 	var breakMinutes int
 	var used int64
@@ -39,12 +40,14 @@ func HasActiveRest(db *sql.DB, now time.Time) (bool, error) {
 }
 
 // StudySecondsBySubject 按科目统计指定日期的学习时长（秒）。
-func StudySecondsBySubject(db *sql.DB, day string) (map[int64]int64, error) {
+func StudySecondsBySubject(db *persistence.Queries, day string) (map[int64]int64, error) {
 	actual := map[int64]int64{}
 	rows, err := db.Query(`SELECT subject_id,COALESCE(SUM(duration_seconds),0) FROM sessions WHERE deleted=0 AND end_at IS NOT NULL AND date(start_at,'localtime')=? GROUP BY subject_id`, day)
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
+
 	for rows.Next() {
 		var id, seconds int64
 		if err = rows.Scan(&id, &seconds); err != nil {
@@ -63,7 +66,7 @@ func StudySecondsBySubject(db *sql.DB, day string) (map[int64]int64, error) {
 }
 
 // HasStudyRecord 判断指定日期是否存在学习记录。
-func HasStudyRecord(db *sql.DB, day string) (bool, error) {
+func HasStudyRecord(db *persistence.Queries, day string) (bool, error) {
 	var count int
 	err := db.QueryRow(`SELECT count(*) FROM sessions WHERE deleted=0 AND end_at IS NOT NULL AND date(start_at,'localtime')=?`, day).Scan(&count)
 	return count > 0, err

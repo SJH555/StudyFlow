@@ -3,13 +3,28 @@ package sessions
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"time"
 
 	"exam_notify/internal/modules/schedule"
 )
 
 // DueBreakReminder 返回需要触发的休息结束提醒（科目名）及是否尚未通知。
-func DueBreakReminder(db *sql.DB, now time.Time) (string, bool, error) {
+func DueBreakReminder(db *persistence.Queries, now time.Time) (string, bool, error) {
+	var name string
+	var due bool
+	var err error
+	err = db.WithTx(func(tx *persistence.Queries) error {
+		name, due, err = dueBreakReminder(tx, now)
+		return err
+	})
+	if err != nil {
+		return "", false, err
+	}
+	return name, due, nil
+}
+
+func dueBreakReminder(db *persistence.Queries, now time.Time) (string, bool, error) {
 	var id int64
 	var subject, startedRaw, sessionStartRaw, planStart, weekdays string
 	var plannedEnd sql.NullString

@@ -1,6 +1,7 @@
 package persistence
 
 import (
+	"context"
 	"database/sql"
 	"errors"
 	"fmt"
@@ -19,13 +20,14 @@ var (
 
 // Database 持有当前 SQLite 句柄及其生命周期锁，所有借用都在该锁下进行。
 type Database struct {
-	mu               sync.RWMutex
-	db               *sql.DB
-	path             string
-	closing          atomic.Bool
-	closeErr         error
-	pauseErr         error
-	switchCleanupErr error
+	mu                 sync.RWMutex
+	db                 *sql.DB
+	path               string
+	closing            atomic.Bool
+	closeErr           error
+	pauseErr           error
+	switchCleanupErr   error
+	candidateValidator func(context.Context, Executor) error
 }
 
 // NewDatabase 打开指定路径的数据库并返回其生命周期管理器。
@@ -142,4 +144,10 @@ func (d *Database) Close() error {
 		d.db = nil
 	}
 	return d.closeErr
+}
+
+// SetCandidateValidator installs the startup-approved version check for future
+// data-directory handoffs. It never upgrades a candidate or adds another pool.
+func (d *Database) SetCandidateValidator(validate func(context.Context, Executor) error) error {
+	return d.WithWrite(func(*sql.DB, string) error { d.candidateValidator = validate; return nil })
 }

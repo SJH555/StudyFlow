@@ -10,6 +10,7 @@ import { usePlanDraft } from "../plans/usePlanDraft";
 import { useTodayView } from "./useTodayView";
 import TodayScheduleDialog from "./TodayScheduleDialog.vue";
 import { useActiveLearning } from "../sessions/useActiveLearning";
+import SessionSourceBadge from "../sessions/SessionSourceBadge.vue";
 import {
   plannedStudyMinutes,
   clockLabel,
@@ -72,6 +73,18 @@ const {
   countdownPercent,
   visibleSessions,
 } = useActiveLearning();
+
+const isLearningRunning = computed(() => !!active.value && !active.value.pausedAt);
+const heroClockSeconds = computed(() => {
+  if (isLearningRunning.value) return countdownLeft.value;
+  const plan = activePlan.value || currentPlan.value;
+  return plan ? plannedStudyMinutes(plan) * 60 : 3600;
+});
+const heroRemainingSeconds = computed(() =>
+  active.value?.pausedAt
+    ? countdownLeft.value
+    : unstartedPlanRemainingSeconds.value,
+);
 </script>
 
 <template>
@@ -138,13 +151,14 @@ const {
       <div
         class="countdown-ring"
         :style="{
-          background: `conic-gradient(#2932e1 ${countdownPercent}%, #e8ecf7 ${countdownPercent}%)`,
+          background: `conic-gradient(#2932e1 ${isLearningRunning ? countdownPercent : 0}%, #e8ecf7 ${isLearningRunning ? countdownPercent : 0}%)`,
         }"
       >
         <div class="countdown-inner">
-          <small>计划学习</small><strong>{{ clockLabel(countdownLeft) }}</strong
-          ><span v-if="unstartedPlanRemainingSeconds !== null">
-            剩余 {{ clockLabel(unstartedPlanRemainingSeconds) }}
+          <small>{{ isLearningRunning ? "剩余时间" : "计划学习" }}</small>
+          <strong>{{ clockLabel(heroClockSeconds) }}</strong>
+          <span v-if="heroRemainingSeconds !== null">
+            剩余 {{ clockLabel(heroRemainingSeconds) }}
           </span>
         </div>
       </div>
@@ -418,9 +432,8 @@ const {
           ◷
         </div>
         <div class="record-name">
-          <b>{{ s.subject }}</b
-          ><small
-            >{{ s.source === "manual" ? "手动补充" : "计时学习" }} ·
+          <div class="record-title"><b>{{ s.subject }}</b><SessionSourceBadge :source="s.source" /></div>
+          <small>
             {{ time(s.startAt) }} –
             {{ s.endAt ? time(s.endAt) : "进行中" }}</small
           >
@@ -603,6 +616,13 @@ const {
 }
 .record-name {
   flex: 1;
+  min-width: 0;
+}
+.record-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
 }
 .record-name b {
   display: block;
@@ -809,8 +829,11 @@ const {
   color: #26355e;
 }
 .countdown-inner span {
-  font-size: 11px;
-  color: #9aa1ae;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: #7d8799;
 }
 .focus-entry {
   border: 0;
@@ -930,7 +953,7 @@ const {
 }
 
 .goal-countdown-card {
-  --goal-countdown-accent: var(--purple);
+  --goal-countdown-accent: var(--goal-upcoming-color);
   display: grid;
   gap: var(--space-2);
   min-width: 0;

@@ -1,0 +1,141 @@
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.78s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.13s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.11s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.11s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.14s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.17s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.83s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.14s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.13s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.11s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.15s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.18s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.65s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.13s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.66s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.08s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.16s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.15s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.74s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.08s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.14s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.17s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.15s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.78s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.08s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.15s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.13s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.18s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.73s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.15s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.17s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.75s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.08s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.11s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.13s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.14s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.17s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.60s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.08s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.10s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.11s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.12s)
+=== RUN   TestUpgradeInterruptionRecovery
+=== RUN   TestUpgradeInterruptionRecovery/delete/cancel
+=== RUN   TestUpgradeInterruptionRecovery/delete/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/delete/committed
+=== RUN   TestUpgradeInterruptionRecovery/wal/cancel
+=== RUN   TestUpgradeInterruptionRecovery/wal/uncommitted
+=== RUN   TestUpgradeInterruptionRecovery/wal/committed
+--- PASS: TestUpgradeInterruptionRecovery (0.68s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/cancel (0.07s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/uncommitted (0.09s)
+    --- PASS: TestUpgradeInterruptionRecovery/delete/committed (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/cancel (0.13s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/uncommitted (0.12s)
+    --- PASS: TestUpgradeInterruptionRecovery/wal/committed (0.15s)
+PASS

@@ -1,0 +1,21 @@
+{
+  "fixedVersion": "0.5.0-5",
+  "fixedDirectory": "/mnt/d/CLink/Desktop/studyflow/StudyFlow-0.5.0-5-portable",
+  "totalCounts": {
+    "subjects": 8,
+    "plans": 7,
+    "sessions": 87,
+    "stage_goals": 9,
+    "activity_logs": 14,
+    "daily_reviews": 14
+  },
+  "added": {
+    "subjects": 6,
+    "plans": 7,
+    "sessions": 86,
+    "goals": 9,
+    "activities": 14
+  },
+  "integrityCheck": "ok",
+  "foreignKeyCheck": []
+}

@@ -1,0 +1,539 @@
+{
+  "passed": true,
+  "scenarios": [
+    {
+      "case": "close-delete",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "exit-delete",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "kill-delete",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "kill-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "kill-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "kill-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "repeat-delete",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 3,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 3,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "committed-delete",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "committed-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "committed-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "sqlerror-delete",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "full-delete",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-delete",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "close-wal",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "close-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "exit-wal",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "exit-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "kill-wal",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "kill-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "kill-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "kill-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "repeat-wal",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 3,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "repeat-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 3,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "committed-wal",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "committed-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "committed-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "sqlerror-wal",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "sqlerror-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    },
+    {
+      "case": "full-wal",
+      "passed": true,
+      "checks": [
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 1,
+          "verifier": "Windows native",
+          "version": 2
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        },
+        {
+          "allNineTablesUnchanged": true,
+          "case": "full-wal",
+          "foreignKeys": "ok",
+          "integrity": "ok",
+          "retainedBackups": 2,
+          "verifier": "Windows native",
+          "version": 3
+        }
+      ]
+    }
+  ]
+}

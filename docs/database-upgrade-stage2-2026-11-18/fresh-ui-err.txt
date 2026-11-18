@@ -1,0 +1,10 @@
+Nov 18 20:32:14.001 INF Build Info: Wails=v3.0.0 Compiler=go1.27.3 -tags=upgradegui DefaultGODEBUG=tracebacklabels=0,x509sslcertoverrideplatform=0 CGO_ENABLED=0 GOARCH=amd64 GOOS=windows GOAMD64=v1 -buildmode=exe -compiler=gc
+Nov 18 20:32:14.004 INF AssetServer Info: middleware=true handler=true
+Nov 18 20:32:14.004 INF Platform Info: Go-WebView2Loader=true WebView2=157.0.4341.60 ID=26H2 Name=Windows 10 Pro Version=2009 (Build: 26300) Branding=Windows 11 专业版
+2026/11/18 20:32:14 [WebView2] Environment created successfully
+Nov 18 20:32:14.314 INF [AssetFileServerFS] Handling request url=/ file=.
+Nov 18 20:32:14.328 INF [AssetFileServerFS] Handling request url=/assets/index-C4_Dw_y4.js file=assets/index-C4_Dw_y4.js
+Nov 18 20:32:14.328 INF [AssetFileServerFS] Handling request url=/assets/index-dbEhfS03.css file=assets/index-dbEhfS03.css
+Nov 18 20:32:14.450 INF [AssetFileServerFS] Handling request url=/app-icon.png file=app-icon.png
+Nov 18 20:32:14.530 INF [AssetFileServerFS] Handling request url=/assets/materialdesignicons-webfont-Dp5v-WZN.woff2 file=assets/materialdesignicons-webfont-Dp5v-WZN.woff2
+[1118/203214.776:ERROR:ui\gfx\win\window_impl.cc:172] Failed to unregister class Chrome_WidgetWin_0. Error = 1412

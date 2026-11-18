@@ -1,0 +1,22 @@
+=== RUN   TestOpenForStartupReportsPossiblePartialMigration
+--- PASS: TestOpenForStartupReportsPossiblePartialMigration (0.00s)
+=== RUN   TestAuditCommitFailureConnectionState
+    startup_goal_upgrade_test.go:92: AUDIT: Commit=constraint failed: FOREIGN KEY constraint failed (787); deferred Rollback=sql: transaction has already been committed or rolled back; next Begin=SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestAuditCommitFailureConnectionState (0.00s)
+=== RUN   TestAuditSubjectArchivePartialSuccess
+    startup_goal_upgrade_test.go:107: AUDIT: archive reported success; subject archived=1, plan active=1 after injected SQL failure
+--- PASS: TestAuditSubjectArchivePartialSuccess (0.00s)
+=== RUN   TestAuditStartIgnoresExistingSessionScanFailure
+    startup_goal_upgrade_test.go:119: AUDIT: Start reported success with two active sessions after old-session Scan failed
+--- PASS: TestAuditStartIgnoresExistingSessionScanFailure (0.00s)
+=== RUN   TestAuditListIgnoresScanFailure
+    startup_goal_upgrade_test.go:128: AUDIT: malformed session omitted, List returned empty result with nil error
+--- PASS: TestAuditListIgnoresScanFailure (0.00s)
+=== RUN   TestAuditSingleConnectionDoesNotSerializeBusiness
+    startup_goal_upgrade_test.go:137: AUDIT: db.Exec waits for the only connection held by tx; all in-transaction helpers must accept tx
+--- PASS: TestAuditSingleConnectionDoesNotSerializeBusiness (0.02s)
+=== RUN   TestAuditActualStartCommitBusyLeavesTransaction
+    startup_goal_upgrade_test.go:151: AUDIT actual Start: external reader -> Commit=database is locked (5) (SQLITE_BUSY); next Begin=SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestAuditActualStartCommitBusyLeavesTransaction (0.00s)
+PASS
+ok  	exam_notify/internal/infrastructure/persistence	0.041s

@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"exam_notify/internal/infrastructure/diagnostics"
-	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/infrastructure/reminder"
 	"io"
 	"log"
@@ -47,7 +46,13 @@ func main() {
 	}
 }
 
-func run() (resultErr error) {
+func run() error {
+	return runWithStartupPresenter(func(store *App, instance system.InstanceGuard, base, data, location string, startup *startupUpgrade) error {
+		return runDesktopWithStartup(store, instance, base, data, location, startup, newDesktopTransport(), func(app *application.App) error { return app.Run() })
+	})
+}
+
+func runWithStartupPresenter(present func(*App, system.InstanceGuard, string, string, string, *startupUpgrade) error) (resultErr error) {
 	executable, err := os.Executable()
 	if err != nil {
 		return err
@@ -112,21 +117,21 @@ func run() (resultErr error) {
 	}()
 	appErrorLog = errorLog
 	log.SetOutput(io.MultiWriter(os.Stderr, errorLog))
-	database, err := openStartupDatabase(startupDatabasePaths{
+	store, startup := prepareStartupUpgrade(startupDatabasePaths{
 		locationFile: locationFile, defaultDir: defaultDataDir, installDir: installDir, legacyConfigDir: configDir,
-	}, persistence.OpenExisting)
-	if err != nil {
-		return err
-	}
-	store := newApp(database)
+	})
 	if err := system.EnsureUserLauncher(executable, appIcon); err != nil {
 		log.Printf("创建用户快捷方式失败: %v", err)
 	}
-	return runDesktop(store, instance, baseDir, defaultDataDir, locationFile, newDesktopTransport(), func(app *application.App) error { return app.Run() })
+	return present(store, instance, baseDir, defaultDataDir, locationFile, startup)
 }
 
 // 被接管的数据库连接属于本作用域，包括所有启动失败的情况。
-func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataDir, locationFile string, transport application.Transport, runApp func(*application.App) error) (resultErr error) {
+func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataDir, locationFile string, transport application.Transport, runApp func(*application.App) error) error {
+	return runDesktopWithStartup(store, instance, baseDir, defaultDataDir, locationFile, nil, transport, runApp)
+}
+
+func runDesktopWithStartup(store *App, instance system.InstanceGuard, baseDir, defaultDataDir, locationFile string, startup *startupUpgrade, transport application.Transport, runApp func(*application.App) error) (resultErr error) {
 	var tracker *system.WindowStateTracker
 	defer func() {
 		store.tasks.stopAndWait()
@@ -137,22 +142,43 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 		reminder.Shutdown()
 		resultErr = errors.Join(resultErr, transport.Stop(), store.Close())
 	}()
-	if err := os.MkdirAll(defaultDataDir, 0700); err != nil {
-		return err
+	var initializeOnce sync.Once
+	var initializeErr error
+	var reminderEnabled bool
+	initializeBusiness := func() error {
+		initializeOnce.Do(func() {
+			if err := os.MkdirAll(defaultDataDir, 0700); err != nil {
+				initializeErr = err
+				return
+			}
+			if err := reminder.Init(defaultDataDir); err != nil {
+				initializeErr = err
+				return
+			}
+			if err := store.applyGeneralSettings(); err != nil {
+				initializeErr = err
+				return
+			}
+			reminderEnabled, initializeErr = store.activityReminderEnabled()
+		})
+		return initializeErr
 	}
-	if err := reminder.Init(defaultDataDir); err != nil {
-		return err
+	if startup.isReady() {
+		if err := initializeBusiness(); err != nil {
+			if startup == nil {
+				return err
+			}
+			startup.fail(err)
+			if closeErr := store.Close(); closeErr != nil {
+				log.Print(closeErr)
+			}
+		}
 	}
-	// 启动时加载常规设置：铃声音量、启动窗口与关闭行为、检查时间。
-	if err := store.applyGeneralSettings(); err != nil {
-		return err
+	if startup != nil {
+		startup.activate = initializeBusiness
 	}
 	launch := &secondLaunch{tasks: &store.tasks}
 	if err := instance.ListenForSecondLaunch(launch.notify); err != nil {
-		return err
-	}
-	reminderEnabled, err := store.activityReminderEnabled()
-	if err != nil {
 		return err
 	}
 	windowStatePath := filepath.Join(baseDir, "window-state.json")
@@ -170,7 +196,7 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 		BackgroundColour: application.NewRGB(248, 248, 245),
 		URL:              "/",
 		// 启动后驻留托盘时先保持隐藏，启动完成后再按设置决定是否显示。
-		Hidden: !store.startupShowsWindow(),
+		Hidden: startup.isReady() && !store.startupShowsWindow(),
 	}
 	system.ApplyWindowState(&windowOptions, lastWindowState, runtime.GOOS)
 	var app *application.App
@@ -191,7 +217,7 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 		Icon:        appIcon,
 		Linux:       application.LinuxOptions{ApplicationID: "org.wails.studyflow", DisableQuitOnLastWindowClosed: true},
 		Windows:     application.WindowsOptions{DisableQuitOnLastWindowClosed: true},
-		Services:    []application.Service{application.NewService(&APIService{app: store, locationFile: locationFile})},
+		Services:    desktopServices(store, locationFile, startup),
 		Assets:      application.AssetOptions{Handler: application.AssetFileServerFS(assets)},
 	})
 	window = app.Window.NewWithOptions(windowOptions)
@@ -199,7 +225,14 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 	window.RegisterHook(events.Common.WindowDidMove, func(_ *application.WindowEvent) { tracker.Schedule(window) })
 	window.RegisterHook(events.Common.WindowDidResize, func(_ *application.WindowEvent) { tracker.Schedule(window) })
 	window.RegisterHook(events.Common.WindowClosing, func(event *application.WindowEvent) {
-		_, done, ok := store.tasks.enter()
+		if !startup.isReady() {
+			if !store.tasks.readyToQuit() {
+				event.Cancel()
+				app.Quit()
+			}
+			return
+		}
+		ctx, done, ok := store.tasks.enter()
 		if !ok {
 			if !store.tasks.readyToQuit() {
 				event.Cancel()
@@ -207,7 +240,7 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 			return
 		}
 		defer done()
-		if review, reviewErr := store.scheduler.PendingReview(time.Now()); reviewErr != nil {
+		if review, reviewErr := store.scheduler.WithContext(ctx).PendingReview(time.Now()); reviewErr != nil {
 			log.Printf("检查待填总结失败: %v", reviewErr)
 		} else if review != nil {
 			event.Cancel()
@@ -248,7 +281,7 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 		}
 		return "开启活动提醒"
 	}
-	reminderItem := trayMenu.Add(reminderLabel(reminderEnabled))
+	reminderItem := trayMenu.Add(reminderLabel(reminderEnabled)).SetEnabled(startup.isReady())
 	store.onActivityReminderChanged = func(enabled bool) {
 		reminderItem.SetLabel(reminderLabel(enabled))
 		value := "0"
@@ -258,6 +291,9 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 		app.Event.Emit("activity-reminder-state", value)
 	}
 	reminderItem.OnClick(func(_ *application.Context) {
+		if !startup.isReady() {
+			return
+		}
 		_, done, ok := store.tasks.enter()
 		if !ok {
 			return
@@ -287,18 +323,33 @@ func runDesktop(store *App, instance system.InstanceGuard, baseDir, defaultDataD
 		window.Focus()
 	})
 	var started sync.Once
-	app.Event.OnApplicationEvent(events.Common.ApplicationStarted, func(_ *application.ApplicationEvent) {
+	startBusiness := func() {
+		if !startup.isReady() {
+			return
+		}
 		started.Do(func() {
-			launch.activate(func() {
-				window.Show()
-				window.Focus()
-			})
+			reminderItem.SetLabel(reminderLabel(reminderEnabled))
+			reminderItem.SetEnabled(true)
 			store.tasks.start(func(ctx context.Context) { activityReminderLoop(ctx, app, store) })
 			store.tasks.start(func(ctx context.Context) { breakReminderLoop(ctx, app, store) })
 			store.tasks.start(func(ctx context.Context) { autoBackupLoop(ctx, store) })
 		})
+	}
+	if startup != nil {
+		startup.onReady = func() { application.InvokeAsync(startBusiness) }
+	}
+	app.Event.OnApplicationEvent(events.Common.ApplicationStarted, func(_ *application.ApplicationEvent) {
+		launch.activate(func() { window.Show(); window.Focus() })
+		startBusiness()
 	})
-	return runApp(app)
+	runErr := runApp(app)
+	if startup != nil {
+		state := startup.snapshot()
+		if state.Phase == "blocked" {
+			return errors.Join(runErr, errors.New(state.Detail))
+		}
+	}
+	return runErr
 }
 
 func activityReminderLoop(ctx context.Context, app *application.App, store *App) {
@@ -308,7 +359,7 @@ func activityReminderLoop(ctx context.Context, app *application.App, store *App)
 	for waitDesktopTask(ctx, time.Until(time.Now().Truncate(time.Second).Add(time.Second))) {
 		now := time.Now()
 		if now.Hour() == 0 && now.Minute() == 0 && now.Second() == 0 {
-			if err := store.scheduler.DailySnapshot(now); err != nil {
+			if err := store.scheduler.WithContext(ctx).DailySnapshot(now); err != nil {
 				log.Printf("%v", err)
 			}
 		}
@@ -317,7 +368,7 @@ func activityReminderLoop(ctx context.Context, app *application.App, store *App)
 		if checkStart {
 			lastPlanMinute = minuteKey
 		}
-		alert, err := store.scheduler.PlanReminder(now, checkStart)
+		alert, err := store.scheduler.WithContext(ctx).PlanReminder(now, checkStart)
 		if err != nil {
 			log.Printf("%v", err)
 		}
@@ -329,7 +380,7 @@ func activityReminderLoop(ctx context.Context, app *application.App, store *App)
 			continue
 		}
 		if now.Hour() == store.dailyCheckHour() && now.Minute() == store.dailyCheckMinute() {
-			if review, reviewErr := store.scheduler.PendingReview(now); reviewErr != nil {
+			if review, reviewErr := store.scheduler.WithContext(ctx).PendingReview(now); reviewErr != nil {
 				log.Printf("检查昨日总结失败: %v", reviewErr)
 			} else if review != nil {
 				reminder.Stop()
@@ -338,7 +389,7 @@ func activityReminderLoop(ctx context.Context, app *application.App, store *App)
 				wakeMainWindow(app)
 			}
 		}
-		fire, activityErr := store.scheduler.ActivityReminder(now)
+		fire, activityErr := store.scheduler.WithContext(ctx).ActivityReminder(now)
 		if activityErr != nil {
 			log.Printf("检查活动提醒失败: %v", activityErr)
 		} else if fire && minuteKey != lastActivityMinute {
@@ -358,4 +409,12 @@ func wakeMainWindow(app *application.App) {
 		window.SetAlwaysOnTop(true)
 		window.Focus()
 	}
+}
+
+func desktopServices(store *App, locationFile string, startup *startupUpgrade) []application.Service {
+	services := []application.Service{application.NewService(&APIService{app: store, locationFile: locationFile, startup: startup})}
+	if startup == nil {
+		startup = &startupUpgrade{status: startupStatus{Phase: "ready"}}
+	}
+	return append(services, application.NewService(&StartupService{control: startup}))
 }

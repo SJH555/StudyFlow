@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "seconds": 300,
+    "source": "manual",
+    "deleted": 1,
+    "note": "QA synthetic fixture"
+  },
+  {
+    "id": 2,
+    "seconds": 2700,
+    "source": "manual",
+    "deleted": 0,
+    "note": "QA synthetic fixture"
+  },
+  {
+    "id": 3,
+    "seconds": 2400,
+    "source": "timer",
+    "deleted": 0,
+    "note": "QA synthetic fixture"
+  }
+]

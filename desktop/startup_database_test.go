@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"database/sql"
 	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -12,6 +13,7 @@ import (
 	"testing"
 
 	"exam_notify/internal/infrastructure/persistence"
+	"exam_notify/internal/infrastructure/system"
 )
 
 func startupPathsFixture(t *testing.T) startupDatabasePaths {
@@ -175,7 +177,7 @@ func TestStartupDatabaseHonorsFormalLocation(t *testing.T) {
 
 // 这三个版本复现了在两个历史文件与早期可执行文件中观测到的五张表 DDL，
 // 并附带合成的测试数据。
-func seedHistoricalStartupDatabase(t *testing.T, path string, version int) {
+func seedHistoricalStartupDatabase(t *testing.T, path string, version int, transforms ...func(string) string) {
 	t.Helper()
 	ddl := []string{
 		`CREATE TABLE subjects (id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, color TEXT NOT NULL DEFAULT '#7668e8', created_at TEXT NOT NULL)`,
@@ -195,6 +197,11 @@ func seedHistoricalStartupDatabase(t *testing.T, path string, version int) {
 			`ALTER TABLE sessions ADD COLUMN plan_id INTEGER`,
 			`ALTER TABLE sessions ADD COLUMN paused_at TEXT`,
 			`ALTER TABLE sessions ADD COLUMN resumed_at TEXT`)
+	}
+	for _, transform := range transforms {
+		for i := range ddl {
+			ddl[i] = transform(ddl[i])
+		}
 	}
 	seedStartupSQLite(t, path, false, ddl...)
 }
@@ -381,13 +388,27 @@ func TestStartupDatabasePositionReadFailureStopsSelection(t *testing.T) {
 	assertStartupPathMissing(t, filepath.Join(p.defaultDir, "study.db"))
 }
 
-// TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork 验证启动失败会在桌面与后台工作之前中止。
-func TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork(t *testing.T) {
+// TestStartupDatabaseFailureBlocksBusinessAndBackgroundWork 验证启动失败只允许错误界面，不启动业务或后台工作。
+func TestStartupDatabaseFailureBlocksBusinessAndBackgroundWork(t *testing.T) {
 	if runtime.GOOS != "linux" {
 		t.Skip("isolated HOME and APPIMAGE exercise the Linux main entry point")
 	}
 	if os.Getenv("STUDYFLOW_B1_STARTUP_TEST") == "missing" {
-		main()
+		err := runWithStartupPresenter(func(store *App, _ system.InstanceGuard, _, _, _ string, startup *startupUpgrade) error {
+			defer store.Close()
+			if startup.isReady() {
+				t.Fatal("failed database admitted business startup")
+			}
+			service := &APIService{app: store, startup: startup}
+			if _, _, err := service.beginWorkContext(); err == nil {
+				t.Fatal("business binding admitted work")
+			}
+			return errors.New(startup.snapshot().Detail)
+		})
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 		os.Exit(97)
 	}
 	p := startupPathsFixture(t)
@@ -396,7 +417,7 @@ func TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork(t *testing.T)
 	location := filepath.Join(base, "storage-location.txt")
 	selected := filepath.Join(base, "missing-selection")
 	writeStartupFixture(t, location, selected+"\n")
-	cmd := exec.Command(os.Args[0], "-test.run=^TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork$")
+	cmd := exec.Command(os.Args[0], "-test.run=^TestStartupDatabaseFailureBlocksBusinessAndBackgroundWork$")
 	cmd.Env = append(os.Environ(), "STUDYFLOW_B1_STARTUP_TEST=missing", "HOME="+home,
 		"XDG_CONFIG_HOME="+filepath.Join(home, "config"), "XDG_DATA_HOME="+filepath.Join(home, "share"),
 		"APPIMAGE="+filepath.Join(p.installDir, "StudyFlow.AppImage"))

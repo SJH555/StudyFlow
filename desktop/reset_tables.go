@@ -1,13 +1,14 @@
 package main
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"net/http"
 
 	"exam_notify/internal/modules/settings"
 )
 
-func (a *App) resetTables(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) resetTables(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		tables, err := settings.ListResetTables(db)

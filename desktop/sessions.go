@@ -1,7 +1,8 @@
 package main
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"encoding/json"
 	"net/http"
 	"time"
@@ -12,7 +13,7 @@ import (
 // Session 是学习记录领域模型在桌面绑定层的别名。
 type Session = sessions.Session
 
-func (a *App) sessions(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) sessions(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		items, err := sessions.List(db, r.URL.Query().Get("date"))
@@ -38,7 +39,7 @@ func (a *App) sessions(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (a *App) sessionAction(db *sql.DB, w http.ResponseWriter, r *http.Request, id string) {
+func (a *App) sessionAction(db *persistence.Queries, w http.ResponseWriter, r *http.Request, id string) {
 	switch r.Method {
 	case http.MethodPost:
 		var input sessions.TimerInput

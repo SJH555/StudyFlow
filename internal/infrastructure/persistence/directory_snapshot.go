@@ -33,10 +33,18 @@ func snapshotDatabase(ctx context.Context, db *sql.DB, path string) error {
 		if err != nil {
 			return err
 		}
-		more, stepErr := backup.Step(-1)
-		if stepErr == nil && more {
-			stepErr = errors.New("SQLite snapshot did not finish copying all pages")
+		var stepErr error
+		for {
+			if stepErr = ctx.Err(); stepErr != nil {
+				break
+			}
+			var more bool
+			more, stepErr = backup.Step(128)
+			if stepErr != nil || !more {
+				break
+			}
 		}
+		stepErr = errors.Join(stepErr, ctx.Err())
 		// Finish 会完成已完成的备份，或回滚未完成的备份；出错时它还会关闭目标，而 Commit 不会。
 		return errors.Join(stepErr, backup.Finish())
 	})

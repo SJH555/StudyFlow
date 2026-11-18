@@ -1,0 +1,482 @@
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+=== RUN   TestTransactionOutcomes
+=== RUN   TestTransactionOutcomes/commit
+=== RUN   TestTransactionOutcomes/business_error
+=== RUN   TestTransactionOutcomes/sql_error
+=== RUN   TestTransactionOutcomes/panic
+=== RUN   TestTransactionOutcomes/cancel
+--- PASS: TestTransactionOutcomes (0.01s)
+    --- PASS: TestTransactionOutcomes/commit (0.00s)
+    --- PASS: TestTransactionOutcomes/business_error (0.00s)
+    --- PASS: TestTransactionOutcomes/sql_error (0.00s)
+    --- PASS: TestTransactionOutcomes/panic (0.00s)
+    --- PASS: TestTransactionOutcomes/cancel (0.00s)
+=== RUN   TestTransactionCommitFailurePausesAllAccess
+=== RUN   TestTransactionCommitFailurePausesAllAccess/busy
+=== RUN   TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key
+--- PASS: TestTransactionCommitFailurePausesAllAccess (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/busy (0.00s)
+    --- PASS: TestTransactionCommitFailurePausesAllAccess/deferred_foreign_key (0.00s)
+=== RUN   TestTransactionScopeGuards
+--- PASS: TestTransactionScopeGuards (0.00s)
+=== RUN   TestTransactionCancellationInterruptsQuery
+--- PASS: TestTransactionCancellationInterruptsQuery (0.03s)
+=== RUN   TestTransactionRollbackFailureRetainsErrors
+=== RUN   TestTransactionRollbackFailureRetainsErrors/business_error
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+=== RUN   TestTransactionRollbackFailureRetainsErrors/panic
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+--- PASS: TestTransactionRollbackFailureRetainsErrors (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/business_error (0.00s)
+    --- PASS: TestTransactionRollbackFailureRetainsErrors/panic (0.00s)
+=== RUN   TestTransactionCommitResultIsNotRetried
+--- PASS: TestTransactionCommitResultIsNotRetried (0.00s)
+=== RUN   TestTransactionCancelAfterCommitIsSuccess
+--- PASS: TestTransactionCancelAfterCommitIsSuccess (0.00s)
+=== RUN   TestTransactionCloseWaitsForCleanup
+--- PASS: TestTransactionCloseWaitsForCleanup (0.00s)
+=== RUN   TestTransactionBeginFailureDoesNotRunWork
+--- PASS: TestTransactionBeginFailureDoesNotRunWork (0.00s)
+=== RUN   TestTransactionCancelRetainsRollbackFailure
+2026/11/18 17:14:13 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation
+--- PASS: TestTransactionCancelRetainsRollbackFailure (0.00s)
+=== RUN   TestTransactionCancelledWaiterDoesNotEnterScope
+--- PASS: TestTransactionCancelledWaiterDoesNotEnterScope (0.00s)
+=== RUN   TestTransactionConcurrentScopesRemainSingleConnection
+--- PASS: TestTransactionConcurrentScopesRemainSingleConnection (0.00s)
+PASS
+ok  	exam_notify/internal/infrastructure/persistence	0.593s

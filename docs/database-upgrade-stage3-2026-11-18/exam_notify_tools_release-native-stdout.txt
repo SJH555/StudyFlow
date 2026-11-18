@@ -1,0 +1,14 @@
+=== RUN   TestPrepareKeepsVersionSourcesSynchronized
+构建版本: 1.2.3-8
+构建版本: 1.2.3-9
+--- PASS: TestPrepareKeepsVersionSourcesSynchronized (0.18s)
+=== RUN   TestFinalizeOnlyRemovesMatchingBuildArtifacts
+可执行文件: C:\Users\jhsong\AppData\Local\Temp\TestFinalizeOnlyRemovesMatchingBuildArtifacts3169723927\001\bin\StudyFlow-1.2.3-8-linux-amd64
+--- PASS: TestFinalizeOnlyRemovesMatchingBuildArtifacts (0.03s)
+=== RUN   TestLinuxPackagesRemoveLegacyNamesAndPreserveOtherArchitectures
+安装包: C:\Users\jhsong\AppData\Local\Temp\TestLinuxPackagesRemoveLegacyNamesAndPreserveOtherArchitectures1132747522\001\bin\StudyFlow-1.2.3-8-linux-amd64.AppImage
+安装包: C:\Users\jhsong\AppData\Local\Temp\TestLinuxPackagesRemoveLegacyNamesAndPreserveOtherArchitectures1132747522\001\bin\StudyFlow-1.2.3-8-linux-amd64.deb
+安装包: C:\Users\jhsong\AppData\Local\Temp\TestLinuxPackagesRemoveLegacyNamesAndPreserveOtherArchitectures1132747522\001\bin\StudyFlow-1.2.3-8-linux-amd64.rpm
+安装包: C:\Users\jhsong\AppData\Local\Temp\TestLinuxPackagesRemoveLegacyNamesAndPreserveOtherArchitectures1132747522\001\bin\StudyFlow-1.2.3-8-linux-amd64.pkg.tar.zst
+--- PASS: TestLinuxPackagesRemoveLegacyNamesAndPreserveOtherArchitectures (0.01s)
+PASS

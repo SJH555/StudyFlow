@@ -1,0 +1,160 @@
+{
+  "focus": {
+    "skewMs": 1
+  },
+  "samples": [
+    {
+      "clock": "08:50",
+      "now": 1794929649776,
+      "sharedNow": 1794929649771,
+      "seconds": 530,
+      "end": 1794930180000,
+      "actual": 710,
+      "paused": false,
+      "errorSeconds": -0.22400000000004638
+    },
+    {
+      "clock": "08:50",
+      "now": 1794929649908,
+      "sharedNow": 1794929649771,
+      "seconds": 530,
+      "end": 1794930180000,
+      "actual": 710,
+      "paused": false,
+      "errorSeconds": -0.09199999999998454
+    },
+    {
+      "clock": "08:50",
+      "now": 1794929650043,
+      "sharedNow": 1794929649771,
+      "seconds": 530,
+      "end": 1794930180000,
+      "actual": 710,
+      "paused": false,
+      "errorSeconds": 0.043000000000006366
+    },
+    {
+      "clock": "08:50",
+      "now": 1794929650179,
+      "sharedNow": 1794929649771,
+      "seconds": 530,
+      "end": 1794930180000,
+      "actual": 710,
+      "paused": false,
+      "errorSeconds": 0.17899999999997362
+    },
+    {
+      "clock": "08:50",
+      "now": 1794929650313,
+      "sharedNow": 1794929649771,
+      "seconds": 530,
+      "end": 1794930180000,
+      "actual": 710,
+      "paused": false,
+      "errorSeconds": 0.3129999999999882
+    },
+    {
+      "clock": "08:50",
+      "now": 1794929650448,
+      "sharedNow": 1794929649771,
+      "seconds": 530,
+      "end": 1794930180000,
+      "actual": 710,
+      "paused": false,
+      "errorSeconds": 0.4479999999999791
+    },
+    {
+      "clock": "08:50",
+      "now": 1794929650580,
+      "sharedNow": 1794929649771,
+      "seconds": 530,
+      "end": 1794930180000,
+      "actual": 710,
+      "paused": false,
+      "errorSeconds": 0.5800000000000409
+    },
+    {
+      "clock": "08:49",
+      "now": 1794929650713,
+      "sharedNow": 1794929650580,
+      "seconds": 529,
+      "end": 1794930180000,
+      "actual": 711,
+      "paused": false,
+      "errorSeconds": -0.28700000000003456
+    },
+    {
+      "clock": "08:49",
+      "now": 1794929650848,
+      "sharedNow": 1794929650580,
+      "seconds": 529,
+      "end": 1794930180000,
+      "actual": 711,
+      "paused": false,
+      "errorSeconds": -0.15200000000004366
+    },
+    {
+      "clock": "08:49",
+      "now": 1794929650984,
+      "sharedNow": 1794929650580,
+      "seconds": 529,
+      "end": 1794930180000,
+      "actual": 711,
+      "paused": false,
+      "errorSeconds": -0.01599999999996271
+    },
+    {
+      "clock": "08:49",
+      "now": 1794929651119,
+      "sharedNow": 1794929650580,
+      "seconds": 529,
+      "end": 1794930180000,
+      "actual": 711,
+      "paused": false,
+      "errorSeconds": 0.1190000000000282
+    },
+    {
+      "clock": "08:49",
+      "now": 1794929651253,
+      "sharedNow": 1794929650580,
+      "seconds": 529,
+      "end": 1794930180000,
+      "actual": 711,
+      "paused": false,
+      "errorSeconds": 0.25300000000004275
+    }
+  ],
+  "pausedFirst": {
+    "clock": "08:48",
+    "now": 1794929652183,
+    "sharedNow": 1794929651583,
+    "seconds": 528,
+    "end": 1794930180000,
+    "actual": 712,
+    "paused": true
+  },
+  "pausedLater": {
+    "clock": "08:46",
+    "now": 1794929654388,
+    "sharedNow": 1794929653580,
+    "seconds": 526,
+    "end": 1794930180000,
+    "actual": 712,
+    "paused": true
+  },
+  "resumed": {
+    "clock": "08:45",
+    "now": 1794929655211,
+    "sharedNow": 1794929654579,
+    "seconds": 525,
+    "end": 1794930180000,
+    "actual": 712,
+    "paused": false
+  },
+  "finishDialog": "结束本次学习？\n\n结束后会保存本次学习记录，时长为 11分钟。\n\n继续学习\n确认结束",
+  "stopped": {
+    "hero": "倒计时秒级验证\n\n23:23 – 23:43 · 含休息 5 分钟\n\n开始学习\n计划学习\n15:00\n剩余 08:44\n进入专注模式 ↗",
+    "hasActive": false,
+    "records": 2
+  }
+}

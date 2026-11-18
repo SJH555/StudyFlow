@@ -1,0 +1,40 @@
+{
+  "version": "0.5.1-1",
+  "architecture": "x64",
+  "checks": {
+    "archiveIntegrity": true,
+    "packagedCodeMatches": true,
+    "appImageRuntimePathsAdjustedByBundler": true,
+    "debAndRpmVersions": true,
+    "windowsFixedVersion": "0.5.1.1",
+    "portableContainsNoUserData": true,
+    "appImageWebKitHelpersPresent": true
+  },
+  "artifacts": [
+    {
+      "file": "StudyFlow-0.5.1-1-linux-amd64.AppImage",
+      "bytes": 112884216,
+      "sha256": "e7830fe26322b9be5a9a37c6787c08fbcccf82a371d616c4dd93c87d8a822232"
+    },
+    {
+      "file": "StudyFlow-0.5.1-1-linux-amd64.deb",
+      "bytes": 13113968,
+      "sha256": "f87e46811f5c011aa271f9bbd1b8c8815482ed493c20469c63430f1037b89578"
+    },
+    {
+      "file": "StudyFlow-0.5.1-1-linux-amd64.rpm",
+      "bytes": 13295011,
+      "sha256": "243b8787cc2fd934e6cd811ee63413dc9b6e241e3868632bec32c479dd15f6ee"
+    },
+    {
+      "file": "StudyFlow-0.5.1-1-amd64-installer.exe",
+      "bytes": 13915455,
+      "sha256": "c211341d3f504f10e4b2ecadd6060524e4a24b88a2e55aadf310ff57b961078e"
+    },
+    {
+      "file": "StudyFlow-0.5.1-1-windows-amd64-portable.zip",
+      "bytes": 11772640,
+      "sha256": "1913e58cb5d48e593baf0c0c69949a719edafaeb8e4fa9a7905260b90c9bdb5f"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 package main
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"encoding/json"
 	"net/http"
 
@@ -11,7 +12,7 @@ import (
 // Plan 是学习计划领域模型在桌面绑定层的别名。
 type Plan = plans.Plan
 
-func (a *App) plans(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) plans(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		items, err := plans.List(db)

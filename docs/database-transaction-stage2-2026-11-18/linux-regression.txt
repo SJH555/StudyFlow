@@ -1,0 +1,17 @@
+ok  	exam_notify/internal/app	0.077s
+ok  	exam_notify/internal/infrastructure/diagnostics	0.016s
+?   	exam_notify/internal/infrastructure/httpapi	[no test files]
+ok  	exam_notify/internal/infrastructure/persistence	0.530s
+ok  	exam_notify/internal/infrastructure/reminder	0.017s
+ok  	exam_notify/internal/infrastructure/storage	0.088s
+ok  	exam_notify/internal/infrastructure/system	0.166s
+?   	exam_notify/internal/modules/activities	[no test files]
+ok  	exam_notify/internal/modules/goals	0.020s
+ok  	exam_notify/internal/modules/plans	0.012s
+?   	exam_notify/internal/modules/review	[no test files]
+ok  	exam_notify/internal/modules/schedule	0.002s
+ok  	exam_notify/internal/modules/sessions	0.041s
+ok  	exam_notify/internal/modules/settings	0.028s
+ok  	exam_notify/internal/modules/subjects	0.009s
+ok  	exam_notify/internal/shared/studytime	0.007s
+ok  	exam_notify/desktop	1.004s

@@ -1,0 +1,25 @@
+=== RUN   TestExpiredPlanClosesAtBoundaryAndOnlyOnce
+--- PASS: TestExpiredPlanClosesAtBoundaryAndOnlyOnce (0.07s)
+=== RUN   TestExpiredPausedPlanUnderTenMinutesIsNotCounted
+--- PASS: TestExpiredPausedPlanUnderTenMinutesIsNotCounted (0.05s)
+=== RUN   TestFinishExpiredFallsBackToPlanBoundaryForLegacySession
+--- PASS: TestFinishExpiredFallsBackToPlanBoundaryForLegacySession (0.06s)
+=== RUN   TestManualMinimumDuration
+=== RUN   TestManualMinimumDuration/5m0s
+=== RUN   TestManualMinimumDuration/9m59s
+=== RUN   TestManualMinimumDuration/9m59.999s
+=== RUN   TestManualMinimumDuration/10m0s
+=== RUN   TestManualMinimumDuration/10m1s
+--- PASS: TestManualMinimumDuration (0.25s)
+    --- PASS: TestManualMinimumDuration/5m0s (0.04s)
+    --- PASS: TestManualMinimumDuration/9m59s (0.06s)
+    --- PASS: TestManualMinimumDuration/9m59.999s (0.04s)
+    --- PASS: TestManualMinimumDuration/10m0s (0.05s)
+    --- PASS: TestManualMinimumDuration/10m1s (0.05s)
+=== RUN   TestLegacyShortManualRecordNoLongerBlocksAfterStartup
+--- PASS: TestLegacyShortManualRecordNoLongerBlocksAfterStartup (0.05s)
+=== RUN   TestStartPersistsBoundaryAndRollsBackOldTimerOnInsertFailure
+--- PASS: TestStartPersistsBoundaryAndRollsBackOldTimerOnInsertFailure (0.06s)
+=== RUN   TestStartAnchorsEarlyStartAndFinishesAtPlannedBoundary
+--- PASS: TestStartAnchorsEarlyStartAndFinishesAtPlannedBoundary (0.04s)
+PASS

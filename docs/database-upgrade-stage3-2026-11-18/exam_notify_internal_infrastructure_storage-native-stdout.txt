@@ -1,0 +1,126 @@
+=== RUN   TestRetirementCleanupRetriesWithoutDeletingUserFiles
+=== RUN   TestRetirementCleanupRetriesWithoutDeletingUserFiles/backup_unlink
+=== RUN   TestRetirementCleanupRetriesWithoutDeletingUserFiles/database_unlink
+=== RUN   TestRetirementCleanupRetriesWithoutDeletingUserFiles/directory_sync
+=== RUN   TestRetirementCleanupRetriesWithoutDeletingUserFiles/empty_directory_removed
+--- PASS: TestRetirementCleanupRetriesWithoutDeletingUserFiles (0.28s)
+    --- PASS: TestRetirementCleanupRetriesWithoutDeletingUserFiles/backup_unlink (0.10s)
+    --- PASS: TestRetirementCleanupRetriesWithoutDeletingUserFiles/database_unlink (0.06s)
+    --- PASS: TestRetirementCleanupRetriesWithoutDeletingUserFiles/directory_sync (0.07s)
+    --- PASS: TestRetirementCleanupRetriesWithoutDeletingUserFiles/empty_directory_removed (0.06s)
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/backup_content
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/backup_identity
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/target_backup_content
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/target_backup_identity
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/database_identity
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/backup_directory_identity
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/WAL
+=== RUN   TestRetirementPreservesChangedFilesAndSQLiteSidecars/location_changed
+--- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars (0.54s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/backup_content (0.06s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/backup_identity (0.07s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/target_backup_content (0.08s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/target_backup_identity (0.06s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/database_identity (0.07s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/backup_directory_identity (0.06s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/WAL (0.06s)
+    --- PASS: TestRetirementPreservesChangedFilesAndSQLiteSidecars/location_changed (0.08s)
+=== RUN   TestRetirementRejectsBackupChangedAfterCopy
+--- PASS: TestRetirementRejectsBackupChangedAfterCopy (0.06s)
+=== RUN   TestRetirementCrashRecovery
+=== RUN   TestRetirementCrashRecovery/after_isolation
+=== RUN   TestRetirementCrashRecovery/after_unlink
+--- PASS: TestRetirementCrashRecovery (0.14s)
+    --- PASS: TestRetirementCrashRecovery/after_isolation (0.07s)
+    --- PASS: TestRetirementCrashRecovery/after_unlink (0.07s)
+=== RUN   TestLocationSwitchPreservesOldLocationStates
+=== RUN   TestLocationSwitchPreservesOldLocationStates/missing
+=== RUN   TestLocationSwitchPreservesOldLocationStates/empty
+=== RUN   TestLocationSwitchPreservesOldLocationStates/content
+--- PASS: TestLocationSwitchPreservesOldLocationStates (0.14s)
+    --- PASS: TestLocationSwitchPreservesOldLocationStates/missing (0.04s)
+    --- PASS: TestLocationSwitchPreservesOldLocationStates/empty (0.04s)
+    --- PASS: TestLocationSwitchPreservesOldLocationStates/content (0.06s)
+=== RUN   TestLocationSwitchRequiresDurablePendingRecord
+=== RUN   TestLocationSwitchRequiresDurablePendingRecord/marker_write
+=== RUN   TestLocationSwitchRequiresDurablePendingRecord/marker_file_sync
+=== RUN   TestLocationSwitchRequiresDurablePendingRecord/marker_directory_sync
+=== RUN   TestLocationSwitchRequiresDurablePendingRecord/position_file_close
+=== RUN   TestLocationSwitchRequiresDurablePendingRecord/marker_file_close
+--- PASS: TestLocationSwitchRequiresDurablePendingRecord (0.25s)
+    --- PASS: TestLocationSwitchRequiresDurablePendingRecord/marker_write (0.04s)
+    --- PASS: TestLocationSwitchRequiresDurablePendingRecord/marker_file_sync (0.06s)
+    --- PASS: TestLocationSwitchRequiresDurablePendingRecord/marker_directory_sync (0.04s)
+    --- PASS: TestLocationSwitchRequiresDurablePendingRecord/position_file_close (0.04s)
+    --- PASS: TestLocationSwitchRequiresDurablePendingRecord/marker_file_close (0.06s)
+=== RUN   TestLocationSwitchPublicationEvidence
+=== RUN   TestLocationSwitchPublicationEvidence/rename_failed
+=== RUN   TestLocationSwitchPublicationEvidence/rename_reported_error_after_success
+=== RUN   TestLocationSwitchPublicationEvidence/readback_failed
+=== RUN   TestLocationSwitchPublicationEvidence/identity_changed
+=== RUN   TestLocationSwitchPublicationEvidence/content_changed
+=== RUN   TestLocationSwitchPublicationEvidence/directory_sync_failed
+=== RUN   TestLocationSwitchPublicationEvidence/external_preflight_edit
+=== RUN   TestLocationSwitchPublicationEvidence/target_identity_changed
+--- PASS: TestLocationSwitchPublicationEvidence (0.22s)
+    --- PASS: TestLocationSwitchPublicationEvidence/rename_failed (0.04s)
+    --- PASS: TestLocationSwitchPublicationEvidence/rename_reported_error_after_success (0.03s)
+    --- PASS: TestLocationSwitchPublicationEvidence/readback_failed (0.02s)
+    --- PASS: TestLocationSwitchPublicationEvidence/identity_changed (0.02s)
+    --- PASS: TestLocationSwitchPublicationEvidence/content_changed (0.03s)
+    --- PASS: TestLocationSwitchPublicationEvidence/directory_sync_failed (0.02s)
+    --- PASS: TestLocationSwitchPublicationEvidence/external_preflight_edit (0.02s)
+    --- PASS: TestLocationSwitchPublicationEvidence/target_identity_changed (0.03s)
+=== RUN   TestLocationSwitchClearRetriesDirectorySync
+--- PASS: TestLocationSwitchClearRetriesDirectorySync (0.02s)
+=== RUN   TestLocationSwitchRetriesRecoveredTemporaryFileCleanup
+=== RUN   TestLocationSwitchRetriesRecoveredTemporaryFileCleanup/unlink
+=== RUN   TestLocationSwitchRetriesRecoveredTemporaryFileCleanup/directory_sync
+=== RUN   TestLocationSwitchRetriesRecoveredTemporaryFileCleanup/interrupted_isolation
+--- PASS: TestLocationSwitchRetriesRecoveredTemporaryFileCleanup (0.10s)
+    --- PASS: TestLocationSwitchRetriesRecoveredTemporaryFileCleanup/unlink (0.04s)
+    --- PASS: TestLocationSwitchRetriesRecoveredTemporaryFileCleanup/directory_sync (0.03s)
+    --- PASS: TestLocationSwitchRetriesRecoveredTemporaryFileCleanup/interrupted_isolation (0.04s)
+=== RUN   TestLocationSwitchRecoversIsolatedPendingRecord
+--- PASS: TestLocationSwitchRecoversIsolatedPendingRecord (0.06s)
+=== RUN   TestLocationSwitchKeepsFileReplacedBeforeIsolation
+--- PASS: TestLocationSwitchKeepsFileReplacedBeforeIsolation (0.07s)
+=== RUN   TestLocationSwitchRejectsInvalidPendingRecords
+=== RUN   TestLocationSwitchRejectsInvalidPendingRecords/unknown_version
+=== RUN   TestLocationSwitchRejectsInvalidPendingRecords/malformed_JSON
+=== RUN   TestLocationSwitchRejectsInvalidPendingRecords/directory_identity_mismatch
+=== RUN   TestLocationSwitchRejectsInvalidPendingRecords/marker_identity_mismatch
+--- PASS: TestLocationSwitchRejectsInvalidPendingRecords (0.29s)
+    --- PASS: TestLocationSwitchRejectsInvalidPendingRecords/unknown_version (0.08s)
+    --- PASS: TestLocationSwitchRejectsInvalidPendingRecords/malformed_JSON (0.06s)
+    --- PASS: TestLocationSwitchRejectsInvalidPendingRecords/directory_identity_mismatch (0.08s)
+    --- PASS: TestLocationSwitchRejectsInvalidPendingRecords/marker_identity_mismatch (0.07s)
+=== RUN   TestLocationSwitchDoesNotOverwriteConcurrentCreation
+--- PASS: TestLocationSwitchDoesNotOverwriteConcurrentCreation (0.06s)
+=== RUN   TestLocationSwitchRecoveryRejectsReplacedDatabase
+--- PASS: TestLocationSwitchRecoveryRejectsReplacedDatabase (0.08s)
+=== RUN   TestLocationSwitchRejectsUnsafePaths
+    location_switch_test.go:484: symlink unavailable: symlink C:\Users\jhsong\AppData\Local\Temp\TestLocationSwitchRejectsUnsafePaths649854363\001\old\study.db C:\Users\jhsong\AppData\Local\Temp\TestLocationSwitchRejectsUnsafePaths649854363\001\storage-location.txt: A required privilege is not held by the client.
+--- SKIP: TestLocationSwitchRejectsUnsafePaths (0.00s)
+=== RUN   TestLocationSwitchCrashRecovery
+=== RUN   TestLocationSwitchCrashRecovery/writing_marker
+=== RUN   TestLocationSwitchCrashRecovery/marker_durable
+=== RUN   TestLocationSwitchCrashRecovery/location_renamed
+=== RUN   TestLocationSwitchCrashRecovery/location_directory_synced
+=== RUN   TestLocationSwitchCrashRecovery/after_memory_commit
+=== RUN   TestLocationSwitchCrashRecovery/before_marker_removal
+--- PASS: TestLocationSwitchCrashRecovery (0.39s)
+    --- PASS: TestLocationSwitchCrashRecovery/writing_marker (0.04s)
+    --- PASS: TestLocationSwitchCrashRecovery/marker_durable (0.07s)
+    --- PASS: TestLocationSwitchCrashRecovery/location_renamed (0.07s)
+    --- PASS: TestLocationSwitchCrashRecovery/location_directory_synced (0.07s)
+    --- PASS: TestLocationSwitchCrashRecovery/after_memory_commit (0.07s)
+    --- PASS: TestLocationSwitchCrashRecovery/before_marker_removal (0.07s)
+=== RUN   TestStorageBaseDir
+--- PASS: TestStorageBaseDir (0.00s)
+=== RUN   TestResolveDataDirectoryMigratesOldDefault
+--- PASS: TestResolveDataDirectoryMigratesOldDefault (0.01s)
+=== RUN   TestResolveDataDirectoryKeepsCustomChoice
+--- PASS: TestResolveDataDirectoryKeepsCustomChoice (0.02s)
+PASS

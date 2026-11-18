@@ -1,7 +1,8 @@
 package app
 
 import (
-	"database/sql"
+	"context"
+
 	"path/filepath"
 	"testing"
 	"time"
@@ -13,7 +14,8 @@ import (
 func schedulerCount(t *testing.T, database *persistence.Database, query string, args ...any) int {
 	t.Helper()
 	var n int
-	if err := database.WithRead(func(db *sql.DB, _ string) error {
+	if err := database.WithAccess(context.Background(), func(a *persistence.Access) error {
+		db := a.Queries(context.Background())
 		return db.QueryRow(query, args...).Scan(&n)
 	}); err != nil {
 		t.Fatal(err)
@@ -24,7 +26,8 @@ func schedulerCount(t *testing.T, database *persistence.Database, query string, 
 func schedulerForDay(t *testing.T, database *persistence.Database, day, mode string, threshold int) *review.DailyReview {
 	t.Helper()
 	var result *review.DailyReview
-	if err := database.WithRead(func(db *sql.DB, _ string) error {
+	if err := database.WithAccess(context.Background(), func(a *persistence.Access) error {
+		db := a.Queries(context.Background())
 		var err error
 		result, err = review.New(db).ForDay(day, mode, threshold)
 		return err
@@ -37,7 +40,8 @@ func schedulerForDay(t *testing.T, database *persistence.Database, day, mode str
 func schedulerBulkOffer(t *testing.T, database *persistence.Database, now time.Time, pending *review.DailyReview) *review.BulkReviewOffer {
 	t.Helper()
 	var result *review.BulkReviewOffer
-	if err := database.WithRead(func(db *sql.DB, _ string) error {
+	if err := database.WithAccess(context.Background(), func(a *persistence.Access) error {
+		db := a.Queries(context.Background())
 		var err error
 		result, err = review.New(db).BulkOffer(now, pending)
 		return err
@@ -50,7 +54,8 @@ func schedulerBulkOffer(t *testing.T, database *persistence.Database, now time.T
 func schedulerSaveBulk(t *testing.T, database *persistence.Database, now time.Time, startDay, endDay, reason string) int {
 	t.Helper()
 	var count int
-	if err := database.WithRead(func(db *sql.DB, _ string) error {
+	if err := database.WithAccess(context.Background(), func(a *persistence.Access) error {
+		db := a.Queries(context.Background())
 		var err error
 		count, err = review.New(db).SaveBulk(now, startDay, endDay, reason)
 		return err

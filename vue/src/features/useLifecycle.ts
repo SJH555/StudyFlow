@@ -39,6 +39,10 @@ export function useLifecycle(deps: LifecycleDeps) {
   const { closePlanNoteOutside } = usePlanDraft();
 
   let tick = 0;
+  const refreshClock = () => appStore.tick();
+  const refreshVisibleClock = () => {
+    if (document.visibilityState === "visible") refreshClock();
+  };
 
   onMounted(() => {
     System.Environment()
@@ -51,6 +55,9 @@ export function useLifecycle(deps: LifecycleDeps) {
     load();
     Events.On("daily-review-due", () => reviewStore.checkDailyReview());
     Events.On("common:WindowFocus", () => reviewStore.checkDailyReview());
+    Events.On("common:WindowFocus", refreshClock);
+    window.addEventListener("focus", refreshClock);
+    document.addEventListener("visibilitychange", refreshVisibleClock);
     window.addEventListener("focus", reviewStore.checkDailyReview);
     Events.On("common:WindowMaximise", () => (windowsMaximised.value = true));
     Events.On(
@@ -108,6 +115,8 @@ export function useLifecycle(deps: LifecycleDeps) {
     clearInterval(tick);
     window.removeEventListener("resize", statsStore.resizeCharts);
     window.removeEventListener("focus", reviewStore.checkDailyReview);
+    window.removeEventListener("focus", refreshClock);
+    document.removeEventListener("visibilitychange", refreshVisibleClock);
     document.removeEventListener("copy", preventDataCopy);
     document.removeEventListener("pointerdown", closePlanNoteOutside);
     document.removeEventListener("keydown", handleAppKeydown, true);

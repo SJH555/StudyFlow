@@ -31,9 +31,9 @@ const deleteDialogOpen = computed({
   },
 });
 const visibleGoals = computed(() => {
-  if (showAccepted.value) return acceptedGoals.value;
-  if (sortOrder.value === "deadline") return activeGoals.value;
-  return [...activeGoals.value].sort(
+  const goals = showAccepted.value ? acceptedGoals.value : activeGoals.value;
+  if (sortOrder.value === "deadline") return goals;
+  return [...goals].sort(
     (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt) || a.id - b.id,
   );
 });
@@ -45,7 +45,7 @@ function openEditor(goal: Goal | null = null) {
 
 function countdownColor(goal: Goal) {
   const tone = goalsStore.countdownTone(goal);
-  return tone === "overdue" ? "error" : tone === "soon" ? "warning" : "primary";
+  return tone === "overdue" ? "error" : tone === "soon" ? "warning" : "var(--goal-upcoming-color)";
 }
 
 function goalStateClass(goal: Goal) {
@@ -70,7 +70,6 @@ async function acceptResult(completed: boolean) {
   try {
     await goalsStore.accept(acceptTarget.value.id, completed);
     acceptTarget.value = null;
-    showAccepted.value = true;
   } catch (error) {
     appStore.setError(error);
   }
@@ -131,7 +130,6 @@ async function removeGoal() {
         </h3>
         <div class="goals-list-controls">
           <VMenu
-            v-if="!showAccepted"
             location="bottom start"
             :width="180"
             :min-width="180"
@@ -147,7 +145,7 @@ async function removeGoal() {
                 size="small"
                 prepend-icon="mdi-sort"
                 append-icon="mdi-chevron-down"
-                :aria-label="`当前目标排序：${sortOrder === 'deadline' ? '截止日期近到远' : '创建日期新到旧'}`"
+                :aria-label="`目标排序：${sortOrder === 'deadline' ? '截止日期近到远' : '创建日期新到旧'}`"
               >
                 {{ sortOrder === "deadline" ? "截止优先" : "新建优先" }}
               </VBtn>
@@ -156,7 +154,7 @@ async function removeGoal() {
               class="goals-sort-menu"
               density="compact"
               rounded="lg"
-              aria-label="当前目标排序方式"
+              aria-label="目标排序方式"
             >
               <VListItem
                 title="截止日期：近到远"
@@ -449,7 +447,7 @@ async function removeGoal() {
 }
 
 .goal-card.v-card {
-  --goal-accent: rgb(var(--v-theme-primary));
+  --goal-accent: var(--goal-upcoming-color);
   display: flex;
   flex: none;
   align-items: center;

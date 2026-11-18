@@ -12,7 +12,7 @@ import (
 	"exam_notify/internal/infrastructure/persistence"
 )
 
-func (s *APIService) setDataDirectory(dir string) error {
+func (s *APIService) setDataDirectory(ctx context.Context, dir string) error {
 	dir = strings.TrimSpace(dir)
 	if dir == "" {
 		return errors.New("请选择一个有效的数据目录")
@@ -21,7 +21,7 @@ func (s *APIService) setDataDirectory(dir string) error {
 	if err != nil {
 		return err
 	}
-	result, err := s.app.database.SwitchDirectory(context.Background(), dir, s.locationFile, installDir)
+	result, err := s.app.database.SwitchDirectory(ctx, dir, s.locationFile, installDir)
 	return directorySwitchResponse(dir, result, err)
 }
 

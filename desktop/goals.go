@@ -1,7 +1,8 @@
 package main
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -10,8 +11,8 @@ import (
 	"exam_notify/internal/modules/goals"
 )
 
-func (a *App) goalsAPI(db *sql.DB, w http.ResponseWriter, r *http.Request, path string) {
-	// Call 的读锁保护句柄生命周期，不限制 SQL 写入；写入串行化由 SQLite 连接和事务保证。
+func (a *App) goalsAPI(db *persistence.Queries, w http.ResponseWriter, r *http.Request, path string) {
+	// Call 持有一次独占借用；业务事务复用该范围，不再次申请生命周期锁。
 	// 此处仅组装依赖并转发，Repository 不再重复借用生命周期锁。
 	service := goals.NewService(goals.NewSQLiteRepository(db))
 	parts := strings.Split(strings.Trim(path, "/"), "/")

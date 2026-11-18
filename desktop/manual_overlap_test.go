@@ -38,6 +38,29 @@ func TestManualRecordRejectsOverlapsAcrossSources(t *testing.T) {
 	}
 }
 
+func TestManualRecordRejectsShortBeforePersisting(t *testing.T) {
+	store, err := NewApp(filepath.Join(t.TempDir(), "study.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if _, err := testExec(store, `INSERT INTO subjects(id,name,created_at) VALUES(1,'数学','2026-11-04')`); err != nil {
+		t.Fatal(err)
+	}
+	response := postManualRecord(store, "09:00", "09:09")
+	if response.Code == http.StatusOK || !strings.Contains(response.Body.String(), "不能少于 10 分钟") {
+		t.Fatalf("short record accepted: %d %s", response.Code, response.Body.String())
+	}
+	response = postManualRecord(store, "09:00", "09:10")
+	if response.Code != http.StatusOK {
+		t.Fatalf("ten-minute record blocked: %d %s", response.Code, response.Body.String())
+	}
+	response = postManualRecord(store, "09:05", "09:15")
+	if response.Code == http.StatusOK || !strings.Contains(response.Body.String(), "时间冲突") {
+		t.Fatalf("overlap accepted: %d %s", response.Code, response.Body.String())
+	}
+}
+
 func TestManualRecordChecksActiveSessionAndIgnoresDeleted(t *testing.T) {
 	store, err := NewApp(filepath.Join(t.TempDir(), "study.db"))
 	if err != nil {

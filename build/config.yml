@@ -11,7 +11,7 @@ info:
   description: "学习时间管理与记录" # The application description
   copyright: "© 2026 StudyFlow" # Copyright text
   comments: "StudyFlow" # Comments
-  version: "0.5.0-1" # The application version
+  version: "0.5.1-1" # The application version
   # cfBundleIconName: "appicon" # The macOS icon name in Assets.car icon bundles (optional)
   #                               # Should match the name of your .icon file without the extension
   #                               # If not set and Assets.car exists, defaults to "appicon"

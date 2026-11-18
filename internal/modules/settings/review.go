@@ -1,12 +1,13 @@
 package settings
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"strconv"
 )
 
 // ReviewConfig 返回复习相关配置。
-func ReviewConfig(db *sql.DB) (bool, string, int, string, error) {
+func ReviewConfig(db *persistence.Queries) (bool, string, int, string, error) {
 	values := map[string]string{}
 	rows, err := db.Query(`SELECT key,value FROM settings WHERE key IN ('dailyReviewEnabled','dailyReviewMode','dailyReviewThreshold','dailyReviewStartDate')`)
 	if err != nil {

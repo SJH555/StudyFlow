@@ -1,7 +1,8 @@
 package app
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"time"
 
 	"exam_notify/internal/modules/activities"
@@ -12,9 +13,10 @@ import (
 // 并在跳过休息时段时，检查用户当前是否正在休息。
 func (s *Scheduler) ActivityReminder(now time.Time) (bool, error) {
 	var config settings.ActivityReminderConfig
-	err := s.db.WithRead(func(db *sql.DB, _ string) error {
-		config = settings.ReadActivityReminderConfig(db)
-		return nil
+	err := s.withQueries(func(db *persistence.Queries) error {
+		var err error
+		config, err = settings.ReadActivityReminderConfig(db)
+		return err
 	})
 	if err != nil {
 		return false, err
@@ -26,7 +28,7 @@ func (s *Scheduler) ActivityReminder(now time.Time) (bool, error) {
 		return true, nil
 	}
 	var resting bool
-	err = s.db.WithRead(func(db *sql.DB, _ string) error {
+	err = s.withQueries(func(db *persistence.Queries) error {
 		var err error
 		resting, err = activities.Resting(db, now)
 		return err

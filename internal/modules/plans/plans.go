@@ -1,14 +1,28 @@
 package plans
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"errors"
 	"strings"
 	"unicode/utf8"
 )
 
 // Create 校验并新增一条学习计划。
-func Create(db *sql.DB, x Plan) (Plan, error) {
+func Create(db *persistence.Queries, x Plan) (Plan, error) {
+	var result Plan
+	var err error
+	err = db.WithTx(func(tx *persistence.Queries) error {
+		result, err = create(tx, x)
+		return err
+	})
+	if err != nil {
+		return x, err
+	}
+	return result, nil
+}
+
+func create(db *persistence.Queries, x Plan) (Plan, error) {
 	if x.SubjectID == 0 || x.Duration < 1 || x.StartTime == "" {
 		return x, errors.New("subject and positive duration are required")
 	}
@@ -32,7 +46,20 @@ func Create(db *sql.DB, x Plan) (Plan, error) {
 }
 
 // Update 校验并更新一条学习计划。
-func Update(db *sql.DB, x Plan) (Plan, error) {
+func Update(db *persistence.Queries, x Plan) (Plan, error) {
+	var result Plan
+	var err error
+	err = db.WithTx(func(tx *persistence.Queries) error {
+		result, err = update(tx, x)
+		return err
+	})
+	if err != nil {
+		return x, err
+	}
+	return result, nil
+}
+
+func update(db *persistence.Queries, x Plan) (Plan, error) {
 	if x.ID == 0 || x.SubjectID == 0 || x.Duration < 1 || x.StartTime == "" || x.Weekdays == "" || x.BreakMinutes < 0 || x.BreakMinutes >= x.Duration {
 		return x, errors.New("invalid plan")
 	}

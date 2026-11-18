@@ -1,0 +1,7 @@
+{
+  "version": "0.5.0-5",
+  "targetDatabaseVersion": 1,
+  "destination": "/mnt/d/CLink/Desktop/studyflow/StudyFlow-0.5.0-5-portable/StudyFlow.exe",
+  "sha256": "57aafa8af997a21796dc8a42ae98054b70c71c30672455c3cafc243fc6795238",
+  "oldExecutableBackup": "/mnt/d/CLink/Desktop/studyflow/StudyFlow-0.5.0-5-portable/qa-backups/StudyFlow-before-goose-stage3.exe"
+}

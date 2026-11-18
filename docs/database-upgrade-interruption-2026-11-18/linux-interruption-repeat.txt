@@ -1,0 +1,1 @@
+ok  	exam_notify/internal/infrastructure/upgrade	2.197s

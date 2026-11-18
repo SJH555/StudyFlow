@@ -1,0 +1,13 @@
+=== RUN   TestEndForStartReadsUncommittedPlanFromSuppliedTransaction
+--- PASS: TestEndForStartReadsUncommittedPlanFromSuppliedTransaction (0.02s)
+=== RUN   TestEndForStartAnchorsEarlyStartToUpcomingWindow
+--- PASS: TestEndForStartAnchorsEarlyStartToUpcomingWindow (0.01s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.01s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.01s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.01s)
+PASS

@@ -2,6 +2,7 @@ package review
 
 import (
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"fmt"
 	"strings"
 	"time"
@@ -13,6 +14,8 @@ func (s *Service) History() ([]DailyReview, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
+
 	out := []DailyReview{}
 	for rows.Next() {
 		var review DailyReview
@@ -54,8 +57,8 @@ func (s *Service) History() ([]DailyReview, error) {
 }
 
 // Submit 提交当天的复习总结及各项未达标理由。
-func (s *Service) Submit(day string, reasons []ReviewItem) error {
-	pending, err := s.Pending(time.Now())
+func (s *Service) submit(day string, reasons []ReviewItem) error {
+	pending, err := s.pending(time.Now())
 	if err != nil {
 		return err
 	}
@@ -70,24 +73,20 @@ func (s *Service) Submit(day string, reasons []ReviewItem) error {
 			return fmt.Errorf("第 %d 项理由需填写，且不超过 1000 字", i+1)
 		}
 	}
-	tx, err := s.db.Begin()
-	if err != nil {
-		return err
-	}
-	defer tx.Rollback()
-	_, err = tx.Exec(`INSERT INTO daily_reviews(day,mode,threshold,planned_seconds,actual_seconds,submitted_at) VALUES(?,?,?,?,?,?)`, pending.Day, pending.Mode, pending.Threshold, pending.PlannedSeconds, pending.ActualSeconds, time.Now().Format(time.RFC3339))
+	_, err = s.db.Exec(`INSERT INTO daily_reviews(day,mode,threshold,planned_seconds,actual_seconds,submitted_at) VALUES(?,?,?,?,?,?)`, pending.Day, pending.Mode, pending.Threshold, pending.PlannedSeconds, pending.ActualSeconds, time.Now().Format(time.RFC3339))
 	if err != nil {
 		return err
 	}
 	for i, item := range pending.Items {
-		_, err = tx.Exec(`INSERT INTO daily_review_items(day,subject_id,subject_name,planned_seconds,actual_seconds,reason) VALUES(?,?,?,?,?,?)`, pending.Day, item.SubjectID, item.SubjectName, item.PlannedSeconds, item.ActualSeconds, strings.TrimSpace(reasons[i].Reason))
+		_, err = s.db.Exec(`INSERT INTO daily_review_items(day,subject_id,subject_name,planned_seconds,actual_seconds,reason) VALUES(?,?,?,?,?,?)`, pending.Day, item.SubjectID, item.SubjectName, item.PlannedSeconds, item.ActualSeconds, strings.TrimSpace(reasons[i].Reason))
 		if err != nil {
 			return err
 		}
 	}
-	if err = tx.Commit(); err != nil {
-		return err
-	}
 
 	return nil
+}
+
+func (s *Service) Submit(day string, reasons []ReviewItem) error {
+	return s.db.WithTx(func(tx *persistence.Queries) error { return New(tx).submit(day, reasons) })
 }

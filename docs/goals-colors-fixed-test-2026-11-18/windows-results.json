@@ -1,0 +1,76 @@
+{
+  "initial": {
+    "version": "0.5.0-5",
+    "subjects": 8,
+    "plans": 7,
+    "goals": 9
+  },
+  "home": {
+    "upcoming": {
+      "class": "side-card goal-countdown-card goal-countdown-upcoming",
+      "title": "测试 · 正常推进 · 数学专题复习",
+      "icon": "rgb(76, 175, 80)",
+      "days": "rgb(76, 175, 80)"
+    },
+    "soon": {
+      "class": "side-card goal-countdown-card goal-countdown-soon",
+      "title": "测试 · 今天截止 · 线性代数测验",
+      "icon": "rgb(251, 140, 0)",
+      "days": "rgb(251, 140, 0)"
+    },
+    "overdue": {
+      "class": "side-card goal-countdown-card goal-countdown-overdue",
+      "title": "测试 · 已经逾期 · 错题整理",
+      "icon": "rgb(176, 0, 32)",
+      "days": "rgb(176, 0, 32)"
+    }
+  },
+  "stats": {
+    "text": "计划完成率\n11%\n实际时长 ÷ 计划时长",
+    "border": "rgb(76, 175, 80)"
+  },
+  "goalCards": [
+    {
+      "title": "测试 · 已经逾期 · 错题整理",
+      "state": "v-card v-theme--studyflow v-card--density-default v-card--variant-flat goal-card goal-state-overdue",
+      "border": "rgb(176, 0, 32)",
+      "chip": "rgb(176, 0, 32)"
+    },
+    {
+      "title": "测试 · 今天截止 · 线性代数测验",
+      "state": "v-card v-theme--studyflow v-card--density-default v-card--variant-flat goal-card goal-state-soon",
+      "border": "rgb(251, 140, 0)",
+      "chip": "rgb(251, 140, 0)"
+    },
+    {
+      "title": "测试 · 时间过半 · 网络协议梳理",
+      "state": "v-card v-theme--studyflow v-card--density-default v-card--variant-flat goal-card goal-state-soon",
+      "border": "rgb(251, 140, 0)",
+      "chip": "rgb(251, 140, 0)"
+    },
+    {
+      "title": "测试 · 时间过半 · 操作系统复习",
+      "state": "v-card v-theme--studyflow v-card--density-default v-card--variant-flat goal-card goal-state-soon",
+      "border": "rgb(251, 140, 0)",
+      "chip": "rgb(251, 140, 0)"
+    },
+    {
+      "title": "测试 · 正常推进 · 数学专题复习",
+      "state": "v-card v-theme--studyflow v-card--density-default v-card--variant-flat goal-card goal-state-upcoming",
+      "border": "rgb(76, 175, 80)",
+      "chip": "rgb(76, 175, 80)"
+    },
+    {
+      "title": "测试 · 正常推进 · 英语词汇积累",
+      "state": "v-card v-theme--studyflow v-card--density-default v-card--variant-flat goal-card goal-state-upcoming",
+      "border": "rgb(76, 175, 80)",
+      "chip": "rgb(76, 175, 80)"
+    },
+    {
+      "title": "测试 · 正常推进 · 数据结构练习",
+      "state": "v-card v-theme--studyflow v-card--density-default v-card--variant-flat goal-card goal-state-upcoming",
+      "border": "rgb(76, 175, 80)",
+      "chip": "rgb(76, 175, 80)"
+    }
+  ]
+}

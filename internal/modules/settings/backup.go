@@ -3,6 +3,7 @@ package settings
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"time"
 )
 
@@ -20,7 +21,7 @@ type BackupConfig struct {
 }
 
 // ReadBackupConfig 读取自动备份配置。
-func ReadBackupConfig(db *sql.DB) (BackupConfig, error) {
+func ReadBackupConfig(db *persistence.Queries) (BackupConfig, error) {
 	value, err := readSetting(db, autoBackupEnabledKey)
 	if err != nil && !errors.Is(err, sql.ErrNoRows) {
 		return BackupConfig{}, err

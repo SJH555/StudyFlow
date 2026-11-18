@@ -7,6 +7,7 @@ import { useStatsStore } from "../../stores/stats";
 import { useCharts } from "./useCharts";
 import { exportHtml } from "../export/exportHtml";
 import SummaryCard from "../../shared/SummaryCard.vue";
+import SessionSourceBadge from "../sessions/SessionSourceBadge.vue";
 import {
   fmt,
   formatDateChinese,
@@ -242,10 +243,8 @@ const { chartEl, projectChartEl } = charts;
             <div v-for="s in sessions" :key="s.id" class="compare-item">
               <span class="subject-dot" :style="{ background: s.color }"></span>
               <div>
-                <b
-                  >{{ s.subject
-                  }}{{ s.source === "manual" ? " · 补充" : "" }}</b
-                ><small
+                <div class="compare-record-title"><b>{{ s.subject }}</b><SessionSourceBadge :source="s.source" /></div>
+                <small
                   >{{ time(s.startAt) }} –
                   {{ s.endAt ? time(s.endAt) : "进行中" }}</small
                 >
@@ -317,6 +316,12 @@ const { chartEl, projectChartEl } = charts;
 </template>
 
 <style scoped>
+.compare-record-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
 .compare-panel .panel-heading p {
   font-size: 13px;
 }

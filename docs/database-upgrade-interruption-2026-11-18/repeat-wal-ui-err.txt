@@ -1,0 +1,9 @@
+Nov 18 21:03:47.188 INF Build Info: Wails=v3.0.0 Compiler=go1.27.3 GOOS=windows GOAMD64=v1 -buildmode=exe -compiler=gc -tags=upgradegui DefaultGODEBUG=tracebacklabels=0,x509sslcertoverrideplatform=0 CGO_ENABLED=0 GOARCH=amd64
+Nov 18 21:03:47.190 INF Platform Info: Go-WebView2Loader=true WebView2=157.0.4341.60 ID=26H2 Name=Windows 10 Pro Version=2009 (Build: 26300) Branding=Windows 11 专业版
+Nov 18 21:03:47.190 INF AssetServer Info: middleware=true handler=true
+2026/11/18 21:03:47 [WebView2] Environment created successfully
+Nov 18 21:03:47.510 INF [AssetFileServerFS] Handling request url=/ file=.
+Nov 18 21:03:47.522 INF [AssetFileServerFS] Handling request url=/assets/index-BRUtv1-B.js file=assets/index-BRUtv1-B.js
+Nov 18 21:03:47.522 INF [AssetFileServerFS] Handling request url=/assets/index-DpA3kuwH.css file=assets/index-DpA3kuwH.css
+Nov 18 21:03:47.638 INF [AssetFileServerFS] Handling request url=/app-icon.png file=app-icon.png
+Nov 18 21:03:47.671 INF [AssetFileServerFS] Handling request url=/assets/materialdesignicons-webfont-Dp5v-WZN.woff2 file=assets/materialdesignicons-webfont-Dp5v-WZN.woff2

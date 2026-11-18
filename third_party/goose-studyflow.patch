@@ -1,0 +1,166 @@
+--- a/provider_options.go
++++ b/provider_options.go
+@@ -1,6 +1,8 @@
+ package goose
+ 
+ import (
++	"context"
++	"database/sql"
+ 	"errors"
+ 	"fmt"
+ 	"log/slog"
+@@ -244,9 +246,26 @@
+ 	})
+ }
+ 
++// TransactionRunner lets the host own transaction cleanup on the connection
++// already borrowed by Provider. The host must not close a healthy connection.
++type TransactionRunner func(context.Context, *sql.Conn, func(database.DBTxConn) error) error
++
++// WithTransactionRunner is a StudyFlow extension. Only transactional SQL
++// migrations are supported with this option; no independent transaction is opened.
++func WithTransactionRunner(run TransactionRunner) ProviderOption {
++	return configFunc(func(c *config) error {
++		if run == nil {
++			return errors.New("nil transaction runner")
++		}
++		c.transactionRunner = run
++		return nil
++	})
++}
++
+ type config struct {
+-	tableName string
+-	store     database.Store
++	transactionRunner TransactionRunner
++	tableName         string
++	store             database.Store
+ 
+ 	verbose         bool
+ 	excludePaths    map[string]bool
+--- a/provider_run.go
++++ b/provider_run.go
+@@ -23,7 +23,13 @@
+ 	errMissingZeroVersion = errors.New("missing zero version migration")
+ )
+ 
+-func (p *Provider) prepareMigration(fsys fs.FS, m *Migration, direction bool) error {
++func (p *Provider) prepareMigration(fsys fs.FS, m *Migration, direction bool) (retErr error) {
++	defer func() {
++		if retErr == nil && p.cfg.transactionRunner != nil &&
++			(m.Type != TypeSQL || !m.sql.UseTx || p.cfg.isolateDDL) {
++			retErr = errors.New("host transaction runner requires transactional SQL migrations without DDL isolation")
++		}
++	}()
+ 	switch m.Type {
+ 	case TypeGo:
+ 		if m.goUp.Mode == 0 {
+@@ -211,7 +217,7 @@
+ 		return err
+ 	}
+ 	if useTx && !p.cfg.isolateDDL {
+-		return beginTx(ctx, conn, func(tx *sql.Tx) error {
++		return p.runTransaction(ctx, conn, func(tx database.DBTxConn) error {
+ 			if err := p.runMigration(ctx, tx, m, direction); err != nil {
+ 				return err
+ 			}
+@@ -274,7 +280,7 @@
+ 	return tx.Commit()
+ }
+ 
+-func (p *Provider) initialize(ctx context.Context, useLocker bool) (*sql.Conn, func() error, error) {
++func (p *Provider) initialize(ctx context.Context, useLocker bool) (resultConn *sql.Conn, resultCleanup func() error, retErr error) {
+ 	p.mu.Lock()
+ 	conn, err := p.db.Conn(ctx)
+ 	if err != nil {
+@@ -286,6 +292,17 @@
+ 		p.mu.Unlock()
+ 		return conn.Close()
+ 	}
++
++	// Release even when initialization panics or exits before handing off the
++	// connection. A deferred transaction rollback alone does not return the borrow.
++	defer func() {
++		if resultConn == nil {
++			if err := cleanup(); err != nil {
++				retErr = multierr.Append(retErr, err)
++				log.Printf("goose initialization cleanup: %v", err)
++			}
++		}
++	}()
+ 
+ 	// Handle locking if enabled and requested
+ 	if useLocker && p.cfg.lockEnabled {
+@@ -293,7 +310,7 @@
+ 		if p.cfg.sessionLocker != nil {
+ 			l := p.cfg.sessionLocker
+ 			if err := l.SessionLock(ctx, conn); err != nil {
+-				return nil, nil, multierr.Append(err, cleanup())
++				return nil, nil, err
+ 			}
+ 			// A lock was acquired, so we need to unlock the session when we're done. This is done
+ 			// by returning a cleanup function that unlocks the session and closes the connection.
+@@ -311,7 +328,7 @@
+ 		if p.cfg.locker != nil {
+ 			l := p.cfg.locker
+ 			if err := l.Lock(ctx, p.db); err != nil {
+-				return nil, nil, multierr.Append(err, cleanup())
++				return nil, nil, err
+ 			}
+ 			// A lock was acquired, so we need to unlock when we're done.
+ 			cleanup = func() error {
+@@ -329,7 +346,7 @@
+ 	// need the version table because no versions are being tracked.
+ 	if !p.cfg.disableVersioning {
+ 		if err := p.ensureVersionTable(ctx, conn); err != nil {
+-			return nil, nil, multierr.Append(err, cleanup())
++			return nil, nil, err
+ 		}
+ 	}
+ 	return conn, cleanup, nil
+@@ -358,6 +375,9 @@
+ func (p *Provider) tryEnsureVersionTable(ctx context.Context, conn *sql.Conn) error {
+ 	b := retry.NewConstant(1 * time.Second)
+ 	b = retry.WithMaxRetries(3, b)
++	if p.cfg.transactionRunner != nil {
++		b = retry.WithMaxRetries(0, b)
++	}
+ 	return retry.Do(ctx, b, func(ctx context.Context) error {
+ 		exists, err := p.store.TableExists(ctx, conn)
+ 		if err == nil && exists {
+@@ -394,7 +414,7 @@
+ 		} else {
+ 			// If DDL isolation is not enabled, we can create the version table and insert the zero
+ 			// version in a single transaction.
+-			if err := beginTx(ctx, conn, func(tx *sql.Tx) error {
++			if err := p.runTransaction(ctx, conn, func(tx database.DBTxConn) error {
+ 				if err := p.store.CreateVersionTable(ctx, tx); err != nil {
+ 					return err
+ 				}
+@@ -533,3 +553,26 @@
+ 	}
+ 	return nil
+ }
++
++// runTransaction is the only Provider transaction entry (SQL and version-table
++// creation). Default upstream behavior is unchanged when no host runner is set.
++func (p *Provider) runTransaction(ctx context.Context, conn *sql.Conn, work func(database.DBTxConn) error) error {
++	if p.cfg.transactionRunner != nil {
++		return p.cfg.transactionRunner(ctx, conn, work)
++	}
++	return beginTx(ctx, conn, func(tx *sql.Tx) error { return work(tx) })
++}
++
++// ValidateSQLMigrations parses all sources without touching the database.
++// StudyFlow uses this before registering an unversioned baseline.
++func (p *Provider) ValidateSQLMigrations() error {
++	for _, m := range p.migrations {
++		if m.Type != TypeSQL {
++			return errors.New("only SQL upgrades are supported")
++		}
++		if err := p.prepareMigration(p.fsys, m, true); err != nil {
++			return fmt.Errorf("prepare %s: %w", m.Source, err)
++		}
++	}
++	return nil
++}

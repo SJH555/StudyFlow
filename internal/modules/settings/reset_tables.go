@@ -1,7 +1,8 @@
 package settings
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"errors"
 )
 
@@ -15,7 +16,7 @@ type ResetTableInfo struct {
 var resetTableLabels = map[string]string{"subjects": "学习项目", "plans": "学习计划", "sessions": "学习记录", "activity_logs": "活动记录", "settings": "应用设置", "daily_reviews": "昨日总结", "daily_review_items": "总结理由", "daily_plan_targets": "每日计划目标", "stage_goals": "阶段目标"}
 
 // ListResetTables 返回所有可重置数据表及各自记录数。
-func ListResetTables(db *sql.DB) ([]ResetTableInfo, error) {
+func ListResetTables(db *persistence.Queries) ([]ResetTableInfo, error) {
 	names, err := resettableNames(db)
 	if err != nil {
 		return nil, err
@@ -32,7 +33,7 @@ func ListResetTables(db *sql.DB) ([]ResetTableInfo, error) {
 }
 
 // ResetTable 清空指定数据表（重置前会校验依赖关系）。
-func ResetTable(db *sql.DB, name string) error {
+func resetTable(db *persistence.Queries, name string) error {
 	if _, ok := resetTableLabels[name]; !ok {
 		return errors.New("不支持重置此表")
 	}
@@ -46,4 +47,8 @@ func ResetTable(db *sql.DB, name string) error {
 		}
 	}
 	return clearResetTable(db, name)
+}
+
+func ResetTable(db *persistence.Queries, name string) error {
+	return db.WithTx(func(tx *persistence.Queries) error { return resetTable(tx, name) })
 }

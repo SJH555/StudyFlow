@@ -38,6 +38,7 @@ export const useSessionsStore = defineStore("sessions", () => {
   // 重新拉取今天的记录并刷新进行中会话。
   async function refreshToday() {
     const todaySessions = await api.sessions(appStore.todayKey);
+    appStore.tick();
     liveSession.value = todaySessions.find((s) => !s.endAt) || null;
     if (appStore.page === "today") sessions.value = todaySessions;
     return todaySessions;
@@ -160,6 +161,7 @@ export const useSessionsStore = defineStore("sessions", () => {
     if (!active.value) return;
     try {
       const result = await api.finish(active.value.id);
+      appStore.tick();
       showFinishConfirm.value = false;
       await appStore.reload();
       if (!result.saved) appStore.notifyTop("本次不足 10 分钟，未计入学习记录");
@@ -229,6 +231,10 @@ export const useSessionsStore = defineStore("sessions", () => {
         endTime = manual.manualEndHour.value + ":" + manual.manualEndMinute.value;
       if (!manual.manualSubject.value) {
         appStore.notifyTop("请选择学习项目");
+        return;
+      }
+      if (manual.manualTimeError.value) {
+        appStore.notifyTop(manual.manualTimeError.value);
         return;
       }
       const start = new Date(`${appStore.selectedDate}T${startTime}:00`),

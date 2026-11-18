@@ -1,0 +1,330 @@
+2026/11/18 17:54:04 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:04 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:04 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:04 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:04 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:05 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:05 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:05 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:05 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:05 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:05 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:05 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:05 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:05 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:05 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:05 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:05 API error: 开始时间无效
+2026/11/18 17:54:05 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:05 API error: 重复星期无效
+2026/11/18 17:54:05 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:05 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:05 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:05 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:05 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:05 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:05 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:05 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:05 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:05 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:05 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:05 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:05 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:05 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:05 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:06 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:06 API error: 开始时间无效
+2026/11/18 17:54:06 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:06 API error: 重复星期无效
+2026/11/18 17:54:06 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:06 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:06 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:06 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:06 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:06 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:06 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:06 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:06 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:06 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:06 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:06 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:06 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:06 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:06 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:06 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:06 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:06 API error: 开始时间无效
+2026/11/18 17:54:06 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:06 API error: 重复星期无效
+2026/11/18 17:54:06 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:06 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:06 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:06 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:06 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:07 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:07 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:07 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:07 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:07 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:07 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:07 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:07 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:07 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:07 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:07 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:07 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:07 API error: 开始时间无效
+2026/11/18 17:54:07 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:07 API error: 重复星期无效
+2026/11/18 17:54:07 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:07 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:07 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:07 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:07 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:07 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:07 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:07 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:07 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:07 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:07 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:07 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:07 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:08 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:08 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:08 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:08 API error: 开始时间无效
+2026/11/18 17:54:08 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:08 API error: 重复星期无效
+2026/11/18 17:54:08 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:08 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:08 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:08 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:08 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:08 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:08 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:08 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:08 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:08 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:08 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:08 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:08 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:08 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:08 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:08 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:08 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:08 API error: 开始时间无效
+2026/11/18 17:54:08 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:09 API error: 重复星期无效
+2026/11/18 17:54:09 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:09 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:09 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:09 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:09 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:09 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:09 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:09 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:09 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:09 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:09 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:09 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:09 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:09 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:09 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:09 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:09 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:09 API error: 开始时间无效
+2026/11/18 17:54:09 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:09 API error: 重复星期无效
+2026/11/18 17:54:09 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:09 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:09 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:09 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:09 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:09 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:09 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:09 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:10 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:10 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:10 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:10 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:10 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:10 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:10 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:10 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:10 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:10 API error: 开始时间无效
+2026/11/18 17:54:10 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:10 API error: 重复星期无效
+2026/11/18 17:54:10 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:10 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:10 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:10 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:10 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:10 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:10 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:10 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:10 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:10 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:10 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:10 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:10 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:10 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:10 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:11 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:11 API error: 开始时间无效
+2026/11/18 17:54:11 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:11 API error: 重复星期无效
+2026/11/18 17:54:11 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)
+2026/11/18 17:54:11 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:11 API error: constraint failed: injected linked plan failure (1811)
+2026/11/18 17:54:11 API error: sql: Scan error on column index 4, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:11 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:11 API error: parsing time "malformed" as "2006-01-02T15:04:05.999999999Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:11 API error: sql: Scan error on column index 3, name "sort_order": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:11 API error: sql: Scan error on column index 5, name "duration_minutes": converting driver.Value type string ("malformed") to a int: invalid syntax
+2026/11/18 17:54:11 API error: sql: Scan error on column index 12, name "duration_seconds": converting driver.Value type string ("malformed") to a int64: invalid syntax
+2026/11/18 17:54:11 API error: sql: Scan error on column index 1, name "value": converting NULL to string is unsupported
+2026/11/18 17:54:11 API error: SQL logic error: integer overflow (1)
+2026/11/18 17:54:11 API error: 读取目标创建时间: parsing time "malformed" as "2006-01-02T15:04:05Z07:00": cannot parse "malformed" as "2006"
+2026/11/18 17:54:11 API error: constraint failed: injected second setting failure (1811)
+2026/11/18 17:54:11 API error: 第 1 项理由需填写，且不超过 1000 字
+2026/11/18 17:54:11 API error: constraint failed: injected later reason failure (1811)
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: 时间冲突：周日的计划与“study” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:54:11 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:11 API error: study database is unavailable
+commit transaction: database is locked (5) (SQLITE_BUSY)
+2026/11/18 17:54:11 API error: 开始时间无效
+2026/11/18 17:54:11 API error: 计划时长必须在 1 到 1440 分钟之间
+2026/11/18 17:54:11 API error: 重复星期无效
+2026/11/18 17:54:11 API error: constraint failed: UNIQUE constraint failed: daily_plan_targets.day (1555)

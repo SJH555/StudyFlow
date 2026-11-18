@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "module": "github.com/pressly/goose/v3",
+  "version": "v3.26.0",
+  "verifiedFiles": 152,
+  "patchedFiles": [
+    "provider_options.go",
+    "provider_run.go"
+  ]
+}

@@ -1,0 +1,3 @@
+ok  	exam_notify/internal/infrastructure/persistence	0.072s
+ok  	exam_notify/internal/modules/plans	0.070s
+ok  	exam_notify/desktop	0.600s

@@ -6,6 +6,7 @@
   --muted: #929189;
   --line: #eeede7;
   --green: #6f9d7e;
+  --goal-upcoming-color: rgb(76, 175, 80);
 }
 * {
   box-sizing: border-box;

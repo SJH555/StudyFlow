@@ -28,39 +28,60 @@ export function useActiveLearning() {
     sessionsStore.sessions.filter((s) => !s.endAt || s.duration >= 600),
   );
 
-  // 倒计时目标：优先锚定到计划的安排时段（提前/晚开始都以计划结束时刻为准，
-  // 计时在时段结束自动停止），无计划边界时回退为计划学习分钟数。
-  const countdownTargetMinutes = computed(() => {
+  // 结束时刻只随会话/计划变化解析，不随每秒时钟更新重复解析。
+  const countdownEndAt = computed(() => {
     const session = sessionsStore.active;
-    if (session?.plannedEndAt) {
-      const minutes = Math.round(
-        (new Date(session.plannedEndAt).getTime() -
-          new Date(session.startAt).getTime()) /
-          60000,
-      );
-      if (minutes > 0) return minutes;
+    if (!session) return null;
+    if (session.plannedEndAt) {
+      const end = new Date(session.plannedEndAt).getTime();
+      if (Number.isFinite(end)) return end;
     }
-    const plan = activePlan.value || plansStore.currentPlan;
-    return plan ? plannedStudyMinutes(plan) : 60;
+    // 兼容未保存结束边界的历史会话，以会话开始日期定位计划时段。
+    const plan = activePlan.value;
+    if (!plan) return null;
+    const startedAt = new Date(session.startAt).getTime();
+    const start = new Date(startedAt);
+    const [hour, minute] = plan.startTime.split(":").map(Number);
+    start.setHours(hour, minute, 0, 0);
+    let end = start.getTime() + plan.duration * 60_000;
+    if (start.getTime() > startedAt) {
+      const previous = new Date(start);
+      previous.setDate(previous.getDate() - 1);
+      const previousEnd = previous.getTime() + plan.duration * 60_000;
+      if (previousEnd > startedAt) end = previousEnd;
+    }
+    return end;
   });
 
   const heroBreakMinutes = computed(
     () => (activePlan.value || plansStore.currentPlan)?.breakMinutes || 0,
   );
 
-  const countdownTotal = computed(
-    () => Math.max(1, countdownTargetMinutes.value) * 60,
-  );
+  const countdownTotal = computed(() => {
+    const session = sessionsStore.active;
+    if (session && countdownEndAt.value !== null) {
+      return Math.max(
+        1,
+        (countdownEndAt.value - new Date(session.startAt).getTime()) / 1000,
+      );
+    }
+    const plan = activePlan.value || plansStore.currentPlan;
+    return Math.max(1, plan ? plannedStudyMinutes(plan) : 60) * 60;
+  });
 
-  const countdownLeft = computed(() =>
-    Math.max(
+  // 距离计划结束的时间包含暂停时间，实际学习时长仍单独累计。
+  const countdownLeft = computed(() => {
+    if (countdownEndAt.value !== null) {
+      return Math.max(0, Math.floor((countdownEndAt.value - appStore.now) / 1000));
+    }
+    return Math.max(
       0,
       countdownTotal.value -
         (sessionsStore.active
           ? sessionsStore.sessionSeconds(sessionsStore.active)
           : 0),
-    ),
-  );
+    );
+  });
 
   const countdownPercent = computed(() =>
     Math.min(

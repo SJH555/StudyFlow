@@ -1,0 +1,64 @@
+[
+  {
+    "case": "baseline",
+    "passed": true,
+    "unchangedBytes": false,
+    "versions": [
+      0,
+      1
+    ],
+    "retainedBackups": 1
+  },
+  {
+    "case": "cancel",
+    "passed": true,
+    "unchangedBytes": true,
+    "versions": [],
+    "retainedBackups": 0
+  },
+  {
+    "case": "backupfail",
+    "passed": true,
+    "unchangedBytes": true,
+    "versions": [],
+    "retainedBackups": 0
+  },
+  {
+    "case": "newer",
+    "passed": true,
+    "unchangedBytes": true,
+    "versions": [
+      0,
+      1,
+      2
+    ],
+    "retainedBackups": 0
+  },
+  {
+    "case": "unknown",
+    "passed": true,
+    "unchangedBytes": true,
+    "versions": [],
+    "retainedBackups": 0
+  },
+  {
+    "case": "fresh",
+    "passed": true,
+    "unchangedBytes": false,
+    "versions": [
+      0,
+      1
+    ],
+    "retainedBackups": 0
+  },
+  {
+    "case": "ready",
+    "passed": true,
+    "unchangedBytes": true,
+    "versions": [
+      0,
+      1
+    ],
+    "retainedBackups": 0
+  }
+]

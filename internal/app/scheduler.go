@@ -1,6 +1,7 @@
 package app
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"time"
@@ -13,19 +14,26 @@ import (
 // Scheduler 负责后台提醒与维护检查。它是一个普通对象：
 // 桌面宿主在每次 tick 时驱动它，并自行持有并发控制与所有 UI 副作用。
 type Scheduler struct {
-	db *persistence.Database
+	db  *persistence.Database
+	ctx context.Context
 }
 
 // NewScheduler 以给定的数据库创建 Scheduler。
 func NewScheduler(db *persistence.Database) *Scheduler {
-	return &Scheduler{db: db}
+	return &Scheduler{db: db, ctx: context.Background()}
 }
 
 // BackupCheck 执行自动备份策略及其数据库操作。
 // 由桌面宿主决定何时调用。
 func (s *Scheduler) BackupCheck(now time.Time) error {
+	if err := s.ctx.Err(); err != nil {
+		return err
+	}
 	return s.db.WithWrite(func(db *sql.DB, path string) error {
-		return CheckBackup(db, path, now)
+		if err := s.ctx.Err(); err != nil {
+			return err
+		}
+		return CheckBackupContext(s.ctx, db, path, now)
 	})
 }
 
@@ -34,7 +42,7 @@ func (s *Scheduler) BackupCheck(now time.Time) error {
 func (s *Scheduler) BreakReminder(now time.Time) (string, bool, error) {
 	var subject string
 	var due bool
-	err := s.db.WithWrite(func(db *sql.DB, _ string) error {
+	err := s.withQueries(func(db *persistence.Queries) error {
 		var err error
 		subject, due, err = sessions.DueBreakReminder(db, now)
 		return err
@@ -43,10 +51,10 @@ func (s *Scheduler) BreakReminder(now time.Time) (string, bool, error) {
 }
 
 // PendingReview 返回最早的一条未完成每日总结，没有到期项时返回 nil。
-// 查询只读，因此在读锁下执行。
+// 查询可能保存每日目标，使用独占借用。
 func (s *Scheduler) PendingReview(now time.Time) (*review.DailyReview, error) {
 	var pending *review.DailyReview
-	err := s.db.WithRead(func(db *sql.DB, _ string) error {
+	err := s.withQueries(func(db *persistence.Queries) error {
 		var err error
 		pending, err = review.New(db).Pending(now)
 		return err
@@ -57,7 +65,7 @@ func (s *Scheduler) PendingReview(now time.Time) (*review.DailyReview, error) {
 // DailySnapshot 在每日总结开启时保存昨天的计划目标。
 // 桌面宿主在午夜调用一次。
 func (s *Scheduler) DailySnapshot(now time.Time) error {
-	return s.db.WithRead(func(db *sql.DB, _ string) error {
+	return s.withQueries(func(db *persistence.Queries) error {
 		reviews := review.New(db)
 		enabled, _, _, _, err := reviews.ReviewConfig()
 		if err != nil {
@@ -71,4 +79,12 @@ func (s *Scheduler) DailySnapshot(now time.Time) error {
 		}
 		return nil
 	})
+}
+
+// WithContext binds a task context without changing the shared scheduler.
+func (s *Scheduler) WithContext(ctx context.Context) *Scheduler {
+	return &Scheduler{db: s.db, ctx: ctx}
+}
+func (s *Scheduler) withQueries(use func(*persistence.Queries) error) error {
+	return s.db.WithAccess(s.ctx, func(a *persistence.Access) error { return use(a.Queries(s.ctx)) })
 }

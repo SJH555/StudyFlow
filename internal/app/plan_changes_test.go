@@ -1,6 +1,7 @@
 package app
 
 import (
+	"exam_notify/internal/testutil"
 	"path/filepath"
 	"testing"
 	"time"
@@ -11,11 +12,12 @@ import (
 )
 
 func TestApplyScheduleChangeFreezesBeforeChangeAndKeepsSnapshotOnFailure(t *testing.T) {
-	db, err := persistence.Open(filepath.Join(t.TempDir(), "study.db"))
+	path := filepath.Join(t.TempDir(), "study.db")
+	raw, err := persistence.Open(path)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer db.Close()
+	db := testutil.Borrow(t, raw, path)
 	for _, query := range []string{
 		"UPDATE settings SET value='1' WHERE key='dailyReviewEnabled'",
 		"UPDATE settings SET value='2026-11-05' WHERE key='dailyReviewStartDate'",

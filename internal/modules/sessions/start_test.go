@@ -1,7 +1,7 @@
 package sessions
 
 import (
-	"database/sql"
+	"exam_notify/internal/testutil"
 	"path/filepath"
 	"testing"
 	"time"
@@ -9,9 +9,10 @@ import (
 	"exam_notify/internal/infrastructure/persistence"
 )
 
-func sessionTestDB(t *testing.T) *sql.DB {
+func sessionTestDB(t *testing.T) *persistence.Queries {
 	t.Helper()
-	db, err := persistence.Open(filepath.Join(t.TempDir(), "study.db"))
+	path := filepath.Join(t.TempDir(), "study.db")
+	db, err := persistence.Open(path)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22,7 +23,7 @@ func sessionTestDB(t *testing.T) *sql.DB {
 	if _, err := db.Exec(`INSERT INTO plans(id,subject_id,start_time,duration_minutes,break_minutes) VALUES(1,1,'09:00',180,1)`); err != nil {
 		t.Fatal(err)
 	}
-	return db
+	return testutil.Borrow(t, db, path)
 }
 
 func TestStartPersistsBoundaryAndRollsBackOldTimerOnInsertFailure(t *testing.T) {

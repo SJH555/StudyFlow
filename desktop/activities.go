@@ -1,7 +1,8 @@
 package main
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"encoding/json"
 	"net/http"
 
@@ -9,7 +10,7 @@ import (
 	"exam_notify/internal/modules/activities"
 )
 
-func (a *App) activities(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) activities(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		items, err := activities.List(db, r.URL.Query().Get("date"))

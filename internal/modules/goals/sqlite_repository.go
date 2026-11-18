@@ -2,6 +2,7 @@ package goals
 
 import (
 	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
 	"fmt"
 	"time"
 )
@@ -9,11 +10,11 @@ import (
 // SQLiteRepository 在调用方借用数据库句柄的有效期内访问目标表。
 // 它不创建或关闭连接；生命周期锁由桌面 API 统一入口持有。
 type SQLiteRepository struct {
-	db *sql.DB
+	db *persistence.Queries
 }
 
 // NewSQLiteRepository 接收应用组装层提供的数据库句柄。
-func NewSQLiteRepository(db *sql.DB) *SQLiteRepository {
+func NewSQLiteRepository(db *persistence.Queries) *SQLiteRepository {
 	return &SQLiteRepository{db: db}
 }
 
@@ -80,7 +81,7 @@ func (r *SQLiteRepository) List() ([]Goal, error) {
 }
 
 // Create 保存新目标并回填标识。
-func (r *SQLiteRepository) Create(goal Goal) (Goal, error) {
+func (r *SQLiteRepository) create(goal Goal) (Goal, error) {
 	result, err := r.db.Exec(`INSERT INTO stage_goals
 		(title,deadline,note,created_at,updated_at) VALUES(?,?,?,?,?)`,
 		goal.Title, goal.Deadline, goal.Note,
@@ -95,22 +96,17 @@ func (r *SQLiteRepository) Create(goal Goal) (Goal, error) {
 // UpdateDetails 原子更新内容并返回同一次事务中的完整状态。
 func (r *SQLiteRepository) UpdateDetails(goal Goal) (Goal, error) {
 	// 更新和回读处于同一事务，防止完成、删除等并发操作改变返回状态。
-	tx, err := r.db.Begin()
+	var updated Goal
+	err := r.db.WithTx(func(tx *persistence.Queries) error {
+		result, err := tx.Exec(`UPDATE stage_goals SET title=?,deadline=?,note=?,updated_at=?
+ WHERE id=? AND deleted=0`, goal.Title, goal.Deadline, goal.Note, goal.UpdatedAt.Format(time.RFC3339), goal.ID)
+		if err := requireAffected(result, err); err != nil {
+			return err
+		}
+		updated, err = scanGoal(tx.QueryRow(`SELECT `+goalColumns+` FROM stage_goals WHERE id=?`, goal.ID))
+		return err
+	})
 	if err != nil {
-		return Goal{}, err
-	}
-	defer tx.Rollback()
-	result, err := tx.Exec(`UPDATE stage_goals SET title=?,deadline=?,note=?,updated_at=?
-		WHERE id=? AND deleted=0`, goal.Title, goal.Deadline, goal.Note,
-		goal.UpdatedAt.Format(time.RFC3339), goal.ID)
-	if err := requireAffected(result, err); err != nil {
-		return Goal{}, err
-	}
-	updated, err := scanGoal(tx.QueryRow(`SELECT `+goalColumns+` FROM stage_goals WHERE id=?`, goal.ID))
-	if err != nil {
-		return Goal{}, err
-	}
-	if err := tx.Commit(); err != nil {
 		return Goal{}, err
 	}
 	return updated, nil
@@ -149,4 +145,17 @@ func requireAffected(result sql.Result, err error) error {
 		return ErrNotFound
 	}
 	return nil
+}
+
+func (r *SQLiteRepository) Create(goal Goal) (Goal, error) {
+	var result Goal
+	err := r.db.WithTx(func(tx *persistence.Queries) error {
+		var err error
+		result, err = NewSQLiteRepository(tx).create(goal)
+		return err
+	})
+	if err != nil {
+		return Goal{}, err
+	}
+	return result, nil
 }

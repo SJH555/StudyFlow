@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"path/filepath"
 	"sync"
@@ -30,19 +31,23 @@ type App struct {
 
 // applyGeneralSettings 从数据库读取常规设置并刷新缓存与铃声音量。
 func (a *App) applyGeneralSettings() error {
+	return a.applyGeneralSettingsContext(context.Background())
+}
+
+func (a *App) applyGeneralSettingsContext(ctx context.Context) error {
 	var config settings.GeneralConfig
 	var checkHour, checkMinute int
 	err := a.database.WithRead(func(db *sql.DB, _ string) error {
 		var readErr error
-		config, readErr = settings.ReadGeneral(db)
+		config, readErr = settings.ReadGeneral(persistence.BindQueries(ctx, db))
 		if readErr != nil {
 			return readErr
 		}
-		checkHour, readErr = settings.CheckHour(db)
+		checkHour, readErr = settings.CheckHour(persistence.BindQueries(ctx, db))
 		if readErr != nil {
 			return readErr
 		}
-		checkMinute, readErr = settings.CheckMinute(db)
+		checkMinute, readErr = settings.CheckMinute(persistence.BindQueries(ctx, db))
 		return readErr
 	})
 	if err != nil {
@@ -90,7 +95,7 @@ func (a *App) activityReminderEnabled() (bool, error) {
 	var enabled bool
 	err := a.database.WithRead(func(db *sql.DB, _ string) error {
 		var err error
-		enabled, err = settings.ActivityReminderEnabled(db)
+		enabled, err = settings.ActivityReminderEnabled(persistence.BindQueries(context.Background(), db))
 		return err
 	})
 	return enabled, err
@@ -98,21 +103,12 @@ func (a *App) activityReminderEnabled() (bool, error) {
 
 func (a *App) setActivityReminderEnabled(enabled bool) error {
 	err := a.database.WithWrite(func(db *sql.DB, _ string) error {
-		return settings.SetActivityReminderEnabled(db, enabled)
+		return settings.SetActivityReminderEnabled(persistence.BindQueries(context.Background(), db), enabled)
 	})
 	if err == nil && a.onActivityReminderChanged != nil {
 		a.onActivityReminderChanged(enabled)
 	}
 	return err
-}
-
-// NewApp 在指定路径上初始化数据库并创建应用实例。
-func NewApp(path string) (*App, error) {
-	database, err := persistence.NewDatabase(path)
-	if err != nil {
-		return nil, err
-	}
-	return newApp(database), nil
 }
 
 func newApp(database *persistence.Database) *App {
@@ -128,7 +124,12 @@ func newApp(database *persistence.Database) *App {
 }
 
 // Close 关闭应用持有的数据库连接。
-func (a *App) Close() error { return a.database.Close() }
+func (a *App) Close() error {
+	if a.database == nil {
+		return nil
+	}
+	return a.database.Close()
+}
 
 // DataDirectory 返回数据库文件所在目录。
 func (a *App) DataDirectory() string { return filepath.Dir(a.database.Path()) }

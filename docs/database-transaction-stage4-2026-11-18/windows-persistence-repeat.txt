@@ -1,0 +1,321 @@
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.04s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.31s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.02s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.08s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.11s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.10s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.40s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.14s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.13s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.02s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.08s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.27s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.02s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.06s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.09s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.10s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.40s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.14s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.02s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.08s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.29s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.02s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.07s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.10s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.10s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.37s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.12s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.02s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.07s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.29s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.02s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.06s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.11s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.10s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.37s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.10s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.03s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.10s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.23s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.01s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.05s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.08s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.09s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.35s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.11s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.04s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.02s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.08s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.24s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.01s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.05s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.09s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.09s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.35s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.10s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.11s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.02s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.02s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.06s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.21s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.01s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.05s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.08s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.08s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.37s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.12s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.03s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.07s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.26s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.02s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.05s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.09s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.09s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.37s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.13s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.12s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.02s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.08s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.26s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.02s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.05s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.10s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.09s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.36s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.13s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.02s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.07s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+=== RUN   TestOpenForStartupRollsBackEntireMigration
+--- PASS: TestOpenForStartupRollsBackEntireMigration (0.02s)
+=== RUN   TestStage4DirectoryCancellationCommitBoundary
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/before
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/prepared
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/staged
+=== RUN   TestStage4DirectoryCancellationCommitBoundary/committed
+--- PASS: TestStage4DirectoryCancellationCommitBoundary (0.27s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/before (0.02s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/prepared (0.05s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/staged (0.11s)
+    --- PASS: TestStage4DirectoryCancellationCommitBoundary/committed (0.09s)
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/commit
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/rollback
+=== RUN   TestStage4SwitchWaitsForTransactionCleanup/panic
+--- PASS: TestStage4SwitchWaitsForTransactionCleanup (0.36s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/commit (0.12s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/rollback (0.11s)
+    --- PASS: TestStage4SwitchWaitsForTransactionCleanup/panic (0.12s)
+=== RUN   TestStage4StartupCommitBusyDoesNotLeakMigration
+--- PASS: TestStage4StartupCommitBusyDoesNotLeakMigration (0.01s)
+=== RUN   TestStage4InitializationPanicRollsBackDDL
+--- PASS: TestStage4InitializationPanicRollsBackDDL (0.01s)
+=== RUN   TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp
+--- PASS: TestStage4BackupDoesNotOverwriteOrRemoveForeignTemp (0.03s)
+=== RUN   TestStage4PausedDatabaseRejectsBackupAndSwitch
+--- PASS: TestStage4PausedDatabaseRejectsBackupAndSwitch (0.03s)
+=== RUN   TestStage4CancelledStageWithUncertainLocationPreservesRecovery
+--- PASS: TestStage4CancelledStageWithUncertainLocationPreservesRecovery (0.08s)
+=== RUN   TestStage4OpenPanicClosesUnacceptedPool
+--- PASS: TestStage4OpenPanicClosesUnacceptedPool (0.01s)
+PASS

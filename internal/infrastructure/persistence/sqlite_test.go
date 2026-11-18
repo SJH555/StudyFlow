@@ -467,7 +467,7 @@ func TestOpenForStartupRejectsMissingEmptyUnrelatedAndCorruptFiles(t *testing.T)
 	}
 }
 
-func TestOpenForStartupReportsPossiblePartialMigration(t *testing.T) {
+func TestOpenForStartupRollsBackEntireMigration(t *testing.T) {
 	path := filepath.Join(t.TempDir(), "study.db")
 	db, err := Open(path)
 	if err != nil {
@@ -477,6 +477,7 @@ func TestOpenForStartupReportsPossiblePartialMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	execSQLiteFixture(t, path,
+		`ALTER TABLE stage_goals DROP COLUMN accepted_at`,
 		`DELETE FROM settings WHERE key='dailyReviewEnabled'`,
 		`INSERT INTO subjects(name,color,created_at) VALUES('subject','#7668e8','2026-11-03')`,
 		`CREATE TRIGGER fail_color BEFORE UPDATE OF color ON subjects
@@ -487,7 +488,7 @@ func TestOpenForStartupReportsPossiblePartialMigration(t *testing.T) {
 		_ = db.Close()
 		t.Fatal("startup returned a usable handle after a migration error")
 	}
-	if err == nil || !strings.Contains(err.Error(), "database may have been partially updated") ||
+	if err == nil || !strings.Contains(err.Error(), "StudyFlow startup migration failed") ||
 		!strings.Contains(err.Error(), "color migration failed in fixture") {
 		t.Fatalf("migration error = %v", err)
 	}
@@ -496,9 +497,13 @@ func TestOpenForStartupReportsPossiblePartialMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer db.Close()
-	var enabled string
-	if err := db.QueryRow(`SELECT value FROM settings WHERE key='dailyReviewEnabled'`).Scan(&enabled); err != nil || enabled != "0" {
-		t.Fatalf("earlier startup write was not preserved: %q, %v", enabled, err)
+	var count int
+	if err := db.QueryRow(`SELECT count(*) FROM settings WHERE key='dailyReviewEnabled'`).Scan(&count); err != nil || count != 0 {
+		t.Fatalf("earlier startup write was not rolled back: count=%d, err=%v", count, err)
+	}
+	var columns int
+	if err := db.QueryRow(`SELECT count(*) FROM pragma_table_info('stage_goals') WHERE name='accepted_at'`).Scan(&columns); err != nil || columns != 0 {
+		t.Fatalf("DDL was not rolled back: count=%d, err=%v", columns, err)
 	}
 }
 

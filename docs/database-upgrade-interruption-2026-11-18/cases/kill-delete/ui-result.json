@@ -1,0 +1,13 @@
+{
+  "status": {
+    "phase": "ready",
+    "kind": "",
+    "current": 3,
+    "target": 3,
+    "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-1cwctzik\\cases\\kill-delete\\data\\study.db",
+    "backupPath": "",
+    "message": "",
+    "detail": ""
+  },
+  "error": ""
+}

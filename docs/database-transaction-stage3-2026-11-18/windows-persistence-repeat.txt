@@ -1,0 +1,61 @@
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.06s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.04s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.04s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.05s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.05s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.06s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.05s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.04s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.04s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.04s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.04s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.04s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.04s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.05s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.06s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.05s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.05s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.05s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.05s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.05s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.04s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.04s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.04s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.04s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.04s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.04s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.04s)
+=== RUN   TestQueriesScopesCannotEscapeOrBypassTransaction
+--- PASS: TestQueriesScopesCannotEscapeOrBypassTransaction (0.04s)
+=== RUN   TestQueriesContextCancellationPreventsAllSQL
+--- PASS: TestQueriesContextCancellationPreventsAllSQL (0.04s)
+=== RUN   TestQueriesBusinessErrorIsPreservedAndRolledBack
+--- PASS: TestQueriesBusinessErrorIsPreservedAndRolledBack (0.04s)
+PASS

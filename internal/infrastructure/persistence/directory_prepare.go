@@ -34,13 +34,18 @@ type directoryPrepareIO struct {
 // prepareDirectory 需要在当前数据库上独占使用。它不触碰当前句柄与位置文件；成功后由调用方持有准备的文件，并可在提交切换前用 cleanup 丢弃。
 func prepareDirectory(ctx context.Context, db *sql.DB, sourcePath, target, locationFile string) (*preparedDirectory, error) {
 	return prepareDirectoryWithIO(ctx, db, sourcePath, target, locationFile, directoryPrepareIO{
-		copyBackup:    io.Copy,
+		copyBackup: func(w io.Writer, r io.Reader) (int64, error) {
+			return io.Copy(w, cancellationReader{ctx: ctx, reader: r})
+		},
 		syncFile:      (*os.File).Sync,
 		syncDirectory: syncPreparedDirectory,
 	})
 }
 
 func prepareDirectoryWithIO(ctx context.Context, db *sql.DB, sourcePath, target, locationFile string, fileIO directoryPrepareIO) (_ *preparedDirectory, resultErr error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
 	paths, err := checkDirectoryPaths(sourcePath, target, locationFile)
 	if err != nil {
 		return nil, err
@@ -85,16 +90,19 @@ func prepareDirectoryWithIO(ctx context.Context, db *sql.DB, sourcePath, target,
 	if err := work.remove(); err != nil {
 		return nil, err
 	}
-	if err := prepared.copyBackups(paths.sourceBackups, paths.targetBackups, fileIO); err != nil {
+	if err := prepared.copyBackups(ctx, paths.sourceBackups, paths.targetBackups, fileIO); err != nil {
 		return nil, fmt.Errorf("迁移备份文件失败: %w", err)
 	}
 	if err := prepared.syncDirectories(paths.target, paths.targetBackups, fileIO.syncDirectory); err != nil {
 		return nil, err
 	}
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
 	return prepared, nil
 }
 
-func (p *preparedDirectory) copyBackups(source, target string, fileIO directoryPrepareIO) error {
+func (p *preparedDirectory) copyBackups(ctx context.Context, source, target string, fileIO directoryPrepareIO) error {
 	if err := checkCanonicalDirectory(source); os.IsNotExist(err) {
 		return nil
 	} else if err != nil {
@@ -111,6 +119,9 @@ func (p *preparedDirectory) copyBackups(source, target string, fileIO directoryP
 		return err
 	}
 	for _, entry := range entries {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
 		// 保留既有备份选择规则：跳过目录与其他后缀。清理另行确认源文件的身份与内容。
 		if entry.IsDir() || !strings.HasSuffix(entry.Name(), ".db") {
 			continue
@@ -232,4 +243,18 @@ func (p *preparedDirectory) syncDirectories(target, backups string, syncDirector
 		synced[path] = true
 	}
 	return nil
+}
+
+// File copies cannot be forcefully interrupted during an OS read, but every
+// subsequent read observes shutdown, and preparation cleans up before publish.
+type cancellationReader struct {
+	ctx    context.Context
+	reader io.Reader
+}
+
+func (r cancellationReader) Read(p []byte) (int, error) {
+	if err := r.ctx.Err(); err != nil {
+		return 0, err
+	}
+	return r.reader.Read(p)
 }

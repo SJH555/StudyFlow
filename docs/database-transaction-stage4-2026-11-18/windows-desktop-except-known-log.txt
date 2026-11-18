@@ -1,0 +1,280 @@
+=== RUN   TestDatabaseFreeAPIsCompleteWhileWriterHoldsLock
+--- PASS: TestDatabaseFreeAPIsCompleteWhileWriterHoldsLock (0.02s)
+=== RUN   TestAPIQueuedDatabaseCallObservesTaskCancellation
+--- PASS: TestAPIQueuedDatabaseCallObservesTaskCancellation (0.01s)
+=== RUN   TestDatabaseFreeAPIsCompleteAfterCloseOrPause
+=== RUN   TestDatabaseFreeAPIsCompleteAfterCloseOrPause/closed
+=== RUN   TestDatabaseFreeAPIsCompleteAfterCloseOrPause/paused
+--- PASS: TestDatabaseFreeAPIsCompleteAfterCloseOrPause (0.02s)
+    --- PASS: TestDatabaseFreeAPIsCompleteAfterCloseOrPause/closed (0.01s)
+    --- PASS: TestDatabaseFreeAPIsCompleteAfterCloseOrPause/paused (0.01s)
+=== RUN   TestReminderAcknowledgementWritesResponseBeforeScheduling
+--- PASS: TestReminderAcknowledgementWritesResponseBeforeScheduling (0.01s)
+=== RUN   TestReminderAcknowledgementDelayedQueryUsesSwitchedDatabase
+    api_service_test.go:335: real directory switching is supported on desktop Linux
+--- SKIP: TestReminderAcknowledgementDelayedQueryUsesSwitchedDatabase (0.00s)
+=== RUN   TestBackupChecksSerializeWithDatabaseRequests
+--- PASS: TestBackupChecksSerializeWithDatabaseRequests (0.02s)
+=== RUN   TestEnableAutomaticBackupRespondsWithoutDeadlock
+--- PASS: TestEnableAutomaticBackupRespondsWithoutDeadlock (0.02s)
+=== RUN   TestManualPauseStartsBreakAndDayPauseDoesNot
+--- PASS: TestManualPauseStartsBreakAndDayPauseDoesNot (0.02s)
+=== RUN   TestBreakBudgetCarriesAcrossPauses
+--- PASS: TestBreakBudgetCarriesAcrossPauses (0.03s)
+=== RUN   TestBreakBudgetCarriesAcrossEndedSessions
+--- PASS: TestBreakBudgetCarriesAcrossEndedSessions (0.03s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.04s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.02s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.02s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.06s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.02s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.02s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.02s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.06s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.01s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.01s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.01s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.01s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.01s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.01s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.01s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.01s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.04s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.02s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.02s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.02s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.02s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.01s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.05s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.02s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.01s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.01s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.02s)
+=== RUN   TestDailyReviewSwitchStartsTodayAndStopsCalculation
+--- PASS: TestDailyReviewSwitchStartsTodayAndStopsCalculation (0.02s)
+=== RUN   TestDailyReviewPerProjectOnlyListsMissedTargets
+--- PASS: TestDailyReviewPerProjectOnlyListsMissedTargets (0.02s)
+=== RUN   TestWindowsBindingKeepsDataDirectoryBehavior
+--- PASS: TestWindowsBindingKeepsDataDirectoryBehavior (0.10s)
+=== RUN   TestChangingDataDirectoryMovesBackupFiles
+--- PASS: TestChangingDataDirectoryMovesBackupFiles (0.10s)
+=== RUN   TestWindowsQASwitchConnectionSettings
+    database_windows_qa_test.go:53: foreign_keys before=1 after=1
+--- PASS: TestWindowsQASwitchConnectionSettings (0.11s)
+=== RUN   TestWindowsQAFailedSwitchRestoresUsableConnection
+--- PASS: TestWindowsQAFailedSwitchRestoresUsableConnection (0.03s)
+=== RUN   TestWindowsQACopyFailureRollbackSettings
+=== RUN   TestWindowsQACopyFailureRollbackSettings/copy
+    database_windows_qa_test.go:92: migration failed as intended: prepare database directory: 发布目标数据库 C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettingscopy6869976\001\deny-create\study.db: Access is denied.
+=== RUN   TestWindowsQACopyFailureRollbackSettings/open
+    database_windows_qa_test.go:92: migration failed as intended: prepare database directory: 创建数据库快照 C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettingsopen1071086755\001\deny-create\.studyflow-snapshot-3974889610\.studyflow-776271084.tmp: unable to open database file: out of memory (14)
+--- PASS: TestWindowsQACopyFailureRollbackSettings (1.54s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/copy (0.09s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/open (1.45s)
+=== RUN   TestWindowsQAConcurrentSwitchRequestsAndBackups
+--- PASS: TestWindowsQAConcurrentSwitchRequestsAndBackups (0.13s)
+=== RUN   TestWindowsQABackupWALAndRetention
+--- PASS: TestWindowsQABackupWALAndRetention (0.03s)
+=== RUN   TestDeletedPlanAndSessionStayInDatabaseButDisappearFromLists
+--- PASS: TestDeletedPlanAndSessionStayInDatabaseButDisappearFromLists (0.02s)
+=== RUN   TestGoalsBindingKeepsContract
+--- PASS: TestGoalsBindingKeepsContract (0.02s)
+=== RUN   TestRunReturnAndSecondQuitOrdering
+=== RUN   TestRunReturnAndSecondQuitOrdering/before-dispatch
+=== RUN   TestRunReturnAndSecondQuitOrdering/queued
+=== RUN   TestRunReturnAndSecondQuitOrdering/executing
+=== RUN   TestRunReturnAndSecondQuitOrdering/normal
+--- PASS: TestRunReturnAndSecondQuitOrdering (0.18s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/before-dispatch (0.05s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/queued (0.04s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/executing (0.05s)
+    --- PASS: TestRunReturnAndSecondQuitOrdering/normal (0.04s)
+=== RUN   TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable
+--- PASS: TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable (0.00s)
+=== RUN   TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork
+--- PASS: TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork (0.00s)
+=== RUN   TestDesktopShutdownWaitsForActualAPICall
+--- PASS: TestDesktopShutdownWaitsForActualAPICall (0.01s)
+=== RUN   TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe
+--- PASS: TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe (0.00s)
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task
+--- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase (0.52s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory (0.04s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone (0.04s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return (0.06s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch (0.06s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error (0.07s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task (0.05s)
+=== RUN   TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown
+--- PASS: TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown (0.00s)
+=== RUN   TestSecondLaunchActiveCallbackDrainsBeforeQuit
+--- PASS: TestSecondLaunchActiveCallbackDrainsBeforeQuit (0.00s)
+=== RUN   TestManualRecordRejectsOverlapsAcrossSources
+--- PASS: TestManualRecordRejectsOverlapsAcrossSources (0.01s)
+=== RUN   TestManualRecordRejectsShortBeforePersisting
+--- PASS: TestManualRecordRejectsShortBeforePersisting (0.01s)
+=== RUN   TestManualRecordChecksActiveSessionAndIgnoresDeleted
+--- PASS: TestManualRecordChecksActiveSessionAndIgnoresDeleted (0.02s)
+=== RUN   TestManualRecordAllowsTimeAfterPausedTimer
+--- PASS: TestManualRecordAllowsTimeAfterPausedTimer (0.01s)
+=== RUN   TestManualRecordCannotOverlapRunningPlanBeforeItsEnd
+--- PASS: TestManualRecordCannotOverlapRunningPlanBeforeItsEnd (0.01s)
+=== RUN   TestPlanBreakMinutesRoundTripAndValidation
+--- PASS: TestPlanBreakMinutesRoundTripAndValidation (0.01s)
+=== RUN   TestPlanConflictChecksWeekdaysTimeAndEdits
+--- PASS: TestPlanConflictChecksWeekdaysTimeAndEdits (0.02s)
+=== RUN   TestExistingDatabaseAddsNoteAndSortColumns
+--- PASS: TestExistingDatabaseAddsNoteAndSortColumns (0.01s)
+=== RUN   TestSubjectCustomSortThenUnsortedCreationOrder
+--- PASS: TestSubjectCustomSortThenUnsortedCreationOrder (0.01s)
+=== RUN   TestSubjectSortOrderCanBeSetAndCleared
+--- PASS: TestSubjectSortOrderCanBeSetAndCleared (0.01s)
+=== RUN   TestDeletedPlanNoLongerBlocksSubjectDeletionButVisibleSessionDoes
+--- PASS: TestDeletedPlanNoLongerBlocksSubjectDeletionButVisibleSessionDoes (0.01s)
+=== RUN   TestPlanNoteRoundTripAndLimit
+--- PASS: TestPlanNoteRoundTripAndLimit (0.01s)
+=== RUN   TestReminderGateDeliversFirstReminderImmediately
+--- PASS: TestReminderGateDeliversFirstReminderImmediately (0.00s)
+=== RUN   TestReminderGateDropsRepeatedActivityWhileActive
+--- PASS: TestReminderGateDropsRepeatedActivityWhileActive (0.00s)
+=== RUN   TestReminderGateUpdatesSameKindPlanWhileActive
+--- PASS: TestReminderGateUpdatesSameKindPlanWhileActive (0.00s)
+=== RUN   TestReminderGateQueuesDifferentKindsAndReleasesInOrder
+--- PASS: TestReminderGateQueuesDifferentKindsAndReleasesInOrder (0.00s)
+=== RUN   TestReminderGateReplacesQueuedSameKindInPlace
+--- PASS: TestReminderGateReplacesQueuedSameKindInPlace (0.00s)
+=== RUN   TestReminderGateHoldsRemindersDuringReview
+--- PASS: TestReminderGateHoldsRemindersDuringReview (0.00s)
+=== RUN   TestReminderGateReplacesQueuedSameKindDuringReview
+--- PASS: TestReminderGateReplacesQueuedSameKindDuringReview (0.00s)
+=== RUN   TestReminderGateKeepsActiveDialogAcrossReview
+--- PASS: TestReminderGateKeepsActiveDialogAcrossReview (0.00s)
+=== RUN   TestReminderGateReleaseDuringReviewDoesNotDeliver
+--- PASS: TestReminderGateReleaseDuringReviewDoesNotDeliver (0.00s)
+=== RUN   TestActivityReminderTogglePersistsAndNotifies
+--- PASS: TestActivityReminderTogglePersistsAndNotifies (0.01s)
+=== RUN   TestResetTablesBindingPreservesAllowlistAndLinkedDataProtection
+--- PASS: TestResetTablesBindingPreservesAllowlistAndLinkedDataProtection (0.02s)
+=== RUN   TestSessionsUseLocalDateForUTCManualRecords
+--- PASS: TestSessionsUseLocalDateForUTCManualRecords (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.05s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable
+--- PASS: TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable (0.05s)
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/committed
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/unchanged_with_implicit_default
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/interrupted_cleanup
+--- PASS: TestStartupPendingRestoresCommittedAndUnchanged (0.17s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/committed (0.05s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/unchanged_with_implicit_default (0.06s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/interrupted_cleanup (0.06s)
+=== RUN   TestStartupPendingFailurePreservesEvidence
+=== RUN   TestStartupPendingFailurePreservesEvidence/identity_conflict
+=== RUN   TestStartupPendingFailurePreservesEvidence/corrupt_marker
+=== RUN   TestStartupPendingFailurePreservesEvidence/uncertain_publication
+=== RUN   TestStartupPendingFailurePreservesEvidence/candidate_schema_failure
+--- PASS: TestStartupPendingFailurePreservesEvidence (0.21s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/identity_conflict (0.05s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/corrupt_marker (0.05s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/uncertain_publication (0.05s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/candidate_schema_failure (0.05s)
+=== RUN   TestStartupPendingUnchangedRechecksHistoricalSelection
+--- PASS: TestStartupPendingUnchangedRechecksHistoricalSelection (0.06s)
+=== RUN   TestStartupPendingClearFailureClosesValidatedConnection
+--- PASS: TestStartupPendingClearFailureClosesValidatedConnection (0.05s)
+=== RUN   TestStartupDatabaseFirstLaunchAndDefaultReopen
+--- PASS: TestStartupDatabaseFirstLaunchAndDefaultReopen (0.01s)
+=== RUN   TestStartupDatabaseHonorsFormalLocation
+=== RUN   TestStartupDatabaseHonorsFormalLocation/complete
+=== RUN   TestStartupDatabaseHonorsFormalLocation/missing
+=== RUN   TestStartupDatabaseHonorsFormalLocation/damaged
+=== RUN   TestStartupDatabaseHonorsFormalLocation/unknown
+--- PASS: TestStartupDatabaseHonorsFormalLocation (0.11s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/complete (0.04s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/missing (0.02s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/damaged (0.03s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/unknown (0.02s)
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study-legacy
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/exam-notify-legacy
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study
+--- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas (0.14s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study-legacy (0.04s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/exam-notify-legacy (0.04s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study (0.06s)
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/no_formal_location
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/empty_formal_location
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/invalid_legacy_database
+--- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation (0.10s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/no_formal_location (0.04s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/empty_formal_location (0.04s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/invalid_legacy_database (0.02s)
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault/valid_copy
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault/invalid_copy
+--- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault (0.05s)
+    --- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault/valid_copy (0.04s)
+    --- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault/invalid_copy (0.01s)
+=== RUN   TestStartupDatabaseLegacySnapshotIncludesUncheckpointedWAL
+--- PASS: TestStartupDatabaseLegacySnapshotIncludesUncheckpointedWAL (0.10s)
+=== RUN   TestStartupDatabaseLegacySnapshotStillRejectsUnknownSchema
+--- PASS: TestStartupDatabaseLegacySnapshotStillRejectsUnknownSchema (0.01s)
+=== RUN   TestStartupDatabasePositionReadFailureStopsSelection
+--- PASS: TestStartupDatabasePositionReadFailureStopsSelection (0.00s)
+=== RUN   TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork
+    startup_database_test.go:387: isolated HOME and APPIMAGE exercise the Linux main entry point
+--- SKIP: TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork (0.00s)
+=== RUN   TestDesktopTransportPublicStartStopJoinsCleanupWorker
+--- PASS: TestDesktopTransportPublicStartStopJoinsCleanupWorker (0.00s)
+PASS

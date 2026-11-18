@@ -1,0 +1,157 @@
+{
+  "passed": true,
+  "scenarios": [
+    {
+      "case": "baseline",
+      "passed": true,
+      "text": "StudyFlow\n−\n□\n×\nStudyFlow\n检测到版本更新\n\n需要调整本地数据格式，以适配新版本。学习记录和设置会保留，开始前将自动备份。\n\n暂时退出\n确认继续",
+      "bounds": {
+        "left": 186.6666717529297,
+        "right": 806.6666717529297,
+        "top": 138.6041717529297,
+        "bottom": 489.39585876464844,
+        "width": 1000,
+        "height": 664,
+        "scroll": 993
+      },
+      "status": {
+        "phase": "ready",
+        "kind": "baseline",
+        "current": 1,
+        "target": 1,
+        "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\baseline\\data\\study.db",
+        "backupPath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\baseline\\data\\backups\\upgrade-1-to-1-20261118-210440-1795007080522736900.db",
+        "message": "",
+        "detail": ""
+      }
+    },
+    {
+      "case": "cancel",
+      "passed": true,
+      "text": "StudyFlow\n−\n□\n×\nStudyFlow\n检测到版本更新\n\n需要调整本地数据格式，以适配新版本。学习记录和设置会保留，开始前将自动备份。\n\n暂时退出\n确认继续",
+      "bounds": {
+        "left": 186.6666717529297,
+        "right": 806.6666717529297,
+        "top": 138.6041717529297,
+        "bottom": 489.39585876464844,
+        "width": 1000,
+        "height": 664,
+        "scroll": 993
+      },
+      "status": {
+        "phase": "confirmation",
+        "kind": "baseline",
+        "current": 1,
+        "target": 1,
+        "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\cancel\\data\\study.db",
+        "backupPath": "",
+        "message": "",
+        "detail": ""
+      }
+    },
+    {
+      "case": "backupfail",
+      "passed": true,
+      "text": "StudyFlow\n−\n□\n×\nStudyFlow\n检测到版本更新\n\n需要调整本地数据格式，以适配新版本。学习记录和设置会保留，开始前将自动备份。\n\n暂时退出\n确认继续",
+      "bounds": {
+        "left": 186.6666717529297,
+        "right": 806.6666717529297,
+        "top": 138.6041717529297,
+        "bottom": 489.39585876464844,
+        "width": 1000,
+        "height": 664,
+        "scroll": 993
+      },
+      "status": {
+        "phase": "blocked",
+        "kind": "failed",
+        "current": 1,
+        "target": 1,
+        "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\backupfail\\data\\study.db",
+        "backupPath": "",
+        "message": "数据库准备未完成，请退出并检查错误信息。原有数据和已生成的备份会保留。",
+        "detail": "升级前备份失败：mkdir C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\backupfail\\data\\backups: The system cannot find the path specified."
+      }
+    },
+    {
+      "case": "newer",
+      "passed": true,
+      "text": "StudyFlow\n−\n□\n×\nStudyFlow\n请先更新 StudyFlow\n\n此数据库需要更高版本的 StudyFlow，请更新应用后再打开。\n\n当前数据\n版本 2\n此应用支持\n版本 1\n数据位置\nC:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\newer\\data\\study.db\n\n请使用支持数据库版本 2 或更高版本的应用。\n\n查看错误详情\n退出",
+      "bounds": {
+        "left": 186.6666717529297,
+        "right": 806.6666717529297,
+        "top": 52,
+        "bottom": 663.3646240234375,
+        "width": 1000,
+        "height": 664,
+        "scroll": 993
+      },
+      "status": {
+        "phase": "blocked",
+        "kind": "newer",
+        "current": 2,
+        "target": 1,
+        "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\newer\\data\\study.db",
+        "backupPath": "",
+        "message": "此数据库需要更高版本的 StudyFlow，请更新应用后再打开。",
+        "detail": "database requires a newer application: database 2, application supports 1"
+      }
+    },
+    {
+      "case": "unknown",
+      "passed": true,
+      "text": "StudyFlow\n−\n□\n×\nStudyFlow\n需要检查学习数据\n\n无法确认数据库结构或版本记录，请保留数据并联系维护者检查。\n\n当前数据\n版本 0\n目标版本\n版本 1\n数据位置\nC:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\unknown\\data\\study.db\n查看错误详情\n退出",
+      "bounds": {
+        "left": 186.6666717529297,
+        "right": 806.6666717529297,
+        "top": 52,
+        "bottom": 621.96875,
+        "width": 1000,
+        "height": 664,
+        "scroll": 993
+      },
+      "status": {
+        "phase": "blocked",
+        "kind": "unrecognized",
+        "current": 0,
+        "target": 1,
+        "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\unknown\\data\\study.db",
+        "backupPath": "",
+        "message": "无法确认数据库结构或版本记录，请保留数据并联系维护者检查。",
+        "detail": "unrecognized database structure: unexpected table unrelated"
+      }
+    },
+    {
+      "case": "fresh",
+      "passed": true,
+      "text": "StudyFlow\n−\n□\n×\nStudyFlow\n今日计划\n学习项目\n学习计划\n学习统计\n学情追踪\n活动提醒\n设置\n今日计划\n暂停今日计划\n准备开始学习\n\n当前没有正在进行的学习计划\n\n开始学习\n计划学习\n01:00:00\n进入专注模式 ↗\n今日安排\n0 个计划时段\n定位当前\n查看全部\n无计划\n计划完成度\n管理计划 ↗\n0%\n实际 / 计划\n计划 0分钟\n0%\n阶段目标倒计时\n管理目标\n\n暂无进行中的阶段目标\n\n学习记录\n0 条记录\n＋ 补充记录\n暂无学习记录",
+      "bounds": null,
+      "status": {
+        "phase": "ready",
+        "kind": "",
+        "current": 1,
+        "target": 1,
+        "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\fresh\\data\\study.db",
+        "backupPath": "",
+        "message": "",
+        "detail": ""
+      }
+    },
+    {
+      "case": "ready",
+      "passed": true,
+      "text": "StudyFlow\n−\n□\n×\nStudyFlow\n今日计划\n学习项目\n学习计划\n学习统计\n学情追踪\n活动提醒\n设置\n正在打开你的学习空间…",
+      "bounds": null,
+      "status": {
+        "phase": "ready",
+        "kind": "",
+        "current": 1,
+        "target": 1,
+        "databasePath": "C:\\Users\\jhsong\\AppData\\Local\\Temp\\StudyFlow-upgrade-stage2-gfc5linv\\cases\\ready\\data\\study.db",
+        "backupPath": "",
+        "message": "",
+        "detail": ""
+      }
+    }
+  ]
+}

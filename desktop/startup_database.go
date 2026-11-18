@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"database/sql"
 	"errors"
 	"fmt"
@@ -21,7 +20,7 @@ func (p startupDatabasePaths) selectData() (storage.StartupData, error) {
 	return storage.SelectStartupData(p.locationFile, p.defaultDir, p.installDir, p.legacyConfigDir)
 }
 
-func openStartupDatabase(paths startupDatabasePaths, openRecovered func(string) (*sql.DB, error)) (_ *persistence.Database, resultErr error) {
+func openStartupDatabaseUsing(paths startupDatabasePaths, openRecovered func(string) (*sql.DB, error), openSelected func(storage.StartupData) (*sql.DB, error)) (_ *persistence.Database, resultErr error) {
 	var db *sql.DB
 	var path string
 	defer func() {
@@ -64,7 +63,7 @@ func openStartupDatabase(paths startupDatabasePaths, openRecovered func(string) 
 			return nil, err
 		}
 		path = choice.DatabasePath
-		db, err = openSelectedStartupDatabase(choice)
+		db, err = openSelected(choice)
 		if err != nil {
 			return nil, fmt.Errorf("open startup study database %s: %w", path, err)
 		}
@@ -81,31 +80,6 @@ func openStartupDatabase(paths startupDatabasePaths, openRecovered func(string) 
 	}
 	db = nil // 所有权已转移给 Database。
 	return database, nil
-}
-
-func openSelectedStartupDatabase(choice storage.StartupData) (*sql.DB, error) {
-	if choice.Create || choice.LegacySource != "" {
-		if err := os.MkdirAll(filepath.Dir(choice.DatabasePath), 0700); err != nil {
-			return nil, err
-		}
-	}
-	if choice.LegacySource != "" {
-		if err := requireStartupDatabaseFile(choice.LegacySource); err != nil {
-			return nil, fmt.Errorf("检查原有学习数据库: %w", err)
-		}
-		if err := persistence.SnapshotLegacyDatabase(context.Background(), choice.LegacySource, choice.DatabasePath); err != nil {
-			return nil, fmt.Errorf("迁移原有学习数据失败: %w", err)
-		}
-	}
-	if choice.Create {
-		return persistence.Open(choice.DatabasePath)
-	}
-	if err := requireStartupDatabaseFile(choice.DatabasePath); errors.Is(err, os.ErrNotExist) {
-		return nil, fmt.Errorf("保存的数据目录缺少 study.db: %w", err)
-	} else if err != nil {
-		return nil, err
-	}
-	return persistence.OpenForStartup(choice.DatabasePath)
 }
 
 func requireStartupDatabaseFile(path string) error {

@@ -1,7 +1,8 @@
 package plans
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"exam_notify/internal/modules/schedule"
 	"time"
 )
@@ -13,12 +14,14 @@ type StudyTarget struct {
 }
 
 // StudyTargetsForDay 保留历史复盘过滤规则：仅统计启用且未删除的计划。
-func StudyTargetsForDay(db *sql.DB, date time.Time) (map[int64]StudyTarget, error) {
+func StudyTargetsForDay(db *persistence.Queries, date time.Time) (map[int64]StudyTarget, error) {
 	planned := map[int64]StudyTarget{}
 	rows, err := db.Query(`SELECT p.subject_id,s.name,p.duration_minutes,p.break_minutes,p.weekdays FROM plans p JOIN subjects s ON s.id=p.subject_id WHERE p.active=1 AND p.deleted=0`)
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
+
 	for rows.Next() {
 		var id int64
 		var name, weekdays string

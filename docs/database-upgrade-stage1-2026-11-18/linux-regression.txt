@@ -1,0 +1,24 @@
+?   	exam_notify/build/android/scripts/deps	[no test files]
+?   	exam_notify/build/ios	[no test files]
+?   	exam_notify/build/ios/scripts/deps	[no test files]
+ok  	exam_notify/desktop	1.492s
+ok  	exam_notify/internal/app	0.062s
+ok  	exam_notify/internal/infrastructure/diagnostics	0.002s
+?   	exam_notify/internal/infrastructure/httpapi	[no test files]
+ok  	exam_notify/internal/infrastructure/persistence	0.672s
+ok  	exam_notify/internal/infrastructure/reminder	0.012s
+ok  	exam_notify/internal/infrastructure/storage	0.062s
+ok  	exam_notify/internal/infrastructure/system	0.163s
+ok  	exam_notify/internal/infrastructure/upgrade	0.246s
+?   	exam_notify/internal/modules/activities	[no test files]
+ok  	exam_notify/internal/modules/goals	0.018s
+ok  	exam_notify/internal/modules/plans	0.026s
+?   	exam_notify/internal/modules/review	[no test files]
+ok  	exam_notify/internal/modules/schedule	0.006s
+ok  	exam_notify/internal/modules/sessions	0.042s
+ok  	exam_notify/internal/modules/settings	0.035s
+ok  	exam_notify/internal/modules/subjects	0.013s
+ok  	exam_notify/internal/shared/studytime	0.003s
+?   	exam_notify/internal/testutil	[no test files]
+ok  	exam_notify/tools/release	0.011s
+?   	exam_notify/tools/syncassets	[no test files]

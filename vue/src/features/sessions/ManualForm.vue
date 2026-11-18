@@ -12,6 +12,8 @@ const {
   manualEndHour,
   manualEndMinute,
   showManual,
+  manualDurationMinutes,
+  manualTimeError,
 } = useManualDraft();
 
 const { subjects } = storeToRefs(useSubjectsStore());
@@ -73,6 +75,12 @@ const { addManual } = useSessionsStore();
             />
           </div>
         </div>
+        <div class="manual-duration-hint">
+          学习时长 {{ Math.max(0, manualDurationMinutes) }} 分钟
+          <p v-if="manualTimeError" class="manual-time-error" role="alert">
+            {{ manualTimeError }}
+          </p>
+        </div>
       </VCardText>
       <div class="subject-form-actions">
         <VBtn variant="text" rounded="lg" @click="showManual = false">取消</VBtn
@@ -81,7 +89,7 @@ const { addManual } = useSessionsStore();
           color="primary"
           rounded="lg"
           prepend-icon="mdi-content-save-outline"
-          :disabled="!subjects.length"
+          :disabled="!subjects.length || !manualSubject || !!manualTimeError"
           @click="addManual"
           >保存记录</VBtn
         >
@@ -91,6 +99,14 @@ const { addManual } = useSessionsStore();
 </template>
 
 <style scoped>
+.manual-duration-hint {
+  color: var(--muted);
+  font-size: 12px;
+}
+.manual-time-error {
+  color: rgb(var(--v-theme-error));
+  margin: 6px 0 0;
+}
 .manual-dialog-time .plan-time-select {
   display: flex;
   align-items: center;

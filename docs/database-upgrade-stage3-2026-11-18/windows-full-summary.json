@@ -1,0 +1,116 @@
+[
+  {
+    "package": "exam_notify_desktop",
+    "passed": false,
+    "failedTests": [
+      "TestAPILogsKeepBindingContract"
+    ],
+    "skippedTests": [
+      "TestReminderAcknowledgementDelayedQueryUsesSwitchedDatabase",
+      "TestStage5DirectoryCrashChild",
+      "TestStartupDatabaseFailureBlocksBusinessAndBackgroundWork"
+    ]
+  },
+  {
+    "package": "exam_notify_internal_app",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": [
+      "TestCheckBackupReturnsCleanupErrorWhileDisabled"
+    ]
+  },
+  {
+    "package": "exam_notify_internal_infrastructure_diagnostics",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_infrastructure_persistence",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": [
+      "TestPrepareDirectoryRejectsBackupFIFOWithoutWaitingForWriter",
+      "TestDirectoryPreparationPreservesPathWhitespace",
+      "TestStage5CrashChild"
+    ]
+  },
+  {
+    "package": "exam_notify_internal_infrastructure_reminder",
+    "passed": false,
+    "failedTests": [
+      "TestWindowsAudioWorkerStopsAndCanBeRecreated"
+    ],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_infrastructure_storage",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": [
+      "TestLocationSwitchRejectsUnsafePaths"
+    ]
+  },
+  {
+    "package": "exam_notify_internal_infrastructure_system",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_infrastructure_upgrade",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": [
+      "TestUpgradeInterruptionChild"
+    ]
+  },
+  {
+    "package": "exam_notify_internal_modules_goals",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_modules_plans",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_modules_schedule",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_modules_sessions",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_modules_settings",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_modules_subjects",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_internal_shared_studytime",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "package": "exam_notify_tools_release",
+    "passed": true,
+    "failedTests": [],
+    "skippedTests": []
+  }
+]

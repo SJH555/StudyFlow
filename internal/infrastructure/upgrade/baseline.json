@@ -1,0 +1,562 @@
+{
+  "activity_logs": {
+    "columns": {
+      "id": [
+        "INTEGER",
+        0,
+        null,
+        1,
+        0
+      ],
+      "happened_at": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "content": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [],
+    "indexes": []
+  },
+  "daily_plan_targets": {
+    "columns": {
+      "day": [
+        "TEXT",
+        0,
+        null,
+        1,
+        0
+      ],
+      "targets_json": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [],
+    "indexes": [
+      {
+        "unique": 1,
+        "origin": "pk",
+        "partial": 0,
+        "columns": [
+          {
+            "name": "day",
+            "desc": 0,
+            "coll": "BINARY"
+          }
+        ]
+      }
+    ]
+  },
+  "daily_review_items": {
+    "columns": {
+      "id": [
+        "INTEGER",
+        0,
+        null,
+        1,
+        0
+      ],
+      "day": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "subject_id": [
+        "INTEGER",
+        0,
+        null,
+        0,
+        0
+      ],
+      "subject_name": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "planned_seconds": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "actual_seconds": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "reason": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [
+      [
+        "daily_reviews",
+        "day",
+        "day",
+        "NO ACTION",
+        "CASCADE",
+        "NONE"
+      ]
+    ],
+    "indexes": []
+  },
+  "daily_reviews": {
+    "columns": {
+      "day": [
+        "TEXT",
+        0,
+        null,
+        1,
+        0
+      ],
+      "mode": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "threshold": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "planned_seconds": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "actual_seconds": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "submitted_at": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [],
+    "indexes": [
+      {
+        "unique": 1,
+        "origin": "pk",
+        "partial": 0,
+        "columns": [
+          {
+            "name": "day",
+            "desc": 0,
+            "coll": "BINARY"
+          }
+        ]
+      }
+    ]
+  },
+  "plans": {
+    "columns": {
+      "id": [
+        "INTEGER",
+        0,
+        null,
+        1,
+        0
+      ],
+      "subject_id": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "start_time": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "duration_minutes": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "weekdays": [
+        "TEXT",
+        1,
+        "'1,2,3,4,5,6,0'",
+        0,
+        0
+      ],
+      "active": [
+        "INTEGER",
+        1,
+        "1",
+        0,
+        0
+      ],
+      "color": [
+        "TEXT",
+        1,
+        "''",
+        0,
+        0
+      ],
+      "deleted": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ],
+      "break_minutes": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ],
+      "note": [
+        "TEXT",
+        1,
+        "''",
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [
+      [
+        "subjects",
+        "subject_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "indexes": []
+  },
+  "sessions": {
+    "columns": {
+      "id": [
+        "INTEGER",
+        0,
+        null,
+        1,
+        0
+      ],
+      "subject_id": [
+        "INTEGER",
+        1,
+        null,
+        0,
+        0
+      ],
+      "plan_id": [
+        "INTEGER",
+        0,
+        null,
+        0,
+        0
+      ],
+      "start_at": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "planned_end_at": [
+        "TEXT",
+        0,
+        null,
+        0,
+        0
+      ],
+      "end_at": [
+        "TEXT",
+        0,
+        null,
+        0,
+        0
+      ],
+      "paused_at": [
+        "TEXT",
+        0,
+        null,
+        0,
+        0
+      ],
+      "resumed_at": [
+        "TEXT",
+        0,
+        null,
+        0,
+        0
+      ],
+      "duration_seconds": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ],
+      "source": [
+        "TEXT",
+        1,
+        "'timer'",
+        0,
+        0
+      ],
+      "note": [
+        "TEXT",
+        1,
+        "''",
+        0,
+        0
+      ],
+      "deleted": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ],
+      "break_started_at": [
+        "TEXT",
+        0,
+        null,
+        0,
+        0
+      ],
+      "break_notified": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ],
+      "break_used_seconds": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [
+      [
+        "subjects",
+        "subject_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "indexes": []
+  },
+  "settings": {
+    "columns": {
+      "key": [
+        "TEXT",
+        0,
+        null,
+        1,
+        0
+      ],
+      "value": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [],
+    "indexes": [
+      {
+        "unique": 1,
+        "origin": "pk",
+        "partial": 0,
+        "columns": [
+          {
+            "name": "key",
+            "desc": 0,
+            "coll": "BINARY"
+          }
+        ]
+      }
+    ]
+  },
+  "stage_goals": {
+    "columns": {
+      "id": [
+        "INTEGER",
+        0,
+        null,
+        1,
+        0
+      ],
+      "title": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "deadline": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "note": [
+        "TEXT",
+        1,
+        "''",
+        0,
+        0
+      ],
+      "completed_at": [
+        "TEXT",
+        0,
+        null,
+        0,
+        0
+      ],
+      "accepted_at": [
+        "TEXT",
+        0,
+        null,
+        0,
+        0
+      ],
+      "created_at": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "updated_at": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "deleted": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [],
+    "indexes": []
+  },
+  "subjects": {
+    "columns": {
+      "id": [
+        "INTEGER",
+        0,
+        null,
+        1,
+        0
+      ],
+      "name": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "color": [
+        "TEXT",
+        1,
+        "'#007AFF'",
+        0,
+        0
+      ],
+      "created_at": [
+        "TEXT",
+        1,
+        null,
+        0,
+        0
+      ],
+      "archived": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ],
+      "deleted": [
+        "INTEGER",
+        1,
+        "0",
+        0,
+        0
+      ],
+      "sort_order": [
+        "INTEGER",
+        0,
+        null,
+        0,
+        0
+      ]
+    },
+    "foreignKeys": [],
+    "indexes": [
+      {
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          {
+            "name": "name",
+            "desc": 0,
+            "coll": "BINARY"
+          }
+        ]
+      }
+    ]
+  }
+}

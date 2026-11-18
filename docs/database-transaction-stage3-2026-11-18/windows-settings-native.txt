@@ -1,0 +1,13 @@
+=== RUN   TestGeneralDefaults
+--- PASS: TestGeneralDefaults (0.07s)
+=== RUN   TestSaveGeneralValid
+--- PASS: TestSaveGeneralValid (0.05s)
+=== RUN   TestSaveGeneralInvalid
+--- PASS: TestSaveGeneralInvalid (0.05s)
+=== RUN   TestSaveGeneralTriggersCallback
+--- PASS: TestSaveGeneralTriggersCallback (0.05s)
+=== RUN   TestSaveNavigationWidths
+--- PASS: TestSaveNavigationWidths (0.06s)
+=== RUN   TestRejectInvalidNavigationWidths
+--- PASS: TestRejectInvalidNavigationWidths (0.05s)
+PASS

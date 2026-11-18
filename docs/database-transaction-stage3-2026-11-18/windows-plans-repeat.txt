@@ -1,0 +1,81 @@
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.16s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.06s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.05s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.06s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.14s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.05s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.05s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.12s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.04s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.12s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.04s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.13s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.04s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.11s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.04s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.13s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.05s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.11s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.04s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.11s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.03s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.04s)
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/starting
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/current
+=== RUN   TestReminderEarlyReturnReleasesSingleConnection/scan-error
+--- PASS: TestReminderEarlyReturnReleasesSingleConnection (0.11s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/starting (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/current (0.04s)
+    --- PASS: TestReminderEarlyReturnReleasesSingleConnection/scan-error (0.04s)
+PASS

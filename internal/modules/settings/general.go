@@ -3,6 +3,7 @@ package settings
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"strconv"
 )
 
@@ -14,7 +15,7 @@ type GeneralConfig struct {
 }
 
 // ReadGeneral 读取常规设置，未配置的项返回默认值（音量 100、显示窗口、隐藏到托盘）。
-func ReadGeneral(db *sql.DB) (GeneralConfig, error) {
+func ReadGeneral(db *persistence.Queries) (GeneralConfig, error) {
 	rows, err := db.Query(`SELECT key,value FROM settings WHERE key IN ('ringtoneVolume','startupWindow','closeBehavior')`)
 	if err != nil {
 		return GeneralConfig{}, err
@@ -45,7 +46,7 @@ func ReadGeneral(db *sql.DB) (GeneralConfig, error) {
 }
 
 // CheckHour 返回进度追因检查的日界小时（0–23），未设置或非法时默认 6 点。
-func CheckHour(db *sql.DB) (int, error) {
+func CheckHour(db *persistence.Queries) (int, error) {
 	value, err := readSetting(db, "dailyReviewCheckHour")
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -61,7 +62,7 @@ func CheckHour(db *sql.DB) (int, error) {
 }
 
 // CheckMinute 返回进度追因检查的分钟（0–59），未设置或非法时默认 0 分。
-func CheckMinute(db *sql.DB) (int, error) {
+func CheckMinute(db *persistence.Queries) (int, error) {
 	value, err := readSetting(db, "dailyReviewCheckMinute")
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {

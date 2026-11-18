@@ -1,0 +1,541 @@
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.08s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.05s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.10s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.16s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.03s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.08s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.04s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.04s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.10s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.03s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.08s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.04s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.10s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.04s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.14s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.03s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.06s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.03s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.03s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.09s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.03s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.06s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.08s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.14s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.02s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.07s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.03s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.03s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.10s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.03s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.06s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.09s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.15s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.04s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.03s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.07s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.04s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.04s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.10s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.03s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.07s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.09s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.16s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.04s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.03s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.08s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.03s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.04s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.04s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.04s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.11s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.04s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.04s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.04s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.04s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.07s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.04s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.04s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.11s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.04s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.16s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.04s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.03s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.07s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.04s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.04s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.10s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.04s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.07s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.10s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.15s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.03s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.07s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.04s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.04s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.04s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.10s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.04s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.07s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.09s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.15s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.04s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.03s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.07s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.04s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.04s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.10s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.03s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.07s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.10s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.15s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.02s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.08s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.05s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.03s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.09s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.03s)
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/archive
+=== RUN   TestBusinessTransactionSubjectLinkFailureRollsBack/delete
+--- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack (0.06s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/archive (0.03s)
+    --- PASS: TestBusinessTransactionSubjectLinkFailureRollsBack/delete (0.03s)
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at
+=== RUN   TestBusinessTransactionStartRejectsMalformedOldSession/start_at
+--- PASS: TestBusinessTransactionStartRejectsMalformedOldSession (0.08s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/duration_seconds (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/planned_end_at (0.03s)
+    --- PASS: TestBusinessTransactionStartRejectsMalformedOldSession/start_at (0.03s)
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/subjects
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/plans
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/sessions
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings
+=== RUN   TestBusinessTransactionListsRejectIncompleteResults/settings_iteration
+--- PASS: TestBusinessTransactionListsRejectIncompleteResults (0.13s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/subjects (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/plans (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/sessions (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings (0.03s)
+    --- PASS: TestBusinessTransactionListsRejectIncompleteResults/settings_iteration (0.03s)
+=== RUN   TestBusinessTransactionGoalReadbackFailureRollsBack
+--- PASS: TestBusinessTransactionGoalReadbackFailureRollsBack (0.03s)
+=== RUN   TestBusinessTransactionSettingsBatchFailureSkipsCallbacks
+--- PASS: TestBusinessTransactionSettingsBatchFailureSkipsCallbacks (0.03s)
+=== RUN   TestBusinessTransactionSettingsCallbackCanReborrow
+--- PASS: TestBusinessTransactionSettingsCallbackCanReborrow (0.02s)
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false
+=== RUN   TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true
+--- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots (0.07s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=false (0.03s)
+    --- PASS: TestBusinessTransactionReviewFailureRollsBackHeadersItemsAndSnapshots/bulk=true (0.04s)
+=== RUN   TestBusinessTransactionFinishExpiredRollsBackEarlierSession
+--- PASS: TestBusinessTransactionFinishExpiredRollsBackEarlierSession (0.03s)
+=== RUN   TestBusinessTransactionConcurrentConflictingPlans
+--- PASS: TestBusinessTransactionConcurrentConflictingPlans (0.03s)
+=== RUN   TestBusinessTransactionActualCommitBusyPausesAPI
+--- PASS: TestBusinessTransactionActualCommitBusyPausesAPI (0.03s)
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes
+=== RUN   TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays
+--- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer (0.09s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/start_time (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/duration_minutes (0.03s)
+    --- PASS: TestBusinessTransactionMalformedPlanRollsBackPreviousTimer/weekdays (0.03s)
+=== RUN   TestBusinessTransactionSnapshotConstraintIsNotIgnored
+--- PASS: TestBusinessTransactionSnapshotConstraintIsNotIgnored (0.03s)
+PASS

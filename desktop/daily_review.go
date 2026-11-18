@@ -1,7 +1,8 @@
 package main
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"encoding/json"
 	studyapp "exam_notify/internal/app"
 	sound "exam_notify/internal/infrastructure/reminder"
@@ -16,7 +17,7 @@ import (
 type reviewItem = review.ReviewItem
 type dailyReview = review.DailyReview
 
-func (a *App) dailyReviewAPI(db *sql.DB, w http.ResponseWriter, r *http.Request, action string) {
+func (a *App) dailyReviewAPI(db *persistence.Queries, w http.ResponseWriter, r *http.Request, action string) {
 	service := review.New(db)
 	onSubmitted := func() {
 		a.tasks.after(150*time.Millisecond, func() {

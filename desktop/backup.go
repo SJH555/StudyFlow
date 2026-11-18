@@ -8,7 +8,7 @@ import (
 
 func autoBackupLoop(ctx context.Context, store *App) {
 	check := func() {
-		if err := store.scheduler.BackupCheck(time.Now()); err != nil {
+		if err := store.scheduler.WithContext(ctx).BackupCheck(time.Now()); err != nil {
 			log.Printf("自动备份失败: %v", err)
 		}
 	}

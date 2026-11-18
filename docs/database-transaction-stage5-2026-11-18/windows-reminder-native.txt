@@ -1,0 +1,10 @@
+=== RUN   TestWindowsQAAudioShutdownAndRecreate
+--- PASS: TestWindowsQAAudioShutdownAndRecreate (1.96s)
+=== RUN   TestRingtonesUseSeparateFiles
+--- PASS: TestRingtonesUseSeparateFiles (0.04s)
+=== RUN   TestWindowsRingtoneClosesAfterAcknowledgement
+--- PASS: TestWindowsRingtoneClosesAfterAcknowledgement (0.31s)
+=== RUN   TestWindowsAudioWorkerStopsAndCanBeRecreated
+    shutdown_windows_test.go:9: MCI sysinfo all quantity: 输出的字符串太大，超出返回的缓冲区的长度。请增加缓冲区的大小。
+--- FAIL: TestWindowsAudioWorkerStopsAndCanBeRecreated (0.00s)
+FAIL

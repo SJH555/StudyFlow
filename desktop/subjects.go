@@ -1,7 +1,8 @@
 package main
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"encoding/json"
 	"net/http"
 
@@ -11,7 +12,7 @@ import (
 // Subject 是学习科目领域模型在桌面绑定层的别名。
 type Subject = subjects.Subject
 
-func (a *App) subjects(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) subjects(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		q := r.URL.Query()

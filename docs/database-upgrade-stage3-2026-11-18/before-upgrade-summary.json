@@ -1,0 +1,20 @@
+{
+  "backup": "/mnt/d/CLink/Desktop/studyflow/StudyFlow-0.5.0-5-portable/qa-backups/before-goose-stage3-20261118-212150.db",
+  "databaseSha256": "fb78400b37c73578b1fac78d78044a3c3fb54b1da123fd491fc1f28a12d516d1",
+  "tables": {
+    "activity_logs": 14,
+    "daily_plan_targets": 14,
+    "daily_review_items": 84,
+    "daily_reviews": 14,
+    "plans": 7,
+    "sessions": 87,
+    "settings": 3,
+    "stage_goals": 9,
+    "subjects": 8
+  },
+  "userFilesSha256": {
+    "activity-ringtone.mp3": "ef3257182e75bb356e3631c6fffe202f8f462b278502269c5c9e31058abc41ae",
+    "break-ringtone.mp3": "3ca500a7fe058c9bc30caae6ebfaa82f41a0c244e773ed426d9a575806bd4806",
+    "plan-ringtone.mp3": "8761d71e0f3c69d2ead1ea0802d0b9621b6a8a4ef68bfb026c9206b2571d8d16"
+  }
+}

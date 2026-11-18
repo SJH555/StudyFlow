@@ -2,6 +2,7 @@ package goals_test
 
 import (
 	"errors"
+	"exam_notify/internal/testutil"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -12,12 +13,13 @@ import (
 
 func newService(t *testing.T) *goals.Service {
 	t.Helper()
-	db, err := persistence.Open(filepath.Join(t.TempDir(), "study.db"))
+	path := filepath.Join(t.TempDir(), "study.db")
+	db, err := persistence.Open(path)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Cleanup(func() { db.Close() })
-	return goals.NewService(goals.NewSQLiteRepository(db))
+	return goals.NewService(goals.NewSQLiteRepository(testutil.Borrow(t, db, path)))
 }
 
 func TestLifecyclePreservesCompletionAndSoftDeletion(t *testing.T) {

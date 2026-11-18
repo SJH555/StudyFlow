@@ -1,0 +1,101 @@
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.11s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.06s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.05s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.09s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.05s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit
+=== RUN   TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback
+--- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData (0.08s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/commit (0.04s)
+    --- PASS: TestStage4BackupWaitsForTransactionAndCopiesCommittedData/rollback (0.04s)
+=== RUN   TestStage4ShutdownWaitsForCancelledTransactionRollback
+--- PASS: TestStage4ShutdownWaitsForCancelledTransactionRollback (0.03s)
+=== RUN   TestStage4CancelledBackupDoesNotCleanExpiredFiles
+--- PASS: TestStage4CancelledBackupDoesNotCleanExpiredFiles (0.01s)
+PASS

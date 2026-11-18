@@ -3,6 +3,7 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"os"
 	"path/filepath"
@@ -27,7 +28,14 @@ func TestRunStartupFailureReleasesLoggerAndSingleInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	previous := log.Writer()
-	err := run()
+	err := runWithStartupPresenter(func(store *App, _ system.InstanceGuard, _, _, _ string, startup *startupUpgrade) error {
+		defer store.Close()
+		state := startup.snapshot()
+		if state.Phase != "blocked" {
+			t.Errorf("missing database did not block startup: %+v", state)
+		}
+		return errors.New(state.Detail)
+	})
 	if err == nil || !strings.Contains(err.Error(), "缺少 study.db") {
 		t.Fatal(err)
 	}

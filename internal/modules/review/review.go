@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/modules/plans"
 	"exam_notify/internal/modules/sessions"
 	"exam_notify/internal/modules/settings"
@@ -13,10 +14,10 @@ import (
 )
 
 // Service 提供复习与总结相关的查询和提交能力。
-type Service struct{ db *sql.DB }
+type Service struct{ db *persistence.Queries }
 
 // New 以给定的数据库创建 Service。
-func New(db *sql.DB) *Service { return &Service{db: db} }
+func New(db *persistence.Queries) *Service { return &Service{db: db} }
 
 // ReviewItem 表示一个科目在一天内的计划/实际学习时长及未达标原因。
 type ReviewItem struct {
@@ -53,7 +54,7 @@ func (s *Service) ReviewConfig() (bool, string, int, string, error) {
 }
 
 // 最早未完成的日期优先返回。检查小时之前的日期永不判为到期。
-func (s *Service) Pending(now time.Time) (*DailyReview, error) {
+func (s *Service) pending(now time.Time) (*DailyReview, error) {
 	enabled, mode, threshold, start, err := s.ReviewConfig()
 	if err != nil || !enabled {
 		return nil, err
@@ -83,7 +84,7 @@ func (s *Service) Pending(now time.Time) (*DailyReview, error) {
 		if exists != 0 {
 			continue
 		}
-		review, err := s.ForDay(key, mode, threshold)
+		review, err := s.forDay(key, mode, threshold)
 		if err != nil {
 			return nil, err
 		}
@@ -95,8 +96,8 @@ func (s *Service) Pending(now time.Time) (*DailyReview, error) {
 }
 
 // ForDay 生成指定日期的复习总结，包含计划与实际时长对比。
-func (s *Service) ForDay(day, mode string, threshold int) (*DailyReview, error) {
-	planned, err := s.PlanTargetsForDay(day)
+func (s *Service) forDay(day, mode string, threshold int) (*DailyReview, error) {
+	planned, err := s.planTargetsForDay(day)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +133,7 @@ func (s *Service) ForDay(day, mode string, threshold int) (*DailyReview, error) 
 
 // BulkOffer 针对连续至少四个完整无记录日提供一次统一总结建议。
 // 没有学习计划的日子也计入连续天数，但无需生成总结行。
-func (s *Service) BulkOffer(now time.Time, pending *DailyReview) (*BulkReviewOffer, error) {
+func (s *Service) bulkOffer(now time.Time, pending *DailyReview) (*BulkReviewOffer, error) {
 	if pending == nil {
 		return nil, nil
 	}
@@ -192,7 +193,7 @@ func (s *Service) BulkOffer(now time.Time, pending *DailyReview) (*BulkReviewOff
 		if submitted != 0 {
 			continue
 		}
-		review, reviewErr := s.ForDay(key, mode, threshold)
+		review, reviewErr := s.forDay(key, mode, threshold)
 		if reviewErr != nil {
 			return nil, reviewErr
 		}
@@ -208,46 +209,38 @@ func (s *Service) BulkOffer(now time.Time, pending *DailyReview) (*BulkReviewOff
 }
 
 // SaveBulk 将一批连续日期按统一原因提交总结。
-func (s *Service) SaveBulk(now time.Time, startDay, endDay, reason string) (int, error) {
+func (s *Service) saveBulk(now time.Time, startDay, endDay, reason string) (int, error) {
 	reason = strings.TrimSpace(reason)
 	if reason == "" || len([]rune(reason)) > 1000 {
 		return 0, errors.New("请填写不超过 1000 字的统一原因")
 	}
-	pending, err := s.Pending(now)
+	pending, err := s.pending(now)
 	if err != nil {
 		return 0, err
 	}
-	offer, err := s.BulkOffer(now, pending)
+	offer, err := s.bulkOffer(now, pending)
 	if err != nil {
 		return 0, err
 	}
 	if offer == nil || offer.StartDay != startDay || offer.EndDay != endDay {
 		return 0, errors.New("待总结日期已变化，请重新检查")
 	}
-	tx, err := s.db.Begin()
-	if err != nil {
-		return 0, err
-	}
-	defer tx.Rollback()
 	for _, review := range offer.Reviews {
-		if _, err = tx.Exec(`INSERT INTO daily_reviews(day,mode,threshold,planned_seconds,actual_seconds,submitted_at) VALUES(?,?,?,?,?,?)`, review.Day, review.Mode, review.Threshold, review.PlannedSeconds, review.ActualSeconds, now.Format(time.RFC3339)); err != nil {
+		if _, err = s.db.Exec(`INSERT INTO daily_reviews(day,mode,threshold,planned_seconds,actual_seconds,submitted_at) VALUES(?,?,?,?,?,?)`, review.Day, review.Mode, review.Threshold, review.PlannedSeconds, review.ActualSeconds, now.Format(time.RFC3339)); err != nil {
 			return 0, err
 		}
 		for _, item := range review.Items {
-			if _, err = tx.Exec(`INSERT INTO daily_review_items(day,subject_id,subject_name,planned_seconds,actual_seconds,reason) VALUES(?,?,?,?,?,?)`, review.Day, item.SubjectID, item.SubjectName, item.PlannedSeconds, item.ActualSeconds, reason); err != nil {
+			if _, err = s.db.Exec(`INSERT INTO daily_review_items(day,subject_id,subject_name,planned_seconds,actual_seconds,reason) VALUES(?,?,?,?,?,?)`, review.Day, item.SubjectID, item.SubjectName, item.PlannedSeconds, item.ActualSeconds, reason); err != nil {
 				return 0, err
 			}
 		}
-	}
-	if err = tx.Commit(); err != nil {
-		return 0, err
 	}
 	return len(offer.Reviews), nil
 }
 
 // 某个日期的计划目标会在之后任何计划或项目编辑前冻结，
 // 因此修改今天的日程不会改写昨天的复盘要求。
-func (s *Service) PlanTargetsForDay(day string) (map[int64]*ReviewItem, error) {
+func (s *Service) planTargetsForDay(day string) (map[int64]*ReviewItem, error) {
 	var saved string
 	err := s.db.QueryRow(`SELECT targets_json FROM daily_plan_targets WHERE day=?`, day).Scan(&saved)
 	if err == nil {
@@ -285,7 +278,7 @@ func (s *Service) PlanTargetsForDay(day string) (map[int64]*ReviewItem, error) {
 	if err != nil {
 		return nil, err
 	}
-	_, err = s.db.Exec(`INSERT OR IGNORE INTO daily_plan_targets(day,targets_json) VALUES(?,?)`, day, string(data))
+	_, err = s.db.Exec(`INSERT INTO daily_plan_targets(day,targets_json) VALUES(?,?)`, day, string(data))
 	if err != nil {
 		return nil, err
 	}
@@ -293,7 +286,7 @@ func (s *Service) PlanTargetsForDay(day string) (map[int64]*ReviewItem, error) {
 }
 
 // SnapshotPastDailyTargets 冻结开始日期到昨天之间所有日期的计划目标。
-func (s *Service) SnapshotPastDailyTargets(now time.Time) error {
+func (s *Service) snapshotPastDailyTargets(now time.Time) error {
 	enabled, _, _, start, err := s.ReviewConfig()
 	if err != nil {
 		return err
@@ -307,9 +300,78 @@ func (s *Service) SnapshotPastDailyTargets(now time.Time) error {
 	}
 	end := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
 	for day := first; day.Before(end); day = day.AddDate(0, 0, 1) {
-		if _, err = s.PlanTargetsForDay(day.Format("2006-01-02")); err != nil {
+		if _, err = s.planTargetsForDay(day.Format("2006-01-02")); err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+func (s *Service) SaveBulk(now time.Time, startDay, endDay, reason string) (int, error) {
+	var count int
+	err := s.db.WithTx(func(tx *persistence.Queries) error {
+		var err error
+		count, err = New(tx).saveBulk(now, startDay, endDay, reason)
+		return err
+	})
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
+func (s *Service) Pending(now time.Time) (*DailyReview, error) {
+	var result *DailyReview
+	err := s.db.WithTx(func(tx *persistence.Queries) error {
+		var err error
+		result, err = New(tx).pending(now)
+		return err
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (s *Service) ForDay(day, mode string, threshold int) (*DailyReview, error) {
+	var result *DailyReview
+	err := s.db.WithTx(func(tx *persistence.Queries) error {
+		var err error
+		result, err = New(tx).forDay(day, mode, threshold)
+		return err
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (s *Service) BulkOffer(now time.Time, pending *DailyReview) (*BulkReviewOffer, error) {
+	var result *BulkReviewOffer
+	err := s.db.WithTx(func(tx *persistence.Queries) error {
+		var err error
+		result, err = New(tx).bulkOffer(now, pending)
+		return err
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (s *Service) PlanTargetsForDay(day string) (map[int64]*ReviewItem, error) {
+	var result map[int64]*ReviewItem
+	err := s.db.WithTx(func(tx *persistence.Queries) error {
+		var err error
+		result, err = New(tx).planTargetsForDay(day)
+		return err
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (s *Service) SnapshotPastDailyTargets(now time.Time) error {
+	return s.db.WithTx(func(tx *persistence.Queries) error { return New(tx).snapshotPastDailyTargets(now) })
 }

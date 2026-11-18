@@ -10,7 +10,7 @@ import (
 
 func breakReminderLoop(ctx context.Context, app *application.App, store *App) {
 	for waitDesktopTask(ctx, time.Until(time.Now().Truncate(time.Second).Add(time.Second))) {
-		subject, due, err := store.scheduler.BreakReminder(time.Now())
+		subject, due, err := store.scheduler.WithContext(ctx).BreakReminder(time.Now())
 		if err != nil {
 			log.Printf("检查休息提醒失败: %v", err)
 			continue

@@ -3,6 +3,7 @@ package settings
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"strconv"
 	"time"
 )
@@ -17,42 +18,48 @@ type Actions struct {
 }
 
 // List 返回全部设置键值。
-func List(db *sql.DB) (map[string]string, error) {
+func List(db *persistence.Queries) (map[string]string, error) {
 	return listSettings(db)
 }
 
 // Save 校验并保存设置，并在必要时触发相应回调。
-func Save(db *sql.DB, in map[string]string, actions Actions) error {
+func Save(db *persistence.Queries, in map[string]string, actions Actions) error {
 	if err := validateGeneral(in); err != nil {
 		return err
 	}
 	if err := validateNavigationWidths(in); err != nil {
 		return err
 	}
-	if enabled, ok := in["dailyReviewEnabled"]; ok {
-		if enabled != "0" && enabled != "1" {
-			return errors.New("总结开关状态无效")
+	var previousBackup string
+	err := db.WithTx(func(db *persistence.Queries) error {
+		if enabled, ok := in["dailyReviewEnabled"]; ok {
+			if enabled != "0" && enabled != "1" {
+				return errors.New("总结开关状态无效")
+			}
+			if enabled == "1" {
+				previous, err := readSetting(db, "dailyReviewEnabled")
+				if err != nil && !errors.Is(err, sql.ErrNoRows) {
+					return err
+				}
+				if previous != "1" {
+					// 新开启的周期从今天开始；编辑其他设置不会改变其起始日期。
+					in["dailyReviewStartDate"] = time.Now().Format("2006-01-02")
+				}
+			}
 		}
-		if enabled == "1" {
-			previous, err := readSetting(db, "dailyReviewEnabled")
+		if _, ok := in[autoBackupEnabledKey]; ok {
+			var err error
+			previousBackup, err = readSetting(db, autoBackupEnabledKey)
 			if err != nil && !errors.Is(err, sql.ErrNoRows) {
 				return err
 			}
-			if previous != "1" {
-				// 新开启的周期从今天开始；编辑其他设置不会改变其起始日期。
-				in["dailyReviewStartDate"] = time.Now().Format("2006-01-02")
-			}
 		}
-	}
-	var previousBackup string
-	if _, ok := in[autoBackupEnabledKey]; ok {
-		var err error
-		previousBackup, err = readSetting(db, autoBackupEnabledKey)
-		if err != nil && !errors.Is(err, sql.ErrNoRows) {
+		if err := writeSettings(db, in); err != nil {
 			return err
 		}
-	}
-	if err := writeSettings(db, in); err != nil {
+		return nil
+	})
+	if err != nil {
 		return err
 	}
 	if value, ok := in[activityReminderEnabledKey]; ok && actions.ActivityReminderChanged != nil {

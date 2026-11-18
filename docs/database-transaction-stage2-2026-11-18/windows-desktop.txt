@@ -1,0 +1,255 @@
+=== RUN   TestAPILogsKeepBindingContract
+    api_service_test.go:91: GET logs = "{\"directory\":\"C:\\\\Users\\\\jhsong\\\\AppData\\\\Local\\\\Temp\\\\TestAPILogsKeepBindingContract1159287685\\\\002\",\"files\":[],\"retentionDays\":7}\n"
+--- FAIL: TestAPILogsKeepBindingContract (0.06s)
+=== RUN   TestDatabaseFreeAPIsCompleteWhileWriterHoldsLock
+--- PASS: TestDatabaseFreeAPIsCompleteWhileWriterHoldsLock (0.03s)
+=== RUN   TestAPIQueuedDatabaseCallObservesTaskCancellation
+2026/11/18 17:13:53 API error: context canceled
+--- PASS: TestAPIQueuedDatabaseCallObservesTaskCancellation (0.03s)
+=== RUN   TestDatabaseFreeAPIsCompleteAfterCloseOrPause
+=== RUN   TestDatabaseFreeAPIsCompleteAfterCloseOrPause/closed
+=== RUN   TestDatabaseFreeAPIsCompleteAfterCloseOrPause/paused
+--- PASS: TestDatabaseFreeAPIsCompleteAfterCloseOrPause (0.06s)
+    --- PASS: TestDatabaseFreeAPIsCompleteAfterCloseOrPause/closed (0.03s)
+    --- PASS: TestDatabaseFreeAPIsCompleteAfterCloseOrPause/paused (0.03s)
+=== RUN   TestReminderAcknowledgementWritesResponseBeforeScheduling
+--- PASS: TestReminderAcknowledgementWritesResponseBeforeScheduling (0.03s)
+=== RUN   TestReminderAcknowledgementDelayedQueryUsesSwitchedDatabase
+    api_service_test.go:335: real directory switching is supported on desktop Linux
+--- SKIP: TestReminderAcknowledgementDelayedQueryUsesSwitchedDatabase (0.00s)
+=== RUN   TestBackupChecksSerializeWithDatabaseRequests
+--- PASS: TestBackupChecksSerializeWithDatabaseRequests (0.05s)
+=== RUN   TestEnableAutomaticBackupRespondsWithoutDeadlock
+--- PASS: TestEnableAutomaticBackupRespondsWithoutDeadlock (0.03s)
+=== RUN   TestManualPauseStartsBreakAndDayPauseDoesNot
+--- PASS: TestManualPauseStartsBreakAndDayPauseDoesNot (0.04s)
+=== RUN   TestBreakBudgetCarriesAcrossPauses
+2026/11/18 17:13:54 API error: 本次计划的休息时间已用完，请继续学习或结束本次学习
+--- PASS: TestBreakBudgetCarriesAcrossPauses (0.05s)
+=== RUN   TestBreakBudgetCarriesAcrossEndedSessions
+2026/11/18 17:13:54 API error: 本次计划的休息时间已用完，请继续学习或结束本次学习
+--- PASS: TestBreakBudgetCarriesAcrossEndedSessions (0.05s)
+=== RUN   TestDailyReviewSwitchStartsTodayAndStopsCalculation
+--- PASS: TestDailyReviewSwitchStartsTodayAndStopsCalculation (0.04s)
+=== RUN   TestDailyReviewPerProjectOnlyListsMissedTargets
+--- PASS: TestDailyReviewPerProjectOnlyListsMissedTargets (0.04s)
+=== RUN   TestWindowsBindingKeepsDataDirectoryBehavior
+2026/11/18 17:13:54 检查昨日总结失败: study database is closed
+--- PASS: TestWindowsBindingKeepsDataDirectoryBehavior (0.12s)
+=== RUN   TestChangingDataDirectoryMovesBackupFiles
+--- PASS: TestChangingDataDirectoryMovesBackupFiles (0.11s)
+=== RUN   TestWindowsQASwitchConnectionSettings
+    database_windows_qa_test.go:53: foreign_keys before=1 after=1
+--- PASS: TestWindowsQASwitchConnectionSettings (0.11s)
+=== RUN   TestWindowsQAFailedSwitchRestoresUsableConnection
+--- PASS: TestWindowsQAFailedSwitchRestoresUsableConnection (0.05s)
+=== RUN   TestWindowsQACopyFailureRollbackSettings
+=== RUN   TestWindowsQACopyFailureRollbackSettings/copy
+    database_windows_qa_test.go:92: migration failed as intended: prepare database directory: 发布目标数据库 C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettingscopy2484031736\001\deny-create\study.db: Access is denied.
+=== RUN   TestWindowsQACopyFailureRollbackSettings/open
+    database_windows_qa_test.go:92: migration failed as intended: prepare database directory: 创建数据库快照 C:\Users\jhsong\AppData\Local\Temp\TestWindowsQACopyFailureRollbackSettingsopen2721652596\001\deny-create\.studyflow-snapshot-2296225013\.studyflow-3274867599.tmp: unable to open database file: out of memory (14)
+--- PASS: TestWindowsQACopyFailureRollbackSettings (1.53s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/copy (0.08s)
+    --- PASS: TestWindowsQACopyFailureRollbackSettings/open (1.45s)
+=== RUN   TestWindowsQAConcurrentSwitchRequestsAndBackups
+--- PASS: TestWindowsQAConcurrentSwitchRequestsAndBackups (0.17s)
+=== RUN   TestWindowsQABackupWALAndRetention
+--- PASS: TestWindowsQABackupWALAndRetention (0.06s)
+=== RUN   TestDeletedPlanAndSessionStayInDatabaseButDisappearFromLists
+--- PASS: TestDeletedPlanAndSessionStayInDatabaseButDisappearFromLists (0.03s)
+=== RUN   TestGoalsBindingKeepsContract
+2026/11/18 17:13:56 API error: invalid syntax
+--- PASS: TestGoalsBindingKeepsContract (0.03s)
+=== RUN   TestRunReturnAndSecondQuitOrdering
+=== RUN   TestRunReturnAndSecondQuitOrdering/before-dispatch
+    lifecycle_quit_test.go:67: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestRunReturnAndSecondQuitOrdering/queued
+    lifecycle_quit_test.go:67: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestRunReturnAndSecondQuitOrdering/executing
+    lifecycle_quit_test.go:67: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestRunReturnAndSecondQuitOrdering/normal
+    lifecycle_quit_test.go:67: exec: "desktop.test.exe": executable file not found in %PATH%
+--- FAIL: TestRunReturnAndSecondQuitOrdering (0.01s)
+    --- FAIL: TestRunReturnAndSecondQuitOrdering/before-dispatch (0.00s)
+    --- FAIL: TestRunReturnAndSecondQuitOrdering/queued (0.00s)
+    --- FAIL: TestRunReturnAndSecondQuitOrdering/executing (0.00s)
+    --- FAIL: TestRunReturnAndSecondQuitOrdering/normal (0.00s)
+=== RUN   TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable
+--- PASS: TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable (0.03s)
+=== RUN   TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork
+--- PASS: TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork (0.00s)
+=== RUN   TestDesktopShutdownWaitsForActualAPICall
+--- PASS: TestDesktopShutdownWaitsForActualAPICall (0.02s)
+=== RUN   TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe
+--- PASS: TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe (0.00s)
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task
+    lifecycle_test.go:330: exec: "desktop.test.exe": executable file not found in %PATH%
+--- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase (0.03s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error (0.00s)
+    --- FAIL: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task (0.00s)
+=== RUN   TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown
+--- PASS: TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown (0.00s)
+=== RUN   TestSecondLaunchActiveCallbackDrainsBeforeQuit
+--- PASS: TestSecondLaunchActiveCallbackDrainsBeforeQuit (0.00s)
+=== RUN   TestManualRecordRejectsOverlapsAcrossSources
+2026/11/18 17:13:56 API error: 与“数学”在 08:45–09:45 的学习记录时间冲突
+2026/11/18 17:13:56 API error: 与“数学”在 10:00–11:00 的学习记录时间冲突
+--- PASS: TestManualRecordRejectsOverlapsAcrossSources (0.04s)
+=== RUN   TestManualRecordRejectsShortBeforePersisting
+2026/11/18 17:13:56 API error: 学习记录不能少于 10 分钟，请调整时间
+2026/11/18 17:13:56 API error: 与“数学”在 09:00–09:10 的学习记录时间冲突
+--- PASS: TestManualRecordRejectsShortBeforePersisting (0.03s)
+=== RUN   TestManualRecordChecksActiveSessionAndIgnoresDeleted
+2026/11/18 17:13:56 API error: 与“数学”在 16:13–17:13（进行中） 的学习记录时间冲突
+--- PASS: TestManualRecordChecksActiveSessionAndIgnoresDeleted (0.04s)
+=== RUN   TestManualRecordAllowsTimeAfterPausedTimer
+--- PASS: TestManualRecordAllowsTimeAfterPausedTimer (0.03s)
+=== RUN   TestManualRecordCannotOverlapRunningPlanBeforeItsEnd
+2026/11/18 17:13:56 API error: 与“数学”在 09:00–12:00（进行中） 的学习记录时间冲突
+--- PASS: TestManualRecordCannotOverlapRunningPlanBeforeItsEnd (0.04s)
+=== RUN   TestPlanBreakMinutesRoundTripAndValidation
+2026/11/18 17:13:56 API error: 休息时长必须小于计划时长
+--- PASS: TestPlanBreakMinutesRoundTripAndValidation (0.03s)
+=== RUN   TestPlanConflictChecksWeekdaysTimeAndEdits
+2026/11/18 17:13:56 API error: 时间冲突：周一的计划与“数学” 09:00 开始的计划重叠，请调整时间或重复星期
+2026/11/18 17:13:56 API error: 时间冲突：周一的计划与“数学” 09:00 开始的计划重叠，请调整时间或重复星期
+--- PASS: TestPlanConflictChecksWeekdaysTimeAndEdits (0.04s)
+=== RUN   TestExistingDatabaseAddsNoteAndSortColumns
+--- PASS: TestExistingDatabaseAddsNoteAndSortColumns (0.04s)
+=== RUN   TestSubjectCustomSortThenUnsortedCreationOrder
+--- PASS: TestSubjectCustomSortThenUnsortedCreationOrder (0.03s)
+=== RUN   TestSubjectSortOrderCanBeSetAndCleared
+--- PASS: TestSubjectSortOrderCanBeSetAndCleared (0.03s)
+=== RUN   TestDeletedPlanNoLongerBlocksSubjectDeletionButVisibleSessionDoes
+2026/11/18 17:13:56 API error: 学习项目已有相关数据，无法删除
+--- PASS: TestDeletedPlanNoLongerBlocksSubjectDeletionButVisibleSessionDoes (0.04s)
+=== RUN   TestPlanNoteRoundTripAndLimit
+2026/11/18 17:13:56 API error: 计划备注最多 100 字
+--- PASS: TestPlanNoteRoundTripAndLimit (0.03s)
+=== RUN   TestReminderGateDeliversFirstReminderImmediately
+--- PASS: TestReminderGateDeliversFirstReminderImmediately (0.00s)
+=== RUN   TestReminderGateDropsRepeatedActivityWhileActive
+--- PASS: TestReminderGateDropsRepeatedActivityWhileActive (0.00s)
+=== RUN   TestReminderGateUpdatesSameKindPlanWhileActive
+--- PASS: TestReminderGateUpdatesSameKindPlanWhileActive (0.00s)
+=== RUN   TestReminderGateQueuesDifferentKindsAndReleasesInOrder
+--- PASS: TestReminderGateQueuesDifferentKindsAndReleasesInOrder (0.00s)
+=== RUN   TestReminderGateReplacesQueuedSameKindInPlace
+--- PASS: TestReminderGateReplacesQueuedSameKindInPlace (0.00s)
+=== RUN   TestReminderGateHoldsRemindersDuringReview
+--- PASS: TestReminderGateHoldsRemindersDuringReview (0.00s)
+=== RUN   TestReminderGateReplacesQueuedSameKindDuringReview
+--- PASS: TestReminderGateReplacesQueuedSameKindDuringReview (0.00s)
+=== RUN   TestReminderGateKeepsActiveDialogAcrossReview
+--- PASS: TestReminderGateKeepsActiveDialogAcrossReview (0.00s)
+=== RUN   TestReminderGateReleaseDuringReviewDoesNotDeliver
+--- PASS: TestReminderGateReleaseDuringReviewDoesNotDeliver (0.00s)
+=== RUN   TestActivityReminderTogglePersistsAndNotifies
+--- PASS: TestActivityReminderTogglePersistsAndNotifies (0.03s)
+=== RUN   TestResetTablesBindingPreservesAllowlistAndLinkedDataProtection
+2026/11/18 17:13:56 API error: 不支持重置此表
+2026/11/18 17:13:56 API error: 请先重置学习记录和学习计划，再重置学习项目
+2026/11/18 17:13:56 API error: 请先重置学习记录和学习计划，再重置学习项目
+--- PASS: TestResetTablesBindingPreservesAllowlistAndLinkedDataProtection (0.04s)
+=== RUN   TestSessionsUseLocalDateForUTCManualRecords
+--- PASS: TestSessionsUseLocalDateForUTCManualRecords (0.03s)
+=== RUN   TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable
+2026/11/18 17:13:57 数据目录已提交，旧文件清理尚未完成: retired storage cleanup is incomplete
+retired database identity changed: C:\Users\jhsong\AppData\Local\Temp\TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable3137575081\001\base\data\study.db
+--- PASS: TestStartupCommittedCleanupFailureKeepsNewDatabaseUsable (0.09s)
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/committed
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/unchanged_with_implicit_default
+=== RUN   TestStartupPendingRestoresCommittedAndUnchanged/interrupted_cleanup
+--- PASS: TestStartupPendingRestoresCommittedAndUnchanged (0.28s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/committed (0.09s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/unchanged_with_implicit_default (0.10s)
+    --- PASS: TestStartupPendingRestoresCommittedAndUnchanged/interrupted_cleanup (0.08s)
+=== RUN   TestStartupPendingFailurePreservesEvidence
+=== RUN   TestStartupPendingFailurePreservesEvidence/identity_conflict
+=== RUN   TestStartupPendingFailurePreservesEvidence/corrupt_marker
+=== RUN   TestStartupPendingFailurePreservesEvidence/uncertain_publication
+=== RUN   TestStartupPendingFailurePreservesEvidence/candidate_schema_failure
+--- PASS: TestStartupPendingFailurePreservesEvidence (0.36s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/identity_conflict (0.10s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/corrupt_marker (0.08s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/uncertain_publication (0.10s)
+    --- PASS: TestStartupPendingFailurePreservesEvidence/candidate_schema_failure (0.08s)
+=== RUN   TestStartupPendingUnchangedRechecksHistoricalSelection
+--- PASS: TestStartupPendingUnchangedRechecksHistoricalSelection (0.12s)
+=== RUN   TestStartupPendingClearFailureClosesValidatedConnection
+--- PASS: TestStartupPendingClearFailureClosesValidatedConnection (0.08s)
+=== RUN   TestStartupDatabaseFirstLaunchAndDefaultReopen
+--- PASS: TestStartupDatabaseFirstLaunchAndDefaultReopen (0.04s)
+=== RUN   TestStartupDatabaseHonorsFormalLocation
+=== RUN   TestStartupDatabaseHonorsFormalLocation/complete
+=== RUN   TestStartupDatabaseHonorsFormalLocation/missing
+=== RUN   TestStartupDatabaseHonorsFormalLocation/damaged
+=== RUN   TestStartupDatabaseHonorsFormalLocation/unknown
+--- PASS: TestStartupDatabaseHonorsFormalLocation (0.20s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/complete (0.07s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/missing (0.03s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/damaged (0.05s)
+    --- PASS: TestStartupDatabaseHonorsFormalLocation/unknown (0.05s)
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study-legacy
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/exam-notify-legacy
+=== RUN   TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study
+--- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas (0.25s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study-legacy (0.08s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/exam-notify-legacy (0.09s)
+    --- PASS: TestStartupDatabaseUpgradesThreeKnownHistoricalSchemas/study (0.08s)
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/no_formal_location
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/empty_formal_location
+=== RUN   TestStartupDatabasePromotesLegacyOnlyAfterValidation/invalid_legacy_database
+--- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation (0.18s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/no_formal_location (0.07s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/empty_formal_location (0.07s)
+    --- PASS: TestStartupDatabasePromotesLegacyOnlyAfterValidation/invalid_legacy_database (0.04s)
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault/valid_copy
+=== RUN   TestStartupDatabaseCopiesAndValidatesLegacyDefault/invalid_copy
+--- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault (0.10s)
+    --- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault/valid_copy (0.09s)
+    --- PASS: TestStartupDatabaseCopiesAndValidatesLegacyDefault/invalid_copy (0.01s)
+=== RUN   TestStartupDatabaseLegacySnapshotIncludesUncheckpointedWAL
+    startup_database_test.go:334: prepare uncheckpointed WAL: exec: "desktop.test.exe": executable file not found in %PATH%
+--- FAIL: TestStartupDatabaseLegacySnapshotIncludesUncheckpointedWAL (0.02s)
+=== RUN   TestStartupDatabaseLegacySnapshotStillRejectsUnknownSchema
+--- PASS: TestStartupDatabaseLegacySnapshotStillRejectsUnknownSchema (0.01s)
+=== RUN   TestStartupDatabasePositionReadFailureStopsSelection
+--- PASS: TestStartupDatabasePositionReadFailureStopsSelection (0.00s)
+=== RUN   TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork
+    startup_database_test.go:387: isolated HOME and APPIMAGE exercise the Linux main entry point
+--- SKIP: TestStartupDatabaseFailureStopsBeforeDesktopAndBackgroundWork (0.00s)
+=== RUN   TestDesktopTransportPublicStartStopJoinsCleanupWorker
+--- PASS: TestDesktopTransportPublicStartStopJoinsCleanupWorker (0.00s)
+FAIL

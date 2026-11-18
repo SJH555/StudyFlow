@@ -1,9 +1,11 @@
 package persistence
 
 import (
+	"context"
 	"database/sql"
 	"errors"
 	"fmt"
+	"log"
 	"net/url"
 	"path/filepath"
 	"strconv"
@@ -23,12 +25,43 @@ func OpenForStartup(path string) (*sql.DB, error) {
 	return openSQLite(path, false, initializeExistingForStartup)
 }
 
+// OpenUnprepared opens only the connection. Startup must inspect compatibility
+// before initializing schema or starting any business services.
+func OpenUnprepared(path string, create bool) (*sql.DB, error) {
+	return openSQLite(path, create, func(*sql.DB) error { return nil })
+}
+
+// WithStartupAccess borrows a pool not yet handed to the running application.
+// The caller retains ownership and must close it on every failed startup.
+func WithStartupAccess(ctx context.Context, db *sql.DB, use func(*Access) error) error {
+	owner := &Database{db: db}
+	return owner.WithAccess(ctx, use)
+}
+
+// RecognizeHistoricalBaseline accepts only the three complete known five-table
+// profiles. No missing-table guessing or writes occur during recognition.
+func RecognizeHistoricalBaseline(ctx context.Context, exec Executor) (bool, error) {
+	return matchesLegacyStudyFlowSchema(BindQueries(ctx, exec))
+}
+
+// UpgradeHistoricalBaseline runs only inside the caller's baseline transaction.
+func UpgradeHistoricalBaseline(ctx context.Context, exec Executor) error {
+	ok, err := RecognizeHistoricalBaseline(ctx, exec)
+	if err != nil {
+		return err
+	}
+	if !ok {
+		return errors.New("unknown historical baseline")
+	}
+	return initializeSchemaQueries(BindQueries(ctx, exec))
+}
+
 // OpenExisting 打开一个已准备好的数据库，不执行迁移。
 func OpenExisting(path string) (*sql.DB, error) {
 	return openSQLite(path, false, validateExisting)
 }
 
-func openSQLite(path string, allowCreate bool, prepare func(*sql.DB) error) (*sql.DB, error) {
+func openSQLite(path string, allowCreate bool, prepare func(*sql.DB) error) (result *sql.DB, resultErr error) {
 	params := url.Values{"_pragma": {"foreign_keys(ON)"}}
 	dsn := ":memory:?" + params.Encode()
 	if path != ":memory:" || !allowCreate {
@@ -49,12 +82,26 @@ func openSQLite(path string, allowCreate bool, prepare func(*sql.DB) error) (*sq
 	if err != nil {
 		return nil, err
 	}
+	// Startup has no external owner yet. Close on every failed return and on
+	// panic, after the transaction runner has finished its own cleanup.
+	defer func() {
+		if result == nil {
+			resultErr = closeAfterError(resultErr, func() error {
+				closeErr := db.Close()
+				if closeErr != nil {
+					log.Printf("close unaccepted SQLite database: %v", closeErr)
+				}
+				return closeErr
+			})
+		}
+	}()
 	db.SetMaxOpenConns(1)
+	db.SetMaxIdleConns(1)
 	if err := verifyForeignKeys(db); err != nil {
-		return nil, closeAfterError(err, db.Close)
+		return nil, err
 	}
 	if err := prepare(db); err != nil {
-		return nil, closeAfterError(err, db.Close)
+		return nil, err
 	}
 	return db, nil
 }
@@ -71,13 +118,13 @@ func verifyForeignKeys(db *sql.DB) error {
 }
 
 func validateExisting(db *sql.DB) error {
-	if err := checkSQLiteIntegrity(db); err != nil {
+	if err := checkSQLiteIntegrity(BindQueries(context.Background(), db)); err != nil {
 		return err
 	}
-	return validateStudyFlowSchema(db)
+	return validateStudyFlowSchema(BindQueries(context.Background(), db))
 }
 
-func checkSQLiteIntegrity(db *sql.DB) error {
+func checkSQLiteIntegrity(db *Queries) error {
 	var result string
 	if err := db.QueryRow(`PRAGMA quick_check`).Scan(&result); err != nil {
 		return err
@@ -90,7 +137,7 @@ func checkSQLiteIntegrity(db *sql.DB) error {
 
 var errMissingStudyFlowTables = errors.New("SQLite database is missing StudyFlow tables")
 
-func validateStudyFlowSchema(db *sql.DB) error {
+func validateStudyFlowSchema(db *Queries) error {
 	var tables int
 	err := db.QueryRow(`SELECT count(*) FROM sqlite_schema WHERE type='table' AND name IN (
 		'subjects','plans','sessions','activity_logs','settings','daily_reviews','daily_review_items','daily_plan_targets'
@@ -146,29 +193,41 @@ func validateStudyFlowSchema(db *sql.DB) error {
 	return nil
 }
 
+// Initialization owns the unopened application's sole pool. Use the same
+// transaction runner as business operations, including uncertain-commit cleanup.
+func initializeAtomically(db *sql.DB, work func(*Queries) error) error {
+	owner := &Database{db: db}
+	ctx := context.Background()
+	return owner.WithAccess(ctx, func(a *Access) error {
+		return a.Queries(ctx).WithTx(work)
+	})
+}
+
 func initializeExistingForStartup(db *sql.DB) error {
-	if err := checkSQLiteIntegrity(db); err != nil {
-		return err
-	}
-	if err := validateStudyFlowSchema(db); err != nil {
-		if !errors.Is(err, errMissingStudyFlowTables) {
+	return initializeAtomically(db, func(q *Queries) error {
+		if err := checkSQLiteIntegrity(q); err != nil {
 			return err
 		}
-		legacy, checkErr := matchesLegacyStudyFlowSchema(db)
-		if checkErr != nil {
-			return fmt.Errorf("check historical StudyFlow schema: %w", checkErr)
+		if err := validateStudyFlowSchema(q); err != nil {
+			if !errors.Is(err, errMissingStudyFlowTables) {
+				return err
+			}
+			legacy, checkErr := matchesLegacyStudyFlowSchema(q)
+			if checkErr != nil {
+				return fmt.Errorf("check historical StudyFlow schema: %w", checkErr)
+			}
+			if !legacy {
+				return fmt.Errorf("unrecognized or incomplete StudyFlow schema: %w", err)
+			}
 		}
-		if !legacy {
-			return fmt.Errorf("unrecognized or incomplete StudyFlow schema: %w", err)
+		if err := initializeSchemaQueries(q); err != nil {
+			return fmt.Errorf("StudyFlow startup migration failed: %w", err)
 		}
-	}
-	if err := initializeSchema(db); err != nil {
-		return fmt.Errorf("StudyFlow startup migration failed; database may have been partially updated: %w", err)
-	}
-	if err := validateStudyFlowSchema(db); err != nil {
-		return fmt.Errorf("validate StudyFlow schema after startup migration; database may have been partially updated: %w", err)
-	}
-	return nil
+		if err := validateStudyFlowSchema(q); err != nil {
+			return fmt.Errorf("validate StudyFlow schema after startup migration: %w", err)
+		}
+		return nil
+	})
 }
 
 type legacyColumn struct {
@@ -176,7 +235,7 @@ type legacyColumn struct {
 	notNull, primaryKey       bool
 }
 
-func matchesLegacyStudyFlowSchema(db *sql.DB) (bool, error) {
+func matchesLegacyStudyFlowSchema(db *Queries) (bool, error) {
 	var objects, ordinaryTables int
 	err := db.QueryRow(`
 		SELECT (SELECT count(*) FROM main.sqlite_schema WHERE name NOT GLOB 'sqlite_*'),
@@ -260,7 +319,7 @@ func matchesLegacyStudyFlowSchema(db *sql.DB) (bool, error) {
 	return true, nil
 }
 
-func matchesLegacyColumns(db *sql.DB, table string, expected []legacyColumn) (bool, error) {
+func matchesLegacyColumns(db *Queries, table string, expected []legacyColumn) (bool, error) {
 	rows, err := db.Query(`SELECT name, type, "notnull", dflt_value, pk, hidden FROM pragma_table_xinfo(?, 'main')`, table)
 	if err != nil {
 		return false, err
@@ -310,7 +369,7 @@ func matchesLegacyDefault(actual sql.NullString, expected string) bool {
 	return err == nil && strconv.FormatInt(number, 10) == expected
 }
 
-func matchesLegacyKeys(db *sql.DB, table string, subjectFK bool, indexOrigin, indexKey string) (bool, error) {
+func matchesLegacyKeys(db *Queries, table string, subjectFK bool, indexOrigin, indexKey string) (bool, error) {
 	var foreignKeys, matchingFKs, indexes, matchingIndexes int
 	err := db.QueryRow(`
 		SELECT (SELECT count(*) FROM pragma_foreign_key_list(?, 'main')),
@@ -353,6 +412,15 @@ func closeAfterError(primary error, closeConnection func() error) error {
 }
 
 func initializeSchema(db *sql.DB) error {
+	return initializeAtomically(db, func(q *Queries) error {
+		if err := initializeSchemaQueries(q); err != nil {
+			return err
+		}
+		return validateStudyFlowSchema(q)
+	})
+}
+
+func initializeSchemaQueries(db *Queries) error {
 	var err error
 	stmts := []string{
 		`CREATE TABLE IF NOT EXISTS subjects (id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, color TEXT NOT NULL DEFAULT '#007AFF', created_at TEXT NOT NULL, archived INTEGER NOT NULL DEFAULT 0, deleted INTEGER NOT NULL DEFAULT 0, sort_order INTEGER)`,
@@ -370,10 +438,10 @@ func initializeSchema(db *sql.DB) error {
 			return err
 		}
 	}
-	if _, err = db.Exec(`INSERT OR IGNORE INTO settings(key,value) VALUES('dailyReviewStartDate',?)`, time.Now().Format("2006-01-02")); err != nil {
+	if _, err = db.Exec(`INSERT INTO settings(key,value) VALUES('dailyReviewStartDate',?) ON CONFLICT(key) DO NOTHING`, time.Now().Format("2006-01-02")); err != nil {
 		return err
 	}
-	if _, err = db.Exec(`INSERT OR IGNORE INTO settings(key,value) VALUES('dailyReviewEnabled','0')`); err != nil {
+	if _, err = db.Exec(`INSERT INTO settings(key,value) VALUES('dailyReviewEnabled','0') ON CONFLICT(key) DO NOTHING`); err != nil {
 		return err
 	}
 	rows, err := db.Query(`PRAGMA table_info(subjects)`)
@@ -396,7 +464,9 @@ func initializeSchema(db *sql.DB) error {
 			deletedColumn = true
 		}
 	}
-	rows.Close()
+	if err := errors.Join(rows.Err(), rows.Close()); err != nil {
+		return err
+	}
 	if !archivedColumn {
 		if _, err = db.Exec(`ALTER TABLE subjects ADD COLUMN archived INTEGER NOT NULL DEFAULT 0`); err != nil {
 			return err
@@ -424,7 +494,9 @@ func initializeSchema(db *sql.DB) error {
 			planColorColumn = true
 		}
 	}
-	rows.Close()
+	if err := errors.Join(rows.Err(), rows.Close()); err != nil {
+		return err
+	}
 	if !planColorColumn {
 		if _, err = db.Exec(`ALTER TABLE plans ADD COLUMN color TEXT NOT NULL DEFAULT ''`); err != nil {
 			return err
@@ -485,6 +557,11 @@ func initializeSchema(db *sql.DB) error {
 	if _, err = db.Exec(`UPDATE stage_goals SET accepted_at=completed_at WHERE completed_at IS NOT NULL AND accepted_at IS NULL`); err != nil {
 		return err
 	}
+	// 旧版允许补录不足 10 分钟，界面却隐藏这些记录。沿用计时学习的
+	// 软删除规则使其不再计入统计或占用时间，保留原始行便于恢复。
+	if _, err = db.Exec(`UPDATE sessions SET deleted=1 WHERE deleted=0 AND source='manual' AND end_at IS NOT NULL AND duration_seconds<600`); err != nil {
+		return err
+	}
 	// 将原先的单一颜色默认值替换为新调色板的分布。
 	legacyRows, err := db.Query(`SELECT id FROM subjects WHERE color='#7668e8' ORDER BY id`)
 	if err != nil {
@@ -499,7 +576,9 @@ func initializeSchema(db *sql.DB) error {
 		}
 		legacyIDs = append(legacyIDs, id)
 	}
-	legacyRows.Close()
+	if err := errors.Join(legacyRows.Err(), legacyRows.Close()); err != nil {
+		return err
+	}
 	palette := []string{"#007AFF", "#34C759", "#FF9500", "#AF52DE", "#5AC8FA", "#FF3B30", "#5856D6", "#FF2D55", "#A2845E", "#00C7BE"}
 	for i, id := range legacyIDs {
 		if _, err = db.Exec(`UPDATE subjects SET color=? WHERE id=?`, palette[i%len(palette)], id); err != nil {
@@ -507,4 +586,10 @@ func initializeSchema(db *sql.DB) error {
 		}
 	}
 	return nil
+}
+
+// UpgradeHistoricalGoalSchema is used only after upgrade's full frozen profile
+// check has identified the missing goal table/acceptance column, inside WithTx.
+func UpgradeHistoricalGoalSchema(ctx context.Context, exec Executor) error {
+	return initializeSchemaQueries(BindQueries(ctx, exec))
 }

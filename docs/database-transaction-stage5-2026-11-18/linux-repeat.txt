@@ -1,0 +1,1034 @@
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.01s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.00s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.01s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.00s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.01s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.00s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.01s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.00s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.01s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.00s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.01s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.00s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:34 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.14s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.03s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.03s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.03s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.02s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.02s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.01s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.02s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.11s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.01s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.02s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.00s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.12s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.02s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.00s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.00s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback I/O failure
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.00s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.00s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.02s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.01s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.00s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.00s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.00s)
+=== RUN   TestStage5BoundedFileWriteFailure
+    stage5_linux_test.go:27: bounded OS write test:
+        === RUN   TestStage5FileLimitChild
+        2026/11/18 18:23:35 database transaction cleanup: study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+            stage5_linux_test.go:75: native SQLite code=778, callbacks=1, paused=true, error=disk I/O error (778)
+                study database is unavailable
+                rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+        --- PASS: TestStage5FileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BoundedFileWriteFailure (0.01s)
+=== RUN   TestStage5FileLimitChild
+    stage5_linux_test.go:36: subprocess helper
+--- SKIP: TestStage5FileLimitChild (0.00s)
+PASS
+ok  	exam_notify/internal/infrastructure/persistence	1.301s
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.02s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.08s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.28s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.10s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.11s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.07s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.07s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.18s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.07s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.05s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.17s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.06s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.05s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.18s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.06s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.07s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.17s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.06s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.05s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.17s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.06s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.05s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.17s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.06s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.05s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.16s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.05s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.05s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.16s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.06s)
+=== RUN   TestStage5BackupOSWriteFailurePreservesOldBackup
+    stage5_linux_test.go:26: bounded backup write test:
+        === RUN   TestStage5BackupFileLimitChild
+            stage5_linux_test.go:60: native backup error code=778: disk I/O error (778)
+        --- PASS: TestStage5BackupFileLimitChild (0.01s)
+        PASS
+--- PASS: TestStage5BackupOSWriteFailurePreservesOldBackup (0.05s)
+=== RUN   TestStage5BackupFileLimitChild
+    stage5_linux_test.go:34: subprocess helper
+--- SKIP: TestStage5BackupFileLimitChild (0.00s)
+=== RUN   TestStage5DirectoryCrashChild
+    stage5_recovery_test.go:24: subprocess helper
+--- SKIP: TestStage5DirectoryCrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/staged
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/published
+=== RUN   TestStage5ForcedTerminationRecoversStorageLocation/cleaned
+--- PASS: TestStage5ForcedTerminationRecoversStorageLocation (0.14s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/staged (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/published (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecoversStorageLocation/cleaned (0.05s)
+PASS
+ok  	exam_notify/desktop	2.437s

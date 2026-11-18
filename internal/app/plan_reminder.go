@@ -1,7 +1,8 @@
 package app
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"errors"
 	"fmt"
 	"time"
@@ -46,7 +47,7 @@ func (s *Scheduler) PlanReminder(now time.Time, checkStart bool) (*PlanAlert, er
 	var starting *plans.ReminderItem
 	var errs []error
 
-	if err := s.db.WithWrite(func(db *sql.DB, _ string) error {
+	if err := s.withQueries(func(db *persistence.Queries) error {
 		var err error
 		completed, err = sessions.FinishExpired(db, now)
 		return err
@@ -55,7 +56,7 @@ func (s *Scheduler) PlanReminder(now time.Time, checkStart bool) (*PlanAlert, er
 	}
 
 	if checkStart {
-		if err := s.db.WithRead(func(db *sql.DB, _ string) error {
+		if err := s.withQueries(func(db *persistence.Queries) error {
 			var err error
 			starting, err = plans.StartingAt(db, now)
 			return err
@@ -65,7 +66,7 @@ func (s *Scheduler) PlanReminder(now time.Time, checkStart bool) (*PlanAlert, er
 	}
 
 	if completed != nil && starting == nil {
-		if err := s.db.WithRead(func(db *sql.DB, _ string) error {
+		if err := s.withQueries(func(db *persistence.Queries) error {
 			var err error
 			starting, err = plans.CurrentAt(db, now)
 			return err

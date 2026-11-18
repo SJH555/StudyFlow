@@ -1,0 +1,6 @@
+2026/11/18 18:11:14 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+2026/11/18 18:11:14 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback IO failure
+2026/11/18 18:11:14 database transaction cleanup: study database is unavailable
+rollback transaction: injected rollback error during cancellation

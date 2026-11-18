@@ -1,12 +1,13 @@
 package plans
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"exam_notify/internal/modules/schedule"
 	"fmt"
 )
 
-func checkConflict(db *sql.DB, plan Plan) error {
+func checkConflict(db *persistence.Queries, plan Plan) error {
 	start, err := schedule.StartMinute(plan.StartTime)
 	if err != nil {
 		return err

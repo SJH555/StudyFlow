@@ -2,7 +2,8 @@ package main
 
 import (
 	"context"
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"encoding/json"
 	"exam_notify/internal/modules/settings"
 	"github.com/wailsapp/wails/v3/pkg/application"
@@ -11,7 +12,7 @@ import (
 	"time"
 )
 
-func (a *App) settings(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) settings(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		values, err := settings.List(db)
@@ -26,7 +27,7 @@ func (a *App) settings(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 			fail(w, err)
 			return
 		}
-		err := settings.Save(db, values, settings.Actions{
+		actions := settings.Actions{
 			ActivityReminderChanged: a.onActivityReminderChanged,
 			ReviewDisabled: func() {
 				a.tasks.after(150*time.Millisecond, func() { a.releaseDeferredReminders(application.Get()) })
@@ -36,7 +37,7 @@ func (a *App) settings(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 					if ctx.Err() != nil {
 						return
 					}
-					if err := a.scheduler.BackupCheck(time.Now()); err != nil {
+					if err := a.scheduler.WithContext(ctx).BackupCheck(time.Now()); err != nil {
 						log.Printf("自动备份失败: %v", err)
 					}
 				})
@@ -46,11 +47,21 @@ func (a *App) settings(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 					if ctx.Err() != nil {
 						return
 					}
-					if err := a.applyGeneralSettings(); err != nil {
+					if err := a.applyGeneralSettingsContext(ctx); err != nil {
 						log.Printf("刷新常规设置失败: %v", err)
 					}
 				})
 			},
+		}
+		err := settings.Save(db, values, settings.Actions{
+			ActivityReminderChanged: func(enabled bool) {
+				if actions.ActivityReminderChanged != nil {
+					queueAfterDatabase(r, func() { actions.ActivityReminderChanged(enabled) })
+				}
+			},
+			ReviewDisabled: func() { queueAfterDatabase(r, actions.ReviewDisabled) },
+			BackupEnabled:  func() { queueAfterDatabase(r, actions.BackupEnabled) },
+			GeneralChanged: func() { queueAfterDatabase(r, actions.GeneralChanged) },
 		})
 		if err != nil {
 			fail(w, err)

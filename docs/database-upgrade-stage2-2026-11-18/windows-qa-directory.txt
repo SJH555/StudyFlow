@@ -1,0 +1,2 @@
+原生后端测试与首次 UI：/mnt/c/Users/jhsong/AppData/Local/Temp/StudyFlow-upgrade-stage2-7cflwfa6
+最终 UI 及最小视口测试：/mnt/c/Users/jhsong/AppData/Local/Temp/StudyFlow-upgrade-stage2-6npc6nid

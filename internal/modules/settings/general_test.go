@@ -1,21 +1,22 @@
 package settings
 
 import (
-	"database/sql"
+	"exam_notify/internal/testutil"
 	"path/filepath"
 	"testing"
 
 	"exam_notify/internal/infrastructure/persistence"
 )
 
-func newGeneralTestDB(t *testing.T) *sql.DB {
+func newGeneralTestDB(t *testing.T) *persistence.Queries {
 	t.Helper()
-	db, err := persistence.Open(filepath.Join(t.TempDir(), "study.db"))
+	path := filepath.Join(t.TempDir(), "study.db")
+	db, err := persistence.Open(path)
 	if err != nil {
 		t.Fatalf("打开测试数据库失败: %v", err)
 	}
 	t.Cleanup(func() { _ = db.Close() })
-	return db
+	return testutil.Borrow(t, db, path)
 }
 
 func TestGeneralDefaults(t *testing.T) {

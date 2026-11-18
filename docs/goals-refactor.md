@@ -6,7 +6,7 @@
 
 ## 后端职责
 
-- `desktop/goals.go` 是桌面请求适配层，只处理路径、请求解析、依赖组装和服务转发，符合 AGENT.md 第 16.2 节。
+- `desktop/goals.go` 是桌面请求适配层，只处理路径、请求解析、依赖组装和服务转发，符合 AGENTS.md 第 16.2 节。
 - `internal/modules/goals/domain.go` 定义领域对象；`dto.go` 定义输入、输出契约和转换。
 - `service.go` 处理目标校验和完成状态，不依赖 SQL。
 - `repository.go` 定义服务需要的数据访问接口；`sqlite_repository.go` 是 SQLite 实现。

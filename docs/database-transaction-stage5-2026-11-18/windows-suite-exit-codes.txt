@@ -1,0 +1,15 @@
+desktop=1
+app=0
+diagnostics=0
+persistence=0
+reminder=1
+storage=0
+system=0
+goals=0
+plans=0
+schedule=0
+sessions=0
+settings=0
+subjects=0
+studytime=0
+release=0

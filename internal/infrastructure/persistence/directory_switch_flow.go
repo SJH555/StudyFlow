@@ -31,6 +31,9 @@ func defaultDirectorySwitchOps() directorySwitchOps {
 
 func (d *Database) switchDirectory(ctx context.Context, targetDir, locationFile, installDir string, ops directorySwitchOps) (DirectorySwitchResult, error) {
 	var result DirectorySwitchResult
+	if err := ctx.Err(); err != nil {
+		return result, err
+	}
 	err := d.WithWrite(func(current *sql.DB, path string) error {
 		var switchErr error
 		result, switchErr = d.switchDirectoryLocked(ctx, current, path, targetDir, locationFile, installDir, ops)
@@ -40,6 +43,9 @@ func (d *Database) switchDirectory(ctx context.Context, targetDir, locationFile,
 }
 
 func (d *Database) switchDirectoryLocked(ctx context.Context, current *sql.DB, path, targetDir, locationFile, installDir string, ops directorySwitchOps) (result DirectorySwitchResult, resultErr error) {
+	if err := ctx.Err(); err != nil {
+		return result, err
+	}
 	if d.switchCleanupErr != nil {
 		return result, errors.Join(ErrDirectorySwitchPending, d.switchCleanupErr)
 	}
@@ -59,6 +65,11 @@ func (d *Database) switchDirectoryLocked(ctx context.Context, current *sql.DB, p
 	}()
 	if location.HasPending() {
 		return result, ErrDirectorySwitchPending
+	}
+	if d.candidateValidator != nil {
+		if err := d.candidateValidator(ctx, current); err != nil {
+			return result, fmt.Errorf("validate source database version: %w", err)
+		}
 	}
 	paths, err := checkDirectoryPaths(path, targetDir, locationFile)
 	if err != nil || paths.sameDirectory {
@@ -91,6 +102,9 @@ func (d *Database) switchDirectoryLocked(ctx context.Context, current *sql.DB, p
 			resultErr = errors.Join(resultErr, d.discardSwitchCandidate(location, prepared, candidate, keepPrepared, clearUnchanged, ops))
 		}
 	}()
+	if err := ctx.Err(); err != nil {
+		return result, err
+	}
 	if prepared.sameDirectory || prepared.databasePath != filepath.Join(paths.target, "study.db") {
 		return result, errors.New("prepared database path does not match the requested directory")
 	}
@@ -108,11 +122,19 @@ func (d *Database) switchDirectoryLocked(ctx context.Context, current *sql.DB, p
 		keepPrepared = errors.As(err, &closeErr)
 		return result, fmt.Errorf("open candidate database %s: %w", target.path, err)
 	}
+	if d.candidateValidator != nil {
+		if err := d.candidateValidator(ctx, candidate); err != nil {
+			return result, fmt.Errorf("validate candidate database version: %w", err)
+		}
+	}
 	if err := checkSwitchCandidate(target, true); err != nil {
 		keepPrepared = true
 		return result, err
 	}
 	if err := old.checkIdentity(); err != nil {
+		return result, err
+	}
+	if err := ctx.Err(); err != nil {
 		return result, err
 	}
 	location.PlanRetirement(prepared.sourceBackups)
@@ -129,6 +151,19 @@ func (d *Database) switchDirectoryLocked(ctx context.Context, current *sql.DB, p
 		d.switchCleanupErr = err
 		return result, err
 	}
+	if err := ctx.Err(); err != nil {
+		// Stage leaves an unresolved recovery record. Confirm the old location
+		// before clearing it; cancellation alone does not establish disk state.
+		resolution, recoverErr := location.Recover()
+		if recoverErr == nil && resolution.Outcome == storage.LocationUnchanged && resolution.DatabasePath == old.path {
+			clearUnchanged = true
+			return result, err
+		}
+		keepPrepared = true
+		d.pauseErr = errors.Join(ErrDatabasePaused, err, recoverErr, errors.New("cannot confirm unchanged storage location after cancellation"))
+		return result, d.pauseErr
+	}
+	// Publication is the commit point. Once confirmed, cancellation cannot undo it.
 	resolution, publishErr := ops.publish(location)
 	switch {
 	case resolution.Outcome == storage.LocationUnchanged && resolution.DatabasePath == old.path:

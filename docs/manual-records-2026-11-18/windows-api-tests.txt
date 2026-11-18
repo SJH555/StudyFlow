@@ -1,0 +1,13 @@
+=== RUN   TestManualRecordRejectsOverlapsAcrossSources
+--- PASS: TestManualRecordRejectsOverlapsAcrossSources (0.11s)
+=== RUN   TestManualRecordRejectsShortBeforePersisting
+--- PASS: TestManualRecordRejectsShortBeforePersisting (0.05s)
+=== RUN   TestManualRecordChecksActiveSessionAndIgnoresDeleted
+--- PASS: TestManualRecordChecksActiveSessionAndIgnoresDeleted (0.05s)
+=== RUN   TestManualRecordAllowsTimeAfterPausedTimer
+--- PASS: TestManualRecordAllowsTimeAfterPausedTimer (0.04s)
+=== RUN   TestManualRecordCannotOverlapRunningPlanBeforeItsEnd
+--- PASS: TestManualRecordCannotOverlapRunningPlanBeforeItsEnd (0.04s)
+=== RUN   TestPlanConflictChecksWeekdaysTimeAndEdits
+--- PASS: TestPlanConflictChecksWeekdaysTimeAndEdits (0.04s)
+PASS

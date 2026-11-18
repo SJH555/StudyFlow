@@ -1,0 +1,7 @@
+=== RUN   TestLifecyclePreservesCompletionAndSoftDeletion
+--- PASS: TestLifecyclePreservesCompletionAndSoftDeletion (0.03s)
+=== RUN   TestAcceptanceRecordsBothOutcomes
+--- PASS: TestAcceptanceRecordsBothOutcomes (0.01s)
+=== RUN   TestInvalidInputsDoNotChangeStoredGoal
+--- PASS: TestInvalidInputsDoNotChangeStoredGoal (0.01s)
+PASS

@@ -1,0 +1,9 @@
+Request normal application quit: process=9744 path=D:\CLink\Desktop\studyflow\StudyFlow-0.5.0-5-portable\StudyFlow-qa.exe window=4718956
+Application did not exit normally; executable has not been replaced
+ËùÔÚÎ»ÖÃ \\wsl.localhost\Debian\home\jhsong\programming\code\StudyFlow\scripts\qa\quit-studyflow-windows.ps1:39 ×Ö·û: 4
+0
++ ... t(30000)) { throw 'Application did not exit normally; executable has  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Application did...t been replaced:String) [], RuntimeException
+    + FullyQualifiedErrorId : Application did not exit normally; executable has not been replaced
+ 

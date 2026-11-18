@@ -1,0 +1,211 @@
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.11s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.06s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.15s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.08s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.15s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.07s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.08s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.16s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.08s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.15s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.07s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.09s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.15s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.07s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.08s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.16s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.08s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.16s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.09s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.08s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.16s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.09s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.08s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.03s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.03s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.15s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.08s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.04s)
+=== RUN   TestConnectionSafetyOrdinaryCompletion
+=== RUN   TestConnectionSafetyOrdinaryCompletion/commit
+=== RUN   TestConnectionSafetyOrdinaryCompletion/rollback
+=== RUN   TestConnectionSafetyOrdinaryCompletion/panic
+--- PASS: TestConnectionSafetyOrdinaryCompletion (0.12s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/commit (0.05s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/rollback (0.04s)
+    --- PASS: TestConnectionSafetyOrdinaryCompletion/panic (0.04s)
+=== RUN   TestConnectionSafetyCommitFailureDiscard
+=== RUN   TestConnectionSafetyCommitFailureDiscard/external_reader_busy
+    connection_safety_test.go:189: Commit=database is locked (5) (SQLITE_BUSY); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+=== RUN   TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key
+    connection_safety_test.go:189: Commit=constraint failed: FOREIGN KEY constraint failed (787); residual BEGIN=SQL logic error: cannot start a transaction within a transaction (1)
+    connection_safety_test.go:239: discard removed the residual transaction; replacement committed with foreign keys enabled
+--- PASS: TestConnectionSafetyCommitFailureDiscard (0.17s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/external_reader_busy (0.09s)
+    --- PASS: TestConnectionSafetyCommitFailureDiscard/deferred_foreign_key (0.08s)
+=== RUN   TestConnectionSafetyCloseDoesNotDiscard
+    connection_safety_test.go:269: Conn.Close returned the dirty connection to the pool: SQL logic error: cannot start a transaction within a transaction (1)
+--- PASS: TestConnectionSafetyCloseDoesNotDiscard (0.03s)
+PASS

@@ -1,0 +1,561 @@
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.06s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.02s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.12s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.02s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.02s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.02s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.02s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.40s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.02s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.02s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.09s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.41s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.01s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.08s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.41s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.09s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.02s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.08s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.39s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.02s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.02s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.08s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.40s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.01s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.09s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.02s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.41s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.04s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.02s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.02s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.08s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.39s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.02s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.01s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.07s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.38s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.06s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.02s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.01s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.01s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.08s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.39s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.06s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.08s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.08s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/delete
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+=== RUN   TestStage5SQLiteFullRollsBackWholeTransaction/wal
+    stage5_fault_test.go:65: real SQLITE_FULL: paused=true, error=database or disk is full (13)
+        study database is unavailable
+        rollback transaction: SQL logic error: cannot rollback - no transaction is active (1)
+--- PASS: TestStage5SQLiteFullRollsBackWholeTransaction (0.03s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/delete (0.02s)
+    --- PASS: TestStage5SQLiteFullRollsBackWholeTransaction/wal (0.01s)
+=== RUN   TestStage5ControlledIOAndMemoryErrors
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false
+=== RUN   TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true
+--- PASS: TestStage5ControlledIOAndMemoryErrors (0.08s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=10/read=true/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=false/rollback-fails=true (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=false (0.01s)
+    --- PASS: TestStage5ControlledIOAndMemoryErrors/code=7/read=true/rollback-fails=true (0.01s)
+=== RUN   TestStage5CrashChild
+    stage5_fault_test.go:281: subprocess helper
+--- SKIP: TestStage5CrashChild (0.00s)
+=== RUN   TestStage5ForcedTerminationRecovery
+=== RUN   TestStage5ForcedTerminationRecovery/delete/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/delete/committed
+=== RUN   TestStage5ForcedTerminationRecovery/delete/migration
+=== RUN   TestStage5ForcedTerminationRecovery/wal/uncommitted
+=== RUN   TestStage5ForcedTerminationRecovery/wal/committed
+=== RUN   TestStage5ForcedTerminationRecovery/wal/migration
+--- PASS: TestStage5ForcedTerminationRecovery (0.44s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/committed (0.05s)
+    --- PASS: TestStage5ForcedTerminationRecovery/delete/migration (0.12s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/uncommitted (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/committed (0.07s)
+    --- PASS: TestStage5ForcedTerminationRecovery/wal/migration (0.07s)
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/10
+=== RUN   TestStage5CommitFailureNeverRetriesOrClaimsRollback/7
+--- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/10 (0.01s)
+    --- PASS: TestStage5CommitFailureNeverRetriesOrClaimsRollback/7 (0.01s)
+=== RUN   TestStage5SQLiteResourceLimitReturnsNoMem
+    stage5_fault_test.go:507: real SQLite SQLITE_NOMEM from instruction limit: calls=1, paused=false, error=out of memory (7)
+--- PASS: TestStage5SQLiteResourceLimitReturnsNoMem (0.01s)
+PASS

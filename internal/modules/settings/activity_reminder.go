@@ -3,6 +3,7 @@ package settings
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 )
 
 const activityReminderEnabledKey = "activityReminderEnabled"
@@ -16,17 +17,26 @@ type ActivityReminderConfig struct {
 }
 
 // ReadActivityReminderConfig 读取活动提醒配置。
-func ReadActivityReminderConfig(db *sql.DB) ActivityReminderConfig {
-	// 每项设置都是可选的。当值缺失或无法读取时，保留调度器独立的回退逻辑。
-	interval, _ := readSetting(db, "activityInterval")
-	startTime, _ := readSetting(db, "activityStartTime")
-	enabled, _ := readSetting(db, activityReminderEnabledKey)
-	skipRest, _ := readSetting(db, "activitySkipRest")
-	return ActivityReminderConfig{Interval: interval, StartTime: startTime, Enabled: enabled, SkipRest: skipRest}
+func ReadActivityReminderConfig(db *persistence.Queries) (ActivityReminderConfig, error) {
+	var config ActivityReminderConfig
+	for _, item := range []struct {
+		key   string
+		value *string
+	}{
+		{"activityInterval", &config.Interval}, {"activityStartTime", &config.StartTime},
+		{activityReminderEnabledKey, &config.Enabled}, {"activitySkipRest", &config.SkipRest},
+	} {
+		value, err := readSetting(db, item.key)
+		if err != nil && !errors.Is(err, sql.ErrNoRows) {
+			return ActivityReminderConfig{}, err
+		}
+		*item.value = value
+	}
+	return config, nil
 }
 
 // ActivityReminderEnabled 返回活动提醒是否开启。
-func ActivityReminderEnabled(db *sql.DB) (bool, error) {
+func ActivityReminderEnabled(db *persistence.Queries) (bool, error) {
 	value, err := readSetting(db, activityReminderEnabledKey)
 	if errors.Is(err, sql.ErrNoRows) {
 		return false, nil
@@ -35,7 +45,7 @@ func ActivityReminderEnabled(db *sql.DB) (bool, error) {
 }
 
 // SetActivityReminderEnabled 设置活动提醒开关。
-func SetActivityReminderEnabled(db *sql.DB, enabled bool) error {
+func SetActivityReminderEnabled(db *persistence.Queries, enabled bool) error {
 	value := "0"
 	if enabled {
 		value = "1"

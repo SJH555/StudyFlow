@@ -3,6 +3,7 @@ package subjects
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/modules/plans"
 	"exam_notify/internal/modules/sessions"
 	"strings"
@@ -22,7 +23,7 @@ type Subject struct {
 }
 
 // List 返回学习科目列表，可按需包含归档或已删除项。
-func List(db *sql.DB, includeArchived, includeDeleted bool) ([]Subject, error) {
+func List(db *persistence.Queries, includeArchived, includeDeleted bool) ([]Subject, error) {
 	query := `SELECT id,name,color,sort_order,archived,deleted,EXISTS(SELECT 1 FROM plans WHERE subject_id=subjects.id AND deleted=0) OR EXISTS(SELECT 1 FROM sessions WHERE subject_id=subjects.id AND deleted=0) FROM subjects`
 	conditions := []string{}
 	if !includeArchived {
@@ -45,22 +46,27 @@ func List(db *sql.DB, includeArchived, includeDeleted bool) ([]Subject, error) {
 		var x Subject
 		var archived, deleted, hasData int
 		var sortOrder sql.NullInt64
-		if rows.Scan(&x.ID, &x.Name, &x.Color, &sortOrder, &archived, &deleted, &hasData) == nil {
-			if sortOrder.Valid {
-				x.SortOrder = &sortOrder.Int64
-			}
-			x.Archived = archived != 0
-			x.Deleted = deleted != 0
-			x.HasData = hasData != 0
-			out = append(out, x)
+		if err := rows.Scan(&x.ID, &x.Name, &x.Color, &sortOrder, &archived, &deleted, &hasData); err != nil {
+			return nil, err
 		}
+		if sortOrder.Valid {
+			x.SortOrder = &sortOrder.Int64
+		}
+		x.Archived = archived != 0
+		x.Deleted = deleted != 0
+		x.HasData = hasData != 0
+		out = append(out, x)
+
 	}
 
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
 	return out, nil
 }
 
 // Create 新增一个学习科目。
-func Create(db *sql.DB, x Subject) (Subject, error) {
+func create(db *persistence.Queries, x Subject) (Subject, error) {
 	x.Name = strings.TrimSpace(x.Name)
 	if x.Name == "" {
 		return x, errors.New("name is required")
@@ -78,13 +84,29 @@ func Create(db *sql.DB, x Subject) (Subject, error) {
 	if err != nil {
 		return x, err
 	}
-	x.ID, _ = res.LastInsertId()
+	x.ID, err = res.LastInsertId()
+	if err != nil {
+		return x, err
+	}
 
 	return x, nil
 }
 
 // Update 更新一个学习科目。
-func Update(db *sql.DB, x Subject) (Subject, error) {
+func Update(db *persistence.Queries, x Subject) (Subject, error) {
+	var result Subject
+	var err error
+	err = db.WithTx(func(tx *persistence.Queries) error {
+		result, err = update(tx, x)
+		return err
+	})
+	if err != nil {
+		return x, err
+	}
+	return result, nil
+}
+
+func update(db *persistence.Queries, x Subject) (Subject, error) {
 	x.Name = strings.TrimSpace(x.Name)
 	if x.ID == 0 || x.Name == "" {
 		return x, errors.New("id and name are required")
@@ -116,17 +138,26 @@ func Update(db *sql.DB, x Subject) (Subject, error) {
 	if err != nil {
 		return x, err
 	}
-	n, _ := res.RowsAffected()
+	n, err := res.RowsAffected()
+	if err != nil {
+		return x, err
+	}
 	if n == 0 {
 		return x, errors.New("learning content not found")
 	}
 
-	_ = plans.SetSubjectActive(db, x.ID, !x.Archived && !x.Deleted)
+	if err := plans.SetSubjectActive(db, x.ID, !x.Archived && !x.Deleted); err != nil {
+		return x, err
+	}
 	return x, nil
 }
 
 // Delete 软删除指定科目。
-func Delete(db *sql.DB, id string) error {
+func Delete(db *persistence.Queries, id string) error {
+	return db.WithTx(func(tx *persistence.Queries) error { return deleteSubject(tx, id) })
+}
+
+func deleteSubject(db *persistence.Queries, id string) error {
 	linked, err := hasLinkedData(db, id)
 	if err != nil {
 		return err
@@ -138,15 +169,20 @@ func Delete(db *sql.DB, id string) error {
 	if err != nil {
 		return err
 	}
-	n, _ := res.RowsAffected()
+	n, err := res.RowsAffected()
+	if err != nil {
+		return err
+	}
 	if n == 0 {
 		return errors.New("learning content not found")
 	}
 
-	_ = plans.SetSubjectActive(db, id, false)
+	if err := plans.SetSubjectActive(db, id, false); err != nil {
+		return err
+	}
 	return nil
 }
-func hasLinkedData(db *sql.DB, id any) (bool, error) {
+func hasLinkedData(db *persistence.Queries, id any) (bool, error) {
 	planned, err := plans.CountForSubject(db, id)
 	if err != nil {
 		return false, err
@@ -156,8 +192,21 @@ func hasLinkedData(db *sql.DB, id any) (bool, error) {
 }
 
 // Count 统计科目总数。
-func Count(db *sql.DB) (int, error) {
+func Count(db *persistence.Queries) (int, error) {
 	var count int
 	err := db.QueryRow(`SELECT count(*) FROM subjects`).Scan(&count)
 	return count, err
+}
+
+func Create(db *persistence.Queries, x Subject) (Subject, error) {
+	var result Subject
+	err := db.WithTx(func(tx *persistence.Queries) error {
+		var err error
+		result, err = create(tx, x)
+		return err
+	})
+	if err != nil {
+		return x, err
+	}
+	return result, nil
 }

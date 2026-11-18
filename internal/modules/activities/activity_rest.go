@@ -1,7 +1,8 @@
 package activities
 
 import (
-	"database/sql"
+	"exam_notify/internal/infrastructure/persistence"
+
 	"exam_notify/internal/modules/plans"
 	"exam_notify/internal/modules/sessions"
 	"time"
@@ -26,7 +27,7 @@ func betweenActivityPlans(now time.Time, windows []plans.Window) bool {
 }
 
 // Resting 判断用户当前是否处于休息状态：先看是否有进行中的休息，再看是否处于计划间空档。
-func Resting(db *sql.DB, now time.Time) (bool, error) {
+func Resting(db *persistence.Queries, now time.Time) (bool, error) {
 	resting, err := sessions.HasActiveRest(db, now)
 	if err != nil || resting {
 		return resting, err

@@ -1,0 +1,2 @@
+ok  	exam_notify/internal/infrastructure/persistence	8.577s
+ok  	exam_notify/internal/infrastructure/upgrade	4.236s

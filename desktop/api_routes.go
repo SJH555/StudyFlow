@@ -1,11 +1,11 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
 	"errors"
 	studyapp "exam_notify/internal/app"
 	"exam_notify/internal/infrastructure/diagnostics"
+	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/infrastructure/reminder"
 	"exam_notify/internal/modules/review"
 	"exam_notify/internal/modules/subjects"
@@ -105,7 +105,13 @@ func clearReminderAlwaysOnTop() {
 	}
 }
 
-func (a *App) handleAPI(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) handleScopedAPI(access *persistence.Access, w http.ResponseWriter, r *http.Request) {
+	// Every module receives context-bound queries and the same transaction scope.
+	db := access.Queries(r.Context())
+	a.handleAPI(db, w, r)
+}
+
+func (a *App) handleAPI(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	path := apiRoute(r)
 	p := strings.Split(path, "/")
 	if path == "snapshot" && r.Method == http.MethodGet {
@@ -151,7 +157,7 @@ func (a *App) handleAPI(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	http.NotFound(w, r)
 }
 
-func (a *App) withScheduleSnapshot(db *sql.DB, w http.ResponseWriter, r *http.Request, handle func(*sql.DB, http.ResponseWriter, *http.Request)) {
+func (a *App) withScheduleSnapshot(db *persistence.Queries, w http.ResponseWriter, r *http.Request, handle func(*persistence.Queries, http.ResponseWriter, *http.Request)) {
 	if r.Method == http.MethodGet {
 		handle(db, w, r)
 		return
@@ -161,7 +167,7 @@ func (a *App) withScheduleSnapshot(db *sql.DB, w http.ResponseWriter, r *http.Re
 	}
 }
 
-func (a *App) snapshot(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (a *App) snapshot(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
 	date := r.URL.Query().Get("date")
 	if date == "" {
 		date = time.Now().Format("2006-01-02")

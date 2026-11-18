@@ -3,6 +3,7 @@ package sessions
 import (
 	"database/sql"
 	"errors"
+	"exam_notify/internal/infrastructure/persistence"
 	"fmt"
 	"time"
 
@@ -47,7 +48,7 @@ type TimerInput struct {
 }
 
 // List 返回指定日期的学习记录。
-func List(db *sql.DB, day string) ([]Session, error) {
+func List(db *persistence.Queries, day string) ([]Session, error) {
 	if day == "" {
 		day = time.Now().Format("2006-01-02")
 	}
@@ -56,40 +57,59 @@ func List(db *sql.DB, day string) ([]Session, error) {
 		return nil, e
 	}
 	defer rows.Close()
+
 	out := []Session{}
 	for rows.Next() {
 		var x Session
 		var end, plannedEnd sql.NullString
 		var paused, resumed, breakStarted sql.NullString
 		var planID sql.NullInt64
-		if rows.Scan(&x.ID, &planID, &x.SubjectID, &x.Subject, &x.Color, &x.StartAt, &end, &plannedEnd, &paused, &resumed, &breakStarted, &x.BreakUsedSeconds, &x.Duration, &x.Source, &x.Note) == nil {
-			if planID.Valid {
-				x.PlanID = &planID.Int64
-			}
-			if end.Valid {
-				x.EndAt = &end.String
-			}
-			if plannedEnd.Valid {
-				x.PlannedEndAt = &plannedEnd.String
-			}
-			if paused.Valid {
-				x.PausedAt = &paused.String
-			}
-			if breakStarted.Valid {
-				x.BreakStartedAt = &breakStarted.String
-			}
-			if resumed.Valid {
-				x.ResumedAt = &resumed.String
-			}
-			out = append(out, x)
+		if err := rows.Scan(&x.ID, &planID, &x.SubjectID, &x.Subject, &x.Color, &x.StartAt, &end, &plannedEnd, &paused, &resumed, &breakStarted, &x.BreakUsedSeconds, &x.Duration, &x.Source, &x.Note); err != nil {
+			return nil, err
 		}
+		if planID.Valid {
+			x.PlanID = &planID.Int64
+		}
+		if end.Valid {
+			x.EndAt = &end.String
+		}
+		if plannedEnd.Valid {
+			x.PlannedEndAt = &plannedEnd.String
+		}
+		if paused.Valid {
+			x.PausedAt = &paused.String
+		}
+		if breakStarted.Valid {
+			x.BreakStartedAt = &breakStarted.String
+		}
+		if resumed.Valid {
+			x.ResumedAt = &resumed.String
+		}
+		out = append(out, x)
+
 	}
 
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
 	return out, nil
 }
 
 // AddManual 手动新增一条学习记录，并返回其 ID 与时长（秒）。
-func AddManual(db *sql.DB, in ManualInput) (int64, int64, error) {
+func AddManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
+	var id, seconds int64
+	var err error
+	err = db.WithTx(func(tx *persistence.Queries) error {
+		id, seconds, err = addManual(tx, in)
+		return err
+	})
+	if err != nil {
+		return 0, 0, err
+	}
+	return id, seconds, nil
+}
+
+func addManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
 	start, e := time.Parse(time.RFC3339, in.StartAt)
 	if e != nil {
 		return 0, 0, e
@@ -101,15 +121,15 @@ func AddManual(db *sql.DB, in ManualInput) (int64, int64, error) {
 	if !end.After(start) {
 		return 0, 0, errors.New("结束时间必须晚于开始时间")
 	}
-	tx, e := db.Begin()
+	if end.Sub(start) < 10*time.Minute {
+		return 0, 0, errors.New("学习记录不能少于 10 分钟，请调整时间")
+	}
+	rows, e := db.Query(`SELECT s.name,t.start_at,t.end_at,t.paused_at,t.planned_end_at FROM sessions t JOIN subjects s ON s.id=t.subject_id WHERE t.deleted=0`)
 	if e != nil {
 		return 0, 0, e
 	}
-	defer tx.Rollback()
-	rows, e := tx.Query(`SELECT s.name,t.start_at,t.end_at,t.paused_at,t.planned_end_at FROM sessions t JOIN subjects s ON s.id=t.subject_id WHERE t.deleted=0`)
-	if e != nil {
-		return 0, 0, e
-	}
+	defer rows.Close()
+
 	for rows.Next() {
 		var subject, existingStartRaw string
 		var existingEndRaw, existingPausedRaw, existingPlannedEndRaw sql.NullString
@@ -162,19 +182,19 @@ func AddManual(db *sql.DB, in ManualInput) (int64, int64, error) {
 		return 0, 0, e
 	}
 	sec := int64(end.Sub(start).Seconds())
-	res, e := tx.Exec(`INSERT INTO sessions(subject_id,start_at,end_at,duration_seconds,source,note) VALUES(?,?,?,?,?,?)`, in.SubjectID, start.Format(time.RFC3339), end.Format(time.RFC3339), sec, "manual", in.Note)
+	res, e := db.Exec(`INSERT INTO sessions(subject_id,start_at,end_at,duration_seconds,source,note) VALUES(?,?,?,?,?,?)`, in.SubjectID, start.Format(time.RFC3339), end.Format(time.RFC3339), sec, "manual", in.Note)
 	if e != nil {
 		return 0, 0, e
 	}
-	if e = tx.Commit(); e != nil {
+	id, e := res.LastInsertId()
+	if e != nil {
 		return 0, 0, e
 	}
-	id, _ := res.LastInsertId()
 
 	return id, sec, nil
 }
 
-func checkPlansRunning(db *sql.DB, now time.Time) error {
+func checkPlansRunning(db *persistence.Queries, now time.Time) error {
 	paused, err := settings.PlansPausedToday(db, now)
 	if err != nil {
 		return err
@@ -186,22 +206,37 @@ func checkPlansRunning(db *sql.DB, now time.Time) error {
 }
 
 // Start 结束上一个进行中的时段并启动一个新的计时时段。
-func Start(db *sql.DB, in TimerInput, now time.Time) (int64, error) {
+func Start(db *persistence.Queries, in TimerInput, now time.Time) (int64, error) {
+	var id int64
+	var err error
+	err = db.WithTx(func(tx *persistence.Queries) error {
+		id, err = start(tx, in, now)
+		return err
+	})
+	if err != nil {
+		return 0, err
+	}
+	return id, nil
+}
+
+func start(db *persistence.Queries, in TimerInput, now time.Time) (int64, error) {
 	if err := checkPlansRunning(db, now); err != nil {
 		return 0, err
 	}
 	if in.SubjectID == 0 {
 		return 0, errors.New("subject is required")
 	}
-	tx, e := db.Begin()
-	if e != nil {
-		return 0, e
-	}
 	var old, stored, oldBreakUsed int64
 	var start string
 	var resumed, paused, oldBreakStarted, oldPlannedEnd sql.NullString
-	e = tx.QueryRow(`SELECT id,start_at,resumed_at,paused_at,duration_seconds,break_started_at,break_used_seconds,planned_end_at FROM sessions WHERE end_at IS NULL AND deleted=0 ORDER BY id DESC LIMIT 1`).Scan(&old, &start, &resumed, &paused, &stored, &oldBreakStarted, &oldBreakUsed, &oldPlannedEnd)
+	e := db.QueryRow(`SELECT id,start_at,resumed_at,paused_at,duration_seconds,break_started_at,break_used_seconds,planned_end_at FROM sessions WHERE end_at IS NULL AND deleted=0 ORDER BY id DESC LIMIT 1`).Scan(&old, &start, &resumed, &paused, &stored, &oldBreakStarted, &oldBreakUsed, &oldPlannedEnd)
+	if e != nil && !errors.Is(e, sql.ErrNoRows) {
+		return 0, e
+	}
 	if e == nil {
+		if err := validateTimerTimes(start, resumed, paused, oldBreakStarted, oldPlannedEnd); err != nil {
+			return 0, err
+		}
 		oldEnd := now
 		if oldPlannedEnd.Valid {
 			if boundary, parseErr := time.Parse(time.RFC3339Nano, oldPlannedEnd.String); parseErr == nil && boundary.Before(oldEnd) {
@@ -211,31 +246,28 @@ func Start(db *sql.DB, in TimerInput, now time.Time) (int64, error) {
 		seconds := studytime.Elapsed(start, nullableTimestamp(resumed), paused.Valid, stored, oldEnd)
 		used := oldBreakUsed + studytime.BreakElapsedSeconds(nullableTimestamp(oldBreakStarted), oldEnd)
 		if seconds < 600 {
-			_, e = tx.Exec(`UPDATE sessions SET end_at=?,deleted=1,paused_at=NULL,resumed_at=NULL,break_started_at=NULL,break_used_seconds=? WHERE id=?`, oldEnd.Format(time.RFC3339), used, old)
+			_, e = db.Exec(`UPDATE sessions SET end_at=?,deleted=1,paused_at=NULL,resumed_at=NULL,break_started_at=NULL,break_used_seconds=? WHERE id=?`, oldEnd.Format(time.RFC3339), used, old)
 		} else {
-			_, e = tx.Exec(`UPDATE sessions SET end_at=?,duration_seconds=?,break_used_seconds=?,paused_at=NULL,resumed_at=NULL,break_started_at=NULL WHERE id=?`, oldEnd.Format(time.RFC3339), seconds, used, old)
+			_, e = db.Exec(`UPDATE sessions SET end_at=?,duration_seconds=?,break_used_seconds=?,paused_at=NULL,resumed_at=NULL,break_started_at=NULL WHERE id=?`, oldEnd.Format(time.RFC3339), seconds, used, old)
 		}
 		if e != nil {
-			_ = tx.Rollback()
 			return 0, e
 		}
 	}
-	plannedEnd, e := plans.EndForStart(tx, in.PlanID, now)
+	plannedEnd, e := plans.EndForStart(db, in.PlanID, now)
 	if e != nil {
-		_ = tx.Rollback()
 		return 0, e
 	}
 	var plannedEndValue any
 	if !plannedEnd.IsZero() {
 		plannedEndValue = plannedEnd.Format(time.RFC3339)
 	}
-	res, e := tx.Exec(`INSERT INTO sessions(subject_id,plan_id,start_at,planned_end_at,source,note) VALUES(?,?,?,?,?,?)`, in.SubjectID, in.PlanID, now.Format(time.RFC3339), plannedEndValue, "timer", in.Note)
+	res, e := db.Exec(`INSERT INTO sessions(subject_id,plan_id,start_at,planned_end_at,source,note) VALUES(?,?,?,?,?,?)`, in.SubjectID, in.PlanID, now.Format(time.RFC3339), plannedEndValue, "timer", in.Note)
 	if e != nil {
-		_ = tx.Rollback()
 		return 0, e
 	}
-	newID, _ := res.LastInsertId()
-	if e = tx.Commit(); e != nil {
+	newID, e := res.LastInsertId()
+	if e != nil {
 		return 0, e
 	}
 
@@ -243,7 +275,20 @@ func Start(db *sql.DB, in TimerInput, now time.Time) (int64, error) {
 }
 
 // ChangeTimer 执行计时器的暂停、恢复或停止操作。
-func ChangeTimer(db *sql.DB, id, action string, now time.Time) (bool, error) {
+func ChangeTimer(db *persistence.Queries, id, action string, now time.Time) (bool, error) {
+	var saved bool
+	var err error
+	err = db.WithTx(func(tx *persistence.Queries) error {
+		saved, err = changeTimer(tx, id, action, now)
+		return err
+	})
+	if err != nil {
+		return false, err
+	}
+	return saved, nil
+}
+
+func changeTimer(db *persistence.Queries, id, action string, now time.Time) (bool, error) {
 	switch action {
 	case "resume":
 		if err := checkPlansRunning(db, now); err != nil {
@@ -260,6 +305,9 @@ func ChangeTimer(db *sql.DB, id, action string, now time.Time) (bool, error) {
 	e := db.QueryRow(`SELECT plan_id,start_at,resumed_at,paused_at,duration_seconds,break_started_at,break_used_seconds,planned_end_at FROM sessions WHERE id=? AND end_at IS NULL AND deleted=0`, id).Scan(&planID, &start, &resumed, &paused, &stored, &breakStarted, &breakUsed, &plannedEnd)
 	if e != nil {
 		return false, e
+	}
+	if err := validateTimerTimes(start, resumed, paused, breakStarted, plannedEnd); err != nil {
+		return false, err
 	}
 	effectiveNow := now
 	if plannedEnd.Valid {
@@ -294,23 +342,23 @@ func ChangeTimer(db *sql.DB, id, action string, now time.Time) (bool, error) {
 				if breakMinutes > 0 {
 					breakStart = now.Format(time.RFC3339)
 				}
-				_, e = db.Exec(`UPDATE sessions SET paused_at=?,resumed_at=NULL,duration_seconds=?,break_started_at=?,break_notified=0 WHERE id=?`, now.Format(time.RFC3339), seconds, breakStart, id)
+				e = updateActiveTimer(db, `UPDATE sessions SET paused_at=?,resumed_at=NULL,duration_seconds=?,break_started_at=?,break_notified=0 WHERE id=? AND end_at IS NULL AND deleted=0`, now.Format(time.RFC3339), seconds, breakStart, id)
 			}
 		} else if action == "pause-day" {
 			used := breakUsed + studytime.BreakElapsedSeconds(nullableTimestamp(breakStarted), now)
-			_, e = db.Exec(`UPDATE sessions SET break_started_at=NULL,break_used_seconds=?,break_notified=0 WHERE id=?`, used, id)
+			e = updateActiveTimer(db, `UPDATE sessions SET break_started_at=NULL,break_used_seconds=?,break_notified=0 WHERE id=? AND end_at IS NULL AND deleted=0`, used, id)
 		}
 	case "resume":
 		if paused.Valid {
 			used := breakUsed + studytime.BreakElapsedSeconds(nullableTimestamp(breakStarted), now)
-			_, e = db.Exec(`UPDATE sessions SET paused_at=NULL,resumed_at=?,break_started_at=NULL,break_used_seconds=?,break_notified=0 WHERE id=?`, now.Format(time.RFC3339), used, id)
+			e = updateActiveTimer(db, `UPDATE sessions SET paused_at=NULL,resumed_at=?,break_started_at=NULL,break_used_seconds=?,break_notified=0 WHERE id=? AND end_at IS NULL AND deleted=0`, now.Format(time.RFC3339), used, id)
 		}
 	case "stop":
 		used := breakUsed + studytime.BreakElapsedSeconds(nullableTimestamp(breakStarted), effectiveNow)
 		if seconds < 600 {
-			_, e = db.Exec(`UPDATE sessions SET end_at=?,deleted=1,paused_at=NULL,resumed_at=NULL,break_started_at=NULL,break_used_seconds=? WHERE id=?`, effectiveNow.Format(time.RFC3339), used, id)
+			e = updateActiveTimer(db, `UPDATE sessions SET end_at=?,deleted=1,paused_at=NULL,resumed_at=NULL,break_started_at=NULL,break_used_seconds=? WHERE id=? AND end_at IS NULL AND deleted=0`, effectiveNow.Format(time.RFC3339), used, id)
 		} else {
-			_, e = db.Exec(`UPDATE sessions SET end_at=?,paused_at=NULL,resumed_at=NULL,break_started_at=NULL,duration_seconds=?,break_used_seconds=? WHERE id=?`, effectiveNow.Format(time.RFC3339), seconds, used, id)
+			e = updateActiveTimer(db, `UPDATE sessions SET end_at=?,paused_at=NULL,resumed_at=NULL,break_started_at=NULL,duration_seconds=?,break_used_seconds=? WHERE id=? AND end_at IS NULL AND deleted=0`, effectiveNow.Format(time.RFC3339), seconds, used, id)
 		}
 	}
 	if e != nil {
@@ -321,7 +369,7 @@ func ChangeTimer(db *sql.DB, id, action string, now time.Time) (bool, error) {
 }
 
 // Delete 软删除指定学习记录。
-func Delete(db *sql.DB, id string) error {
+func Delete(db *persistence.Queries, id string) error {
 	_, err := db.Exec(`UPDATE sessions SET deleted=1 WHERE id=? AND deleted=0 AND end_at IS NOT NULL`, id)
 	return err
 }
@@ -331,4 +379,33 @@ func nullableTimestamp(value sql.NullString) *string {
 		return nil
 	}
 	return &value.String
+}
+
+func validateTimerTimes(start string, optional ...sql.NullString) error {
+	if _, err := time.Parse(time.RFC3339Nano, start); err != nil {
+		return err
+	}
+	for _, value := range optional {
+		if value.Valid {
+			if _, err := time.Parse(time.RFC3339Nano, value.String); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func updateActiveTimer(db *persistence.Queries, query string, args ...any) error {
+	result, err := db.Exec(query, args...)
+	if err != nil {
+		return err
+	}
+	count, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if count != 1 {
+		return sql.ErrNoRows
+	}
+	return nil
 }

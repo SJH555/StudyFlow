@@ -19,14 +19,10 @@ export function useTodayView() {
     plansStore.currentPlans.reduce((n, p) => n + plannedStudyMinutes(p), 0),
   );
 
-  // 计划时段已开始但尚未学习时，提示距离该时段结束还剩多久。
+  // 尚未学习或已经结束本次学习时，都提示当前计划还剩多久。
   const unstartedPlanRemainingSeconds = computed(() => {
     const plan = plansStore.currentPlan;
-    if (
-      !plan ||
-      sessionsStore.active ||
-      sessionsStore.sessions.some((session) => session.planId === plan.id)
-    ) {
+    if (!plan || sessionsStore.active) {
       return null;
     }
 
@@ -37,7 +33,7 @@ export function useTodayView() {
       scheduledStart.setDate(scheduledStart.getDate() - 1);
     }
     const scheduledEnd = scheduledStart.getTime() + plan.duration * 60_000;
-    return Math.max(0, Math.ceil((scheduledEnd - appStore.now) / 1000));
+    return Math.max(0, Math.floor((scheduledEnd - appStore.now) / 1000));
   });
 
   // 时段空档定位到下一段计划，让列表中暂时不可见的计划也能找到。

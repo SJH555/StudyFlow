@@ -1,0 +1,14 @@
+{
+  "action": "ready",
+  "passed": true,
+  "navigation": [
+    "今日计划",
+    "学习项目",
+    "学习计划",
+    "学习统计",
+    "学情追踪",
+    "活动提醒",
+    "设置"
+  ],
+  "goalsSortVisible": true
+}
