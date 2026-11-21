@@ -1,0 +1,166 @@
+{
+  "shell": {
+    "runs": 3,
+    "samples": {
+      "shell": {
+        "medianMiB": 233.0703125,
+        "minMiB": 230.33984375,
+        "maxMiB": 235.140625,
+        "jsHeapMedianMiB": 3.511474609375
+      }
+    }
+  },
+  "none": {
+    "runs": 3,
+    "samples": {
+      "home": {
+        "medianMiB": 298.69921875,
+        "minMiB": 298.18359375,
+        "maxMiB": 299.97265625,
+        "jsHeapMedianMiB": 7.141845703125
+      },
+      "stats": {
+        "medianMiB": 325.0546875,
+        "minMiB": 323.32421875,
+        "maxMiB": 325.64453125,
+        "jsHeapMedianMiB": 8.240631103515625
+      },
+      "afterRefreshImmediate": {
+        "medianMiB": 354.765625,
+        "minMiB": 351.49609375,
+        "maxMiB": 355.31640625,
+        "jsHeapMedianMiB": 11.30538558959961
+      },
+      "afterRefresh": {
+        "medianMiB": 337.76171875,
+        "minMiB": 337.46484375,
+        "maxMiB": 339.32421875,
+        "jsHeapMedianMiB": 11.308826446533203
+      },
+      "leave": {
+        "medianMiB": 362.0,
+        "minMiB": 360.875,
+        "maxMiB": 364.03125,
+        "jsHeapMedianMiB": 13.531139373779297
+      },
+      "leaveAfterGC": {
+        "medianMiB": 335.89453125,
+        "minMiB": 333.03125,
+        "maxMiB": 335.92578125,
+        "jsHeapMedianMiB": 6.459709167480469
+      }
+    },
+    "entryMedianMs": 233.58625100000063,
+    "refreshMedianMs": 156.40000000596046,
+    "refreshMinMs": 155.60000002384186,
+    "refreshMaxMs": 167.2999999821186,
+    "statsMinusHomeMedianMiB": 25.140625,
+    "statsRolesMedianMiB": {
+      "app": 66.1875,
+      "renderer": 61.42578125,
+      "gpu-process": 142.26953125
+    }
+  },
+  "canvas": {
+    "runs": 3,
+    "samples": {
+      "home": {
+        "medianMiB": 303.81640625,
+        "minMiB": 297.1875,
+        "maxMiB": 305.0625,
+        "jsHeapMedianMiB": 7.128761291503906
+      },
+      "stats": {
+        "medianMiB": 359.81640625,
+        "minMiB": 354.28125,
+        "maxMiB": 360.86328125,
+        "jsHeapMedianMiB": 12.321891784667969
+      },
+      "afterRefreshImmediate": {
+        "medianMiB": 421.31640625,
+        "minMiB": 420.51953125,
+        "maxMiB": 422.4609375,
+        "jsHeapMedianMiB": 19.934181213378906
+      },
+      "afterRefresh": {
+        "medianMiB": 386.36328125,
+        "minMiB": 386.30078125,
+        "maxMiB": 389.3828125,
+        "jsHeapMedianMiB": 19.406513214111328
+      },
+      "leave": {
+        "medianMiB": 401.24609375,
+        "minMiB": 401.19140625,
+        "maxMiB": 401.87890625,
+        "jsHeapMedianMiB": 21.647693634033203
+      },
+      "leaveAfterGC": {
+        "medianMiB": 357.9609375,
+        "minMiB": 357.1328125,
+        "maxMiB": 358.3359375,
+        "jsHeapMedianMiB": 8.26434326171875
+      }
+    },
+    "entryMedianMs": 240.30020599998534,
+    "refreshMedianMs": 172.10000002384186,
+    "refreshMinMs": 166.5,
+    "refreshMaxMs": 185.69999998807907,
+    "statsMinusHomeMedianMiB": 56.0,
+    "statsRolesMedianMiB": {
+      "app": 66.2421875,
+      "renderer": 74.984375,
+      "gpu-process": 163.11328125
+    }
+  },
+  "svg": {
+    "runs": 3,
+    "samples": {
+      "home": {
+        "medianMiB": 301.5703125,
+        "minMiB": 301.47265625,
+        "maxMiB": 305.46875,
+        "jsHeapMedianMiB": 7.1333770751953125
+      },
+      "stats": {
+        "medianMiB": 369.00390625,
+        "minMiB": 366.46875,
+        "maxMiB": 369.375,
+        "jsHeapMedianMiB": 17.47891616821289
+      },
+      "afterRefreshImmediate": {
+        "medianMiB": 406.7421875,
+        "minMiB": 403.6015625,
+        "maxMiB": 407.1875,
+        "jsHeapMedianMiB": 22.808940887451172
+      },
+      "afterRefresh": {
+        "medianMiB": 405.05859375,
+        "minMiB": 401.37890625,
+        "maxMiB": 405.1875,
+        "jsHeapMedianMiB": 19.03585433959961
+      },
+      "leave": {
+        "medianMiB": 423.74609375,
+        "minMiB": 420.48046875,
+        "maxMiB": 427.015625,
+        "jsHeapMedianMiB": 21.26898956298828
+      },
+      "leaveAfterGC": {
+        "medianMiB": 355.46484375,
+        "minMiB": 350.79296875,
+        "maxMiB": 358.33203125,
+        "jsHeapMedianMiB": 8.312095642089844
+      }
+    },
+    "entryMedianMs": 242.5933939999959,
+    "refreshMedianMs": 170.80000001192093,
+    "refreshMinMs": 163.59999999403954,
+    "refreshMaxMs": 177.09999999403954,
+    "statsMinusHomeMedianMiB": 64.99609375,
+    "statsRolesMedianMiB": {
+      "app": 65.8203125,
+      "renderer": 101.41015625,
+      "gpu-process": 147.66796875
+    }
+  }
+}

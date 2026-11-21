@@ -11,6 +11,7 @@ export const useActivityStore = defineStore("activity", () => {
   const settingsStore = useSettingsStore();
 
   const activities = ref<Activity[]>([]);
+  let activityLoadSequence = 0;
   const activityModalWasOpen = ref(false);
   const activityDraftBeforeReminder = ref<string | null>(null);
   const activityText = ref("");
@@ -55,8 +56,13 @@ export const useActivityStore = defineStore("activity", () => {
 
   // 按日期拉取活动记录（启动加载/日期切换时由编排方调用）。
   async function fetchForDate(d: string) {
-    activities.value = await api.activities(d);
-    return activities.value;
+    const sequence = ++activityLoadSequence;
+    const rows = await api.activities(d);
+    // 日期切换和保存后的刷新共用顺序，避免迟到结果覆盖当前列表。
+    if (sequence === activityLoadSequence && d === appStore.selectedDate) {
+      activities.value = rows;
+    }
+    return rows;
   }
 
   // 提醒打断时暂存正在编辑的内容，结束后再恢复原状态。
@@ -102,7 +108,7 @@ export const useActivityStore = defineStore("activity", () => {
         activityText.value = "";
         showActivity.value = false;
       }
-      activities.value = await api.activities(appStore.selectedDate);
+      await fetchForDate(appStore.selectedDate);
     } catch (e) {
       appStore.setError(e);
     }

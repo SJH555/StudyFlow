@@ -1,0 +1,1714 @@
+[
+  {
+    "run": 0,
+    "mode": "shell",
+    "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "shell": {
+      "native": {
+        "workingSet": 399446016,
+        "processes": [
+          {
+            "workingSet": 10457088,
+            "name": "msedgewebview2",
+            "privateBytes": 2719744,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 98553856,
+            "name": "msedgewebview2",
+            "privateBytes": 84987904,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 71913472,
+            "name": "msedgewebview2",
+            "privateBytes": 35102720,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 112361472,
+            "name": "msedgewebview2",
+            "privateBytes": 33472512,
+            "role": "browser"
+          },
+          {
+            "workingSet": 35295232,
+            "name": "msedgewebview2",
+            "privateBytes": 11575296,
+            "role": "utility"
+          },
+          {
+            "workingSet": 20205568,
+            "name": "msedgewebview2",
+            "privateBytes": 7647232,
+            "role": "utility"
+          },
+          {
+            "workingSet": 50659328,
+            "name": "StudyFlow",
+            "privateBytes": 68001792,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 243507200,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 3,
+        "Nodes": 33,
+        "JSHeapUsedSize": 3682088,
+        "JSHeapTotalSize": 5505024
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    }
+  },
+  {
+    "run": 0,
+    "mode": "none",
+    "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "home": {
+      "native": {
+        "workingSet": 497500160,
+        "processes": [
+          {
+            "workingSet": 10452992,
+            "name": "msedgewebview2",
+            "privateBytes": 2695168,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39104512,
+            "name": "msedgewebview2",
+            "privateBytes": 11919360,
+            "role": "utility"
+          },
+          {
+            "workingSet": 109395968,
+            "name": "msedgewebview2",
+            "privateBytes": 64086016,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 142364672,
+            "name": "msedgewebview2",
+            "privateBytes": 127909888,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 124346368,
+            "name": "msedgewebview2",
+            "privateBytes": 39133184,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20111360,
+            "name": "msedgewebview2",
+            "privateBytes": 7610368,
+            "role": "utility"
+          },
+          {
+            "workingSet": 51724288,
+            "name": "StudyFlow",
+            "privateBytes": 68059136,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 321413120,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 3,
+        "Nodes": 965,
+        "JSHeapUsedSize": 7478000,
+        "JSHeapTotalSize": 11534336
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "entryMs": 234.23810799999956,
+    "data": {
+      "count": 456,
+      "seconds": 547200,
+      "days": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08",
+        "2026-11-09",
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-15",
+        "2026-11-16",
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25",
+        "2026-11-26",
+        "2026-11-27",
+        "2026-11-28",
+        "2026-11-29",
+        "2026-11-30"
+      ],
+      "actual": [
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "stats": {
+      "native": {
+        "workingSet": 529338368,
+        "processes": [
+          {
+            "workingSet": 10452992,
+            "name": "msedgewebview2",
+            "privateBytes": 2695168,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39157760,
+            "name": "msedgewebview2",
+            "privateBytes": 11927552,
+            "role": "utility"
+          },
+          {
+            "workingSet": 110505984,
+            "name": "msedgewebview2",
+            "privateBytes": 63721472,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 171524096,
+            "name": "msedgewebview2",
+            "privateBytes": 154341376,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 124751872,
+            "name": "msedgewebview2",
+            "privateBytes": 39411712,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20111360,
+            "name": "msedgewebview2",
+            "privateBytes": 7610368,
+            "role": "utility"
+          },
+          {
+            "workingSet": 52834304,
+            "name": "StudyFlow",
+            "privateBytes": 69165056,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 348872704,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 4,
+        "Nodes": 1674,
+        "JSHeapUsedSize": 8579788,
+        "JSHeapTotalSize": 14417920
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "refreshes": [
+      166.5,
+      150.09999999403954,
+      155.69999998807907
+    ],
+    "afterRefreshImmediate": {
+      "native": {
+        "workingSet": 559587328,
+        "processes": [
+          {
+            "workingSet": 10452992,
+            "name": "msedgewebview2",
+            "privateBytes": 2695168,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39190528,
+            "name": "msedgewebview2",
+            "privateBytes": 11927552,
+            "role": "utility"
+          },
+          {
+            "workingSet": 136171520,
+            "name": "msedgewebview2",
+            "privateBytes": 87515136,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 175304704,
+            "name": "msedgewebview2",
+            "privateBytes": 157642752,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 124882944,
+            "name": "msedgewebview2",
+            "privateBytes": 40570880,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20111360,
+            "name": "msedgewebview2",
+            "privateBytes": 7610368,
+            "role": "utility"
+          },
+          {
+            "workingSet": 53473280,
+            "name": "StudyFlow",
+            "privateBytes": 70103040,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 378064896,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 4,
+        "Nodes": 3717,
+        "JSHeapUsedSize": 11832144,
+        "JSHeapTotalSize": 20709376
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "afterRefresh": {
+      "native": {
+        "workingSet": 540241920,
+        "processes": [
+          {
+            "workingSet": 10452992,
+            "name": "msedgewebview2",
+            "privateBytes": 2695168,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39190528,
+            "name": "msedgewebview2",
+            "privateBytes": 11927552,
+            "role": "utility"
+          },
+          {
+            "workingSet": 136114176,
+            "name": "msedgewebview2",
+            "privateBytes": 87515136,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 155987968,
+            "name": "msedgewebview2",
+            "privateBytes": 138215424,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 124895232,
+            "name": "msedgewebview2",
+            "privateBytes": 40570880,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20111360,
+            "name": "msedgewebview2",
+            "privateBytes": 7610368,
+            "role": "utility"
+          },
+          {
+            "workingSet": 53489664,
+            "name": "StudyFlow",
+            "privateBytes": 70103040,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 358637568,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 4,
+        "Nodes": 3717,
+        "JSHeapUsedSize": 11835752,
+        "JSHeapTotalSize": 20709376
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "leave": {
+      "native": {
+        "workingSet": 565583872,
+        "processes": [
+          {
+            "workingSet": 10452992,
+            "name": "msedgewebview2",
+            "privateBytes": 2695168,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39190528,
+            "name": "msedgewebview2",
+            "privateBytes": 11927552,
+            "role": "utility"
+          },
+          {
+            "workingSet": 148279296,
+            "name": "msedgewebview2",
+            "privateBytes": 99606528,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 169570304,
+            "name": "msedgewebview2",
+            "privateBytes": 151773184,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 125329408,
+            "name": "msedgewebview2",
+            "privateBytes": 40595456,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20111360,
+            "name": "msedgewebview2",
+            "privateBytes": 7610368,
+            "role": "utility"
+          },
+          {
+            "workingSet": 52649984,
+            "name": "StudyFlow",
+            "privateBytes": 69103616,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 383311872,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 4,
+        "Nodes": 4358,
+        "JSHeapUsedSize": 14166484,
+        "JSHeapTotalSize": 20709376
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "leaveAfterGC": {
+      "native": {
+        "workingSet": 540524544,
+        "processes": [
+          {
+            "workingSet": 10452992,
+            "name": "msedgewebview2",
+            "privateBytes": 2695168,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39190528,
+            "name": "msedgewebview2",
+            "privateBytes": 11927552,
+            "role": "utility"
+          },
+          {
+            "workingSet": 127688704,
+            "name": "msedgewebview2",
+            "privateBytes": 77156352,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 165097472,
+            "name": "msedgewebview2",
+            "privateBytes": 147259392,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 125333504,
+            "name": "msedgewebview2",
+            "privateBytes": 40595456,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20111360,
+            "name": "msedgewebview2",
+            "privateBytes": 7610368,
+            "role": "utility"
+          },
+          {
+            "workingSet": 52649984,
+            "name": "StudyFlow",
+            "privateBytes": 69103616,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 356347904,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 907,
+        "JSHeapUsedSize": 6771520,
+        "JSHeapTotalSize": 7864320
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    }
+  },
+  {
+    "run": 0,
+    "mode": "canvas",
+    "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "home": {
+      "native": {
+        "workingSet": 541106176,
+        "processes": [
+          {
+            "workingSet": 20070400,
+            "name": "msedgewebview2",
+            "privateBytes": 7618560,
+            "role": "utility"
+          },
+          {
+            "workingSet": 109899776,
+            "name": "msedgewebview2",
+            "privateBytes": 64073728,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 10448896,
+            "name": "msedgewebview2",
+            "privateBytes": 2703360,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39149568,
+            "name": "msedgewebview2",
+            "privateBytes": 11984896,
+            "role": "utility"
+          },
+          {
+            "workingSet": 119922688,
+            "name": "msedgewebview2",
+            "privateBytes": 38551552,
+            "role": "browser"
+          },
+          {
+            "workingSet": 146444288,
+            "name": "msedgewebview2",
+            "privateBytes": 129966080,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 95170560,
+            "name": "StudyFlow",
+            "privateBytes": 67932160,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 322830336,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 3,
+        "Nodes": 965,
+        "JSHeapUsedSize": 7479176,
+        "JSHeapTotalSize": 11272192
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "entryMs": 234.41699199999857,
+    "data": {
+      "count": 456,
+      "seconds": 547200,
+      "days": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08",
+        "2026-11-09",
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-15",
+        "2026-11-16",
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25",
+        "2026-11-26",
+        "2026-11-27",
+        "2026-11-28",
+        "2026-11-29",
+        "2026-11-30"
+      ],
+      "actual": [
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "stats": {
+      "native": {
+        "workingSet": 609144832,
+        "processes": [
+          {
+            "workingSet": 20070400,
+            "name": "msedgewebview2",
+            "privateBytes": 7618560,
+            "role": "utility"
+          },
+          {
+            "workingSet": 130445312,
+            "name": "msedgewebview2",
+            "privateBytes": 78446592,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 10448896,
+            "name": "msedgewebview2",
+            "privateBytes": 2703360,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39202816,
+            "name": "msedgewebview2",
+            "privateBytes": 11993088,
+            "role": "utility"
+          },
+          {
+            "workingSet": 120209408,
+            "name": "msedgewebview2",
+            "privateBytes": 38809600,
+            "role": "browser"
+          },
+          {
+            "workingSet": 190984192,
+            "name": "msedgewebview2",
+            "privateBytes": 172990464,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 97783808,
+            "name": "StudyFlow",
+            "privateBytes": 70688768,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 383250432,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 4,
+        "Nodes": 1681,
+        "JSHeapUsedSize": 12898952,
+        "JSHeapTotalSize": 25952256
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 2,
+        "canvasRgbaBytes": 5320264,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "refreshes": [
+      178.90000000596046,
+      166.90000000596046,
+      173.19999998807907
+    ],
+    "afterRefreshImmediate": {
+      "native": {
+        "workingSet": 676700160,
+        "processes": [
+          {
+            "workingSet": 20070400,
+            "name": "msedgewebview2",
+            "privateBytes": 7618560,
+            "role": "utility"
+          },
+          {
+            "workingSet": 158711808,
+            "name": "msedgewebview2",
+            "privateBytes": 106745856,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 10448896,
+            "name": "msedgewebview2",
+            "privateBytes": 2703360,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39219200,
+            "name": "msedgewebview2",
+            "privateBytes": 12001280,
+            "role": "utility"
+          },
+          {
+            "workingSet": 120250368,
+            "name": "msedgewebview2",
+            "privateBytes": 39874560,
+            "role": "browser"
+          },
+          {
+            "workingSet": 231198720,
+            "name": "msedgewebview2",
+            "privateBytes": 213405696,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 96800768,
+            "name": "StudyFlow",
+            "privateBytes": 69623808,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 451973120,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 4,
+        "Nodes": 3742,
+        "JSHeapUsedSize": 21041624,
+        "JSHeapTotalSize": 31195136
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 2,
+        "canvasRgbaBytes": 5320264,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "afterRefresh": {
+      "native": {
+        "workingSet": 631660544,
+        "processes": [
+          {
+            "workingSet": 20070400,
+            "name": "msedgewebview2",
+            "privateBytes": 7618560,
+            "role": "utility"
+          },
+          {
+            "workingSet": 160952320,
+            "name": "msedgewebview2",
+            "privateBytes": 108814336,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 10448896,
+            "name": "msedgewebview2",
+            "privateBytes": 2703360,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39219200,
+            "name": "msedgewebview2",
+            "privateBytes": 12001280,
+            "role": "utility"
+          },
+          {
+            "workingSet": 120258560,
+            "name": "msedgewebview2",
+            "privateBytes": 39874560,
+            "role": "browser"
+          },
+          {
+            "workingSet": 183906304,
+            "name": "msedgewebview2",
+            "privateBytes": 165949440,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 96804864,
+            "name": "StudyFlow",
+            "privateBytes": 69623808,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 406585344,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 973,
+        "JSHeapUsedSize": 20278280,
+        "JSHeapTotalSize": 34078720
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 2,
+        "canvasRgbaBytes": 5320264,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "leave": {
+      "native": {
+        "workingSet": 650764288,
+        "processes": [
+          {
+            "workingSet": 20070400,
+            "name": "msedgewebview2",
+            "privateBytes": 7618560,
+            "role": "utility"
+          },
+          {
+            "workingSet": 172216320,
+            "name": "msedgewebview2",
+            "privateBytes": 119709696,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 10448896,
+            "name": "msedgewebview2",
+            "privateBytes": 2703360,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39219200,
+            "name": "msedgewebview2",
+            "privateBytes": 12001280,
+            "role": "utility"
+          },
+          {
+            "workingSet": 120713216,
+            "name": "msedgewebview2",
+            "privateBytes": 39915520,
+            "role": "browser"
+          },
+          {
+            "workingSet": 192446464,
+            "name": "msedgewebview2",
+            "privateBytes": 174288896,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 95649792,
+            "name": "StudyFlow",
+            "privateBytes": 68259840,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 424497152,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 1614,
+        "JSHeapUsedSize": 22628580,
+        "JSHeapTotalSize": 36175872
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "leaveAfterGC": {
+      "native": {
+        "workingSet": 611049472,
+        "processes": [
+          {
+            "workingSet": 20070400,
+            "name": "msedgewebview2",
+            "privateBytes": 7618560,
+            "role": "utility"
+          },
+          {
+            "workingSet": 136609792,
+            "name": "msedgewebview2",
+            "privateBytes": 82767872,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 10448896,
+            "name": "msedgewebview2",
+            "privateBytes": 2703360,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 39219200,
+            "name": "msedgewebview2",
+            "privateBytes": 12001280,
+            "role": "utility"
+          },
+          {
+            "workingSet": 120713216,
+            "name": "msedgewebview2",
+            "privateBytes": 39915520,
+            "role": "browser"
+          },
+          {
+            "workingSet": 188338176,
+            "name": "msedgewebview2",
+            "privateBytes": 170176512,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 95649792,
+            "name": "StudyFlow",
+            "privateBytes": 68259840,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 383442944,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 910,
+        "JSHeapUsedSize": 8667748,
+        "JSHeapTotalSize": 9961472
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "exportPrefix": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACA",
+    "series": [
+      {
+        "name": "计划学习",
+        "data": [
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5
+        ]
+      },
+      {
+        "name": "实际学习",
+        "data": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "实际学习趋势",
+        "data": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "run": 0,
+    "mode": "svg",
+    "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "home": {
+      "native": {
+        "workingSet": 539455488,
+        "processes": [
+          {
+            "workingSet": 146296832,
+            "name": "msedgewebview2",
+            "privateBytes": 130064384,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 119758848,
+            "name": "msedgewebview2",
+            "privateBytes": 38420480,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20082688,
+            "name": "msedgewebview2",
+            "privateBytes": 7639040,
+            "role": "utility"
+          },
+          {
+            "workingSet": 39043072,
+            "name": "msedgewebview2",
+            "privateBytes": 11841536,
+            "role": "utility"
+          },
+          {
+            "workingSet": 10461184,
+            "name": "msedgewebview2",
+            "privateBytes": 2707456,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 109170688,
+            "name": "msedgewebview2",
+            "privateBytes": 63393792,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 94642176,
+            "name": "StudyFlow",
+            "privateBytes": 67194880,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 321261568,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 3,
+        "Nodes": 965,
+        "JSHeapUsedSize": 7479044,
+        "JSHeapTotalSize": 11272192
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "entryMs": 246.34935699999915,
+    "data": {
+      "count": 456,
+      "seconds": 547200,
+      "days": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08",
+        "2026-11-09",
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-15",
+        "2026-11-16",
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25",
+        "2026-11-26",
+        "2026-11-27",
+        "2026-11-28",
+        "2026-11-29",
+        "2026-11-30"
+      ],
+      "actual": [
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        28800,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "stats": {
+      "native": {
+        "workingSet": 621629440,
+        "processes": [
+          {
+            "workingSet": 181698560,
+            "name": "msedgewebview2",
+            "privateBytes": 157716480,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 118992896,
+            "name": "msedgewebview2",
+            "privateBytes": 37605376,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20082688,
+            "name": "msedgewebview2",
+            "privateBytes": 7639040,
+            "role": "utility"
+          },
+          {
+            "workingSet": 39100416,
+            "name": "msedgewebview2",
+            "privateBytes": 11857920,
+            "role": "utility"
+          },
+          {
+            "workingSet": 10461184,
+            "name": "msedgewebview2",
+            "privateBytes": 2707456,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 154255360,
+            "name": "msedgewebview2",
+            "privateBytes": 103014400,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 97038336,
+            "name": "StudyFlow",
+            "privateBytes": 69632000,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 390172672,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 4,
+        "Nodes": 1937,
+        "JSHeapUsedSize": 18099328,
+        "JSHeapTotalSize": 26738688
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 2,
+        "chartSvgNodes": 203
+      }
+    },
+    "refreshes": [
+      175.7000000178814,
+      170.19999998807907,
+      184.40000000596046
+    ],
+    "afterRefreshImmediate": {
+      "native": {
+        "workingSet": 667430912,
+        "processes": [
+          {
+            "workingSet": 184504320,
+            "name": "msedgewebview2",
+            "privateBytes": 160681984,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 119418880,
+            "name": "msedgewebview2",
+            "privateBytes": 38043648,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20082688,
+            "name": "msedgewebview2",
+            "privateBytes": 7639040,
+            "role": "utility"
+          },
+          {
+            "workingSet": 39108608,
+            "name": "msedgewebview2",
+            "privateBytes": 11857920,
+            "role": "utility"
+          },
+          {
+            "workingSet": 10461184,
+            "name": "msedgewebview2",
+            "privateBytes": 2707456,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 194527232,
+            "name": "msedgewebview2",
+            "privateBytes": 142864384,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 99328000,
+            "name": "StudyFlow",
+            "privateBytes": 71872512,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 435666944,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 1636,
+        "JSHeapUsedSize": 13090224,
+        "JSHeapTotalSize": 34865152
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 2,
+        "chartSvgNodes": 203
+      }
+    },
+    "afterRefresh": {
+      "native": {
+        "workingSet": 656855040,
+        "processes": [
+          {
+            "workingSet": 169766912,
+            "name": "msedgewebview2",
+            "privateBytes": 145534976,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 119427072,
+            "name": "msedgewebview2",
+            "privateBytes": 38043648,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20082688,
+            "name": "msedgewebview2",
+            "privateBytes": 7639040,
+            "role": "utility"
+          },
+          {
+            "workingSet": 39108608,
+            "name": "msedgewebview2",
+            "privateBytes": 11857920,
+            "role": "utility"
+          },
+          {
+            "workingSet": 10461184,
+            "name": "msedgewebview2",
+            "privateBytes": 2707456,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 198549504,
+            "name": "msedgewebview2",
+            "privateBytes": 146857984,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 99459072,
+            "name": "StudyFlow",
+            "privateBytes": 71995392,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 424636416,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 1636,
+        "JSHeapUsedSize": 24761296,
+        "JSHeapTotalSize": 46399488
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 2,
+        "chartSvgNodes": 203
+      }
+    },
+    "leave": {
+      "native": {
+        "workingSet": 672333824,
+        "processes": [
+          {
+            "workingSet": 183492608,
+            "name": "msedgewebview2",
+            "privateBytes": 159731712,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 119877632,
+            "name": "msedgewebview2",
+            "privateBytes": 38080512,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20082688,
+            "name": "msedgewebview2",
+            "privateBytes": 7639040,
+            "role": "utility"
+          },
+          {
+            "workingSet": 39108608,
+            "name": "msedgewebview2",
+            "privateBytes": 11857920,
+            "role": "utility"
+          },
+          {
+            "workingSet": 10461184,
+            "name": "msedgewebview2",
+            "privateBytes": 2707456,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 203632640,
+            "name": "msedgewebview2",
+            "privateBytes": 151547904,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 95678464,
+            "name": "StudyFlow",
+            "privateBytes": 67989504,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 439554048,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 908,
+        "JSHeapUsedSize": 9997420,
+        "JSHeapTotalSize": 42467328
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "leaveAfterGC": {
+      "native": {
+        "workingSet": 604082176,
+        "processes": [
+          {
+            "workingSet": 176574464,
+            "name": "msedgewebview2",
+            "privateBytes": 152760320,
+            "role": "gpu-process"
+          },
+          {
+            "workingSet": 119877632,
+            "name": "msedgewebview2",
+            "privateBytes": 38080512,
+            "role": "browser"
+          },
+          {
+            "workingSet": 20082688,
+            "name": "msedgewebview2",
+            "privateBytes": 7639040,
+            "role": "utility"
+          },
+          {
+            "workingSet": 39108608,
+            "name": "msedgewebview2",
+            "privateBytes": 11857920,
+            "role": "utility"
+          },
+          {
+            "workingSet": 10461184,
+            "name": "msedgewebview2",
+            "privateBytes": 2707456,
+            "role": "crashpad-handler"
+          },
+          {
+            "workingSet": 142299136,
+            "name": "msedgewebview2",
+            "privateBytes": 88403968,
+            "role": "renderer"
+          },
+          {
+            "workingSet": 95678464,
+            "name": "StudyFlow",
+            "privateBytes": 67989504,
+            "role": "app"
+          }
+        ],
+        "privateBytes": 369438720,
+        "count": 7
+      },
+      "measured": {
+        "Documents": 2,
+        "Nodes": 908,
+        "JSHeapUsedSize": 8715768,
+        "JSHeapTotalSize": 9961472
+      },
+      "surface": {
+        "width": 1380,
+        "height": 920,
+        "dpr": 1.5,
+        "chartCanvasCount": 0,
+        "canvasRgbaBytes": 0,
+        "chartSvgCount": 0,
+        "chartSvgNodes": 0
+      }
+    },
+    "exportPrefix": "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%",
+    "series": [
+      {
+        "name": "计划学习",
+        "data": [
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5,
+          11.5
+        ]
+      },
+      {
+        "name": "实际学习",
+        "data": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "实际学习趋势",
+        "data": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+=== RUN   TestExpiredPlanClosesAtBoundaryAndOnlyOnce
+--- PASS: TestExpiredPlanClosesAtBoundaryAndOnlyOnce (0.03s)
+=== RUN   TestExpiredPausedPlanUnderTenMinutesIsNotCounted
+--- PASS: TestExpiredPausedPlanUnderTenMinutesIsNotCounted (0.02s)
+=== RUN   TestFinishExpiredFallsBackToPlanBoundaryForLegacySession
+--- PASS: TestFinishExpiredFallsBackToPlanBoundaryForLegacySession (0.02s)
+=== RUN   TestListForDatesPreservesRecordsAndLocalDayBreakBudgets
+--- PASS: TestListForDatesPreservesRecordsAndLocalDayBreakBudgets (0.04s)
+=== RUN   TestListForDatesValidatesAndBoundsRequest
+--- PASS: TestListForDatesValidatesAndBoundsRequest (0.01s)
+=== RUN   TestListForDatesUsesLocalDayAcrossClockChanges
+=== RUN   TestListForDatesUsesLocalDayAcrossClockChanges/2026-03-08
+=== RUN   TestListForDatesUsesLocalDayAcrossClockChanges/2026-11-01
+--- PASS: TestListForDatesUsesLocalDayAcrossClockChanges (0.06s)
+    --- PASS: TestListForDatesUsesLocalDayAcrossClockChanges/2026-03-08 (0.03s)
+    --- PASS: TestListForDatesUsesLocalDayAcrossClockChanges/2026-11-01 (0.04s)
+=== RUN   TestManualMinimumDuration
+=== RUN   TestManualMinimumDuration/5m0s
+=== RUN   TestManualMinimumDuration/9m59s
+=== RUN   TestManualMinimumDuration/9m59.999s
+=== RUN   TestManualMinimumDuration/10m0s
+=== RUN   TestManualMinimumDuration/10m1s
+--- PASS: TestManualMinimumDuration (0.07s)
+    --- PASS: TestManualMinimumDuration/5m0s (0.01s)
+    --- PASS: TestManualMinimumDuration/9m59s (0.01s)
+    --- PASS: TestManualMinimumDuration/9m59.999s (0.01s)
+    --- PASS: TestManualMinimumDuration/10m0s (0.01s)
+    --- PASS: TestManualMinimumDuration/10m1s (0.01s)
+=== RUN   TestLegacyShortManualRecordNoLongerBlocksAfterStartup
+--- PASS: TestLegacyShortManualRecordNoLongerBlocksAfterStartup (0.02s)
+=== RUN   TestStartPersistsBoundaryAndRollsBackOldTimerOnInsertFailure
+--- PASS: TestStartPersistsBoundaryAndRollsBackOldTimerOnInsertFailure (0.02s)
+=== RUN   TestStartAnchorsEarlyStartAndFinishesAtPlannedBoundary
+--- PASS: TestStartAnchorsEarlyStartAndFinishesAtPlannedBoundary (0.02s)
+PASS

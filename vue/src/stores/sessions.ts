@@ -18,6 +18,9 @@ export const useSessionsStore = defineStore("sessions", () => {
 
   const sessions = ref<Session[]>([]);
   const liveSession = ref<Session | null>(null);
+  let selectedLoadSequence = 0;
+  let todayLoadSequence = 0;
+  let stopping = false;
   const startingPlanId = ref(0);
   const pendingStartPlan = ref<Plan | null>(null);
   const showFinishConfirm = ref(false);
@@ -35,19 +38,49 @@ export const useSessionsStore = defineStore("sessions", () => {
     () => settingsStore.settings.pausedPlanDate === appStore.todayKey,
   );
 
-  // 重新拉取今天的记录并刷新进行中会话。
-  async function refreshToday() {
-    const todaySessions = await api.sessions(appStore.todayKey);
+  function publishSelected(date: string, sequence: number, rows: Session[]) {
+    if (sequence === selectedLoadSequence && date === appStore.selectedDate) {
+      sessions.value = rows;
+    }
+  }
+
+  // 今日的进行中会话与选中日期列表分别更新，历史日期请求不影响计时器。
+  async function refreshToday(updateSelected = appStore.page === "today") {
+    const today = appStore.todayKey;
+    const todaySequence = ++todayLoadSequence;
+    const selectedSequence = updateSelected && today === appStore.selectedDate
+      ? ++selectedLoadSequence
+      : null;
+    const todaySessions = await api.sessions(today);
     appStore.tick();
-    liveSession.value = todaySessions.find((s) => !s.endAt) || null;
-    if (appStore.page === "today") sessions.value = todaySessions;
+    if (todaySequence === todayLoadSequence && today === appStore.todayKey) {
+      liveSession.value = todaySessions.find((s) => !s.endAt) || null;
+    }
+    if (selectedSequence !== null && today === appStore.todayKey) {
+      publishSelected(today, selectedSequence, todaySessions);
+    }
     return todaySessions;
   }
 
   // 按日期拉取记录（页面切换/日期切换时由编排方调用）。
   async function fetchForDate(d: string) {
-    sessions.value = await api.sessions(d);
-    return sessions.value;
+    const sequence = ++selectedLoadSequence;
+    const rows = await api.sessions(d);
+    publishSelected(d, sequence, rows);
+    return rows;
+  }
+
+  async function loadInitial() {
+    const selected = appStore.selectedDate;
+    if (selected === appStore.todayKey) {
+      await refreshToday(true);
+      return;
+    }
+    const sequence = selectedLoadSequence;
+    await refreshToday(false);
+    if (selected === appStore.selectedDate && sequence === selectedLoadSequence) {
+      await fetchForDate(selected);
+    }
   }
 
   function openManual() {
@@ -158,16 +191,28 @@ export const useSessionsStore = defineStore("sessions", () => {
   }
 
   async function stop() {
-    if (!active.value) return;
+    const session = active.value;
+    if (!session || stopping) return false;
+    stopping = true;
     try {
-      const result = await api.finish(active.value.id);
+      const result = await api.finish(session.id);
       appStore.tick();
       showFinishConfirm.value = false;
-      await appStore.reload();
-      if (!result.saved) appStore.notifyTop("本次不足 10 分钟，未计入学习记录");
+      if (liveSession.value?.id === session.id) liveSession.value = null;
       if (appStore.focusMode) appStore.exitFocus();
+      if (!result.saved) appStore.notifyTop("本次不足 10 分钟，未计入学习记录");
+
+      await refreshToday().catch((error) => {
+        // 已确认结束的记录不能在刷新失败时继续显示为进行中。
+        sessions.value = sessions.value.filter((row) => row.id !== session.id || row.endAt);
+        appStore.setError(error);
+      });
+      return true;
     } catch (e) {
       appStore.setError(e);
+      return false;
+    } finally {
+      stopping = false;
     }
   }
 
@@ -295,6 +340,7 @@ export const useSessionsStore = defineStore("sessions", () => {
     showTaskReminder,
     taskReminderEnded,
     refreshToday,
+    loadInitial,
     fetchForDate,
     openManual,
     startCurrent,

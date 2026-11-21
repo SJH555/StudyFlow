@@ -15,7 +15,9 @@ func autoBackupLoop(ctx context.Context, store *App) {
 	if ctx.Err() != nil {
 		return
 	}
-	check()
+	_ = measureStartup("首次备份检查", func() error {
+		return store.scheduler.WithContext(ctx).BackupCheck(time.Now())
+	})
 	ticker := time.NewTicker(time.Minute)
 	defer ticker.Stop()
 	for {

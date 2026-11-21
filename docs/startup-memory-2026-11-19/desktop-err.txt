@@ -1,0 +1,15 @@
+2026/11/19 20:10:54 启动任务 测试维护 等待首页 0s
+2026/11/19 20:10:54 启动任务 测试维护 执行 0s，错误=非关键任务失败
+2026/11/19 20:10:54 database startup: 升级前备份失败：injected backup failure
+2026/11/19 20:10:54 database startup: 数据库升级异常：backup panic
+2026/11/19 20:10:54 database startup: context canceled
+2026/11/19 20:10:54 database startup: 升级前备份失败：mkdir C:\Users\jhsong\AppData\Local\Temp\TestUpgradeActualBackupFailureDoesNotRegister290578567\001\base\data\backups: The system cannot find the path specified.
+2026/11/19 20:10:54 database startup: database requires a newer application: database 2, application supports 1
+2026/11/19 20:10:54 database startup: unrecognized database structure: unexpected table unrelated
+2026/11/19 20:10:54 database startup: open startup study database C:\Users\jhsong\AppData\Local\Temp\TestUpgradeBlocksNewerUnknownAndMissingWithoutWritesmissing1996775904\001\base\data\study.db: 保存的数据目录缺少 study.db 或无法读取：GetFileAttributesEx C:\Users\jhsong\AppData\Local\Temp\TestUpgradeBlocksNewerUnknownAndMissingWithoutWritesmissing1996775904\001\base\data\study.db: The system cannot find the path specified.
+2026/11/19 20:10:54 database startup: 已存在的数据库为空，为避免覆盖数据，已停止启动
+2026/11/19 20:10:54 database startup: validate recovered study database C:\Users\jhsong\AppData\Local\Temp\TestUpgradeRecoveryRejectsNewerBeforeRetiringOldLocation98334201\001\base\target\study.db: database requires a newer application: database 2, application supports 1
+2026/11/19 20:10:54 database startup: settings initialization failed
+2026/11/19 20:10:54 database startup: unrecognized database structure: unexpected table feature CONFLICT in subjects
+2026/11/19 20:10:54 database startup: unrecognized database structure: unexpected table feature CONFLICT in subjects
+2026/11/19 20:10:54 database startup: unrecognized database structure: unexpected table feature CHECK in subjects

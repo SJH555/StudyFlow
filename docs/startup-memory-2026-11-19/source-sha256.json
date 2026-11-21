@@ -1,0 +1,15 @@
+{
+  "desktop/startup_schedule.go": "2ef10a47c50b0bb365533fdf6219b4758d47463d570e17246b9f0361fd2c8984",
+  "desktop/main.go": "150e179babadb90fc4712c8253238b9b6d65bc1601526e04fe28882a13af2cfb",
+  "desktop/app.go": "c745916430dafd0649e6624357740a48f16ab3344cf0e225f9b80a37a364f116",
+  "desktop/backup.go": "ef9a3839936d9d4279002b898d28e8f7ceb6993c5f5589f28e1c4667fb7f4365",
+  "desktop/api_routes.go": "c8999759a36bc42c05b0a18b357e496df069662ff952813b3f9f0d8e00875e82",
+  "internal/infrastructure/reminder/ringtone.go": "cca037f2f6f98ca01256f823b81b69f14c3014b2173c5be3c60bf019db729e83",
+  "vue/src/features/useBootstrap.ts": "be32fa1407548c4fa2de674a7c6410ca1b8b5a4ec65b14a03eb6006bf8fc61cb",
+  "vue/src/stores/sessions.ts": "df203c11118421252b2eda72ecbfb5dac89b9056f5c0a8191cb862eebdcf1de2",
+  "vue/src/stores/stats.ts": "48293cb220bf4e8278f157c81b9d62a228fa05d4a3dd3f6001840e1f1d9b597d",
+  "vue/src/features/stats/useCharts.ts": "55a17c22a187248f460ccfbc8bb3239ef277d8081a1e4bb36a91cec09f3153c1",
+  "vue/src/features/stats/StatsPage.vue": "1ba99eddd4581ee96de650a4e840ef0749884fa8e20462606b5b67762fa87879",
+  "vue/src/features/export/exportHtml.ts": "e4f379f6ffd8f8a0523e7986ccccb62e979e3e2b9bc37fca5ef4668fd6e45e1c",
+  "vue/src/api.ts": "1a17f43436f89b8474ed05fac7f1842c74ab56665f0495584d3bef28da06a529"
+}

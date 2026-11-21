@@ -1,6 +1,6 @@
 import { nextTick, type ComputedRef, type Ref } from "vue";
 import { storeToRefs } from "pinia";
-import type { ECharts } from "echarts";
+import type { EChartsType as ECharts } from "echarts/core";
 import { api, type Subject } from "../../api";
 import { dateKey, fmt, formatDateChinese } from "../../shared/format";
 import { useAppStore } from "../../stores/app";

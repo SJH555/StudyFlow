@@ -1,0 +1,2646 @@
+[
+  {
+    "run": 0,
+    "variant": "before",
+    "launchToHomeMs": 927.1691490000001,
+    "switches": [
+      535.5472120000002,
+      1764.769412999999,
+      1765.188075
+    ],
+    "refreshes": [
+      {
+        "ms": 1702,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 58.599999994039536,
+          "studyflow:stats:queries": 1605.800000011921,
+          "studyflow:stats:layout": 11.700000017881393,
+          "studyflow:stats:idle-project": 0,
+          "studyflow:stats:draw-project": 6,
+          "studyflow:stats:idle-trend": 2.199999988079071,
+          "studyflow:stats:draw-trend": 8.199999988079071
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 1718.1000000238419,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 59.60000002384186,
+          "studyflow:stats:queries": 1615.5999999940395,
+          "studyflow:stats:layout": 11.300000011920929,
+          "studyflow:stats:idle-project": 8.199999988079071,
+          "studyflow:stats:draw-project": 5.199999988079071,
+          "studyflow:stats:idle-trend": 1,
+          "studyflow:stats:draw-trend": 7.4000000059604645
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 1733.699999988079,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 65.60000002384186,
+          "studyflow:stats:queries": 1626.2999999821186,
+          "studyflow:stats:layout": 10.600000023841858,
+          "studyflow:stats:idle-project": 0.699999988079071,
+          "studyflow:stats:draw-project": 5,
+          "studyflow:stats:idle-trend": 9.300000011920929,
+          "studyflow:stats:draw-trend": 7
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 463392768,
+      "processes": [
+        {
+          "workingSet": 100921344,
+          "name": "msedgewebview2",
+          "privateBytes": 54890496,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 145260544,
+          "name": "msedgewebview2",
+          "privateBytes": 130985984,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 35401728,
+          "name": "msedgewebview2",
+          "privateBytes": 11714560,
+          "role": "utility"
+        },
+        {
+          "workingSet": 99221504,
+          "name": "msedgewebview2",
+          "privateBytes": 28741632,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10477568,
+          "name": "msedgewebview2",
+          "privateBytes": 2719744,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20172800,
+          "name": "msedgewebview2",
+          "privateBytes": 7610368,
+          "role": "utility"
+        },
+        {
+          "workingSet": 51937280,
+          "name": "StudyFlow",
+          "privateBytes": 68603904,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 305266688,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5648628
+      }
+    },
+    "statsMemory": {
+      "workingSet": 580407296,
+      "processes": [
+        {
+          "workingSet": 136384512,
+          "name": "msedgewebview2",
+          "privateBytes": 79745024,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 208478208,
+          "name": "msedgewebview2",
+          "privateBytes": 190414848,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 36134912,
+          "name": "msedgewebview2",
+          "privateBytes": 12345344,
+          "role": "utility"
+        },
+        {
+          "workingSet": 115523584,
+          "name": "msedgewebview2",
+          "privateBytes": 37404672,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10477568,
+          "name": "msedgewebview2",
+          "privateBytes": 2719744,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20189184,
+          "name": "msedgewebview2",
+          "privateBytes": 7651328,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53219328,
+          "name": "StudyFlow",
+          "privateBytes": 70156288,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 400437248,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9210544
+      }
+    },
+    "afterMemory": {
+      "workingSet": 596865024,
+      "processes": [
+        {
+          "workingSet": 139010048,
+          "name": "msedgewebview2",
+          "privateBytes": 81633280,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 220835840,
+          "name": "msedgewebview2",
+          "privateBytes": 201089024,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 36507648,
+          "name": "msedgewebview2",
+          "privateBytes": 12644352,
+          "role": "utility"
+        },
+        {
+          "workingSet": 116617216,
+          "name": "msedgewebview2",
+          "privateBytes": 37851136,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10477568,
+          "name": "msedgewebview2",
+          "privateBytes": 2719744,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20189184,
+          "name": "msedgewebview2",
+          "privateBytes": 7651328,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53227520,
+          "name": "StudyFlow",
+          "privateBytes": 70184960,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 413773824,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8951716
+      }
+    },
+    "afterMemoryImmediate": {
+      "workingSet": 611172352,
+      "processes": [
+        {
+          "workingSet": 139358208,
+          "name": "msedgewebview2",
+          "privateBytes": 82264064,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 234659840,
+          "name": "msedgewebview2",
+          "privateBytes": 215019520,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 36507648,
+          "name": "msedgewebview2",
+          "privateBytes": 12644352,
+          "role": "utility"
+        },
+        {
+          "workingSet": 116457472,
+          "name": "msedgewebview2",
+          "privateBytes": 37830656,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10477568,
+          "name": "msedgewebview2",
+          "privateBytes": 2719744,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20189184,
+          "name": "msedgewebview2",
+          "privateBytes": 7651328,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53522432,
+          "name": "StudyFlow",
+          "privateBytes": 70479872,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 428609536,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8958948
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 0,
+    "variant": "after",
+    "launchToHomeMs": 943.6140870000017,
+    "switches": [
+      261.21273400000064,
+      216.52812500000073,
+      223.15510699999868
+    ],
+    "refreshes": [
+      {
+        "ms": 358.69999998807907,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 121.69999998807907,
+          "studyflow:stats:queries": 148.80000001192093,
+          "studyflow:stats:layout": 22.599999994039536,
+          "studyflow:stats:idle-project": 5,
+          "studyflow:stats:draw-project": 9.099999994039536,
+          "studyflow:stats:idle-trend": 18.80000001192093,
+          "studyflow:stats:draw-trend": 15.400000005960464
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 172.5,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 65.7999999821186,
+          "studyflow:stats:queries": 68.09999999403954,
+          "studyflow:stats:layout": 11.800000011920929,
+          "studyflow:stats:idle-project": 1.899999976158142,
+          "studyflow:stats:draw-project": 5.300000011920929,
+          "studyflow:stats:idle-trend": 2.300000011920929,
+          "studyflow:stats:draw-trend": 7.5
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 172.40000000596046,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 65.60000002384186,
+          "studyflow:stats:queries": 70.09999999403954,
+          "studyflow:stats:layout": 11.199999988079071,
+          "studyflow:stats:idle-project": 2.0999999940395355,
+          "studyflow:stats:draw-project": 5.200000017881393,
+          "studyflow:stats:idle-trend": 1.5,
+          "studyflow:stats:draw-trend": 7
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 462946304,
+      "processes": [
+        {
+          "workingSet": 145305600,
+          "name": "msedgewebview2",
+          "privateBytes": 131194880,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 99237888,
+          "name": "msedgewebview2",
+          "privateBytes": 29761536,
+          "role": "browser"
+        },
+        {
+          "workingSet": 20172800,
+          "name": "msedgewebview2",
+          "privateBytes": 7593984,
+          "role": "utility"
+        },
+        {
+          "workingSet": 35385344,
+          "name": "msedgewebview2",
+          "privateBytes": 11689984,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2703360,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 101519360,
+          "name": "msedgewebview2",
+          "privateBytes": 54865920,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 50864128,
+          "name": "StudyFlow",
+          "privateBytes": 67100672,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 304910336,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5649476
+      }
+    },
+    "statsMemory": {
+      "workingSet": 569073664,
+      "processes": [
+        {
+          "workingSet": 217874432,
+          "name": "msedgewebview2",
+          "privateBytes": 200613888,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 100380672,
+          "name": "msedgewebview2",
+          "privateBytes": 30715904,
+          "role": "browser"
+        },
+        {
+          "workingSet": 20185088,
+          "name": "msedgewebview2",
+          "privateBytes": 7630848,
+          "role": "utility"
+        },
+        {
+          "workingSet": 35266560,
+          "name": "msedgewebview2",
+          "privateBytes": 11567104,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2703360,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 132239360,
+          "name": "msedgewebview2",
+          "privateBytes": 75821056,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 52666368,
+          "name": "StudyFlow",
+          "privateBytes": 69300224,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 398352384,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9151396
+      }
+    },
+    "afterMemory": {
+      "workingSet": 584720384,
+      "processes": [
+        {
+          "workingSet": 223027200,
+          "name": "msedgewebview2",
+          "privateBytes": 204365824,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 114630656,
+          "name": "msedgewebview2",
+          "privateBytes": 36179968,
+          "role": "browser"
+        },
+        {
+          "workingSet": 20185088,
+          "name": "msedgewebview2",
+          "privateBytes": 7630848,
+          "role": "utility"
+        },
+        {
+          "workingSet": 35397632,
+          "name": "msedgewebview2",
+          "privateBytes": 11599872,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2703360,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 129138688,
+          "name": "msedgewebview2",
+          "privateBytes": 72142848,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 51879936,
+          "name": "StudyFlow",
+          "privateBytes": 68018176,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 402640896,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8934076
+      }
+    },
+    "afterMemoryImmediate": {
+      "workingSet": 605478912,
+      "processes": [
+        {
+          "workingSet": 247480320,
+          "name": "msedgewebview2",
+          "privateBytes": 229687296,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 100724736,
+          "name": "msedgewebview2",
+          "privateBytes": 30617600,
+          "role": "browser"
+        },
+        {
+          "workingSet": 20185088,
+          "name": "msedgewebview2",
+          "privateBytes": 7630848,
+          "role": "utility"
+        },
+        {
+          "workingSet": 35295232,
+          "name": "msedgewebview2",
+          "privateBytes": 11591680,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2703360,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 139456512,
+          "name": "msedgewebview2",
+          "privateBytes": 82595840,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 51875840,
+          "name": "StudyFlow",
+          "privateBytes": 68018176,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 432844800,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8941148
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 1,
+    "variant": "before",
+    "launchToHomeMs": 924.6808489999967,
+    "switches": [
+      1001.0752929999944,
+      1761.2415869999968,
+      1764.4179059999951
+    ],
+    "refreshes": [
+      {
+        "ms": 1701.199999988079,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 57.69999998807907,
+          "studyflow:stats:queries": 1606,
+          "studyflow:stats:layout": 11.5,
+          "studyflow:stats:idle-project": 0.29999998211860657,
+          "studyflow:stats:draw-project": 5.699999988079071,
+          "studyflow:stats:idle-trend": 1.4000000059604645,
+          "studyflow:stats:draw-trend": 8.299999982118607
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 1718.5999999940395,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 62.900000005960464,
+          "studyflow:stats:queries": 1610.5,
+          "studyflow:stats:layout": 12.300000011920929,
+          "studyflow:stats:idle-project": 0.09999999403953552,
+          "studyflow:stats:draw-project": 5.9000000059604645,
+          "studyflow:stats:idle-trend": 9.199999988079071,
+          "studyflow:stats:draw-trend": 7.9000000059604645
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 1733.2000000178814,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 62.20000001788139,
+          "studyflow:stats:queries": 1629.7999999821186,
+          "studyflow:stats:layout": 10.699999988079071,
+          "studyflow:stats:idle-project": 0,
+          "studyflow:stats:draw-project": 5.5,
+          "studyflow:stats:idle-trend": 1.0999999940395355,
+          "studyflow:stats:draw-trend": 7.200000017881393
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 459513856,
+      "processes": [
+        {
+          "workingSet": 140722176,
+          "name": "msedgewebview2",
+          "privateBytes": 126636032,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 20197376,
+          "name": "msedgewebview2",
+          "privateBytes": 7606272,
+          "role": "utility"
+        },
+        {
+          "workingSet": 99262464,
+          "name": "msedgewebview2",
+          "privateBytes": 28848128,
+          "role": "browser"
+        },
+        {
+          "workingSet": 101163008,
+          "name": "msedgewebview2",
+          "privateBytes": 55078912,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2715648,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 35459072,
+          "name": "msedgewebview2",
+          "privateBytes": 11759616,
+          "role": "utility"
+        },
+        {
+          "workingSet": 52240384,
+          "name": "StudyFlow",
+          "privateBytes": 68599808,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 301244416,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5649264
+      }
+    },
+    "statsMemory": {
+      "workingSet": 579571712,
+      "processes": [
+        {
+          "workingSet": 208125952,
+          "name": "msedgewebview2",
+          "privateBytes": 190435328,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 20213760,
+          "name": "msedgewebview2",
+          "privateBytes": 7647232,
+          "role": "utility"
+        },
+        {
+          "workingSet": 115458048,
+          "name": "msedgewebview2",
+          "privateBytes": 36433920,
+          "role": "browser"
+        },
+        {
+          "workingSet": 135507968,
+          "name": "msedgewebview2",
+          "privateBytes": 79753216,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2715648,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 36257792,
+          "name": "msedgewebview2",
+          "privateBytes": 12439552,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53538816,
+          "name": "StudyFlow",
+          "privateBytes": 69017600,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 398442496,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9214296
+      }
+    },
+    "afterMemory": {
+      "workingSet": 595185664,
+      "processes": [
+        {
+          "workingSet": 218996736,
+          "name": "msedgewebview2",
+          "privateBytes": 199495680,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 20213760,
+          "name": "msedgewebview2",
+          "privateBytes": 7647232,
+          "role": "utility"
+        },
+        {
+          "workingSet": 116637696,
+          "name": "msedgewebview2",
+          "privateBytes": 36958208,
+          "role": "browser"
+        },
+        {
+          "workingSet": 138600448,
+          "name": "msedgewebview2",
+          "privateBytes": 81899520,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2715648,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 36589568,
+          "name": "msedgewebview2",
+          "privateBytes": 12722176,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53678080,
+          "name": "StudyFlow",
+          "privateBytes": 68927488,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 410365952,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8945192
+      }
+    },
+    "afterMemoryImmediate": {
+      "workingSet": 616824832,
+      "processes": [
+        {
+          "workingSet": 240398336,
+          "name": "msedgewebview2",
+          "privateBytes": 220995584,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 20213760,
+          "name": "msedgewebview2",
+          "privateBytes": 7647232,
+          "role": "utility"
+        },
+        {
+          "workingSet": 116498432,
+          "name": "msedgewebview2",
+          "privateBytes": 36958208,
+          "role": "browser"
+        },
+        {
+          "workingSet": 138981376,
+          "name": "msedgewebview2",
+          "privateBytes": 82132992,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2715648,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 36589568,
+          "name": "msedgewebview2",
+          "privateBytes": 12722176,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53673984,
+          "name": "StudyFlow",
+          "privateBytes": 68927488,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 432099328,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8952924
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 1,
+    "variant": "after",
+    "launchToHomeMs": 948.1944230000008,
+    "switches": [
+      489.17527800000244,
+      230.11750600000232,
+      216.58632000000216
+    ],
+    "refreshes": [
+      {
+        "ms": 360.7000000178814,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 125.30000001192093,
+          "studyflow:stats:queries": 152.40000000596046,
+          "studyflow:stats:layout": 27.200000017881393,
+          "studyflow:stats:idle-project": 5.899999976158142,
+          "studyflow:stats:draw-project": 10.900000005960464,
+          "studyflow:stats:idle-trend": 9.300000011920929,
+          "studyflow:stats:draw-trend": 14.900000005960464
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 171.7000000178814,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 61.900000005960464,
+          "studyflow:stats:queries": 72.19999998807907,
+          "studyflow:stats:layout": 11.400000005960464,
+          "studyflow:stats:idle-project": 1.9000000059604645,
+          "studyflow:stats:draw-project": 5.0999999940395355,
+          "studyflow:stats:idle-trend": 2.7000000178813934,
+          "studyflow:stats:draw-trend": 7.0999999940395355
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ms": 178.40000000596046,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 66.40000000596046,
+          "studyflow:stats:queries": 74.5,
+          "studyflow:stats:layout": 12.299999982118607,
+          "studyflow:stats:idle-project": 1.4000000059604645,
+          "studyflow:stats:draw-project": 4.800000011920929,
+          "studyflow:stats:idle-trend": 3.0999999940395355,
+          "studyflow:stats:draw-trend": 6.299999982118607
+        },
+        "correctness": {
+          "recordHash": "964b017e89fd76e9586be95c966f432fcda9e930902f933b7ee4d90c37d5f280",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                0
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 492912640,
+      "processes": [
+        {
+          "workingSet": 20213760,
+          "name": "msedgewebview2",
+          "privateBytes": 7651328,
+          "role": "utility"
+        },
+        {
+          "workingSet": 101318656,
+          "name": "msedgewebview2",
+          "privateBytes": 54894592,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 35303424,
+          "name": "msedgewebview2",
+          "privateBytes": 11636736,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2707456,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 98992128,
+          "name": "msedgewebview2",
+          "privateBytes": 28389376,
+          "role": "browser"
+        },
+        {
+          "workingSet": 145313792,
+          "name": "msedgewebview2",
+          "privateBytes": 131014656,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 30097408,
+          "name": "NhNotifSys",
+          "privateBytes": 28737536,
+          "role": "browser"
+        },
+        {
+          "workingSet": 51212288,
+          "name": "StudyFlow",
+          "privateBytes": 68046848,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 333078528,
+      "count": 8,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5649528
+      }
+    },
+    "statsMemory": {
+      "workingSet": 597925888,
+      "processes": [
+        {
+          "workingSet": 20213760,
+          "name": "msedgewebview2",
+          "privateBytes": 7651328,
+          "role": "utility"
+        },
+        {
+          "workingSet": 128032768,
+          "name": "msedgewebview2",
+          "privateBytes": 71614464,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 35307520,
+          "name": "msedgewebview2",
+          "privateBytes": 11636736,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2707456,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 100270080,
+          "name": "msedgewebview2",
+          "privateBytes": 29384704,
+          "role": "browser"
+        },
+        {
+          "workingSet": 219688960,
+          "name": "msedgewebview2",
+          "privateBytes": 202113024,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 30097408,
+          "name": "NhNotifSys",
+          "privateBytes": 28737536,
+          "role": "browser"
+        },
+        {
+          "workingSet": 53854208,
+          "name": "StudyFlow",
+          "privateBytes": 70373376,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 424218624,
+      "count": 8,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9135500
+      }
+    },
+    "afterMemory": {
+      "workingSet": 618012672,
+      "processes": [
+        {
+          "workingSet": 20213760,
+          "name": "msedgewebview2",
+          "privateBytes": 7651328,
+          "role": "utility"
+        },
+        {
+          "workingSet": 128745472,
+          "name": "msedgewebview2",
+          "privateBytes": 71733248,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 35459072,
+          "name": "msedgewebview2",
+          "privateBytes": 11689984,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2707456,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 114425856,
+          "name": "msedgewebview2",
+          "privateBytes": 34766848,
+          "role": "browser"
+        },
+        {
+          "workingSet": 226095104,
+          "name": "msedgewebview2",
+          "privateBytes": 207335424,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 30097408,
+          "name": "NhNotifSys",
+          "privateBytes": 28737536,
+          "role": "browser"
+        },
+        {
+          "workingSet": 52514816,
+          "name": "StudyFlow",
+          "privateBytes": 68759552,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 433381376,
+      "count": 8,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8928088
+      }
+    },
+    "afterMemoryImmediate": {
+      "workingSet": 639045632,
+      "processes": [
+        {
+          "workingSet": 20213760,
+          "name": "msedgewebview2",
+          "privateBytes": 7651328,
+          "role": "utility"
+        },
+        {
+          "workingSet": 138944512,
+          "name": "msedgewebview2",
+          "privateBytes": 82436096,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 35332096,
+          "name": "msedgewebview2",
+          "privateBytes": 11657216,
+          "role": "utility"
+        },
+        {
+          "workingSet": 10461184,
+          "name": "msedgewebview2",
+          "privateBytes": 2707456,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 100556800,
+          "name": "msedgewebview2",
+          "privateBytes": 29229056,
+          "role": "browser"
+        },
+        {
+          "workingSet": 250974208,
+          "name": "msedgewebview2",
+          "privateBytes": 232857600,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 30097408,
+          "name": "NhNotifSys",
+          "privateBytes": 28737536,
+          "role": "browser"
+        },
+        {
+          "workingSet": 52465664,
+          "name": "StudyFlow",
+          "privateBytes": 68710400,
+          "role": "app"
+        }
+      ],
+      "privateBytes": 463986688,
+      "count": 8,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8935236
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  }
+]

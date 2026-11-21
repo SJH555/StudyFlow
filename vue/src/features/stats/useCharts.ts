@@ -1,9 +1,25 @@
 import { ref, type ComputedRef, type Ref } from "vue";
-import * as echarts from "echarts";
+import * as echarts from "echarts/core";
+import { BarChart, LineChart } from "echarts/charts";
+import {
+  GridComponent,
+  LegendComponent,
+  TooltipComponent,
+} from "echarts/components";
+import { CanvasRenderer } from "echarts/renderers";
 import { useTheme } from "vuetify";
 import type { Subject } from "../../api";
 import { dateKey, fmt, formatDateChinese } from "../../shared/format";
 import { chartSeriesColors, chartTheme } from "../../shared/chartTheme";
+
+echarts.use([
+  BarChart,
+  LineChart,
+  GridComponent,
+  LegendComponent,
+  TooltipComponent,
+  CanvasRenderer,
+]);
 
 // 图表渲染：用 ECharts 渲染学习趋势图与项目对比图，并提供导出所需的实例引用。
 type ChartInputs = {

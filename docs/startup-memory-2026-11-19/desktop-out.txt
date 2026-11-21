@@ -1,0 +1,101 @@
+=== RUN   TestBackupChecksSerializeWithDatabaseRequests
+--- PASS: TestBackupChecksSerializeWithDatabaseRequests (0.03s)
+=== RUN   TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable
+--- PASS: TestDesktopQuitDrainsBeforeSecondQuitAndKeepsMainThreadAvailable (0.01s)
+=== RUN   TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork
+--- PASS: TestDesktopShutdownCancelsDelayedWorkAndWaitsForActiveWork (0.00s)
+=== RUN   TestDesktopShutdownWaitsForActualAPICall
+--- PASS: TestDesktopShutdownWaitsForActualAPICall (0.01s)
+=== RUN   TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe
+--- PASS: TestDesktopTaskAdmissionAndRepeatedQuitAreRaceSafe (0.00s)
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error
+=== RUN   TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task
+--- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase (0.47s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/data-directory (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/ringtone (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/second-instance (0.04s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/tray-settings (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/normal-return (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/early-second-launch (0.04s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/cleanup-error (0.05s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/prepare-and-cleanup-error (0.04s)
+    --- PASS: TestDesktopStartupFailureReleasesAdoptedDatabase/run-error-with-task (0.05s)
+=== RUN   TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown
+--- PASS: TestSecondLaunchQueuesUntilActivationAndStopsOnShutdown (0.00s)
+=== RUN   TestSecondLaunchActiveCallbackDrainsBeforeQuit
+--- PASS: TestSecondLaunchActiveCallbackDrainsBeforeQuit (0.00s)
+=== RUN   TestHomeReadyBindingDoesNotBorrowDatabase
+--- PASS: TestHomeReadyBindingDoesNotBorrowDatabase (0.00s)
+=== RUN   TestStartupMaintenanceWaitsForHomeAndCancels
+--- PASS: TestStartupMaintenanceWaitsForHomeAndCancels (0.00s)
+=== RUN   TestStartupMaintenancePublishesHomeOnce
+--- PASS: TestStartupMaintenancePublishesHomeOnce (0.00s)
+=== RUN   TestUpgradeStartupConsentBackupAndRepeat
+--- PASS: TestUpgradeStartupConsentBackupAndRepeat (0.06s)
+=== RUN   TestUpgradeFreshStartupInitializesOnce
+--- PASS: TestUpgradeFreshStartupInitializesOnce (0.01s)
+=== RUN   TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase
+=== RUN   TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/cancel
+=== RUN   TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/backup
+=== RUN   TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/panic
+=== RUN   TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/shutdown
+--- PASS: TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase (0.09s)
+    --- PASS: TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/cancel (0.02s)
+    --- PASS: TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/backup (0.02s)
+    --- PASS: TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/panic (0.02s)
+    --- PASS: TestUpgradeCancelAndFailuresPreserveUnregisteredDatabase/shutdown (0.02s)
+=== RUN   TestUpgradeActualBackupFailureDoesNotRegister
+--- PASS: TestUpgradeActualBackupFailureDoesNotRegister (0.02s)
+=== RUN   TestUpgradeConcurrentConfirmationRunsOnce
+--- PASS: TestUpgradeConcurrentConfirmationRunsOnce (0.05s)
+=== RUN   TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites
+=== RUN   TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites/newer
+=== RUN   TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites/unknown
+=== RUN   TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites/missing
+--- PASS: TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites (0.05s)
+    --- PASS: TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites/newer (0.01s)
+    --- PASS: TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites/unknown (0.01s)
+    --- PASS: TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites/missing (0.02s)
+=== RUN   TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion
+=== RUN   TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/1
+=== RUN   TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/2
+=== RUN   TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/3
+=== RUN   TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/missing-goals
+=== RUN   TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/missing-acceptance
+--- PASS: TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion (0.29s)
+    --- PASS: TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/1 (0.05s)
+    --- PASS: TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/2 (0.06s)
+    --- PASS: TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/3 (0.07s)
+    --- PASS: TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/missing-goals (0.05s)
+    --- PASS: TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion/missing-acceptance (0.06s)
+=== RUN   TestUpgradeBackupSurvivesRetentionAndDirectorySwitch
+--- PASS: TestUpgradeBackupSurvivesRetentionAndDirectorySwitch (0.13s)
+=== RUN   TestUpgradeDirectorySwitchRejectsUnexpectedSourceVersion
+--- PASS: TestUpgradeDirectorySwitchRejectsUnexpectedSourceVersion (0.02s)
+=== RUN   TestUpgradeExistingEmptyFileIsNotInitialized
+--- PASS: TestUpgradeExistingEmptyFileIsNotInitialized (0.00s)
+=== RUN   TestUpgradeRecoveryRejectsNewerBeforeRetiringOldLocation
+--- PASS: TestUpgradeRecoveryRejectsNewerBeforeRetiringOldLocation (0.05s)
+=== RUN   TestUpgradeActivationFailureRetainsVerifiedBackup
+--- PASS: TestUpgradeActivationFailureRetainsVerifiedBackup (0.05s)
+=== RUN   TestUpgradeRejectsLegacyConstraintChangesBeforeConsent
+=== RUN   TestUpgradeRejectsLegacyConstraintChangesBeforeConsent/UNIQUE_ON_CONFLICT_REPLACE
+=== RUN   TestUpgradeRejectsLegacyConstraintChangesBeforeConsent/UNIQUE_ON_CONFLICT_IGNORE
+=== RUN   TestUpgradeRejectsLegacyConstraintChangesBeforeConsent/UNIQUE_CHECK(length(name)>0)
+--- PASS: TestUpgradeRejectsLegacyConstraintChangesBeforeConsent (0.06s)
+    --- PASS: TestUpgradeRejectsLegacyConstraintChangesBeforeConsent/UNIQUE_ON_CONFLICT_REPLACE (0.02s)
+    --- PASS: TestUpgradeRejectsLegacyConstraintChangesBeforeConsent/UNIQUE_ON_CONFLICT_IGNORE (0.02s)
+    --- PASS: TestUpgradeRejectsLegacyConstraintChangesBeforeConsent/UNIQUE_CHECK(length(name)>0) (0.02s)
+=== RUN   TestDesktopTransportPublicStartStopJoinsCleanupWorker
+--- PASS: TestDesktopTransportPublicStartStopJoinsCleanupWorker (0.00s)
+PASS

@@ -1,0 +1,5 @@
+=== RUN   TestRingtoneResourcePreservedAndRepaired
+--- PASS: TestRingtoneResourcePreservedAndRepaired (0.01s)
+=== RUN   TestRingtonesUseSeparateFiles
+--- PASS: TestRingtonesUseSeparateFiles (0.04s)
+PASS

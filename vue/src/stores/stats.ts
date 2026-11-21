@@ -11,7 +11,7 @@ import { useAppStore } from "./app";
 import { usePlansStore } from "./plans";
 import { useSubjectsStore } from "./subjects";
 import { useSessionsStore } from "./sessions";
-import { useCharts } from "../features/stats/useCharts";
+import type { useCharts } from "../features/stats/useCharts";
 
 // 学习统计：按周/月/日聚合计划与实际学习数据，为图表与导出提供数据源。
 // 图表实例由页面层创建后通过 attachCharts 注入，store 不直接持有 DOM。
@@ -25,6 +25,10 @@ export const useStatsStore = defineStore("stats", () => {
   const overviewPeriod = ref<"day" | "week" | "month">("day");
   const trendSessions = ref<Record<string, Session[]>>({});
   const comparisonSessions = ref<Record<string, Session[]>>({});
+  // 趋势的周/月范围始终包含所选日期，明细复用同一批学习记录。
+  const selectedSessions = computed(
+    () => trendSessions.value[appStore.selectedDate] ?? [],
+  );
   const statsLoading = ref(false);
   const statsReady = ref(false);
 
@@ -45,6 +49,21 @@ export const useStatsStore = defineStore("stats", () => {
 
   function disposeCharts() {
     charts.value?.disposeCharts();
+  }
+
+  // 各阶段仅保留最近一次耗时，便于桌面实测时区分查询、调度与同步绘制。
+  async function measureStage<T>(
+    name: string,
+    work: () => T | Promise<T>,
+  ): Promise<T> {
+    const started = performance.now();
+    try {
+      return await work();
+    } finally {
+      const key = `studyflow:stats:${name}`;
+      performance.clearMeasures(key);
+      performance.measure(key, { start: started, end: performance.now() });
+    }
   }
 
   // 绘制帧调度：等一次重绘后继续，避免图表在元素未布局时初始化。
@@ -198,9 +217,7 @@ export const useStatsStore = defineStore("stats", () => {
     const trendDays = periodDates.value.map(dateKey),
       overviewDays = comparisonDates.value.map(dateKey);
     const dates = [...new Set([...trendDays, ...overviewDays])];
-    const entries = await Promise.all(
-      dates.map(async (day) => [day, await api.sessions(day)] as const),
-    );
+    const all = await measureStage("queries", () => api.sessionsForDates(dates));
     // 用递增序号判断结果是否已被更新的请求取代，避免异步竞态覆盖新数据。
     if (sequence !== statsLoadSequence || appStore.page !== "stats") return;
     if (
@@ -208,7 +225,6 @@ export const useStatsStore = defineStore("stats", () => {
       overviewDays.join() !== comparisonDates.value.map(dateKey).join()
     )
       return loadStats();
-    const all = Object.fromEntries(entries);
     trendSessions.value = Object.fromEntries(
       trendDays.map((day) => [day, all[day]]),
     );
@@ -216,18 +232,17 @@ export const useStatsStore = defineStore("stats", () => {
       overviewDays.map((day) => [day, all[day]]),
     );
     statsReady.value = true;
-    await afterPaint();
+    await measureStage("layout", afterPaint);
     if (sequence !== statsLoadSequence || appStore.page !== "stats") return;
-    await whenIdle();
+    await measureStage("idle-project", whenIdle);
     if (sequence !== statsLoadSequence || appStore.page !== "stats") return;
-    charts.value?.renderProjectChart();
-    await whenIdle();
+    await measureStage("draw-project", () => charts.value?.renderProjectChart());
+    await measureStage("idle-trend", whenIdle);
     if (sequence !== statsLoadSequence || appStore.page !== "stats") return;
-    charts.value?.renderChart();
+    await measureStage("draw-trend", () => charts.value?.renderChart());
   }
 
-  // 统计页刷新：重新拉取科目/计划/当日记录并重算图表。
-  // 他人数据（科目/计划/记录）通过各自 store 的公开能力写入。
+  // 统计页刷新：先更新科目和计划，再批量读取图表和明细共用的学习记录。
   async function refreshStatsPage() {
     const sequence = ++refreshSequence;
     cancelStats();
@@ -236,12 +251,9 @@ export const useStatsStore = defineStore("stats", () => {
     try {
       await afterPaint();
       if (sequence !== refreshSequence || appStore.page !== "stats") return;
-      const date = appStore.selectedDate;
-      const [, currentPlans] = await Promise.all([
-        subjectsStore.fetchAll(),
-        api.plans(),
-        sessionsStore.fetchForDate(date),
-      ]);
+      const [, currentPlans] = await measureStage("base-queries", () =>
+        Promise.all([subjectsStore.fetchAll(), api.plans()]),
+      );
       if (sequence !== refreshSequence || appStore.page !== "stats") return;
       plansStore.setPlans(currentPlans);
       await loadStats();
@@ -255,16 +267,14 @@ export const useStatsStore = defineStore("stats", () => {
     const sequence = ++trendLoadSequence,
       refresh = refreshSequence,
       days = periodDates.value.map(dateKey);
-    const entries = await Promise.all(
-      days.map(async (day) => [day, await api.sessions(day)] as const),
-    );
+    const entries = await api.sessionsForDates(days);
     if (
       sequence !== trendLoadSequence ||
       refresh !== refreshSequence ||
       appStore.page !== "stats"
     )
       return;
-    trendSessions.value = Object.fromEntries(entries);
+    trendSessions.value = entries;
     await afterPaint();
     if (
       sequence !== trendLoadSequence ||
@@ -279,16 +289,14 @@ export const useStatsStore = defineStore("stats", () => {
     const sequence = ++overviewLoadSequence,
       refresh = refreshSequence,
       days = comparisonDates.value.map(dateKey);
-    const entries = await Promise.all(
-      days.map(async (day) => [day, await api.sessions(day)] as const),
-    );
+    const entries = await api.sessionsForDates(days);
     if (
       sequence !== overviewLoadSequence ||
       refresh !== refreshSequence ||
       appStore.page !== "stats"
     )
       return;
-    comparisonSessions.value = Object.fromEntries(entries);
+    comparisonSessions.value = entries;
     await afterPaint();
     if (
       sequence !== overviewLoadSequence ||
@@ -330,6 +338,10 @@ export const useStatsStore = defineStore("stats", () => {
     cancelStats();
     statsLoading.value = false;
     disposeCharts();
+    charts.value = null;
+    trendSessions.value = {};
+    comparisonSessions.value = {};
+    statsReady.value = false;
   }
 
   function pickStatsDate(value: unknown) {
@@ -345,6 +357,7 @@ export const useStatsStore = defineStore("stats", () => {
     overviewPeriod,
     trendSessions,
     comparisonSessions,
+    selectedSessions,
     statsLoading,
     statsReady,
     statsDateMenu,

@@ -1,0 +1,9 @@
+{
+  "sqlSamples": 101,
+  "medianSqlMs": 53.5862,
+  "apiSamples": 101,
+  "maxWaitMs": 3201.7216,
+  "maxTotalMs": 3253.5077,
+  "medianWorkMs": 53.95,
+  "method": "仅在测试编译 overlay 中测量；单次 SQL 含遍历与字段映射，work 另含 JSON 编码。"
+}

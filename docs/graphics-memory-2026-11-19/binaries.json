@@ -1,0 +1,16 @@
+{
+  "modes": [
+    "shell",
+    "none",
+    "canvas",
+    "svg"
+  ],
+  "records": 8760,
+  "recordMode": "mixed",
+  "binaries": {
+    "shell": "10eeca7ab7474e9b729f7465ed13cd96982200093a2639de7366e5232db510c0",
+    "none": "ebbeffd8852b9263be8c60b57bba391253a0d744ad986e9c648a31a7b130e518",
+    "canvas": "9468321ad1f047cfb05f77cd4de5efbb7196613ed5e8636b4ab3548c7fa85e59",
+    "svg": "1a6bcaef95b108d165467a33dfb356f024a500ae07e459b7654d809ee5b9c260"
+  }
+}

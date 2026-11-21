@@ -1,0 +1,266 @@
+[
+  {
+    "run": 0,
+    "variant": "before",
+    "launchToHomeMs": 1026.5197600000001,
+    "switches": [
+      560.1209899999999,
+      1767.7870260000009,
+      1763.8469969999987
+    ],
+    "homeMemory": {
+      "workingSet": 464920576,
+      "privateBytes": 304250880,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 6399356
+      }
+    },
+    "statsMemory": {
+      "workingSet": 602279936,
+      "privateBytes": 412172288,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9827912
+      }
+    },
+    "afterMemory": {
+      "workingSet": 623783936,
+      "privateBytes": 430407680,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 10059880
+      }
+    },
+    "retained": {
+      "charts": true,
+      "days": 30
+    }
+  },
+  {
+    "run": 0,
+    "variant": "after",
+    "launchToHomeMs": 1091.3318240000008,
+    "switches": [
+      622.2434690000009,
+      1916.0673750000024,
+      1828.5218200000018
+    ],
+    "homeMemory": {
+      "workingSet": 517238784,
+      "privateBytes": 308498432,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 872,
+        "JSHeapUsedSize": 5651832
+      }
+    },
+    "statsMemory": {
+      "workingSet": 643866624,
+      "privateBytes": 404533248,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 1104,
+        "JSHeapUsedSize": 8952828
+      }
+    },
+    "afterMemory": {
+      "workingSet": 674009088,
+      "privateBytes": 433348608,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8959720
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 1,
+    "variant": "before",
+    "launchToHomeMs": 1019.8044870000012,
+    "switches": [
+      603.2910520000005,
+      1823.2242719999995,
+      1824.4545560000042
+    ],
+    "homeMemory": {
+      "workingSet": 462032896,
+      "privateBytes": 300851200,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 6404280
+      }
+    },
+    "statsMemory": {
+      "workingSet": 593084416,
+      "privateBytes": 411348992,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9825736
+      }
+    },
+    "afterMemory": {
+      "workingSet": 615223296,
+      "privateBytes": 429092864,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 10064048
+      }
+    },
+    "retained": {
+      "charts": true,
+      "days": 30
+    }
+  },
+  {
+    "run": 1,
+    "variant": "after",
+    "launchToHomeMs": 968.9995720000006,
+    "switches": [
+      954.7412410000034,
+      1763.8233130000008,
+      1762.8892990000022
+    ],
+    "homeMemory": {
+      "workingSet": 469471232,
+      "privateBytes": 310120448,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5645076
+      }
+    },
+    "statsMemory": {
+      "workingSet": 580243456,
+      "privateBytes": 396746752,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 1104,
+        "JSHeapUsedSize": 8942528
+      }
+    },
+    "afterMemory": {
+      "workingSet": 609071104,
+      "privateBytes": 423411712,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8962424
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 2,
+    "variant": "before",
+    "launchToHomeMs": 1055.754203000004,
+    "switches": [
+      767.936281000002,
+      1813.142068999994,
+      1769.4689870000002
+    ],
+    "homeMemory": {
+      "workingSet": 461385728,
+      "privateBytes": 301092864,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 6404280
+      }
+    },
+    "statsMemory": {
+      "workingSet": 587923456,
+      "privateBytes": 407048192,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9836516
+      }
+    },
+    "afterMemory": {
+      "workingSet": 618389504,
+      "privateBytes": 433598464,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 10095184
+      }
+    },
+    "retained": {
+      "charts": true,
+      "days": 30
+    }
+  },
+  {
+    "run": 2,
+    "variant": "after",
+    "launchToHomeMs": 947.9477209999895,
+    "switches": [
+      822.7386209999968,
+      1765.2186159999983,
+      1873.5796960000007
+    ],
+    "homeMemory": {
+      "workingSet": 462323712,
+      "privateBytes": 302977024,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5649568
+      }
+    },
+    "statsMemory": {
+      "workingSet": 577888256,
+      "privateBytes": 397295616,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 1104,
+        "JSHeapUsedSize": 8924948
+      }
+    },
+    "afterMemory": {
+      "workingSet": 608665600,
+      "privateBytes": 426057728,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8957752
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  }
+]

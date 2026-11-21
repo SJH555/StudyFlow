@@ -1,0 +1,372 @@
+[
+  {
+    "run": 0,
+    "variant": "before",
+    "launchToHomeMs": 1017.569964,
+    "switches": [
+      178.5511140000001
+    ],
+    "refreshes": [
+      {
+        "ms": 560.6999999880791,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 12.300000011920929,
+          "studyflow:stats:queries": 511.09999999403954,
+          "studyflow:stats:layout": 12,
+          "studyflow:stats:idle-project": 1.5,
+          "studyflow:stats:draw-project": 5.0999999940395355,
+          "studyflow:stats:idle-trend": 2,
+          "studyflow:stats:draw-trend": 7.800000011920929
+        },
+        "correctness": {
+          "recordHash": "a8cda7f083b7543d9ecd0e2f4ae0e956cfb6867be0a9d781fe8b147ae290c188",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                345
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 519184384,
+      "privateBytes": 306692096,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 905,
+        "JSHeapUsedSize": 5685408
+      }
+    },
+    "statsMemory": {
+      "workingSet": 676716544,
+      "privateBytes": 449024000,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 973,
+        "JSHeapUsedSize": 9215272
+      }
+    },
+    "afterMemory": {
+      "workingSet": 678113280,
+      "privateBytes": 450174976,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 910,
+        "JSHeapUsedSize": 8354880
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 0,
+    "variant": "after",
+    "launchToHomeMs": 1020.4870600000004,
+    "switches": [
+      215.25609299999996
+    ],
+    "refreshes": [
+      {
+        "ms": 416.7999999821186,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 28.700000017881393,
+          "studyflow:stats:queries": 347,
+          "studyflow:stats:layout": 13.100000023841858,
+          "studyflow:stats:idle-project": 1.2999999821186066,
+          "studyflow:stats:draw-project": 5.4000000059604645,
+          "studyflow:stats:idle-trend": 1,
+          "studyflow:stats:draw-trend": 8
+        },
+        "correctness": {
+          "recordHash": "a8cda7f083b7543d9ecd0e2f4ae0e956cfb6867be0a9d781fe8b147ae290c188",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                345
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 520052736,
+      "privateBytes": 313180160,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 905,
+        "JSHeapUsedSize": 5685704
+      }
+    },
+    "statsMemory": {
+      "workingSet": 663482368,
+      "privateBytes": 441954304,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 973,
+        "JSHeapUsedSize": 9199028
+      }
+    },
+    "afterMemory": {
+      "workingSet": 659468288,
+      "privateBytes": 436060160,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 910,
+        "JSHeapUsedSize": 8347892
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  }
+]

@@ -1,0 +1,469 @@
+[
+  {
+    "run": 0,
+    "variant": "canvas",
+    "launchToHomeMs": 869.8129819999999,
+    "switches": [
+      243.6062770000001
+    ],
+    "refreshes": [
+      {
+        "ms": 171.80000001192093,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 60.80000001192093,
+          "studyflow:stats:queries": 69.59999999403954,
+          "studyflow:stats:layout": 13.800000011920929,
+          "studyflow:stats:idle-project": 1.699999988079071,
+          "studyflow:stats:draw-project": 5.300000011920929,
+          "studyflow:stats:idle-trend": 3.300000011920929,
+          "studyflow:stats:draw-trend": 8.5
+        },
+        "correctness": {
+          "recordHash": "a8cda7f083b7543d9ecd0e2f4ae0e956cfb6867be0a9d781fe8b147ae290c188",
+          "overviewSeconds": 547200,
+          "sessionCount": 456,
+          "trend": [
+            {
+              "name": "计划学习",
+              "data": [
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5,
+                11.5
+              ]
+            },
+            {
+              "name": "实际学习",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "name": "实际学习趋势",
+              "data": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "comparison": [
+            {
+              "name": "计划时长",
+              "data": [
+                345
+              ]
+            },
+            {
+              "name": "实际时长",
+              "data": [
+                152
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 605016064,
+      "processes": [
+        {
+          "workingSet": 99590144,
+          "name": "msedgewebview2",
+          "privateBytes": 29270016,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2711552,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20172800,
+          "name": "msedgewebview2",
+          "privateBytes": 7585792,
+          "role": "utility"
+        },
+        {
+          "workingSet": 144207872,
+          "name": "msedgewebview2",
+          "privateBytes": 129904640,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 35475456,
+          "name": "msedgewebview2",
+          "privateBytes": 11788288,
+          "role": "utility"
+        },
+        {
+          "workingSet": 103432192,
+          "name": "msedgewebview2",
+          "privateBytes": 56688640,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 30248960,
+          "name": "promecefpluginhost",
+          "privateBytes": 15347712,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53030912,
+          "name": "promecefpluginhost",
+          "privateBytes": 37986304,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 51380224,
+          "name": "StudyFlow",
+          "privateBytes": 67973120,
+          "role": "app"
+        },
+        {
+          "workingSet": 48349184,
+          "name": "wps",
+          "privateBytes": 62439424,
+          "role": "browser"
+        },
+        {
+          "workingSet": 8658944,
+          "name": "wpscloudsvr",
+          "privateBytes": 90935296,
+          "role": "browser"
+        }
+      ],
+      "privateBytes": 512630784,
+      "count": 11,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 905,
+        "JSHeapUsedSize": 5684700
+      }
+    },
+    "statsMemory": {
+      "workingSet": 741146624,
+      "processes": [
+        {
+          "workingSet": 100114432,
+          "name": "msedgewebview2",
+          "privateBytes": 29609984,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2711552,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20185088,
+          "name": "msedgewebview2",
+          "privateBytes": 7622656,
+          "role": "utility"
+        },
+        {
+          "workingSet": 252297216,
+          "name": "msedgewebview2",
+          "privateBytes": 235405312,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 35287040,
+          "name": "msedgewebview2",
+          "privateBytes": 11595776,
+          "role": "utility"
+        },
+        {
+          "workingSet": 129421312,
+          "name": "msedgewebview2",
+          "privateBytes": 72359936,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 30248960,
+          "name": "promecefpluginhost",
+          "privateBytes": 15347712,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53030912,
+          "name": "promecefpluginhost",
+          "privateBytes": 37986304,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 53084160,
+          "name": "StudyFlow",
+          "privateBytes": 69292032,
+          "role": "app"
+        },
+        {
+          "workingSet": 48349184,
+          "name": "wps",
+          "privateBytes": 62439424,
+          "role": "browser"
+        },
+        {
+          "workingSet": 8658944,
+          "name": "wpscloudsvr",
+          "privateBytes": 90935296,
+          "role": "browser"
+        }
+      ],
+      "privateBytes": 635305984,
+      "count": 11,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 973,
+        "JSHeapUsedSize": 9146284
+      }
+    },
+    "afterMemory": {
+      "workingSet": 740388864,
+      "processes": [
+        {
+          "workingSet": 100446208,
+          "name": "msedgewebview2",
+          "privateBytes": 29503488,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2711552,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20185088,
+          "name": "msedgewebview2",
+          "privateBytes": 7622656,
+          "role": "utility"
+        },
+        {
+          "workingSet": 253026304,
+          "name": "msedgewebview2",
+          "privateBytes": 235692032,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 35287040,
+          "name": "msedgewebview2",
+          "privateBytes": 11595776,
+          "role": "utility"
+        },
+        {
+          "workingSet": 128835584,
+          "name": "msedgewebview2",
+          "privateBytes": 71712768,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 30248960,
+          "name": "promecefpluginhost",
+          "privateBytes": 15347712,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53030912,
+          "name": "promecefpluginhost",
+          "privateBytes": 37986304,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 51851264,
+          "name": "StudyFlow",
+          "privateBytes": 67825664,
+          "role": "app"
+        },
+        {
+          "workingSet": 48349184,
+          "name": "wps",
+          "privateBytes": 62439424,
+          "role": "browser"
+        },
+        {
+          "workingSet": 8658944,
+          "name": "wpscloudsvr",
+          "privateBytes": 90935296,
+          "role": "browser"
+        }
+      ],
+      "privateBytes": 633372672,
+      "count": 11,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 910,
+        "JSHeapUsedSize": 8335952
+      }
+    },
+    "afterMemoryImmediate": {
+      "workingSet": 740388864,
+      "processes": [
+        {
+          "workingSet": 100446208,
+          "name": "msedgewebview2",
+          "privateBytes": 29503488,
+          "role": "browser"
+        },
+        {
+          "workingSet": 10469376,
+          "name": "msedgewebview2",
+          "privateBytes": 2711552,
+          "role": "crashpad-handler"
+        },
+        {
+          "workingSet": 20185088,
+          "name": "msedgewebview2",
+          "privateBytes": 7622656,
+          "role": "utility"
+        },
+        {
+          "workingSet": 253026304,
+          "name": "msedgewebview2",
+          "privateBytes": 235692032,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 35287040,
+          "name": "msedgewebview2",
+          "privateBytes": 11595776,
+          "role": "utility"
+        },
+        {
+          "workingSet": 128835584,
+          "name": "msedgewebview2",
+          "privateBytes": 71712768,
+          "role": "renderer"
+        },
+        {
+          "workingSet": 30248960,
+          "name": "promecefpluginhost",
+          "privateBytes": 15347712,
+          "role": "utility"
+        },
+        {
+          "workingSet": 53030912,
+          "name": "promecefpluginhost",
+          "privateBytes": 37986304,
+          "role": "gpu-process"
+        },
+        {
+          "workingSet": 51851264,
+          "name": "StudyFlow",
+          "privateBytes": 67825664,
+          "role": "app"
+        },
+        {
+          "workingSet": 48349184,
+          "name": "wps",
+          "privateBytes": 62439424,
+          "role": "browser"
+        },
+        {
+          "workingSet": 8658944,
+          "name": "wpscloudsvr",
+          "privateBytes": 90935296,
+          "role": "browser"
+        }
+      ],
+      "privateBytes": 633372672,
+      "count": 11,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 910,
+        "JSHeapUsedSize": 8335952
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  }
+]

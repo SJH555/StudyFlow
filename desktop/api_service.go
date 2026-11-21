@@ -8,19 +8,23 @@ import (
 	"net/http/httptest"
 	"os"
 	"strings"
+	"sync"
 	"time"
 
 	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/infrastructure/system"
+	"exam_notify/internal/infrastructure/transfer"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
 // APIService 是暴露给前端的 Wails 服务，负责将绑定调用转发到应用与业务层。
 type APIService struct {
-	app              *App
-	startup          *startupUpgrade
-	locationFile     string
-	afterReminderAck func(time.Duration, func())
+	app               *App
+	startup           *startupUpgrade
+	locationFile      string
+	afterReminderAck  func(time.Duration, func())
+	transferMu        sync.Mutex
+	transferCandidate *transfer.Candidate
 }
 
 // GetAutostartEnabled 返回系统开机自启是否已开启。

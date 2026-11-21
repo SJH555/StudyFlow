@@ -7,7 +7,7 @@ import { exportHtml } from "../export/exportHtml";
 import { hourOptions, minuteOptions } from "../../shared/constants";
 import { time, formatDateChinese } from "../../shared/format";
 
-const { selectedDate } = storeToRefs(useAppStore());
+const { selectedDate, todayKey } = storeToRefs(useAppStore());
 
 const { settings } = storeToRefs(useSettingsStore());
 
@@ -47,6 +47,7 @@ const {
             >{{ formatDateChinese(selectedDate) }}</VBtn
           ></template
         ><VDatePicker
+          :key="todayKey"
           :model-value="selectedDate"
           color="primary"
           hide-title

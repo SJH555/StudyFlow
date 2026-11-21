@@ -1,0 +1,548 @@
+[
+  {
+    "run": 0,
+    "variant": "before",
+    "launchToHomeMs": 972.6227570000001,
+    "switches": [
+      560.8035009999999,
+      1757.5814289999998,
+      1764.9274819999991
+    ],
+    "refreshes": [
+      {
+        "ms": 1697,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 58.5,
+          "studyflow:stats:queries": 1599.2999999821186,
+          "studyflow:stats:layout": 11.900000005960464,
+          "studyflow:stats:idle-project": 0.09999999403953552,
+          "studyflow:stats:draw-project": 6.300000011920929,
+          "studyflow:stats:idle-trend": 1.699999988079071,
+          "studyflow:stats:draw-trend": 9.700000017881393
+        }
+      },
+      {
+        "ms": 1725.199999988079,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 60.79999998211861,
+          "studyflow:stats:queries": 1622,
+          "studyflow:stats:layout": 10.199999988079071,
+          "studyflow:stats:idle-project": 0.09999999403953552,
+          "studyflow:stats:draw-project": 5.700000017881393,
+          "studyflow:stats:idle-trend": 9.699999988079071,
+          "studyflow:stats:draw-trend": 7.800000011920929
+        }
+      },
+      {
+        "ms": 1725.800000011921,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 69.09999999403954,
+          "studyflow:stats:queries": 1623,
+          "studyflow:stats:layout": 10.599999994039536,
+          "studyflow:stats:idle-project": 0.10000002384185791,
+          "studyflow:stats:draw-project": 5.0999999940395355,
+          "studyflow:stats:idle-trend": 1.5999999940395355,
+          "studyflow:stats:draw-trend": 6.9000000059604645
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 461684736,
+      "privateBytes": 1163603968,
+      "count": 8,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 6403932
+      }
+    },
+    "statsMemory": {
+      "workingSet": 586260480,
+      "privateBytes": 1266475008,
+      "count": 8,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 10166624
+      }
+    },
+    "afterMemory": {
+      "workingSet": 611680256,
+      "privateBytes": 1289097216,
+      "count": 8,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 10075916
+      }
+    },
+    "retained": {
+      "charts": true,
+      "days": 30
+    }
+  },
+  {
+    "run": 0,
+    "variant": "after",
+    "launchToHomeMs": 927.6028799999985,
+    "switches": [
+      822.8760849999999,
+      1873.9918849999995,
+      1767.8253250000016
+    ],
+    "refreshes": [
+      {
+        "ms": 1749.9000000059605,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 61.19999998807907,
+          "studyflow:stats:queries": 1645.5,
+          "studyflow:stats:layout": 11.5,
+          "studyflow:stats:idle-project": 0.20000001788139343,
+          "studyflow:stats:draw-project": 5.799999982118607,
+          "studyflow:stats:idle-trend": 9.700000017881393,
+          "studyflow:stats:draw-trend": 7.699999988079071
+        }
+      },
+      {
+        "ms": 1760,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 63.599999994039536,
+          "studyflow:stats:queries": 1655,
+          "studyflow:stats:layout": 10.900000005960464,
+          "studyflow:stats:idle-project": 7.399999976158142,
+          "studyflow:stats:draw-project": 5,
+          "studyflow:stats:idle-trend": 1.5999999940395355,
+          "studyflow:stats:draw-trend": 7.5999999940395355
+        }
+      },
+      {
+        "ms": 1785.199999988079,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 66.2999999821186,
+          "studyflow:stats:queries": 1686.800000011921,
+          "studyflow:stats:layout": 10.5,
+          "studyflow:stats:idle-project": 0.19999998807907104,
+          "studyflow:stats:draw-project": 5.4000000059604645,
+          "studyflow:stats:idle-trend": 1.2000000178813934,
+          "studyflow:stats:draw-trend": 6.699999988079071
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 463835136,
+      "privateBytes": 306454528,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5651792
+      }
+    },
+    "statsMemory": {
+      "workingSet": 584593408,
+      "privateBytes": 404893696,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9210760
+      }
+    },
+    "afterMemory": {
+      "workingSet": 613801984,
+      "privateBytes": 431099904,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8947564
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 1,
+    "variant": "before",
+    "launchToHomeMs": 1021.5654829999985,
+    "switches": [
+      889.5618499999982,
+      1767.2202800000014,
+      1763.6546559999988
+    ],
+    "refreshes": [
+      {
+        "ms": 1712.5999999940395,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 61.400000005960464,
+          "studyflow:stats:queries": 1606.5,
+          "studyflow:stats:layout": 11.899999976158142,
+          "studyflow:stats:idle-project": 0.10000002384185791,
+          "studyflow:stats:draw-project": 7.199999988079071,
+          "studyflow:stats:idle-trend": 8.400000005960464,
+          "studyflow:stats:draw-trend": 8.199999988079071
+        }
+      },
+      {
+        "ms": 1707.5,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 56.89999997615814,
+          "studyflow:stats:queries": 1608.300000011921,
+          "studyflow:stats:layout": 10.400000005960464,
+          "studyflow:stats:idle-project": 1.199999988079071,
+          "studyflow:stats:draw-project": 6,
+          "studyflow:stats:idle-trend": 8.900000005960464,
+          "studyflow:stats:draw-trend": 7.5999999940395355
+        }
+      },
+      {
+        "ms": 1710.9000000059605,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 60.400000005960464,
+          "studyflow:stats:queries": 1616.2000000178814,
+          "studyflow:stats:layout": 10.299999982118607,
+          "studyflow:stats:idle-project": 0.10000002384185791,
+          "studyflow:stats:draw-project": 5.799999982118607,
+          "studyflow:stats:idle-trend": 2.4000000059604645,
+          "studyflow:stats:draw-trend": 7.0999999940395355
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 463282176,
+      "privateBytes": 304586752,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 6404452
+      }
+    },
+    "statsMemory": {
+      "workingSet": 586973184,
+      "privateBytes": 405725184,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 10201776
+      }
+    },
+    "afterMemory": {
+      "workingSet": 612999168,
+      "privateBytes": 428326912,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 10080928
+      }
+    },
+    "retained": {
+      "charts": true,
+      "days": 30
+    }
+  },
+  {
+    "run": 1,
+    "variant": "after",
+    "launchToHomeMs": 965.670054999995,
+    "switches": [
+      726.0674639999997,
+      1761.4864499999967,
+      1767.698848
+    ],
+    "refreshes": [
+      {
+        "ms": 1704.2999999821186,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 57.30000001192093,
+          "studyflow:stats:queries": 1610.699999988079,
+          "studyflow:stats:layout": 11.700000017881393,
+          "studyflow:stats:idle-project": 0.09999999403953552,
+          "studyflow:stats:draw-project": 5.9000000059604645,
+          "studyflow:stats:idle-trend": 1.300000011920929,
+          "studyflow:stats:draw-trend": 7.799999982118607
+        }
+      },
+      {
+        "ms": 1724.800000011921,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 60.599999994039536,
+          "studyflow:stats:queries": 1621.1000000238419,
+          "studyflow:stats:layout": 10.699999988079071,
+          "studyflow:stats:idle-project": 0.19999998807907104,
+          "studyflow:stats:draw-project": 5.600000023841858,
+          "studyflow:stats:idle-trend": 10,
+          "studyflow:stats:draw-trend": 7.9000000059604645
+        }
+      },
+      {
+        "ms": 1738.5,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 69.90000000596046,
+          "studyflow:stats:queries": 1636.0999999940395,
+          "studyflow:stats:layout": 10.600000023841858,
+          "studyflow:stats:idle-project": 0.09999999403953552,
+          "studyflow:stats:draw-project": 5.199999988079071,
+          "studyflow:stats:idle-trend": 1,
+          "studyflow:stats:draw-trend": 6.800000011920929
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 463925248,
+      "privateBytes": 303697920,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5650220
+      }
+    },
+    "statsMemory": {
+      "workingSet": 589332480,
+      "privateBytes": 405667840,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9210864
+      }
+    },
+    "afterMemory": {
+      "workingSet": 617066496,
+      "privateBytes": 429674496,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8944140
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  },
+  {
+    "run": 2,
+    "variant": "before",
+    "launchToHomeMs": 1022.4644370000024,
+    "switches": [
+      776.4939299999969,
+      1765.7961579999974,
+      1717.9150170000066
+    ],
+    "refreshes": [
+      {
+        "ms": 1702.5,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 57.69999998807907,
+          "studyflow:stats:queries": 1606.6000000238419,
+          "studyflow:stats:layout": 11.5,
+          "studyflow:stats:idle-project": 0.09999999403953552,
+          "studyflow:stats:draw-project": 6.300000011920929,
+          "studyflow:stats:idle-trend": 1.7999999821186066,
+          "studyflow:stats:draw-trend": 9
+        }
+      },
+      {
+        "ms": 1725.300000011921,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 67.09999999403954,
+          "studyflow:stats:queries": 1616.300000011921,
+          "studyflow:stats:layout": 10.599999994039536,
+          "studyflow:stats:idle-project": 0.5,
+          "studyflow:stats:draw-project": 5.800000011920929,
+          "studyflow:stats:idle-trend": 8.300000011920929,
+          "studyflow:stats:draw-trend": 8
+        }
+      },
+      {
+        "ms": 1730.4000000059605,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 61.099999994039536,
+          "studyflow:stats:queries": 1635.4000000059605,
+          "studyflow:stats:layout": 10.400000005960464,
+          "studyflow:stats:idle-project": 0.5,
+          "studyflow:stats:draw-project": 5.4000000059604645,
+          "studyflow:stats:idle-trend": 1.699999988079071,
+          "studyflow:stats:draw-trend": 7.200000017881393
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 461463552,
+      "privateBytes": 303968256,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 6403876
+      }
+    },
+    "statsMemory": {
+      "workingSet": 585392128,
+      "privateBytes": 405721088,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 10187356
+      }
+    },
+    "afterMemory": {
+      "workingSet": 617902080,
+      "privateBytes": 434528256,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 10079984
+      }
+    },
+    "retained": {
+      "charts": true,
+      "days": 30
+    }
+  },
+  {
+    "run": 2,
+    "variant": "after",
+    "launchToHomeMs": 930.477246999988,
+    "switches": [
+      770.1509169999918,
+      1764.0583160000097,
+      1771.5154860000039
+    ],
+    "refreshes": [
+      {
+        "ms": 1709.2000000178814,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 62.69999998807907,
+          "studyflow:stats:queries": 1610.699999988079,
+          "studyflow:stats:layout": 11.300000011920929,
+          "studyflow:stats:idle-project": 0.19999998807907104,
+          "studyflow:stats:draw-project": 5.600000023841858,
+          "studyflow:stats:idle-trend": 1.0999999940395355,
+          "studyflow:stats:draw-trend": 7.5999999940395355
+        }
+      },
+      {
+        "ms": 1713,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 67.09999999403954,
+          "studyflow:stats:queries": 1604.199999988079,
+          "studyflow:stats:layout": 10.200000017881393,
+          "studyflow:stats:idle-project": 1.4000000059604645,
+          "studyflow:stats:draw-project": 4.799999982118607,
+          "studyflow:stats:idle-trend": 9.200000017881393,
+          "studyflow:stats:draw-trend": 7.699999988079071
+        }
+      },
+      {
+        "ms": 1734.4000000059605,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 60.80000001192093,
+          "studyflow:stats:queries": 1633.0999999940395,
+          "studyflow:stats:layout": 10,
+          "studyflow:stats:idle-project": 0.19999998807907104,
+          "studyflow:stats:draw-project": 5.600000023841858,
+          "studyflow:stats:idle-trend": 8.799999982118607,
+          "studyflow:stats:draw-trend": 7.4000000059604645
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 463925248,
+      "privateBytes": 305463296,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5649764
+      }
+    },
+    "statsMemory": {
+      "workingSet": 577146880,
+      "privateBytes": 395722752,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9205160
+      }
+    },
+    "afterMemory": {
+      "workingSet": 605507584,
+      "privateBytes": 420970496,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8942824
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  }
+]

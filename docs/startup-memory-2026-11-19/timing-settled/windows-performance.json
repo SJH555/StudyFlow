@@ -1,0 +1,120 @@
+[
+  {
+    "run": 0,
+    "variant": "before",
+    "launchToHomeMs": 1079.6700600000001,
+    "switches": [
+      540.37718
+    ],
+    "refreshes": [
+      {
+        "ms": 1722.5999999940395,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 59.5,
+          "studyflow:stats:queries": 1622,
+          "studyflow:stats:layout": 11.599999994039536,
+          "studyflow:stats:idle-project": 0.4000000059604645,
+          "studyflow:stats:draw-project": 6.5,
+          "studyflow:stats:idle-trend": 1.0999999940395355,
+          "studyflow:stats:draw-trend": 8.900000005960464
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 466837504,
+      "privateBytes": 305324032,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 6399508
+      }
+    },
+    "statsMemory": {
+      "workingSet": 597393408,
+      "privateBytes": 413769728,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 10174924
+      }
+    },
+    "afterMemory": {
+      "workingSet": 608210944,
+      "privateBytes": 423464960,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 9487028
+      }
+    },
+    "retained": {
+      "charts": true,
+      "days": 30
+    }
+  },
+  {
+    "run": 0,
+    "variant": "after",
+    "launchToHomeMs": 987.1768240000001,
+    "switches": [
+      800.4351449999995
+    ],
+    "refreshes": [
+      {
+        "ms": 1713.5999999940395,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 62.79999998211861,
+          "studyflow:stats:queries": 1604,
+          "studyflow:stats:layout": 11.5,
+          "studyflow:stats:idle-project": 0.19999998807907104,
+          "studyflow:stats:draw-project": 5.5,
+          "studyflow:stats:idle-trend": 9.199999988079071,
+          "studyflow:stats:draw-trend": 8.300000011920929
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 465301504,
+      "privateBytes": 306036736,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5646904
+      }
+    },
+    "statsMemory": {
+      "workingSet": 581206016,
+      "privateBytes": 399785984,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9270328
+      }
+    },
+    "afterMemory": {
+      "workingSet": 605638656,
+      "privateBytes": 423354368,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8400672
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    }
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "run": 0,
+    "variant": "after",
+    "launchToHomeMs": 1133.798496,
+    "switches": [
+      534.4067140000002
+    ],
+    "refreshes": [
+      {
+        "ms": 1727.199999988079,
+        "same": false,
+        "image": "data:image/png;base64,",
+        "series": 3,
+        "timings": {
+          "studyflow:stats:base-queries": 63.5,
+          "studyflow:stats:queries": 1620.2000000178814,
+          "studyflow:stats:layout": 12,
+          "studyflow:stats:idle-project": 0.19999998807907104,
+          "studyflow:stats:draw-project": 5.699999988079071,
+          "studyflow:stats:idle-trend": 8.699999988079071,
+          "studyflow:stats:draw-trend": 8.400000005960464
+        }
+      }
+    ],
+    "homeMemory": {
+      "workingSet": 462663680,
+      "privateBytes": 303890432,
+      "count": 7,
+      "metrics": {
+        "Documents": 1,
+        "Nodes": 868,
+        "JSHeapUsedSize": 5651652
+      }
+    },
+    "statsMemory": {
+      "workingSet": 579469312,
+      "privateBytes": 398876672,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 961,
+        "JSHeapUsedSize": 9210364
+      }
+    },
+    "afterMemory": {
+      "workingSet": 603521024,
+      "privateBytes": 421793792,
+      "count": 7,
+      "metrics": {
+        "Documents": 2,
+        "Nodes": 873,
+        "JSHeapUsedSize": 8407536
+      }
+    },
+    "retained": {
+      "charts": false,
+      "days": 0
+    },
+    "features": {
+      "exportPngImages": 2,
+      "rapidNavigation": true,
+      "emptyMonthAndRestore": true
+    }
+  }
+]

@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"path/filepath"
 	"sync"
+	"sync/atomic"
 
 	studyapp "exam_notify/internal/app"
 	"exam_notify/internal/infrastructure/persistence"
@@ -21,12 +22,15 @@ type App struct {
 	// gate 保证同一时刻只展示一个提醒弹窗（见 reminderGate）。
 	gate reminderGate
 	// generalMu 保护常规设置缓存：设置保存协程写入，主循环与窗口钩子读取。
-	generalMu         sync.Mutex
-	startupWindow     string // "show" 启动后显示主窗口，"tray" 启动后驻留托盘。
-	closeBehavior     string // "tray" 关闭时隐藏到托盘，"quit" 关闭时退出应用。
-	reviewCheckHour   int    // 进度追因检查的日界小时。
-	reviewCheckMinute int    // 进度追因检查的分钟。
-	tasks             desktopTasks
+	generalMu           sync.Mutex
+	startupWindow       string // "show" 启动后显示主窗口，"tray" 启动后驻留托盘。
+	closeBehavior       string // "tray" 关闭时隐藏到托盘，"quit" 关闭时退出应用。
+	reviewCheckHour     int    // 进度追因检查的日界小时。
+	reviewCheckMinute   int    // 进度追因检查的分钟。
+	tasks               desktopTasks
+	startupSchedule     *startupSchedule
+	launcherJob         func(context.Context) error
+	restartAfterRestore atomic.Bool
 }
 
 // applyGeneralSettings 从数据库读取常规设置并刷新缓存与铃声音量。
@@ -115,6 +119,7 @@ func newApp(database *persistence.Database) *App {
 	// 常规设置缓存先填默认值，runDesktop 启动时再用数据库中的设置覆盖。
 	return &App{
 		database:          database,
+		startupSchedule:   newStartupSchedule(),
 		scheduler:         studyapp.NewScheduler(database),
 		startupWindow:     "show",
 		closeBehavior:     "tray",

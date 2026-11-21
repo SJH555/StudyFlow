@@ -1,0 +1,42 @@
+{
+  "final": {
+    "before": {
+      "firstStatsMs": 881.3328430000038,
+      "returnStatsMs": 1771.8535380000003,
+      "firstMonthRefreshMs": 1734.300000011921,
+      "refreshMs": 1734.300000011921,
+      "queryMs": 1637.300000011921,
+      "jsonParseMs": 0.20000001788139343,
+      "samples": 9
+    },
+    "after": {
+      "firstStatsMs": 423.80913999999757,
+      "returnStatsMs": 216.25667799999792,
+      "firstMonthRefreshMs": 341.40000000596046,
+      "refreshMs": 186.89999997615814,
+      "queryMs": 70.59999999403954,
+      "jsonParseMs": 0.19999998807907104,
+      "samples": 9
+    }
+  },
+  "mixed-final": {
+    "before": {
+      "firstStatsMs": 227.63276549999978,
+      "returnStatsMs": 586.5131510000006,
+      "firstMonthRefreshMs": 578.6500000059605,
+      "refreshMs": 575.2000000029802,
+      "queryMs": 522.5,
+      "jsonParseMs": 0.3999999910593033,
+      "samples": 4
+    },
+    "after": {
+      "firstStatsMs": 202.13287649999984,
+      "returnStatsMs": 117.92545999999948,
+      "firstMonthRefreshMs": 159.90000000596046,
+      "refreshMs": 111.8500000089407,
+      "queryMs": 35.95000000298023,
+      "jsonParseMs": 0.30000002682209015,
+      "samples": 4
+    }
+  }
+}

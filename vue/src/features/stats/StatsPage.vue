@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onUnmounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useAppStore } from "../../stores/app";
 import { usePlansStore } from "../../stores/plans";
@@ -15,12 +16,12 @@ import {
   time,
   planEnd,
 } from "../../shared/format";
-const { selectedDate } = storeToRefs(useAppStore());
+const { selectedDate, todayKey } = storeToRefs(useAppStore());
 const { currentPlans } = storeToRefs(usePlansStore());
-const { sessions } = storeToRefs(useSessionsStore());
 const { sessionSeconds } = useSessionsStore();
 const statsStore = useStatsStore();
 const {
+  selectedSessions: sessions,
   statsLoading,
   statsReady,
   statsDateMenu,
@@ -59,6 +60,7 @@ const charts = useCharts({
   actualForPeriod,
 });
 statsStore.attachCharts(charts);
+onUnmounted(() => statsStore.leaveStatsPage());
 const { chartEl, projectChartEl } = charts;
 </script>
 
@@ -81,6 +83,7 @@ const { chartEl, projectChartEl } = charts;
             >{{ formatDateChinese(selectedDate) }}</VBtn
           ></template
         ><VDatePicker
+          :key="todayKey"
           :model-value="selectedDate"
           color="primary"
           hide-title

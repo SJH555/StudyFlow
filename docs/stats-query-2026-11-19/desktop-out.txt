@@ -1,0 +1,23 @@
+=== RUN   TestManualPauseStartsBreakAndDayPauseDoesNot
+--- PASS: TestManualPauseStartsBreakAndDayPauseDoesNot (0.04s)
+=== RUN   TestBreakBudgetCarriesAcrossPauses
+--- PASS: TestBreakBudgetCarriesAcrossPauses (0.03s)
+=== RUN   TestBreakBudgetCarriesAcrossEndedSessions
+--- PASS: TestBreakBudgetCarriesAcrossEndedSessions (0.03s)
+=== RUN   TestManualRecordRejectsOverlapsAcrossSources
+--- PASS: TestManualRecordRejectsOverlapsAcrossSources (0.02s)
+=== RUN   TestManualRecordRejectsShortBeforePersisting
+--- PASS: TestManualRecordRejectsShortBeforePersisting (0.01s)
+=== RUN   TestManualRecordChecksActiveSessionAndIgnoresDeleted
+--- PASS: TestManualRecordChecksActiveSessionAndIgnoresDeleted (0.02s)
+=== RUN   TestManualRecordAllowsTimeAfterPausedTimer
+--- PASS: TestManualRecordAllowsTimeAfterPausedTimer (0.02s)
+=== RUN   TestManualRecordCannotOverlapRunningPlanBeforeItsEnd
+--- PASS: TestManualRecordCannotOverlapRunningPlanBeforeItsEnd (0.01s)
+=== RUN   TestPlanConflictChecksWeekdaysTimeAndEdits
+--- PASS: TestPlanConflictChecksWeekdaysTimeAndEdits (0.03s)
+=== RUN   TestSessionsUseLocalDateForUTCManualRecords
+--- PASS: TestSessionsUseLocalDateForUTCManualRecords (0.01s)
+=== RUN   TestSessionDaysBindingReadsLocalDatesWithoutChangingSingleDayContract
+--- PASS: TestSessionDaysBindingReadsLocalDatesWithoutChangingSingleDayContract (0.01s)
+PASS

@@ -2,10 +2,13 @@
 import { storeToRefs } from "pinia";
 import { useAppStore } from "../../stores/app";
 import { useSessionsStore } from "../../stores/sessions";
+import { useReviewStore } from "../../stores/review";
+import { useStatsStore } from "../../stores/stats";
 import { useActiveLearning } from "./useActiveLearning";
 import { clockLabel, fmt, time } from "../../shared/format";
-const { focusMode } = storeToRefs(useAppStore());
-const { exitFocus } = useAppStore();
+const appStore = useAppStore();
+const { focusMode } = storeToRefs(appStore);
+const { exitFocus } = appStore;
 const sessionsStore = useSessionsStore();
 const {
   showFinishConfirm,
@@ -15,6 +18,14 @@ const {
 } = storeToRefs(sessionsStore);
 const { sessionSeconds, startPlanNow, stop, deleteSession } = sessionsStore;
 const { countdownLeft, countdownPercent } = useActiveLearning();
+
+async function confirmFinish() {
+  if (!(await stop())) return;
+  void useReviewStore().checkDailyReview();
+  if (appStore.page === "stats") {
+    await useStatsStore().refreshStatsPage().catch(appStore.setError);
+  }
+}
 </script>
 
 <template>
@@ -50,7 +61,7 @@ const { countdownLeft, countdownPercent } = useActiveLearning();
       <div class="confirm-actions">
         <button class="btn secondary" @click="showFinishConfirm = false">
           继续学习</button
-        ><button class="btn delete-confirm-button" @click="stop">
+        ><button class="btn delete-confirm-button" @click="confirmFinish">
           确认结束
         </button>
       </div>

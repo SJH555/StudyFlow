@@ -1,4 +1,5 @@
-import { watch } from "vue";
+import { nextTick, watch } from "vue";
+import { api } from "../api";
 import { useAppStore } from "../stores/app";
 import { useSettingsStore } from "../stores/settings";
 import { useSubjectsStore } from "../stores/subjects";
@@ -24,63 +25,80 @@ export function useBootstrap() {
 
   // 启动时加载全部核心数据并回填设置表单，完成后检查每日复习。
   async function load() {
+    const started = performance.now();
     try {
       await Promise.all([
         settingsStore.loadSettings(),
         subjectsStore.fetchAll(),
         plansStore.fetch(),
-        sessionsStore.fetchForDate(appStore.selectedDate),
-        sessionsStore.refreshToday(),
-        activityStore.fetchForDate(appStore.selectedDate),
+        sessionsStore.loadInitial(),
         goalsStore.fetch(),
       ]);
-      await settingsStore.loadDataDirectory();
+
       activityStore.applySettings();
       reviewStore.applySettings();
     } catch (e) {
       appStore.setError(e);
     } finally {
       appStore.setLoading(false);
+      performance.clearMeasures("studyflow:home-data");
+      performance.measure("studyflow:home-data", {
+        start: started,
+        end: performance.now(),
+      });
+      await nextTick();
+      // 复盘可能扫描历史日期，先完成它再释放维护任务，避免备份抢占同一连接。
       await reviewStore.checkDailyReview();
+      const backgroundResults = await Promise.allSettled([
+        activityStore.fetchForDate(appStore.selectedDate),
+        settingsStore.loadDataDirectory(),
+      ]);
+      for (const result of backgroundResults) {
+        if (result.status === "rejected") appStore.setError(result.reason);
+      }
+      await api.homeReady().catch(appStore.setError);
     }
   }
 
-  // 切换页面 / 日期时按需刷新对应数据。
+  // 只在本地日期变化时跟进，保留正在查看的历史日期。
   watch(
-    () => appStore.page,
-    async (p) => {
-    try {
-      if (p !== "stats") statsStore.leaveStatsPage();
-      if (p === "today") {
-        if (appStore.selectedDate !== appStore.todayKey)
-          appStore.selectedDate = appStore.todayKey;
-        await sessionsStore.refreshToday();
+    () => appStore.todayKey,
+    (today, previousToday) => {
+      if (appStore.selectedDate === previousToday) {
+        appStore.selectedDate = today;
       }
-      if (p === "subjects" || p === "plans")
-        await subjectsStore.refreshProjectAndPlan();
-      if (p === "stats") await statsStore.refreshStatsPage();
-      if (p === "summary") await reviewStore.refreshReviewHistory();
-    } catch (e) {
-      appStore.setError(e);
-    }
-  });
+    },
+  );
 
+  // 一次页面或日期变更只刷新当前页面，切入活动页时再加载对应日期。
   watch(
-    () => appStore.selectedDate,
-    async (d) => {
-    try {
-      if (appStore.page === "stats") await statsStore.refreshStatsPage();
-      else
-        await Promise.all([
-          sessionsStore.fetchForDate(d),
-          activityStore.fetchForDate(d),
-        ]);
-    } catch (e) {
-      appStore.setError(e);
-    }
-  });
+    [() => appStore.page, () => appStore.selectedDate],
+    async ([page, date], [previousPage]) => {
+      const pageChanged = page !== previousPage;
+      try {
+        if (previousPage === "stats" && pageChanged) statsStore.leaveStatsPage();
+        if (page === "today") {
+          if (pageChanged && date !== appStore.todayKey) {
+            appStore.selectedDate = appStore.todayKey;
+            return;
+          }
+          await sessionsStore.refreshToday();
+        } else if (page === "stats") {
+          await statsStore.refreshStatsPage();
+        } else if (page === "activity") {
+          await activityStore.fetchForDate(date);
+        } else if (pageChanged && (page === "subjects" || page === "plans")) {
+          await subjectsStore.refreshProjectAndPlan();
+        } else if (pageChanged && page === "summary") {
+          await reviewStore.refreshReviewHistory();
+        }
+      } catch (e) {
+        appStore.setError(e);
+      }
+    },
+  );
 
-  // 重置表/停止学习后重载全部数据。
+  // 重置表后重载全部数据。
   appStore.setReloadAll(load);
 
   return { load };

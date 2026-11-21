@@ -1,6 +1,7 @@
 package reminder
 
 import (
+	"bytes"
 	_ "embed"
 	"log"
 	"os"
@@ -77,13 +78,13 @@ func Init(dataDir string) error {
 	player.expectedStop = map[*exec.Cmd]bool{}
 	// 音量默认 100，桌面层随后会用保存的设置覆盖。
 	player.volume = 100
-	if err := os.WriteFile(player.files[ActivitySound], activityRingtoneData, 0600); err != nil {
+	if err := writeRingtone(player.files[ActivitySound], activityRingtoneData); err != nil {
 		return err
 	}
-	if err := os.WriteFile(player.files[PlanSound], planRingtoneData, 0600); err != nil {
+	if err := writeRingtone(player.files[PlanSound], planRingtoneData); err != nil {
 		return err
 	}
-	if err := os.WriteFile(player.files[BreakSound], breakRingtoneData, 0600); err != nil {
+	if err := writeRingtone(player.files[BreakSound], breakRingtoneData); err != nil {
 		return err
 	}
 	player.closed = false
@@ -219,4 +220,14 @@ func Notify(title, body string) {
 			go func() { defer player.workers.Done(); _ = cmd.Wait() }()
 		}
 	}
+}
+
+// writeRingtone 保留内容一致的资源；缺失、损坏或随应用更新时重新生成。
+func writeRingtone(path string, data []byte) error {
+	if info, err := os.Stat(path); err == nil && info.Size() == int64(len(data)) {
+		if existing, err := os.ReadFile(path); err == nil && bytes.Equal(existing, data) {
+			return nil
+		}
+	}
+	return os.WriteFile(path, data, 0600)
 }

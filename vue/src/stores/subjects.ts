@@ -14,8 +14,10 @@ export const useSubjectsStore = defineStore("subjects", () => {
   const draft = useSubjectDraft();
   const planDraft = usePlanDraft();
 
-  const subjects = ref<Subject[]>([]);
   const allSubjects = ref<Subject[]>([]);
+  const subjects = computed(() =>
+    allSubjects.value.filter((subject) => !subject.archived && !subject.deleted),
+  );
 
   // 下一个可用科目排序号（新增科目默认排最后）。
   const nextSubjectSortOrder = computed(
@@ -23,21 +25,16 @@ export const useSubjectsStore = defineStore("subjects", () => {
   );
 
   async function fetchAll() {
-    [subjects.value, allSubjects.value] = await Promise.all([
-      api.subjects(),
-      api.subjects(true, true),
-    ]);
+    allSubjects.value = await api.subjects(true, true);
   }
 
   // 科目与计划的联合刷新：并行请求，全部成功后才一起更新（不出现部分列表提前更新），
   // 并校正失效的项目筛选。计划的写入通过 plans store 的公开能力完成。
   async function refreshProjectAndPlan() {
-    const [enabled, all, currentPlans] = await Promise.all([
-      api.subjects(),
+    const [all, currentPlans] = await Promise.all([
       api.subjects(true, true),
       api.plans(),
     ]);
-    subjects.value = enabled;
     allSubjects.value = all;
     plansStore.setPlans(currentPlans);
     if (

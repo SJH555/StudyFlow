@@ -1,0 +1,12 @@
+{
+  "internal/modules/sessions/list.go": "c58ccc158bc8124b0044a178adde0f1a5c1e3998d2458101a6148f32aee0f434",
+  "internal/modules/sessions/sessions.go": "b3f25c1294e40a7f362eec57e6f58bd8fed1a758b9f62b3dcffea456dca63616",
+  "internal/modules/sessions/list_test.go": "6e7c05310fae355bdad663c132bf74057b6e5710a4b9f80a4209c0ed92f4ab8f",
+  "desktop/session_days_test.go": "0db3b065157cd835ea0d903bff644cba47c2d3dd0d10c7fbcfc8e31464a9a430",
+  "desktop/sessions.go": "faa3b3af16c33539d0c510bff5a0b0af7ef6a6508dd6946159f3bfff3d85e874",
+  "desktop/api_routes.go": "524dabc86dfd1ff0f8158edb835329ee43c12ec2fb534d02965e056a3a693149",
+  "vue/src/api.ts": "6892b9f86b4e0f109173ca10bada7ae8a144e8da4557989213590af36ce3d67a",
+  "vue/src/stores/stats.ts": "63c1bd18a4f1f54d1243f23e4fca88a84d1aeaa3fb3de23b9d51a36d5f03a7ba",
+  "scripts/qa/prepare-startup-memory.py": "03186b6c9058663ced381b0d06bd9988072fe6303c24198e07b35cf50c436875",
+  "scripts/qa/test-startup-memory-windows.mjs": "1ce6e88e46eb5eb2c023bf8a16ae078fdace4ae5f7811de4f78abd936ca1d70f"
+}

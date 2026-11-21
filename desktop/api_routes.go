@@ -33,6 +33,15 @@ func apiRoute(r *http.Request) string {
 }
 
 func (s *APIService) handleDatabaseFreeAPI(path string, w http.ResponseWriter, r *http.Request) bool {
+	if strings.HasPrefix(path, "data-transfer/") {
+		s.transferAPI(path, w, r)
+		return true
+	}
+	if path == "startup/home-ready" && r.Method == http.MethodPost {
+		s.app.startupSchedule.homeReady()
+		writeJSON(w, map[string]bool{"ok": true})
+		return true
+	}
 	if path == "reminder/ack" && r.Method == http.MethodPost {
 		s.app.acknowledgeReminder(w, reminder.Stop, clearReminderAlwaysOnTop, s.afterReminderAck)
 		return true
@@ -140,6 +149,10 @@ func (a *App) handleAPI(db *persistence.Queries, w http.ResponseWriter, r *http.
 	}
 	if path == "sessions" {
 		a.sessions(db, w, r)
+		return
+	}
+	if path == "sessions/batch" {
+		a.sessionDays(db, w, r)
 		return
 	}
 	if len(p) == 2 && p[0] == "sessions" {

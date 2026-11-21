@@ -7,9 +7,11 @@ import (
 	"errors"
 	"exam_notify/internal/infrastructure/diagnostics"
 	"exam_notify/internal/infrastructure/reminder"
+	"fmt"
 	"io"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"sync"
@@ -47,9 +49,28 @@ func main() {
 }
 
 func run() error {
-	return runWithStartupPresenter(func(store *App, instance system.InstanceGuard, base, data, location string, startup *startupUpgrade) error {
+	var restoredApp *App
+	err := runWithStartupPresenter(func(store *App, instance system.InstanceGuard, base, data, location string, startup *startupUpgrade) error {
+		restoredApp = store
 		return runDesktopWithStartup(store, instance, base, data, location, startup, newDesktopTransport(), func(app *application.App) error { return app.Run() })
 	})
+	if err != nil || restoredApp == nil || !restoredApp.restartAfterRestore.Load() {
+		return err
+	}
+	// 此时旧进程已关闭数据库和单实例锁，新进程可以按正常门禁初始化。
+	executable := os.Getenv("APPIMAGE")
+	if executable == "" {
+		executable, err = os.Executable()
+		if err != nil {
+			return err
+		}
+	}
+	cmd := exec.Command(executable)
+	cmd.Env = append(cmd.Environ(), "STUDYFLOW_REOPEN_AFTER_RESTORE=1")
+	if err := cmd.Start(); err != nil {
+		return fmt.Errorf("数据已恢复，请手动重新打开 StudyFlow: %w", err)
+	}
+	return cmd.Process.Release()
 }
 
 func runWithStartupPresenter(present func(*App, system.InstanceGuard, string, string, string, *startupUpgrade) error) (resultErr error) {
@@ -117,11 +138,16 @@ func runWithStartupPresenter(present func(*App, system.InstanceGuard, string, st
 	}()
 	appErrorLog = errorLog
 	log.SetOutput(io.MultiWriter(os.Stderr, errorLog))
+	checkingStarted := time.Now()
 	store, startup := prepareStartupUpgrade(startupDatabasePaths{
 		locationFile: locationFile, defaultDir: defaultDataDir, installDir: installDir, legacyConfigDir: configDir,
 	})
-	if err := system.EnsureUserLauncher(executable, appIcon); err != nil {
-		log.Printf("创建用户快捷方式失败: %v", err)
+	log.Printf("启动阶段 数据库准备 %s", time.Since(checkingStarted))
+	store.launcherJob = func(ctx context.Context) error {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
+		return system.EnsureUserLauncher(executable, appIcon)
 	}
 	return present(store, instance, baseDir, defaultDataDir, locationFile, startup)
 }
@@ -196,7 +222,7 @@ func runDesktopWithStartup(store *App, instance system.InstanceGuard, baseDir, d
 		BackgroundColour: application.NewRGB(248, 248, 245),
 		URL:              "/",
 		// 启动后驻留托盘时先保持隐藏，启动完成后再按设置决定是否显示。
-		Hidden: startup.isReady() && !store.startupShowsWindow(),
+		Hidden: startup.isReady() && !store.startupShowsWindow() && os.Getenv("STUDYFLOW_REOPEN_AFTER_RESTORE") != "1",
 	}
 	system.ApplyWindowState(&windowOptions, lastWindowState, runtime.GOOS)
 	var app *application.App
@@ -263,6 +289,10 @@ func runDesktopWithStartup(store *App, instance system.InstanceGuard, baseDir, d
 		event.Cancel()
 	})
 	tray := app.SystemTray.New()
+	if runtime.GOOS == "linux" {
+		// Linux 托盘的悬浮提示取自 Label，SetTooltip 在当前 Wails 实现中不生效。
+		tray.SetLabel("StudyFlow")
+	}
 	tray.SetIcon(trayIcon)
 	tray.SetTooltip("StudyFlow")
 	trayMenu := app.NewMenu()
@@ -332,7 +362,7 @@ func runDesktopWithStartup(store *App, instance system.InstanceGuard, baseDir, d
 			reminderItem.SetEnabled(true)
 			store.tasks.start(func(ctx context.Context) { activityReminderLoop(ctx, app, store) })
 			store.tasks.start(func(ctx context.Context) { breakReminderLoop(ctx, app, store) })
-			store.tasks.start(func(ctx context.Context) { autoBackupLoop(ctx, store) })
+			startMaintenance(store)
 		})
 	}
 	if startup != nil {
@@ -350,6 +380,24 @@ func runDesktopWithStartup(store *App, instance system.InstanceGuard, baseDir, d
 		}
 	}
 	return runErr
+}
+
+func startMaintenance(store *App) {
+	job := startupJob{
+		name: "维护",
+		run: func(ctx context.Context) error {
+			if store.launcherJob != nil {
+				if err := measureStartup("启动器", func() error { return store.launcherJob(ctx) }); err != nil {
+					log.Printf("创建用户快捷方式失败: %v", err)
+				}
+			}
+			store.tasks.start(func(ctx context.Context) { autoBackupLoop(ctx, store) })
+			return nil
+		},
+	}
+	store.tasks.start(func(ctx context.Context) {
+		store.startupSchedule.runAfterHome(ctx, job)
+	})
 }
 
 func activityReminderLoop(ctx context.Context, app *application.App, store *App) {

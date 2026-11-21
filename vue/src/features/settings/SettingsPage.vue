@@ -2,6 +2,7 @@
 import { storeToRefs } from "pinia";
 import { useSettingsStore } from "../../stores/settings";
 import SectionSubnav from "../../shared/SectionSubnav.vue";
+import BackupFiles from "./BackupFiles.vue";
 import packageInfo from "../../../package.json";
 const appVersion = packageInfo.version;
 const settingsStore = useSettingsStore();
@@ -256,6 +257,7 @@ function selectSection(key: string) {
               @update:model-value="toggleAutoBackup"
             />
           </div>
+          <BackupFiles />
         </VCard>
         <VCard
           v-else-if="settingsTab === 'logs'"
@@ -353,6 +355,16 @@ function selectSection(key: string) {
 </template>
 
 <style scoped>
+.settings-app .section-column > .section-card.v-card {
+  padding-inline: calc(var(--space-6) + var(--space-5));
+}
+
+@media (max-width: 1100px) {
+  .settings-app .section-column > .section-card.v-card {
+    padding-inline: var(--space-6);
+  }
+}
+
 .section-page-header > .section-page-actions {
   display: flex;
   align-items: center;
@@ -464,7 +476,7 @@ function selectSection(key: string) {
   line-height: 1.45;
 }
 .settings-content-block {
-  padding: 20px 22px;
+  padding-block: var(--space-5);
 }
 .settings-block-heading {
   display: grid;
@@ -501,7 +513,7 @@ function selectSection(key: string) {
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 13px 22px;
+  padding-block: var(--space-3);
   color: var(--section-muted);
   font-size: 12px;
   overflow-wrap: anywhere;
@@ -511,11 +523,12 @@ function selectSection(key: string) {
   color: var(--section-primary);
 }
 .settings-data-list.v-list {
-  padding: 0 12px;
+  padding: 0;
   background: transparent;
 }
 .settings-data-list :deep(.v-list-item) {
   min-height: 68px;
+  padding-inline: 0;
   border-bottom: 1px solid var(--section-outline);
 }
 .settings-data-list :deep(.v-list-item:last-child) {
@@ -533,7 +546,7 @@ function selectSection(key: string) {
   opacity: 1;
 }
 .settings-log-viewer {
-  margin: 12px 22px 22px;
+  margin-block: var(--space-3) var(--space-5);
   border: 1px solid var(--section-outline);
   border-radius: 10px;
   overflow: hidden;
@@ -557,7 +570,7 @@ function selectSection(key: string) {
   line-height: 1.5;
 }
 .settings-reset-note {
-  padding: 16px 22px 8px;
+  padding-block: var(--space-4) var(--space-2);
 }
 .settings-reset-note :deep(.v-alert) {
   font-size: 12px;

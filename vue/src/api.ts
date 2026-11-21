@@ -139,6 +139,7 @@ export const resetTable = (name: string) =>
 
 // —— 聚合 API：Wails Binding 直连 + JSON 路由 ——
 export const api = {
+  homeReady: () => request<{ ok: boolean }>("startup/home-ready", "POST"),
   getAutostartEnabled: () => APIService.GetAutostartEnabled(),
   setAutostartEnabled: (enabled: boolean) => APIService.SetAutostartEnabled(enabled),
   getDataDirectory: () => APIService.GetDataDirectory(),
@@ -163,6 +164,11 @@ export const api = {
   deletePlan: (id: number) => request('plans?id=' + id, 'DELETE'),
 
   sessions: (date: string) => request<Session[]>('sessions?date=' + date),
+  // 批量返回按本地自然日分组的记录，无记录日期仍保留空数组。
+  sessionsForDates: (dates: string[]) => {
+    const query = new URLSearchParams(dates.map(day => ['date', day]))
+    return request<Record<string, Session[]>>('sessions/batch?' + query.toString())
+  },
   start: (subjectId: number, planId: number) =>
     request<{ id: number }>('sessions/0', 'POST', { action: 'start', subjectId, planId }),
   finish: (id: number, action = 'stop') =>

@@ -73,3 +73,16 @@ func (a *App) sessionAction(db *persistence.Queries, w http.ResponseWriter, r *h
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 	}
 }
+
+func (a *App) sessionDays(db *persistence.Queries, w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	items, err := sessions.ListForDates(db, r.URL.Query()["date"])
+	if err != nil {
+		fail(w, err)
+		return
+	}
+	writeJSON(w, items)
+}

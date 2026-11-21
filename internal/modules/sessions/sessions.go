@@ -47,54 +47,6 @@ type TimerInput struct {
 	Note      string `json:"note"`
 }
 
-// List 返回指定日期的学习记录。
-func List(db *persistence.Queries, day string) ([]Session, error) {
-	if day == "" {
-		day = time.Now().Format("2006-01-02")
-	}
-	rows, e := db.Query(`SELECT t.id,t.plan_id,t.subject_id,s.name,s.color,t.start_at,t.end_at,t.planned_end_at,t.paused_at,t.resumed_at,t.break_started_at,t.break_used_seconds+COALESCE((SELECT SUM(previous.break_used_seconds) FROM sessions previous WHERE previous.plan_id=t.plan_id AND date(previous.start_at,'localtime')=date(t.start_at,'localtime') AND previous.id<t.id),0),t.duration_seconds,t.source,t.note FROM sessions t JOIN subjects s ON s.id=t.subject_id WHERE date(t.start_at,'localtime')=? AND t.deleted=0 ORDER BY julianday(t.start_at) DESC`, day)
-	if e != nil {
-		return nil, e
-	}
-	defer rows.Close()
-
-	out := []Session{}
-	for rows.Next() {
-		var x Session
-		var end, plannedEnd sql.NullString
-		var paused, resumed, breakStarted sql.NullString
-		var planID sql.NullInt64
-		if err := rows.Scan(&x.ID, &planID, &x.SubjectID, &x.Subject, &x.Color, &x.StartAt, &end, &plannedEnd, &paused, &resumed, &breakStarted, &x.BreakUsedSeconds, &x.Duration, &x.Source, &x.Note); err != nil {
-			return nil, err
-		}
-		if planID.Valid {
-			x.PlanID = &planID.Int64
-		}
-		if end.Valid {
-			x.EndAt = &end.String
-		}
-		if plannedEnd.Valid {
-			x.PlannedEndAt = &plannedEnd.String
-		}
-		if paused.Valid {
-			x.PausedAt = &paused.String
-		}
-		if breakStarted.Valid {
-			x.BreakStartedAt = &breakStarted.String
-		}
-		if resumed.Valid {
-			x.ResumedAt = &resumed.String
-		}
-		out = append(out, x)
-
-	}
-
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AddManual 手动新增一条学习记录，并返回其 ID 与时长（秒）。
 func AddManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
 	var id, seconds int64
