@@ -5,15 +5,21 @@ import (
 	"errors"
 	"exam_notify/internal/infrastructure/persistence"
 	"fmt"
+	"slices"
 	"time"
 
 	"exam_notify/internal/modules/plans"
+	"exam_notify/internal/modules/schedule"
 	"exam_notify/internal/modules/settings"
+	"exam_notify/internal/modules/subjects"
+	"exam_notify/internal/shared/studycalendar"
 	"exam_notify/internal/shared/studytime"
 )
 
 // Session 表示一条学习记录或进行中的学习时段。
 type Session struct {
+	PlanVersionID    *int64  `json:"planVersionId,omitempty"`
+	BreakMinutes     int     `json:"breakMinutes"`
 	ID               int64   `json:"id"`
 	PlanID           *int64  `json:"planId"`
 	SubjectID        int64   `json:"subjectId"`
@@ -76,7 +82,26 @@ func addManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
 	if end.Sub(start) < 10*time.Minute {
 		return 0, 0, errors.New("学习记录不能少于 10 分钟，请调整时间")
 	}
-	rows, e := db.Query(`SELECT s.name,t.start_at,t.end_at,t.paused_at,t.planned_end_at FROM sessions t JOIN subjects s ON s.id=t.subject_id WHERE t.deleted=0`)
+	modifier, e := dayModifier(db)
+	if e != nil {
+		return 0, 0, e
+	}
+	day := start.Local().Format(time.DateOnly)
+	if modifier != "'localtime'" {
+		day = studycalendar.Day(start)
+	}
+	options, err := subjects.ManualOptions(db, day)
+	if err != nil {
+		return 0, 0, err
+	}
+	available := slices.ContainsFunc(options, func(item subjects.Subject) bool {
+		return item.ID == in.SubjectID
+	})
+	if !available {
+		return 0, 0, fmt.Errorf("所选学习项目在 %s 不可用于补录", day)
+	}
+	rows, e := db.Query(`SELECT ` + timerSubjectLabel(modifier) + `,t.start_at,t.end_at,t.paused_at,t.planned_end_at
+		FROM sessions t` + timerSubjectJoin(modifier) + `WHERE t.deleted=0`)
 	if e != nil {
 		return 0, 0, e
 	}
@@ -206,15 +231,35 @@ func start(db *persistence.Queries, in TimerInput, now time.Time) (int64, error)
 			return 0, e
 		}
 	}
-	plannedEnd, e := plans.EndForStart(db, in.PlanID, now)
+	history, e := schedule.HasHistory(db)
 	if e != nil {
 		return 0, e
+	}
+	var plannedEnd time.Time
+	var versionID int64
+	if history {
+		p, end, err := plans.ForTimerStart(db, in.PlanID, now)
+		if err != nil {
+			return 0, err
+		}
+		in.SubjectID, versionID, plannedEnd = p.SubjectID, p.VersionID, end
+	} else {
+		plannedEnd, e = plans.EndForStart(db, in.PlanID, now)
+		if e != nil {
+			return 0, e
+		}
 	}
 	var plannedEndValue any
 	if !plannedEnd.IsZero() {
 		plannedEndValue = plannedEnd.Format(time.RFC3339)
 	}
-	res, e := db.Exec(`INSERT INTO sessions(subject_id,plan_id,start_at,planned_end_at,source,note) VALUES(?,?,?,?,?,?)`, in.SubjectID, in.PlanID, now.Format(time.RFC3339), plannedEndValue, "timer", in.Note)
+	query := `INSERT INTO sessions(subject_id,plan_id,start_at,planned_end_at,source,note) VALUES(?,?,?,?,?,?)`
+	args := []any{in.SubjectID, in.PlanID, now.Format(time.RFC3339), plannedEndValue, "timer", in.Note}
+	if history {
+		query = `INSERT INTO sessions(subject_id,plan_id,start_at,planned_end_at,source,note,plan_version_id) VALUES(?,?,?,?,?,?,?)`
+		args = append(args, versionID)
+	}
+	res, e := db.Exec(query, args...)
 	if e != nil {
 		return 0, e
 	}
@@ -280,10 +325,10 @@ func changeTimer(db *persistence.Queries, id, action string, now time.Time) (boo
 		if !paused.Valid {
 			var breakMinutes int
 			if action == "pause" {
-				e = db.QueryRow(`SELECT COALESCE((SELECT p.break_minutes FROM sessions s JOIN plans p ON p.id=s.plan_id WHERE s.id=?),0)`, id).Scan(&breakMinutes)
+				e = timerBreakMinutes(db, id, &breakMinutes)
 				var usedToday int64
 				if e == nil && planID.Valid && breakMinutes > 0 {
-					e = db.QueryRow(`SELECT COALESCE(SUM(break_used_seconds),0) FROM sessions WHERE plan_id=? AND date(start_at,'localtime')=date(?,'localtime')`, planID.Int64, start).Scan(&usedToday)
+					e = breakUsedForDay(db, planID.Int64, start, &usedToday)
 				}
 				if e == nil && breakMinutes > 0 && usedToday >= int64(breakMinutes)*60 {
 					return false, errors.New("本次计划的休息时间已用完，请继续学习或结束本次学习")

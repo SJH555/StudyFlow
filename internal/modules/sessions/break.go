@@ -30,8 +30,13 @@ func dueBreakReminder(db *persistence.Queries, now time.Time) (string, bool, err
 	var plannedEnd sql.NullString
 	var minutes, planDuration int
 	var used int64
-	err := db.QueryRow(`SELECT t.id,s.name,t.break_started_at,p.break_minutes,t.break_used_seconds+COALESCE((SELECT SUM(previous.break_used_seconds) FROM sessions previous WHERE previous.plan_id=t.plan_id AND date(previous.start_at,'localtime')=date(t.start_at,'localtime') AND previous.id<t.id),0),t.planned_end_at,t.start_at,p.start_time,p.duration_minutes,p.weekdays
-        FROM sessions t JOIN plans p ON p.id=t.plan_id JOIN subjects s ON s.id=t.subject_id
+	join, modifier, err := timerPlanSources(db, false)
+	if err != nil {
+		return "", false, err
+	}
+	name := timerSubjectLabel(modifier)
+	err = db.QueryRow(`SELECT t.id,`+name+`,t.break_started_at,p.break_minutes,t.break_used_seconds+COALESCE((SELECT SUM(previous.break_used_seconds) FROM sessions previous WHERE previous.plan_id=t.plan_id AND date(previous.start_at,`+modifier+`)=date(t.start_at,`+modifier+`) AND previous.id<t.id),0),t.planned_end_at,t.start_at,p.start_time,p.duration_minutes,p.weekdays
+        FROM sessions t`+join+timerSubjectJoin(modifier)+`
         WHERE t.end_at IS NULL AND t.paused_at IS NOT NULL AND t.break_started_at IS NOT NULL
 		AND t.break_notified=0 AND t.deleted=0 AND p.break_minutes>0 ORDER BY t.id DESC LIMIT 1`).Scan(&id, &subject, &startedRaw, &minutes, &used, &plannedEnd, &sessionStartRaw, &planStart, &planDuration, &weekdays)
 	if errors.Is(err, sql.ErrNoRows) {

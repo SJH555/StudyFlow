@@ -1,6 +1,7 @@
 export type StartupState = {
   phase: 'checking' | 'confirmation' | 'upgrading' | 'blocked' | 'ready';
   kind: string;
+  systemZone?: string;
   current: number;
   target: number;
   databasePath: string;

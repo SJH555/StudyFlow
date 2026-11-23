@@ -8,6 +8,7 @@ import (
 
 	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/modules/review"
+	"exam_notify/internal/modules/schedule"
 	"exam_notify/internal/modules/sessions"
 )
 
@@ -66,6 +67,10 @@ func (s *Scheduler) PendingReview(now time.Time) (*review.DailyReview, error) {
 // 桌面宿主在午夜调用一次。
 func (s *Scheduler) DailySnapshot(now time.Time) error {
 	return s.withQueries(func(db *persistence.Queries) error {
+		history, err := schedule.HasHistory(db)
+		if err != nil || history {
+			return err
+		}
 		reviews := review.New(db)
 		enabled, _, _, _, err := reviews.ReviewConfig()
 		if err != nil {

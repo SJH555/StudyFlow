@@ -25,7 +25,8 @@
   --canvas-study: rgb(247 249 254);
   --outline-note: #a4afb8;
   --surface-version-tag: rgb(232 232 232);
-  --color-plan-learning: rgb(40 99 244);
+  --color-plan-learning: #5484e0;
+  --color-actual-learning: #c48233;
   --elevation-panel: 0 8px 26px color-mix(in srgb, var(--ink) 4%, transparent);
   --elevation-panel-raised: 0 4px 14px color-mix(in srgb, var(--ink) 6%, transparent);
   --elevation-item: 0 4px 16px color-mix(in srgb, var(--ink) 4%, transparent);

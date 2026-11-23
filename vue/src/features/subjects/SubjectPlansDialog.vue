@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import RecordBadge from "../../shared/RecordBadge.vue";
 import { storeToRefs } from "pinia";
 import { useSubjectDraft } from "./useSubjectDraft";
 import { usePlansStore } from "../../stores/plans";
@@ -13,7 +15,13 @@ const {
   showSubjectPlans,
   openSubjectPlanNoteId,
 } = useSubjectDraft();
-const { plans } = storeToRefs(usePlansStore());
+const { managedPlansBySubject } = storeToRefs(usePlansStore());
+const relatedPlans = computed(() => {
+  if (!subjectPlanTarget.value) return [];
+  return (managedPlansBySubject.value.get(subjectPlanTarget.value.id) ?? [])
+    .slice()
+    .sort((a, b) => a.startTime.localeCompare(b.startTime));
+});
 </script>
 
 <template>
@@ -23,9 +31,7 @@ const { plans } = storeToRefs(usePlansStore());
         <div>
           <h2>{{ subjectPlanTarget?.name }} · 关联计划</h2>
           <p>
-            {{
-              plans.filter((p) => p.subjectId === subjectPlanTarget?.id).length
-            }}
+            {{ relatedPlans.length }}
             个计划时段 · 按开始时间排列
           </p>
         </div>
@@ -39,10 +45,7 @@ const { plans } = storeToRefs(usePlansStore());
       <VDivider />
       <div class="subject-plans-list">
         <div
-          v-for="p in plans
-            .filter((p) => p.subjectId === subjectPlanTarget?.id)
-            .slice()
-            .sort((a, b) => a.startTime.localeCompare(b.startTime))"
+          v-for="p in relatedPlans"
           :key="p.id"
           class="plan-row today-schedule-row"
         >
@@ -59,8 +62,14 @@ const { plans } = storeToRefs(usePlansStore());
               <span class="subject-dot" :style="{ background: p.color }"></span>
               <div class="plan-card-copy">
                 <div class="plan-card-title">
-                  <b>{{ p.subject }}</b
-                  ><VBtn
+                  <b>{{ p.subject }}</b>
+                  <RecordBadge
+                    v-if="p.pendingLabel || p.managedActive === false"
+                    :icon="p.pendingLabel ? 'mdi-clock-outline' : 'mdi-eye-off-outline'"
+                  >
+                    {{ p.pendingLabel || "已停用" }}<template v-if="p.pendingDay"> · {{ p.pendingDay }}</template>
+                  </RecordBadge>
+                  <VBtn
                     v-if="p.note"
                     class="plan-note-chip"
                     variant="flat"
@@ -116,6 +125,7 @@ const { plans } = storeToRefs(usePlansStore());
   max-width: 320px;
   min-width: 0;
   height: 23px;
+  margin-block-start: 0;
   padding-inline: 8px;
   border-radius: 8px !important;
   box-shadow: none !important;

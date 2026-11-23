@@ -140,22 +140,45 @@ var errMissingStudyFlowTables = errors.New("SQLite database is missing StudyFlow
 func validateStudyFlowSchema(db *Queries) error {
 	var tables int
 	err := db.QueryRow(`SELECT count(*) FROM sqlite_schema WHERE type='table' AND name IN (
-		'subjects','plans','sessions','activity_logs','settings','daily_reviews','daily_review_items','daily_plan_targets'
+		'sessions','activity_logs','settings','daily_reviews','daily_review_items'
 	)`).Scan(&tables)
 	if err != nil {
 		return err
 	}
-	if tables != 8 {
+	if tables != 5 {
 		return errMissingStudyFlowTables
 	}
 
+	var history bool
+	if err := db.QueryRow(`SELECT EXISTS(SELECT 1 FROM sqlite_schema WHERE type='table' AND name='plan_versions')`).Scan(&history); err != nil {
+		return err
+	}
 	// 解析限定列名，但不扫描或修改任何行。
-	for _, query := range []string{
-		`SELECT t.id, t.name, t.color, t.created_at, t.archived, t.deleted, t.sort_order
-		 FROM subjects AS t LIMIT 0`,
+	versionQueries := []string{
+		`SELECT t.id, t.name, t.color, t.created_at, t.archived, t.deleted, t.sort_order FROM subjects AS t LIMIT 0`,
 		`SELECT t.id, t.subject_id, t.start_time, t.duration_minutes, t.weekdays, t.active,
-		        t.color, t.deleted, t.break_minutes, t.note
-		 FROM plans AS t LIMIT 0`,
+		     t.color, t.deleted, t.break_minutes, t.note FROM plans AS t LIMIT 0`,
+		`SELECT t.day, t.targets_json FROM daily_plan_targets AS t LIMIT 0`,
+	}
+	if history {
+		versionQueries = []string{
+			`SELECT t.id,t.subject_id,t.effective_day,t.name,t.color,t.sort_order,t.created_at,t.status
+			 FROM subject_versions AS t LIMIT 0`,
+			`SELECT t.id,t.kind,t.plan_id,t.subject_id,t.effective_day,t.start_time,t.duration_minutes,
+			     t.break_minutes,t.weekdays,t.color,t.note,t.status,t.legacy_targets_json,t.adoption_day
+			 FROM plan_versions AS t LIMIT 0`,
+			`SELECT t.plan_version_id FROM sessions AS t LIMIT 0`,
+		}
+	} else {
+		if err := db.QueryRow(`SELECT count(*) FROM sqlite_schema WHERE type='table' AND name IN
+			('subjects','plans','daily_plan_targets')`).Scan(&tables); err != nil {
+			return err
+		}
+		if tables != 3 {
+			return errMissingStudyFlowTables
+		}
+	}
+	for _, query := range append(versionQueries,
 		`SELECT t.id, t.subject_id, t.plan_id, t.start_at, t.planned_end_at, t.end_at, t.paused_at,
 		        t.resumed_at, t.duration_seconds, t.source, t.note, t.deleted, t.break_started_at,
 		        t.break_notified, t.break_used_seconds
@@ -166,8 +189,7 @@ func validateStudyFlowSchema(db *Queries) error {
 		 FROM daily_reviews AS t LIMIT 0`,
 		`SELECT t.id, t.day, t.subject_id, t.subject_name, t.planned_seconds, t.actual_seconds, t.reason
 		 FROM daily_review_items AS t LIMIT 0`,
-		`SELECT t.day, t.targets_json FROM daily_plan_targets AS t LIMIT 0`,
-	} {
+	) {
 		rows, err := db.Query(query)
 		if err != nil {
 			return fmt.Errorf("SQLite database has invalid StudyFlow columns: %w", err)

@@ -2,7 +2,6 @@
 import { onUnmounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useAppStore } from "../../stores/app";
-import { usePlansStore } from "../../stores/plans";
 import { useSessionsStore } from "../../stores/sessions";
 import { useStatsStore } from "../../stores/stats";
 import { useCharts } from "./useCharts";
@@ -17,11 +16,12 @@ import {
   planEnd,
 } from "../../shared/format";
 const { selectedDate, todayKey } = storeToRefs(useAppStore());
-const { currentPlans } = storeToRefs(usePlansStore());
 const { sessionSeconds } = useSessionsStore();
 const statsStore = useStatsStore();
 const {
   selectedSessions: sessions,
+  selectedHistory,
+  overviewHistoryKind,
   statsLoading,
   statsReady,
   statsDateMenu,
@@ -38,6 +38,7 @@ const {
 } = storeToRefs(statsStore);
 const {
   pickStatsDate,
+  historyKind,
   plannedForDate,
   dailyActualSeconds,
   dailyActualTrend,
@@ -58,6 +59,8 @@ const charts = useCharts({
   completionLabel,
   plannedForPeriod,
   actualForPeriod,
+  historyKind,
+  overviewHistoryKind,
 });
 statsStore.attachCharts(charts);
 onUnmounted(() => statsStore.leaveStatsPage());
@@ -134,8 +137,12 @@ const { chartEl, projectChartEl } = charts;
           tone="primary"
           tall
         >
-          {{ fmt(overviewPlannedMinutes * 60) }}
-          <template #detail>来自 {{ overviewPlanCount }} 个计划时段</template>
+          {{ overviewHistoryKind === "unknown" ? "—" : fmt(overviewPlannedMinutes * 60) }}
+          <template #detail>
+            <span v-if="overviewHistoryKind === 'unknown'">历史计划未知</span>
+            <span v-else-if="overviewHistoryKind === 'legacy'">含旧复盘目标</span>
+            <span v-else>来自 {{ overviewPlanCount }} 个计划时段</span>
+          </template>
         </SummaryCard>
         <SummaryCard
           label="实际学习"
@@ -147,18 +154,20 @@ const { chartEl, projectChartEl } = charts;
           <template #detail>共 {{ overviewSessionCount }} 条学习记录</template>
         </SummaryCard>
         <SummaryCard label="计划完成率" icon="mdi-check" tone="success" tall>
-          <template v-if="overviewPlannedMinutes">
+          <template v-if="overviewHistoryKind === 'complete' && overviewPlannedMinutes">
             {{
               Math.round(
-                (overviewActualSeconds / (overviewPlannedMinutes * 60)) * 100,
-              )
+                (overviewActualSeconds / (overviewPlannedMinutes * 60)) * 1000,
+              ) / 10
             }}<em>%</em>
           </template>
           <template v-else>—</template>
           <template #detail>{{
-            overviewPlannedMinutes
-              ? "实际时长 ÷ 计划时长"
-              : "该范围没有学习计划"
+            overviewHistoryKind !== "complete"
+              ? "缺少完整的历史计划"
+              : overviewPlannedMinutes
+                ? "实际时长 ÷ 计划时长"
+                : "该范围没有学习计划"
           }}</template>
         </SummaryCard>
       </div>
@@ -210,17 +219,18 @@ const { chartEl, projectChartEl } = charts;
         <div>
           <h2>每日计划与实际</h2>
           <p>
-            {{ formatDateChinese(selectedDate) }} · 左侧原计划，右侧实际学习
+            {{ formatDateChinese(selectedDate) }} · 左侧当天计划，右侧实际学习
+            <span v-if="selectedHistory?.adoptionDay"> · 升级日沿用升级时的安排</span>
           </p>
         </div>
       </div>
       <div class="compare-columns compare-scroll">
         <div>
           <div class="column-heading">
-            原计划 <small>{{ currentPlans.length }} 项</small>
+            当天计划 <small v-if="selectedHistory?.kind === 'complete'">{{ selectedHistory.plans.length }} 项</small>
           </div>
           <div class="compare-list-frame">
-            <div v-for="p in currentPlans" :key="p.id" class="compare-item">
+            <div v-for="p in selectedHistory?.plans ?? []" :key="p.id" class="compare-item">
               <span class="subject-dot" :style="{ background: p.color }"></span>
               <div>
                 <b>{{ p.subject }}</b
@@ -233,9 +243,15 @@ const { chartEl, projectChartEl } = charts;
               </div>
               <strong>{{ fmt(plannedStudyMinutes(p) * 60) }}</strong>
             </div>
-            <div v-if="!currentPlans.length" class="subtle-empty">
-              无预设计划
-            </div>
+            <template v-if="selectedHistory?.kind === 'legacy'">
+              <div class="subtle-empty">仅有旧复盘目标，没有原时段明细</div>
+              <div v-for="item in selectedHistory.targets ?? []" :key="item.subjectId" class="compare-item">
+                <b>{{ item.subjectName }}</b>
+                <strong>{{ fmt(item.plannedSeconds) }}</strong>
+              </div>
+            </template>
+            <div v-else-if="selectedHistory?.kind === 'unknown'" class="subtle-empty">历史计划未知</div>
+            <div v-else-if="!selectedHistory?.plans.length" class="subtle-empty">当天无计划</div>
           </div>
         </div>
         <div>
@@ -572,6 +588,10 @@ const { chartEl, projectChartEl } = charts;
 
 .overview-panel :deep(.summary-card--primary) {
   --summary-accent: var(--color-plan-learning);
+}
+
+.overview-panel :deep(.summary-card--warning) {
+  --summary-accent: var(--color-actual-learning);
 }
 
 .overview-panel > .stat-cards {

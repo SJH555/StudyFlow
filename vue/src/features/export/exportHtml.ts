@@ -13,6 +13,8 @@ type ExportDeps = {
   getProjectChart: () => ECharts | null;
   periodDates: ComputedRef<Date[]>;
   plannedForDate: (date: Date, subjectId?: number) => number;
+  historyKind: (date: Date) => "complete" | "legacy" | "unknown";
+  overviewHistoryKind: Ref<"complete" | "legacy" | "unknown">;
   dailyActualSeconds: (date: Date) => number;
   comparisonSubjects: ComputedRef<Subject[]>;
   plannedForPeriod: (subjectId?: number) => number;
@@ -33,6 +35,8 @@ export async function exportHtmlReport(
     getProjectChart,
     periodDates,
     plannedForDate,
+    historyKind,
+    overviewHistoryKind,
     dailyActualSeconds,
     comparisonSubjects,
     plannedForPeriod,
@@ -103,7 +107,9 @@ export async function exportHtmlReport(
         ["日期", "计划学习", "实际学习"],
         periodDates.value.map((date) => [
           formatDateChinese(dateKey(date)),
-          fmt(plannedForDate(date) * 60),
+          historyKind(date) === "unknown" ? "历史计划未知" :
+            historyKind(date) === "legacy" ? `旧复盘目标 ${fmt(plannedForDate(date) * 60)}` :
+              fmt(plannedForDate(date) * 60),
           fmt(dailyActualSeconds(date)),
         ]),
       );
@@ -112,7 +118,9 @@ export async function exportHtmlReport(
         ["学习项目", "计划时长", "实际时长"],
         comparisonSubjects.value.map((subject) => [
           subject.name,
-          fmt(plannedForPeriod(subject.id) * 60),
+          overviewHistoryKind.value === "unknown" ? "历史计划未知" :
+            overviewHistoryKind.value === "legacy" ? `含旧复盘目标 ${fmt(plannedForPeriod(subject.id) * 60)}` :
+              fmt(plannedForPeriod(subject.id) * 60),
           fmt(actualForPeriod(subject.id)),
         ]),
       );
@@ -181,7 +189,7 @@ export async function exportHtml(kind: "study" | "activity") {
   const appStore = useAppStore();
   const statsStore = useStatsStore();
   const { selectedDate, error } = storeToRefs(appStore);
-  const { periodDates, comparisonSubjects } = storeToRefs(statsStore);
+  const { periodDates, comparisonSubjects, overviewHistoryKind } = storeToRefs(statsStore);
   return exportHtmlReport(kind, {
     selectedDate,
     loadStats: statsStore.loadStats,
@@ -189,6 +197,8 @@ export async function exportHtml(kind: "study" | "activity") {
     getProjectChart: () => statsStore.charts?.getProjectChart() ?? null,
     periodDates,
     plannedForDate: statsStore.plannedForDate,
+    historyKind: statsStore.historyKind,
+    overviewHistoryKind,
     dailyActualSeconds: statsStore.dailyActualSeconds,
     comparisonSubjects,
     plannedForPeriod: statsStore.plannedForPeriod,

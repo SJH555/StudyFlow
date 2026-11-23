@@ -6,6 +6,7 @@ import (
 	"errors"
 	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/modules/plans"
+	"exam_notify/internal/modules/schedule"
 	"exam_notify/internal/modules/sessions"
 	"exam_notify/internal/modules/settings"
 	"sort"
@@ -35,6 +36,7 @@ type DailyReview struct {
 	Threshold      int          `json:"threshold"`
 	PlannedSeconds int64        `json:"plannedSeconds"`
 	ActualSeconds  int64        `json:"actualSeconds"`
+	Status         string       `json:"status"`
 	SubmittedAt    string       `json:"submittedAt,omitempty"`
 	Items          []ReviewItem `json:"items"`
 }
@@ -75,6 +77,26 @@ func (s *Service) pending(now time.Time) (*DailyReview, error) {
 		first = now.AddDate(0, 0, -1)
 	}
 	last := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+	versioned, err := schedule.HasHistory(s.db)
+	if err != nil {
+		return nil, err
+	}
+	if versioned {
+		if err := s.settle(first, last, mode, threshold); err != nil {
+			return nil, err
+		}
+		// 开启日期只限制新检查的范围，已经生成的待办不能因此丢失。
+		var day string
+		err := s.db.QueryRow(`SELECT day FROM daily_reviews
+			WHERE status='pending' AND day<? ORDER BY day LIMIT 1`, last.Format(time.DateOnly)).Scan(&day)
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, nil
+		}
+		if err != nil {
+			return nil, err
+		}
+		return s.storedReview(day)
+	}
 	for day := first; day.Before(last); day = day.AddDate(0, 0, 1) {
 		key := day.Format("2006-01-02")
 		var exists int
@@ -186,6 +208,16 @@ func (s *Service) bulkOffer(now time.Time, pending *DailyReview) (*BulkReviewOff
 	offer := &BulkReviewOffer{StartDay: begin.Format("2006-01-02"), EndDay: end.Format("2006-01-02"), DaysWithoutStudy: days, Reviews: []DailyReview{}}
 	for cursor := begin; !cursor.After(end); cursor = cursor.AddDate(0, 0, 1) {
 		key := cursor.Format("2006-01-02")
+		if pending.Status == reviewPending {
+			item, err := s.storedReview(key)
+			if err != nil {
+				return nil, err
+			}
+			if item != nil && item.Status == reviewPending {
+				offer.Reviews = append(offer.Reviews, *item)
+			}
+			continue
+		}
 		var submitted int
 		if err = s.db.QueryRow(`SELECT count(*) FROM daily_reviews WHERE day=?`, key).Scan(&submitted); err != nil {
 			return nil, err
@@ -226,6 +258,15 @@ func (s *Service) saveBulk(now time.Time, startDay, endDay, reason string) (int,
 		return 0, errors.New("待总结日期已变化，请重新检查")
 	}
 	for _, review := range offer.Reviews {
+		if review.Status == reviewPending {
+			for i := range review.Items {
+				review.Items[i].Reason = reason
+			}
+			if err := s.submitStoredReview(review.Day, review.Items, now); err != nil {
+				return 0, err
+			}
+			continue
+		}
 		if _, err = s.db.Exec(`INSERT INTO daily_reviews(day,mode,threshold,planned_seconds,actual_seconds,submitted_at) VALUES(?,?,?,?,?,?)`, review.Day, review.Mode, review.Threshold, review.PlannedSeconds, review.ActualSeconds, now.Format(time.RFC3339)); err != nil {
 			return 0, err
 		}
@@ -241,8 +282,38 @@ func (s *Service) saveBulk(now time.Time, startDay, endDay, reason string) (int,
 // 某个日期的计划目标会在之后任何计划或项目编辑前冻结，
 // 因此修改今天的日程不会改写昨天的复盘要求。
 func (s *Service) planTargetsForDay(day string) (map[int64]*ReviewItem, error) {
+	history, err := schedule.HasHistory(s.db)
+	if err != nil {
+		return nil, err
+	}
+	if history {
+		items, err := plans.DailyPlans(s.db, []string{day}, time.Now())
+		if err != nil {
+			return nil, err
+		}
+		result := make(map[int64]*ReviewItem)
+		entry := items[day]
+		if entry.Kind == "legacy" {
+			var saved []ReviewItem
+			if err := json.Unmarshal(entry.TargetsJSON, &saved); err != nil {
+				return nil, err
+			}
+			for i := range saved {
+				result[saved[i].SubjectID] = &saved[i]
+			}
+		}
+		for _, p := range entry.Plans {
+			item := result[p.SubjectID]
+			if item == nil {
+				item = &ReviewItem{SubjectID: p.SubjectID, SubjectName: p.Subject}
+				result[p.SubjectID] = item
+			}
+			item.PlannedSeconds += int64(max(0, p.Duration-p.BreakMinutes)) * 60
+		}
+		return result, nil
+	}
 	var saved string
-	err := s.db.QueryRow(`SELECT targets_json FROM daily_plan_targets WHERE day=?`, day).Scan(&saved)
+	err = s.db.QueryRow(`SELECT targets_json FROM daily_plan_targets WHERE day=?`, day).Scan(&saved)
 	if err == nil {
 		var items []ReviewItem
 		if err = json.Unmarshal([]byte(saved), &items); err != nil {

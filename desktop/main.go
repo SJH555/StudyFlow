@@ -20,6 +20,7 @@ import (
 	studyapp "exam_notify/internal/app"
 	"exam_notify/internal/infrastructure/storage"
 	"exam_notify/internal/infrastructure/system"
+	"exam_notify/internal/shared/studycalendar"
 	"github.com/wailsapp/wails/v3/pkg/application"
 	"github.com/wailsapp/wails/v3/pkg/events"
 )
@@ -50,7 +51,7 @@ func main() {
 
 func run() error {
 	var restoredApp *App
-	err := runWithStartupPresenter(func(store *App, instance system.InstanceGuard, base, data, location string, startup *startupUpgrade) error {
+	err := runWithStartupCheck(checkStartupTimeZone, func(store *App, instance system.InstanceGuard, base, data, location string, startup *startupUpgrade) error {
 		restoredApp = store
 		return runDesktopWithStartup(store, instance, base, data, location, startup, newDesktopTransport(), func(app *application.App) error { return app.Run() })
 	})
@@ -73,7 +74,11 @@ func run() error {
 	return cmd.Process.Release()
 }
 
-func runWithStartupPresenter(present func(*App, system.InstanceGuard, string, string, string, *startupUpgrade) error) (resultErr error) {
+func runWithStartupPresenter(present func(*App, system.InstanceGuard, string, string, string, *startupUpgrade) error) error {
+	return runWithStartupCheck(nil, present)
+}
+
+func runWithStartupCheck(check func() *startupStatus, present func(*App, system.InstanceGuard, string, string, string, *startupUpgrade) error) (resultErr error) {
 	executable, err := os.Executable()
 	if err != nil {
 		return err
@@ -138,6 +143,13 @@ func runWithStartupPresenter(present func(*App, system.InstanceGuard, string, st
 	}()
 	appErrorLog = errorLog
 	log.SetOutput(io.MultiWriter(os.Stderr, errorLog))
+	if check != nil {
+		if blocked := check(); blocked != nil {
+			app := newApp(nil)
+			startup := &startupUpgrade{status: *blocked, tasks: &app.tasks}
+			return present(app, instance, baseDir, defaultDataDir, locationFile, startup)
+		}
+	}
 	checkingStarted := time.Now()
 	store, startup := prepareStartupUpgrade(startupDatabasePaths{
 		locationFile: locationFile, defaultDir: defaultDataDir, installDir: installDir, legacyConfigDir: configDir,
@@ -375,7 +387,7 @@ func runDesktopWithStartup(store *App, instance system.InstanceGuard, baseDir, d
 	runErr := runApp(app)
 	if startup != nil {
 		state := startup.snapshot()
-		if state.Phase == "blocked" {
+		if state.Phase == "blocked" && state.Detail != "" {
 			return errors.Join(runErr, errors.New(state.Detail))
 		}
 	}
@@ -405,7 +417,7 @@ func activityReminderLoop(ctx context.Context, app *application.App, store *App)
 	lastActivityMinute := ""
 	// 将检查对齐到每秒的起始，使提醒在整秒（:00）触发。
 	for waitDesktopTask(ctx, time.Until(time.Now().Truncate(time.Second).Add(time.Second))) {
-		now := time.Now()
+		now := time.Now().In(studycalendar.Location)
 		if now.Hour() == 0 && now.Minute() == 0 && now.Second() == 0 {
 			if err := store.scheduler.WithContext(ctx).DailySnapshot(now); err != nil {
 				log.Printf("%v", err)

@@ -110,6 +110,7 @@ export const useReviewStore = defineStore("review", () => {
       reviewBulkOffer.value = result.bulk;
       reviewPending.value = result.pending;
       if (result.pending && appStore.focusMode) appStore.exitFocus();
+      if (appStore.page === "summary") await refreshReviewHistory();
     } catch (e) {
       appStore.setError(e);
     }
@@ -195,7 +196,7 @@ export const useReviewStore = defineStore("review", () => {
     try {
       await submitDailyReview(current.day, reasons);
       reviewPending.value = null;
-      await Promise.all([checkDailyReview(), refreshReviewHistory()]);
+      await checkDailyReview();
     } catch (e) {
       appStore.setError(e);
     } finally {
@@ -218,7 +219,7 @@ export const useReviewStore = defineStore("review", () => {
       reviewBulkOffer.value = null;
       reviewBulkChoice.value = "individual";
       reviewBulkReason.value = "";
-      await Promise.all([checkDailyReview(), refreshReviewHistory()]);
+      await checkDailyReview();
     } catch (e) {
       appStore.setError(e);
     } finally {

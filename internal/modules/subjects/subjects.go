@@ -5,7 +5,7 @@ import (
 	"errors"
 	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/modules/plans"
-	"exam_notify/internal/modules/sessions"
+	"exam_notify/internal/modules/schedule"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -184,17 +184,26 @@ func deleteSubject(db *persistence.Queries, id string) error {
 }
 func hasLinkedData(db *persistence.Queries, id any) (bool, error) {
 	planned, err := plans.CountForSubject(db, id)
-	if err != nil {
-		return false, err
+	if err != nil || planned > 0 {
+		return planned > 0, err
 	}
-	recorded, err := sessions.CountForSubject(db, id)
-	return planned+recorded > 0, err
+	var recorded bool
+	err = db.QueryRow(`SELECT EXISTS(SELECT 1 FROM sessions WHERE subject_id=? AND deleted=0)`, id).Scan(&recorded)
+	return recorded, err
 }
 
 // Count 统计科目总数。
 func Count(db *persistence.Queries) (int, error) {
+	history, err := schedule.HasHistory(db)
+	if err != nil {
+		return 0, err
+	}
+	query := `SELECT count(*) FROM subjects`
+	if history {
+		query = `SELECT count(DISTINCT subject_id) FROM subject_versions`
+	}
 	var count int
-	err := db.QueryRow(`SELECT count(*) FROM subjects`).Scan(&count)
+	err = db.QueryRow(query).Scan(&count)
 	return count, err
 }
 

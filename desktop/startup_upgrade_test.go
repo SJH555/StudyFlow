@@ -110,7 +110,7 @@ func TestUpgradeStartupConsentBackupAndRepeat(t *testing.T) {
 }
 func TestUpgradeFreshStartupInitializesOnce(t *testing.T) {
 	p, app, c := prepareUpgradeFixture(t, false)
-	if state := c.snapshot(); state.Phase != "ready" || state.Current != 1 {
+	if state := c.snapshot(); state.Phase != "ready" || state.Current != 2 {
 		t.Fatal(state)
 	}
 	if got := upgradeScalar(t, app.database, `SELECT value FROM settings WHERE key='dailyReviewEnabled'`); got != "0" {
@@ -225,7 +225,7 @@ func TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites(t *testing.T) {
 			p := startupPathsFixture(t)
 			path := filepath.Join(p.defaultDir, "study.db")
 			if kind == "newer" {
-				seedStartupSQLite(t, path, true, `CREATE TABLE goose_db_version(id INTEGER PRIMARY KEY,version_id INTEGER,is_applied INTEGER,tstamp TIMESTAMP);INSERT INTO goose_db_version VALUES(1,0,1,NULL),(2,1,1,NULL),(3,2,1,NULL);`)
+				seedStartupSQLite(t, path, true, `CREATE TABLE goose_db_version(id INTEGER PRIMARY KEY,version_id INTEGER,is_applied INTEGER,tstamp TIMESTAMP);INSERT INTO goose_db_version VALUES(1,0,1,NULL),(2,1,1,NULL),(3,2,1,NULL),(4,3,1,NULL);`)
 			}
 			if kind == "unknown" {
 				seedStartupSQLite(t, path, false, `CREATE TABLE unrelated(id INTEGER)`)
@@ -239,7 +239,7 @@ func TestUpgradeBlocksNewerUnknownAndMissingWithoutWrites(t *testing.T) {
 			}
 			app, c := prepareStartupUpgrade(p)
 			defer app.Close()
-			if state := c.snapshot(); state.Phase != "blocked" || (kind == "newer" && (state.Kind != "newer" || state.Current != 2)) {
+			if state := c.snapshot(); state.Phase != "blocked" || (kind == "newer" && (state.Kind != "newer" || state.Current != 3)) {
 				t.Fatal(state)
 			}
 			api := &APIService{app: app, startup: c}
@@ -272,7 +272,7 @@ func TestUpgradeKnownHistoricalProfilesAreBackedUpBeforeConversion(t *testing.T)
 			if got := rawUpgradeScalar(t, state.BackupPath, `SELECT count(*) FROM sqlite_schema WHERE type='table' AND name NOT GLOB 'sqlite_*'`); got != "5" {
 				t.Fatal("backup was converted", got)
 			}
-			if got := upgradeScalar(t, app.database, `SELECT name FROM subjects WHERE id=1`); got != "legacy subject" {
+			if got := upgradeScalar(t, app.database, `SELECT name FROM subject_versions WHERE subject_id=1`); got != "legacy subject" {
 				t.Fatal(got)
 			}
 		})
@@ -328,14 +328,14 @@ func TestUpgradeBackupSurvivesRetentionAndDirectorySwitch(t *testing.T) {
 	if got := rawUpgradeScalar(t, backup, `SELECT count(*) FROM sqlite_schema WHERE name='goose_db_version'`); got != "0" {
 		t.Fatal(got)
 	}
-	if got := upgradeScalar(t, app.database, `SELECT max(version_id) FROM goose_db_version`); got != "1" {
+	if got := upgradeScalar(t, app.database, `SELECT max(version_id) FROM goose_db_version`); got != "2" {
 		t.Fatal(got)
 	}
 }
 func TestUpgradeDirectorySwitchRejectsUnexpectedSourceVersion(t *testing.T) {
 	p, app, c := prepareUpgradeFixture(t, false)
 	if err := app.database.WithWrite(func(db *sql.DB, _ string) error {
-		_, err := db.Exec(`INSERT INTO goose_db_version(version_id,is_applied) VALUES(2,1)`)
+		_, err := db.Exec(`INSERT INTO goose_db_version(version_id,is_applied) VALUES(3,1)`)
 		return err
 	}); err != nil {
 		t.Fatal(err)
@@ -367,7 +367,7 @@ func TestUpgradeExistingEmptyFileIsNotInitialized(t *testing.T) {
 }
 func TestUpgradeRecoveryRejectsNewerBeforeRetiringOldLocation(t *testing.T) {
 	f := makeStartupPending(t, true, false)
-	seedStartupSQLite(t, f.targetDB, true, `CREATE TABLE goose_db_version(id INTEGER PRIMARY KEY,version_id INTEGER,is_applied INTEGER,tstamp TIMESTAMP);INSERT INTO goose_db_version VALUES(1,0,1,NULL),(2,1,1,NULL),(3,2,1,NULL)`)
+	seedStartupSQLite(t, f.targetDB, true, `CREATE TABLE goose_db_version(id INTEGER PRIMARY KEY,version_id INTEGER,is_applied INTEGER,tstamp TIMESTAMP);INSERT INTO goose_db_version VALUES(1,0,1,NULL),(2,1,1,NULL),(3,2,1,NULL),(4,3,1,NULL)`)
 	oldBefore := readStartupFixture(t, f.oldDB)
 	targetBefore := readStartupFixture(t, f.targetDB)
 	app, c := prepareStartupUpgrade(f.paths)

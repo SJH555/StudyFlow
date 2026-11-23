@@ -54,7 +54,9 @@ export function useActiveLearning() {
   });
 
   const heroBreakMinutes = computed(
-    () => (activePlan.value || plansStore.currentPlan)?.breakMinutes || 0,
+    () => sessionsStore.active?.planVersionId
+      ? sessionsStore.active.breakMinutes ?? 0
+      : (activePlan.value || plansStore.currentPlan)?.breakMinutes || 0,
   );
 
   const countdownTotal = computed(() => {
@@ -91,25 +93,19 @@ export function useActiveLearning() {
   );
 
   // 休息中的计划与剩余休息秒数。
-  const activeBreakPlan = computed(() =>
-    sessionsStore.active?.pausedAt &&
-    sessionsStore.active.breakStartedAt &&
-    activePlan.value?.breakMinutes
-      ? activePlan.value
-      : null,
-  );
+  const activeBreakPlan = computed(() => {
+    const session = sessionsStore.active;
+    if (!session?.pausedAt || !session.breakStartedAt || !heroBreakMinutes.value) return null;
+    return { breakMinutes: heroBreakMinutes.value };
+  });
 
   const breakLeftSeconds = computed(() => {
     const session = sessionsStore.active;
     if (!activeBreakPlan.value || !session?.breakStartedAt) return 0;
-    return Math.max(
-      0,
-      activeBreakPlan.value.breakMinutes * 60 -
-        (session.breakUsedSeconds || 0) -
-        Math.floor(
-          (appStore.now - new Date(session.breakStartedAt).getTime()) / 1000,
-        ),
-    );
+    const remaining = activeBreakPlan.value.breakMinutes * 60 -
+      (session.breakUsedSeconds || 0) -
+      Math.floor((appStore.now - new Date(session.breakStartedAt).getTime()) / 1000);
+    return Math.max(0, countdownEndAt.value === null ? remaining : Math.min(remaining, countdownLeft.value));
   });
 
   return {

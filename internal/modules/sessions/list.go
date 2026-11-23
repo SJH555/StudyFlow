@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"exam_notify/internal/infrastructure/persistence"
+	"exam_notify/internal/modules/schedule"
 )
 
 // 两个自然月最多 62 天，覆盖周/月联合查询，同时限制单次返回范围。
@@ -54,6 +55,24 @@ func listForDates(db *persistence.Queries, days []string) (map[string][]Session,
 	if len(days) == 0 {
 		return out, nil
 	}
+	history, err := schedule.HasHistory(db)
+	if err != nil {
+		return nil, err
+	}
+	daySQL, versionSQL := "date(start_at,'localtime')", "NULL AS version_id"
+	labels, join, breakRule := "s.name,s.color", " JOIN subjects s ON s.id=t.subject_id ", "0"
+	if history {
+		daySQL, versionSQL = "date(start_at,'+8 hours')", "plan_version_id AS version_id"
+		labels = "COALESCE(v.name,initial.name),COALESCE(v.color,initial.color)"
+		join = `LEFT JOIN subject_versions v ON v.id=(
+			SELECT sv.id FROM subject_versions sv WHERE sv.subject_id=t.subject_id AND sv.effective_day<=t.local_day
+			ORDER BY sv.effective_day DESC,sv.id DESC LIMIT 1
+		) LEFT JOIN subject_versions initial ON initial.id=(
+			SELECT sv.id FROM subject_versions sv WHERE sv.subject_id=t.subject_id
+			ORDER BY sv.effective_day,sv.id LIMIT 1
+		) LEFT JOIN plan_versions pv ON pv.id=t.version_id`
+		breakRule = "COALESCE(pv.break_minutes,0)"
+	}
 	placeholders := strings.TrimSuffix(strings.Repeat("?,", len(days)), ",")
 	// 本批日期只扫描一次；复用本地日期和记录，避免休息累计为每条记录回扫全库。
 	// 删除记录必须在外层过滤，因为它们仍参与同一计划的当日休息累计。
@@ -61,11 +80,11 @@ func listForDates(db *persistence.Queries, days []string) (map[string][]Session,
 	query := `WITH selected AS MATERIALIZED (
         SELECT id,plan_id,subject_id,start_at,end_at,planned_end_at,paused_at,
             resumed_at,break_started_at,break_used_seconds,duration_seconds,source,note,deleted,
-            date(start_at,'localtime') AS local_day
-        FROM sessions WHERE date(start_at,'localtime') IN (` + placeholders + `)
+            ` + daySQL + ` AS local_day,` + versionSQL + `
+        FROM sessions WHERE ` + daySQL + ` IN (` + placeholders + `)
     )
     SELECT t.local_day,
-        t.id,t.plan_id,t.subject_id,s.name,s.color,t.start_at,t.end_at,
+        t.id,t.plan_id,t.subject_id,` + labels + `,t.start_at,t.end_at,
         t.planned_end_at,t.paused_at,t.resumed_at,t.break_started_at,
         t.break_used_seconds + CASE WHEN t.plan_id IS NULL THEN 0 ELSE COALESCE((
             SELECT SUM(previous.break_used_seconds) FROM selected previous
@@ -73,8 +92,8 @@ func listForDates(db *persistence.Queries, days []string) (map[string][]Session,
                 AND previous.local_day=t.local_day
                 AND previous.id<t.id
         ),0) END,
-        t.duration_seconds,t.source,t.note
-        FROM selected t JOIN subjects s ON s.id=t.subject_id
+        t.duration_seconds,t.source,t.note,t.version_id,` + breakRule + `
+        FROM selected t ` + join + `
         WHERE t.deleted=0
         ORDER BY julianday(t.start_at) DESC`
 	rows, err := db.Query(query, args...)
@@ -87,13 +106,16 @@ func listForDates(db *persistence.Queries, days []string) (map[string][]Session,
 		var session Session
 		var end, plannedEnd sql.NullString
 		var paused, resumed, breakStarted sql.NullString
-		var planID sql.NullInt64
+		var planID, versionID sql.NullInt64
 		if err := rows.Scan(
 			&day, &session.ID, &planID, &session.SubjectID, &session.Subject, &session.Color, &session.StartAt,
 			&end, &plannedEnd, &paused, &resumed, &breakStarted,
-			&session.BreakUsedSeconds, &session.Duration, &session.Source, &session.Note,
+			&session.BreakUsedSeconds, &session.Duration, &session.Source, &session.Note, &versionID, &session.BreakMinutes,
 		); err != nil {
 			return nil, err
+		}
+		if versionID.Valid {
+			session.PlanVersionID = &versionID.Int64
 		}
 		if planID.Valid {
 			session.PlanID = &planID.Int64

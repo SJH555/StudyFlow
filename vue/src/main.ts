@@ -77,6 +77,10 @@ const vuetify = createVuetify({
           background: '#ffffff',
           'on-surface': '#282821',
           outline: '#e8ebf2',
+          'directory-status': '#f7f0da',
+          'on-directory-status': '#765811',
+          'version-history': '#f0f2f5',
+          'on-version-history': '#515866',
         },
       },
       studyflowReview: {

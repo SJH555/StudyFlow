@@ -123,10 +123,18 @@ func Prepare(ctx context.Context, path string, now time.Time) (*Candidate, error
 		if err := requireIdle(q, "备份文件中"); err != nil {
 			return err
 		}
-		if err := q.QueryRow("SELECT count(*) FROM subjects").Scan(&c.preview.Subjects); err != nil {
+		subjectCount := "SELECT count(*) FROM subjects"
+		if c.state.Version >= 2 {
+			subjectCount = "SELECT count(DISTINCT subject_id) FROM subject_versions"
+		}
+		if err := q.QueryRow(subjectCount).Scan(&c.preview.Subjects); err != nil {
 			return err
 		}
-		return q.QueryRow("SELECT count(*) FROM sessions").Scan(&c.preview.Sessions)
+		visible, err := visibleSessionCondition(q)
+		if err != nil {
+			return err
+		}
+		return q.QueryRow("SELECT count(*) FROM sessions WHERE " + visible).Scan(&c.preview.Sessions)
 	})
 	if err != nil {
 		if errors.Is(err, upgrade.ErrNewerDatabase) {
@@ -205,17 +213,25 @@ func withCandidate(ctx context.Context, path string, use func(*persistence.Acces
 	return errors.Join(persistence.WithStartupAccess(ctx, db, use), db.Close())
 }
 
-func requireIdle(query *persistence.Queries, where string) error {
+// 早期可导入的五表旧库没有删除标记，其学习记录均视为可见。
+func visibleSessionCondition(query *persistence.Queries) (string, error) {
 	var hasDeletedColumn int
 	if err := query.QueryRow(`SELECT count(*) FROM pragma_table_info('sessions') WHERE name='deleted'`).Scan(&hasDeletedColumn); err != nil {
+		return "", err
+	}
+	if hasDeletedColumn == 0 {
+		return "1=1", nil
+	}
+	return "deleted=0", nil
+}
+
+func requireIdle(query *persistence.Queries, where string) error {
+	visible, err := visibleSessionCondition(query)
+	if err != nil {
 		return err
 	}
-	condition := "end_at IS NULL"
-	if hasDeletedColumn != 0 {
-		condition += " AND deleted=0"
-	}
 	var active bool
-	if err := query.QueryRow("SELECT EXISTS(SELECT 1 FROM sessions WHERE " + condition + ")").Scan(&active); err != nil {
+	if err := query.QueryRow("SELECT EXISTS(SELECT 1 FROM sessions WHERE end_at IS NULL AND " + visible + ")").Scan(&active); err != nil {
 		return err
 	}
 	if active {

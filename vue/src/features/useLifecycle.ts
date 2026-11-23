@@ -19,8 +19,15 @@ type LifecycleDeps = {
 
 export function useLifecycle(deps: LifecycleDeps) {
   const { load, handleDialogKeydown } = deps;
+  const focusRoot = document.documentElement;
+  const handlePointerDown = () => focusRoot.setAttribute("data-pointer-focus", "");
   const handleAppKeydown = (event: KeyboardEvent) => {
-    if (event.key === "Tab") {
+    // 系统窗口快捷键会让 WebView 误判焦点来源。仅在应用内导航时切回键盘焦点样式。
+    if (!event.altKey && !event.ctrlKey && !event.metaKey &&
+      (event.key === "Tab" || event.key.startsWith("Arrow") || event.key === "Enter" || event.key === " ")) {
+      focusRoot.removeAttribute("data-pointer-focus");
+    }
+    if (event.key === "Tab" && !event.altKey) {
       event.preventDefault();
       event.stopImmediatePropagation();
       return;
@@ -108,6 +115,7 @@ export function useLifecycle(deps: LifecycleDeps) {
     window.addEventListener("resize", statsStore.resizeCharts);
     document.addEventListener("copy", preventDataCopy);
     document.addEventListener("pointerdown", closePlanNoteOutside);
+    document.addEventListener("pointerdown", handlePointerDown, true);
     document.addEventListener("keydown", handleAppKeydown, true);
   });
 
@@ -119,6 +127,8 @@ export function useLifecycle(deps: LifecycleDeps) {
     document.removeEventListener("visibilitychange", refreshVisibleClock);
     document.removeEventListener("copy", preventDataCopy);
     document.removeEventListener("pointerdown", closePlanNoteOutside);
+    document.removeEventListener("pointerdown", handlePointerDown, true);
+    focusRoot.removeAttribute("data-pointer-focus");
     document.removeEventListener("keydown", handleAppKeydown, true);
     document.body.classList.remove("rest-orb-dragging");
     statsStore.disposeCharts();

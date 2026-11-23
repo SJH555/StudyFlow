@@ -6,6 +6,7 @@ import (
 	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/modules/schedule"
 	"exam_notify/internal/modules/settings"
+	"exam_notify/internal/shared/studycalendar"
 	"fmt"
 	"time"
 )
@@ -21,6 +22,30 @@ type ReminderItem struct {
 func StartingAt(db *persistence.Queries, now time.Time) (*ReminderItem, error) {
 	if paused, err := settings.PlansPausedToday(db, now); err != nil || paused {
 		return nil, err
+	}
+	history, err := schedule.HasHistory(db)
+	if err != nil {
+		return nil, err
+	}
+	if history {
+		items, err := AsOf(db, studycalendar.Day(now))
+		if err != nil {
+			return nil, err
+		}
+		now = now.In(studycalendar.Location)
+		for _, p := range items {
+			if p.StartTime != now.Format("15:04") || !schedule.ContainsWeekday(p.Weekdays, int(now.Weekday())) {
+				continue
+			}
+			var running bool
+			if err := db.QueryRow(`SELECT EXISTS(SELECT 1 FROM sessions WHERE plan_id=? AND end_at IS NULL AND deleted=0)`, p.ID).Scan(&running); err != nil {
+				return nil, err
+			}
+			if !running {
+				return &ReminderItem{ID: p.ID, Name: p.Subject, StartTime: p.StartTime}, nil
+			}
+		}
+		return nil, nil
 	}
 	rows, err := startingRows(db, now.Format("15:04"))
 	if err != nil {
@@ -45,6 +70,33 @@ func StartingAt(db *persistence.Queries, now time.Time) (*ReminderItem, error) {
 func CurrentAt(db *persistence.Queries, now time.Time) (*ReminderItem, error) {
 	if paused, err := settings.PlansPausedToday(db, now); err != nil || paused {
 		return nil, err
+	}
+	history, err := schedule.HasHistory(db)
+	if err != nil {
+		return nil, err
+	}
+	if history {
+		now = now.In(studycalendar.Location)
+		for _, day := range []time.Time{now, now.AddDate(0, 0, -1)} {
+			items, err := AsOf(db, studycalendar.Day(day))
+			if err != nil {
+				return nil, err
+			}
+			for _, p := range items {
+				if !schedule.ContainsWeekday(p.Weekdays, int(day.Weekday())) {
+					continue
+				}
+				clock, err := schedule.StartMinute(p.StartTime)
+				if err != nil {
+					return nil, err
+				}
+				start := time.Date(day.Year(), day.Month(), day.Day(), clock/60, clock%60, 0, 0, day.Location())
+				if !now.Before(start) && now.Before(start.Add(time.Duration(p.Duration)*time.Minute)) {
+					return &ReminderItem{ID: p.ID, Name: p.Subject, StartTime: p.StartTime}, nil
+				}
+			}
+		}
+		return nil, nil
 	}
 	rows, err := currentRows(db)
 	if err != nil {

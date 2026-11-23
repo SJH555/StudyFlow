@@ -437,7 +437,7 @@ body {
   font-weight: 700;
   color: #6f7685;
 }
-.plan-confirm > p {
+.plan-confirm > p:not(.form-effective-notice) {
   font-size: 14px;
   color: #656d7a;
   margin: 12px 0 16px;
@@ -659,6 +659,13 @@ textarea,
 .app-sidebar .v-list-item:focus-visible {
   outline: 2px solid var(--section-primary);
   outline-offset: 2px;
+}
+/* 切回窗口时保留选择和焦点位置，只抑制指针操作后误触发的轮廓。 */
+html[data-pointer-focus] :is(.v-btn, .v-list-item):focus-visible {
+  outline: none;
+}
+html[data-pointer-focus] :is(.v-btn, .v-list-item):focus-visible::after {
+  opacity: 0;
 }
 .section-empty {
   display: grid;
@@ -997,6 +1004,18 @@ textarea,
 .app-sidebar .app-primary-nav .v-list-item-title {
   white-space: nowrap;
   text-overflow: clip;
+}
+
+/* Plan and project form descriptions. */
+.v-card-title:has(+ .form-effective-notice) {
+  padding-bottom: var(--space-1);
+}
+
+.form-effective-notice {
+  margin: 0 var(--space-6) var(--space-2);
+  color: color-mix(in srgb, var(--ink) 65%, var(--surface-card));
+  font-size: var(--text-small);
+  line-height: 1.55;
 }
 
 /* Vuetify based learning project editor. */

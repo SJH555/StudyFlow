@@ -27,7 +27,7 @@ import SubjectForm from "./features/subjects/SubjectForm.vue";
 import SubjectPlansDialog from "./features/subjects/SubjectPlansDialog.vue";
 import SubjectDeleteDialog from "./features/subjects/SubjectDeleteDialog.vue";
 import PlanForm from "./features/plans/PlanForm.vue";
-import PlanConfirmDialogs from "./features/plans/PlanConfirmDialogs.vue";
+import PlanDeleteDialog from "./features/plans/PlanDeleteDialog.vue";
 import ReminderDialogs from "./features/plans/ReminderDialogs.vue";
 import ManualForm from "./features/sessions/ManualForm.vue";
 import StudyConfirmDialogs from "./features/sessions/StudyConfirmDialogs.vue";
@@ -79,8 +79,7 @@ const { handleDialogKeydown } = useKeyboardShortcuts({
   openPlanNoteId: planDraft.openPlanNoteId,
   reminderActive: activityRefs.reminderActive,
   addActivity: activityStore.addActivity,
-  pendingPlanAction: planDraft.pendingPlanAction,
-  confirmPlanAction: plansForm.confirmPlanAction,
+  deletePlanTarget: planDraft.deletePlanTarget,
   resetTarget: settingsRefs.resetTarget,
   deleteSubjectTarget: subjectDraft.deleteSubjectTarget,
   deleteSessionTarget: sessionsRefs.deleteSessionTarget,
@@ -248,7 +247,7 @@ useLifecycle({ load, handleDialogKeydown });
   <SubjectPlansDialog />
   <SubjectForm /><PlanForm /><ManualForm />
   <ActivityDialogs />
-  <SettingsDialogs /><PlanConfirmDialogs /><StudyConfirmDialogs /><ReminderDialogs />
+  <SettingsDialogs /><PlanDeleteDialog /><StudyConfirmDialogs /><ReminderDialogs />
   <SubjectDeleteDialog />
   <ReviewDialog />
   <RestOrb />

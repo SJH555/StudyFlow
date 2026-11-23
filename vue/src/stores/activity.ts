@@ -15,6 +15,7 @@ export const useActivityStore = defineStore("activity", () => {
   const activityModalWasOpen = ref(false);
   const activityDraftBeforeReminder = ref<string | null>(null);
   const activityText = ref("");
+  const activitySaving = ref(false);
   const reminderActive = ref(false);
   const activityEnabled = ref(false);
   const activitySettingsSaving = ref(false);
@@ -95,22 +96,33 @@ export const useActivityStore = defineStore("activity", () => {
   }
 
   async function addActivity() {
-    if (!activityText.value.trim()) {
+    if (activitySaving.value) return;
+    const content = activityText.value.trim();
+    if (!content) {
       appStore.notifyTop("请填写当前活动");
       return;
     }
+    const fromReminder = reminderActive.value;
+    activitySaving.value = true;
     try {
-      const fromReminder = reminderActive.value;
       if (fromReminder) await appStore.stopReminderSound();
-      await api.addActivity(activityText.value.trim());
-      if (fromReminder) finishActivityReminder();
-      else {
-        activityText.value = "";
+      await api.addActivity(content);
+      if (fromReminder) {
+        finishActivityReminder();
+      } else {
         showActivity.value = false;
+        if (reminderActive.value) {
+          activityModalWasOpen.value = false;
+          activityDraftBeforeReminder.value = null;
+        } else {
+          activityText.value = "";
+        }
       }
       await fetchForDate(appStore.selectedDate);
     } catch (e) {
       appStore.setError(e);
+    } finally {
+      activitySaving.value = false;
     }
   }
 
@@ -179,6 +191,7 @@ export const useActivityStore = defineStore("activity", () => {
     activityModalWasOpen,
     activityDraftBeforeReminder,
     activityText,
+    activitySaving,
     reminderActive,
     activityEnabled,
     activitySettingsSaving,

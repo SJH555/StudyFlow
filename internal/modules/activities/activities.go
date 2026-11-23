@@ -3,6 +3,8 @@ package activities
 import (
 	"exam_notify/internal/infrastructure/persistence"
 
+	"exam_notify/internal/modules/schedule"
+	"exam_notify/internal/shared/studycalendar"
 	"time"
 )
 
@@ -14,10 +16,18 @@ type Input struct {
 
 // List 返回指定日期的活动记录，day 为空时使用今天。
 func List(db *persistence.Queries, day string) ([]map[string]any, error) {
-	if day == "" {
-		day = time.Now().Format("2006-01-02")
+	history, err := schedule.HasHistory(db)
+	if err != nil {
+		return nil, err
 	}
-	rows, e := db.Query(`SELECT id,happened_at,content FROM activity_logs WHERE substr(happened_at,1,10)=? ORDER BY happened_at DESC`, day)
+	dayExpr := "substr(happened_at,1,10)"
+	if history {
+		dayExpr = "date(happened_at,'+8 hours')"
+	}
+	if day == "" {
+		day = studycalendar.Day(time.Now())
+	}
+	rows, e := db.Query(`SELECT id,happened_at,content FROM activity_logs WHERE `+dayExpr+`=? ORDER BY happened_at DESC`, day)
 	if e != nil {
 		return nil, e
 	}

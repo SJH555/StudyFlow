@@ -195,6 +195,13 @@ function selectSection(key: string) {
           <VDivider class="settings-row-divider" />
           <div class="section-setting-row">
             <div class="section-setting-copy">
+              <strong>学习时区</strong><small>计划、提醒和统计使用北京时间</small>
+            </div>
+            <span class="settings-version-tag">北京时间（UTC+08:00）</span>
+          </div>
+          <VDivider class="settings-row-divider" />
+          <div class="section-setting-row">
+            <div class="section-setting-copy">
               <strong>版本信息</strong><small>当前安装的 StudyFlow 版本</small>
             </div>
             <span class="settings-version-tag">v{{ appVersion }}</span>

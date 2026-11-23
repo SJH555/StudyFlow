@@ -1,37 +1,27 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
+import DeleteConfirmDialog from "../../shared/DeleteConfirmDialog.vue";
+import { formatDateChinese } from "../../shared/format";
 import { useSubjectDraft } from "./useSubjectDraft";
 import { useSubjectsStore } from "../../stores/subjects";
-const { deleteSubjectTarget } = useSubjectDraft();
-const { deleteSubject } = useSubjectsStore();
+
+const { deleteSubjectTarget, deleteSubjectDay } = useSubjectDraft();
+const subjectsStore = useSubjectsStore();
+const { savingSubject } = storeToRefs(subjectsStore);
+const { cancelDeleteSubject, deleteSubject } = subjectsStore;
+const notice = computed(() => deleteSubjectDay.value
+  ? `${formatDateChinese(deleteSubjectDay.value)}起移出列表并停止相关排程，历史记录保留。`
+  : "");
 </script>
 
 <template>
-  <div v-if="deleteSubjectTarget" class="modal-backdrop">
-    <div class="modal delete-confirm">
-      <button class="modal-close" @click="deleteSubjectTarget = null">×</button>
-      <h2>删除“{{ deleteSubjectTarget.name }}”？</h2>
-      <div class="confirm-actions">
-        <button class="btn secondary" @click="deleteSubjectTarget = null">
-          取消</button
-        ><button class="btn delete-confirm-button" @click="deleteSubject">
-          确认删除
-        </button>
-      </div>
-    </div>
-  </div>
+  <DeleteConfirmDialog
+    :open="!!deleteSubjectTarget"
+    :title="`删除“${deleteSubjectTarget?.name ?? ''}”？`"
+    :notice="notice"
+    :busy="savingSubject"
+    @cancel="cancelDeleteSubject"
+    @confirm="deleteSubject"
+  />
 </template>
-
-<style scoped>
-.modal-close {
-  position: absolute;
-  right: 17px;
-  top: 13px;
-  border: 0;
-  background: none;
-  font-size: 21px;
-  color: #aaa89f;
-}
-.modal-close {
-  font-size: 24px;
-}
-</style>

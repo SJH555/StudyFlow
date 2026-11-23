@@ -27,6 +27,8 @@ type ChartInputs = {
   statsPeriod: Ref<"week" | "month">;
   comparisonSubjects: ComputedRef<Subject[]>;
   plannedForDate: (date: Date, subjectId?: number) => number;
+  historyKind: (date: Date) => "complete" | "legacy" | "unknown";
+  overviewHistoryKind: ComputedRef<"complete" | "legacy" | "unknown">;
   dailyActualSeconds: (date: Date) => number;
   dailyActualTrend: (date: Date) => number | null;
   completionLabel: (plannedSeconds: number, actualSeconds: number) => string;
@@ -39,6 +41,8 @@ export function useCharts({
   statsPeriod,
   comparisonSubjects,
   plannedForDate,
+  historyKind,
+  overviewHistoryKind,
   dailyActualSeconds,
   dailyActualTrend,
   completionLabel,
@@ -51,22 +55,11 @@ export function useCharts({
   let chart: echarts.ECharts | null = null;
   let projectChart: echarts.ECharts | null = null;
 
-  function seriesColors() {
-    // 计划柱色直接读取上方卡片的最终边框色，避免主题作用域导致色差。
-    const planCard = document.querySelector<HTMLElement>(
-      ".stats-main .summary-card--tall.summary-card--primary",
-    );
-    const borderColor = planCard
-      ? getComputedStyle(planCard).borderTopColor
-      : undefined;
-    return chartSeriesColors(theme.current.value.colors, borderColor);
-  }
-
   function renderChart() {
     if (!chartEl.value) return;
     chart?.dispose();
     chart = echarts.init(chartEl.value);
-    const colors = seriesColors();
+    const colors = chartSeriesColors(theme.current.value.colors);
     chart.setOption({
       color: [colors.plan, colors.actual, colors.trend],
       tooltip: {
@@ -76,7 +69,11 @@ export function useCharts({
           if (!date) return "";
           const planned = plannedForDate(date),
             actual = dailyActualSeconds(date);
-          return `<b>${formatDateChinese(dateKey(date))}</b><br>计划学习：${fmt(planned * 60)}<br>实际学习：${fmt(actual)}<br>完成度：${completionLabel(planned * 60, actual)}`;
+          const kind = historyKind(date);
+          const target = kind === "unknown" ? "历史计划未知" : fmt(planned * 60);
+          const label = kind === "legacy" ? "旧复盘目标" : "计划学习";
+          const rate = kind === "complete" ? completionLabel(planned * 60, actual) : "—";
+          return `<b>${formatDateChinese(dateKey(date))}</b><br>${label}：${target}<br>实际学习：${fmt(actual)}<br>完成度：${rate}`;
         },
       },
       legend: { bottom: 0, data: ["计划学习", "实际学习", "实际学习趋势"] },
@@ -106,13 +103,19 @@ export function useCharts({
           type: "bar",
           barMaxWidth: 16,
           itemStyle: { borderRadius: [5, 5, 0, 0] },
-          data: periodDates.value.map((d) => plannedForDate(d) / 60),
+          emphasis: {
+            itemStyle: { color: chartTheme.planBarHighlight },
+          },
+          data: periodDates.value.map((d) => historyKind(d) === "complete" ? plannedForDate(d) / 60 : null),
         },
         {
           name: "实际学习",
           type: "bar",
           barMaxWidth: 16,
           itemStyle: { borderRadius: [5, 5, 0, 0] },
+          emphasis: {
+            itemStyle: { color: chartTheme.actualBarHighlight },
+          },
           data: periodDates.value.map((d) => dailyActualSeconds(d) / 3600),
         },
         {
@@ -142,7 +145,7 @@ export function useCharts({
     projectChart?.dispose();
     projectChart = echarts.init(projectChartEl.value);
     const rows = comparisonSubjects.value;
-    const colors = seriesColors();
+    const colors = chartSeriesColors(theme.current.value.colors);
     projectChart.setOption({
       color: [colors.plan, colors.actual],
       tooltip: {
@@ -154,7 +157,8 @@ export function useCharts({
           if (!subject) return "";
           const planned = plannedForPeriod(subject.id) * 60,
             actual = actualForPeriod(subject.id);
-          return `<b>${subject.name}</b><br>${items.map((p) => `${p.marker}${p.seriesName}：${fmt(Math.round(Number(p.value) * 3600))}`).join("<br>")}<br>完成度：${completionLabel(planned, actual)}`;
+          const subjectName = echarts.format.encodeHTML(subject.name);
+          return `<b>${subjectName}</b><br>${items.map((p) => `${p.marker}${p.seriesName}：${fmt(Math.round(Number(p.value) * 3600))}`).join("<br>")}<br>完成度：${overviewHistoryKind.value === "complete" ? completionLabel(planned, actual) : "—"}`;
         },
       },
       legend: { bottom: 0, data: ["计划时长", "实际时长"] },
@@ -182,6 +186,9 @@ export function useCharts({
           type: "bar",
           barMaxWidth: 20,
           itemStyle: { borderRadius: [0, 5, 5, 0] },
+          emphasis: {
+            itemStyle: { color: chartTheme.planBarHighlight },
+          },
           label: {
             show: true,
             position: "right",
@@ -189,13 +196,16 @@ export function useCharts({
             color: chartTheme.projectValueLabel,
             fontSize: 12,
           },
-          data: rows.map((s) => plannedForPeriod(s.id) / 60),
+          data: rows.map((s) => overviewHistoryKind.value === "unknown" ? null : plannedForPeriod(s.id) / 60),
         },
         {
           name: "实际时长",
           type: "bar",
           barMaxWidth: 20,
           itemStyle: { borderRadius: [0, 5, 5, 0] },
+          emphasis: {
+            itemStyle: { color: chartTheme.actualBarHighlight },
+          },
           label: {
             show: true,
             position: "right",

@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useSubjectsStore } from "../../stores/subjects";
+import { ref, useId } from "vue";
+import { formatDateChinese } from "../../shared/format";
 import { useSessionsStore } from "../../stores/sessions";
 import { useManualDraft } from "./useManualDraft";
 import { hourOptions, minuteOptions } from "../../shared/constants";
 
 const {
+  manualDate,
+  manualSubjects,
+  manualSubjectsLoading,
+  manualSaving,
   manualSubject,
   manualStartHour,
   manualStartMinute,
@@ -16,24 +20,56 @@ const {
   manualTimeError,
 } = useManualDraft();
 
-const { subjects } = storeToRefs(useSubjectsStore());
-const { addManual } = useSessionsStore();
+const subjectId = useId();
+const dateMenuOpen = ref(false);
+const { addManual, chooseManualDate } = useSessionsStore();
 </script>
 
 <template>
-  <VDialog v-model="showManual" max-width="510"
+  <VDialog v-model="showManual" max-width="510" :persistent="manualSaving"
     ><VCard class="manual-dialog-card" rounded="xl"
       ><VCardTitle class="subject-form-title">补充学习记录</VCardTitle
       ><VCardText class="manual-dialog-content">
-        <VSelect
-          v-model="manualSubject"
-          :items="subjects.map((s) => ({ title: s.name, value: s.id }))"
-          label="学习项目"
-          variant="outlined"
-          density="comfortable"
-          hide-details="auto"
-        />
-        <div class="manual-dialog-time">
+        <div class="manual-dialog-field">
+          <label :for="subjectId">学习项目</label>
+          <VSelect
+            :id="subjectId"
+            v-model="manualSubject"
+            :items="manualSubjects.map((s) => ({ title: s.name, value: s.id }))"
+            :loading="manualSubjectsLoading"
+            :disabled="manualSubjectsLoading || manualSaving"
+            no-data-text="这天没有可用的学习项目"
+            placeholder="选择学习项目"
+            variant="outlined"
+            density="comfortable"
+            hide-details
+          />
+        </div>
+        <div class="manual-dialog-field">
+          <span>学习日期</span>
+          <VMenu v-model="dateMenuOpen" :close-on-content-click="false">
+            <template #activator="{ props: menuProps }">
+              <VBtn
+                v-bind="menuProps"
+                class="manual-date-trigger"
+                :aria-label="`学习日期，${formatDateChinese(manualDate)}`"
+                :disabled="manualSaving"
+                variant="outlined"
+                prepend-icon="mdi-calendar-month-outline"
+                append-icon="mdi-chevron-down"
+              >{{ formatDateChinese(manualDate) }}</VBtn>
+            </template>
+            <VDatePicker
+              :model-value="manualDate"
+              color="primary"
+              width="320"
+              hide-title
+              hide-header
+              @update:model-value="chooseManualDate($event); dateMenuOpen = false"
+            />
+          </VMenu>
+        </div>
+        <div class="manual-dialog-field">
           <span>开始时间</span>
           <div class="plan-time-select">
             <VSelect
@@ -54,7 +90,7 @@ const { addManual } = useSessionsStore();
             />
           </div>
         </div>
-        <div class="manual-dialog-time">
+        <div class="manual-dialog-field">
           <span>结束时间</span>
           <div class="plan-time-select">
             <VSelect
@@ -83,13 +119,14 @@ const { addManual } = useSessionsStore();
         </div>
       </VCardText>
       <div class="subject-form-actions">
-        <VBtn variant="text" rounded="lg" @click="showManual = false">取消</VBtn
+        <VBtn variant="text" rounded="lg" :disabled="manualSaving" @click="showManual = false">取消</VBtn
         ><VBtn
           variant="tonal"
           color="primary"
           rounded="lg"
           prepend-icon="mdi-content-save-outline"
-          :disabled="!subjects.length || !manualSubject || !!manualTimeError"
+          :loading="manualSaving"
+          :disabled="manualSaving || manualSubjectsLoading || !manualSubjects.length || !manualSubject || !!manualTimeError"
           @click="addManual"
           >保存记录</VBtn
         >
@@ -107,7 +144,22 @@ const { addManual } = useSessionsStore();
   color: rgb(var(--v-theme-error));
   margin: 6px 0 0;
 }
-.manual-dialog-time .plan-time-select {
+.manual-date-trigger.v-btn {
+  width: 100%;
+  height: 48px;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  padding-inline: 16px;
+  border-color: rgba(var(--v-theme-on-surface), 0.38);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.manual-date-trigger :deep(.v-btn__content) {
+  justify-content: flex-start;
+}
+.manual-dialog-field .plan-time-select {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -124,10 +176,10 @@ const { addManual } = useSessionsStore();
 }
 .manual-dialog-content {
   display: grid;
-  gap: 18px;
+  gap: 16px;
   padding: 12px 24px 8px;
 }
-.manual-dialog-time {
+.manual-dialog-field {
   display: grid;
   gap: 8px;
   color: var(--ink);

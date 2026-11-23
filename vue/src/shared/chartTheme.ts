@@ -1,17 +1,16 @@
-// 图表主题：坐标轴等辅助色集中管理，系列色与 Vuetify 主题保持一致。
+// 统计图与概览卡片共用配色，柱状图的高亮描边在此维护。
 
-export function chartSeriesColors(
-  colors: Record<string, string>,
-  planBorderColor?: string,
-) {
-  return {
-    plan: planBorderColor || colors.primary,
-    actual: colors.success,
-    trend: colors.success,
-  };
+export function chartSeriesColors(colors: Record<string, string>) {
+  const tokens = getComputedStyle(document.documentElement);
+  const plan = tokens.getPropertyValue("--color-plan-learning").trim() || colors.primary;
+  const actual = tokens.getPropertyValue("--color-actual-learning").trim() || colors.warning;
+  return { plan, actual, trend: actual };
 }
 
 export const chartTheme = {
+  planBarHighlight: "#396ac4",
+  actualBarHighlight: "#aa6723",
+
   // 趋势图坐标轴与网格线。
   axisLine: "#e8e6e0",
   axisLabel: "#89877f",

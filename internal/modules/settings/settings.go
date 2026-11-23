@@ -12,6 +12,7 @@ import (
 type Actions struct {
 	ActivityReminderChanged func(bool)
 	ReviewDisabled          func()
+	BeforeReviewRulesChange func(*persistence.Queries, map[string]string) error
 	BackupEnabled           func()
 	// GeneralChanged 在常规设置（音量、启动窗口、关闭行为、检查时间）变化后触发。
 	GeneralChanged func()
@@ -51,6 +52,13 @@ func Save(db *persistence.Queries, in map[string]string, actions Actions) error 
 			var err error
 			previousBackup, err = readSetting(db, autoBackupEnabledKey)
 			if err != nil && !errors.Is(err, sql.ErrNoRows) {
+				return err
+			}
+		}
+		_, changesScope := in["dailyReviewMode"]
+		_, changesThreshold := in["dailyReviewThreshold"]
+		if actions.BeforeReviewRulesChange != nil && (changesScope || changesThreshold) {
+			if err := actions.BeforeReviewRulesChange(db, in); err != nil {
 				return err
 			}
 		}

@@ -63,9 +63,24 @@ export function useBootstrap() {
   // 只在本地日期变化时跟进，保留正在查看的历史日期。
   watch(
     () => appStore.todayKey,
-    (today, previousToday) => {
+    async (today, previousToday) => {
       if (appStore.selectedDate === previousToday) {
         appStore.selectedDate = today;
+      }
+      try {
+        if (appStore.page === "plans" || appStore.page === "subjects") {
+          await subjectsStore.refreshProjectAndPlan();
+        } else {
+          await Promise.all([
+            plansStore.fetch(),
+            subjectsStore.fetchAll(),
+            appStore.page === "stats" && appStore.selectedDate !== today
+              ? statsStore.refreshStatsPage()
+              : undefined,
+          ]);
+        }
+      } catch (error) {
+        appStore.setError(error);
       }
     },
   );

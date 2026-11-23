@@ -188,8 +188,8 @@ function selectSection(key: string) {
               <div class="section-card-title">
                 <VIcon icon="mdi-history" />
                 <div>
-                  <h2 id="review-history-title">已填写的总结</h2>
-                  <p>按日期查看已提交的复盘。</p>
+                  <h2 id="review-history-title">每日检查结果</h2>
+                  <p>按日期查看达标结果和已填写的追因。</p>
                 </div>
               </div>
               <VChip size="small" label variant="tonal" color="primary"
@@ -201,7 +201,7 @@ function selectSection(key: string) {
                 <div class="review-empty-illustration">
                   <VIcon icon="mdi-clipboard-text-clock-outline" />
                 </div>
-                <b>暂无总结记录</b><span>填写后的追因记录会显示在这里。</span>
+                <b>暂无检查结果</b>
               </div>
               <article
                 v-for="entry in reviewHistory"
@@ -209,7 +209,7 @@ function selectSection(key: string) {
                 class="review-record"
               >
                 <div class="review-record-top">
-                  <b>{{ formatDateChinese(entry.day) }}</b
+                  <b>{{ formatDateChinese(entry.day) }} · {{ entry.status === "passed" ? "已达标" : "未达标" }}</b
                   ><small
                     >计划 {{ fmt(entry.plannedSeconds) }} · 实际
                     {{ fmt(entry.actualSeconds) }} · 目标
@@ -220,11 +220,15 @@ function selectSection(key: string) {
                   v-for="item in entry.items"
                   :key="item.subjectId"
                   class="review-record-reason"
+                  :class="{ 'review-record-reason-by-project': entry.mode === 'project' }"
                 >
-                  <strong>{{
-                    entry.mode === "total" ? "未达标原因" : item.subjectName
-                  }}</strong
-                  ><span>{{ item.reason }}</span>
+                  <div class="review-record-project">
+                    <strong>{{ entry.mode === "total" ? "未达标原因" : item.subjectName }}</strong>
+                    <small v-if="entry.mode === 'project'">
+                      计划 {{ fmt(item.plannedSeconds) }} · 实际 {{ fmt(item.actualSeconds) }}
+                    </small>
+                  </div>
+                  <span>{{ item.reason }}</span>
                 </div>
               </article>
             </div>
@@ -448,6 +452,21 @@ function selectSection(key: string) {
   margin-top: 10px;
   font-size: 13px;
   line-height: 1.5;
+}
+
+.review-record-reason-by-project {
+  grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+}
+
+.review-record-project {
+  display: grid;
+  gap: 2px;
+  overflow-wrap: anywhere;
+}
+
+.review-record-project small {
+  color: var(--section-muted);
+  font-size: 12px;
 }
 
 .review-record-reason strong {

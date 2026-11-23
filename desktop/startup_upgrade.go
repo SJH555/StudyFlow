@@ -34,6 +34,7 @@ type startupUpgrade struct {
 type startupStatus struct {
 	Phase        string `json:"phase"`
 	Kind         string `json:"kind"`
+	SystemZone   string `json:"systemZone,omitempty"`
 	Current      int64  `json:"current"`
 	Target       int64  `json:"target"`
 	DatabasePath string `json:"databasePath"`

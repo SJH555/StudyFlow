@@ -4,7 +4,7 @@ import { api, type Plan, type Session } from "../api";
 import { useAppStore } from "./app";
 import { useSettingsStore } from "./settings";
 import { usePlansStore } from "./plans";
-import { useSubjectsStore } from "./subjects";
+import { dateKey, formatDateChinese, parseDateKey } from "../shared/format";
 import { useManualDraft } from "../features/sessions/useManualDraft";
 
 // 学习记录：记录数据与进行中会话的所有者，负责开始/暂停/恢复/结束、
@@ -13,13 +13,13 @@ export const useSessionsStore = defineStore("sessions", () => {
   const appStore = useAppStore();
   const settingsStore = useSettingsStore();
   const plansStore = usePlansStore();
-  const subjectsStore = useSubjectsStore();
   const manual = useManualDraft();
 
   const sessions = ref<Session[]>([]);
   const liveSession = ref<Session | null>(null);
   let selectedLoadSequence = 0;
   let todayLoadSequence = 0;
+  let manualDateSequence = 0;
   let stopping = false;
   const startingPlanId = ref(0);
   const pendingStartPlan = ref<Plan | null>(null);
@@ -84,14 +84,39 @@ export const useSessionsStore = defineStore("sessions", () => {
   }
 
   function openManual() {
-    const end = new Date(),
-      start = new Date(end.getTime() - 3600000); // 默认补录最近 1 小时
-    manual.manualSubject.value = subjectsStore.subjects[0]?.id || 0;
-    manual.manualStartHour.value = String(start.getHours()).padStart(2, "0");
-    manual.manualStartMinute.value = String(start.getMinutes()).padStart(2, "0");
-    manual.manualEndHour.value = String(end.getHours()).padStart(2, "0");
-    manual.manualEndMinute.value = String(end.getMinutes()).padStart(2, "0");
+    if (manual.manualSaving.value) return;
+    const now = new Date();
+    const end = Math.max(10, now.getHours() * 60 + now.getMinutes());
+    const start = Math.max(0, end - 60);
+    manual.manualStartHour.value = String(Math.floor(start / 60)).padStart(2, "0");
+    manual.manualStartMinute.value = String(start % 60).padStart(2, "0");
+    manual.manualEndHour.value = String(Math.floor(end / 60)).padStart(2, "0");
+    manual.manualEndMinute.value = String(end % 60).padStart(2, "0");
+    manual.manualSubject.value = 0;
+    void chooseManualDate(dateKey(now));
     manual.showManual.value = true;
+  }
+
+  async function chooseManualDate(value: unknown) {
+    const date = parseDateKey(value);
+    if (!date || manual.manualSaving.value) return;
+    const sequence = ++manualDateSequence;
+    const previousSubject = manual.manualSubject.value;
+    manual.manualDate.value = date;
+    manual.manualSubjects.value = [];
+    manual.manualSubjectsLoading.value = true;
+    try {
+      const items = await api.subjectsForManualDate(date);
+      if (sequence !== manualDateSequence) return;
+      manual.manualSubjects.value = items;
+      manual.manualSubject.value = items.some((item) => item.id === previousSubject)
+        ? previousSubject
+        : items[0]?.id ?? 0;
+    } catch (e) {
+      if (sequence === manualDateSequence) appStore.setError(e);
+    } finally {
+      if (sequence === manualDateSequence) manual.manualSubjectsLoading.value = false;
+    }
   }
 
   function startCurrent() {
@@ -270,11 +295,15 @@ export const useSessionsStore = defineStore("sessions", () => {
   }
 
   async function addManual() {
+    if (manual.manualSaving.value || manual.manualSubjectsLoading.value) return;
+    const day = manual.manualDate.value;
+    if (!day) return;
+    manual.manualSaving.value = true;
     try {
       const startTime =
           manual.manualStartHour.value + ":" + manual.manualStartMinute.value,
         endTime = manual.manualEndHour.value + ":" + manual.manualEndMinute.value;
-      if (!manual.manualSubject.value) {
+      if (!manual.manualSubjects.value.some((item) => item.id === manual.manualSubject.value)) {
         appStore.notifyTop("请选择学习项目");
         return;
       }
@@ -282,8 +311,8 @@ export const useSessionsStore = defineStore("sessions", () => {
         appStore.notifyTop(manual.manualTimeError.value);
         return;
       }
-      const start = new Date(`${appStore.selectedDate}T${startTime}:00`),
-        end = new Date(`${appStore.selectedDate}T${endTime}:00`);
+      const start = new Date(`${day}T${startTime}:00+08:00`),
+        end = new Date(`${day}T${endTime}:00+08:00`);
       if (end <= start) {
         appStore.notifyTop("结束时间必须晚于开始时间");
         return;
@@ -294,9 +323,12 @@ export const useSessionsStore = defineStore("sessions", () => {
         endAt: end.toISOString(),
       });
       manual.showManual.value = false;
-      await fetchForDate(appStore.selectedDate);
+      appStore.notifyTop(`已补录 ${formatDateChinese(day)} 的学习记录`);
+      if (day === appStore.selectedDate) await fetchForDate(day).catch(appStore.setError);
     } catch (e) {
       appStore.notifyTop(e instanceof Error ? e.message : String(e));
+    } finally {
+      manual.manualSaving.value = false;
     }
   }
 
@@ -343,6 +375,7 @@ export const useSessionsStore = defineStore("sessions", () => {
     loadInitial,
     fetchForDate,
     openManual,
+    chooseManualDate,
     startCurrent,
     start,
     startPlanNow,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useId } from "vue";
 import { storeToRefs } from "pinia";
 import { useAppStore } from "../../stores/app";
 import { useSubjectsStore } from "../../stores/subjects";
@@ -12,8 +12,10 @@ import {
   hourOptions,
   minuteOptions,
 } from "../../shared/constants";
+const titleId = useId();
+const noticeId = useId();
 const { page } = storeToRefs(useAppStore());
-const { subjects } = storeToRefs(useSubjectsStore());
+const { scheduledSubjects } = storeToRefs(useSubjectsStore());
 const {
   planEditId,
   planSubject,
@@ -28,8 +30,17 @@ const {
   selectedWeekdays,
   showPlanColors,
   showPlan,
+  savingPlan,
 } = usePlanDraft();
-const { toggleWeekday, addPlan } = usePlansForm();
+const { toggleWeekday, addPlan, planDisplayColor } = usePlansForm();
+const planPickerColor = computed({
+  get: () => planDisplayColor.value,
+  set: (value: string) => {
+    if (planColor.value || value.toLowerCase() !== planDisplayColor.value.toLowerCase()) {
+      planColor.value = value;
+    }
+  },
+});
 const { startHour, startMinute, endHour, endMinute, timeError } = usePlanTiming(
   planHour,
   planMinute,
@@ -50,15 +61,19 @@ const planBreakMinutesNumber = computed({
 </script>
 
 <template>
-  <VDialog v-model="showPlan" max-width="670">
+  <VDialog v-model="showPlan" max-width="670" :persistent="savingPlan" :aria-labelledby="titleId" :aria-describedby="noticeId">
     <VCard class="plan-dialog-card" rounded="xl">
-      <VCardTitle class="plan-dialog-title">{{
+      <VCardTitle :id="titleId" class="plan-dialog-title">{{
         planEditId ? "编辑学习计划" : "安排学习时段"
       }}</VCardTitle>
+      <p :id="noticeId" class="form-effective-notice">
+        {{ planEditId ? "修改从明天起生效，今天的安排保留。" : "新计划从明天起生效。" }}
+        今天可以在「今日计划」手动补充学习记录。
+      </p>
       <VCardText class="plan-dialog-content">
         <VSelect
           v-model="planSubject"
-          :items="subjects.map((s) => ({ title: s.name, value: s.id }))"
+          :items="scheduledSubjects.map((s) => ({ title: s.name, value: s.id }))"
           label="学习项目"
           placeholder="选择学习项目"
           variant="outlined"
@@ -66,14 +81,14 @@ const planBreakMinutesNumber = computed({
           hide-details="auto"
         />
         <VBtn
-          v-if="!subjects.length"
+          v-if="!scheduledSubjects.length"
           variant="text"
           color="primary"
           @click="
             showPlan = false;
             page = 'subjects';
           "
-          >先添加学习项目 ↗</VBtn
+          >明天没有可用项目，前往管理 ↗</VBtn
         >
         <div class="plan-dialog-time-row">
           <div class="plan-dialog-field">
@@ -187,7 +202,7 @@ const planBreakMinutesNumber = computed({
           <div class="subject-color-controls">
             <span
               class="subject-color-preview"
-              :style="{ background: planColor }"
+              :style="{ background: planDisplayColor }"
             ></span
             ><span class="subject-color-value">{{ planColor }}</span
             ><VMenu
@@ -225,7 +240,7 @@ const planBreakMinutesNumber = computed({
                   ></VBtn>
                 </div>
                 <VDivider class="my-2" /><VColorPicker
-                  v-model="planColor"
+                  v-model="planPickerColor"
                   mode="hex"
                   hide-inputs
                   show-swatches
@@ -250,13 +265,14 @@ const planBreakMinutesNumber = computed({
         >
       </VCardText>
       <div class="subject-form-actions">
-        <VBtn variant="text" rounded="lg" @click="showPlan = false">取消</VBtn
+        <VBtn variant="text" rounded="lg" :disabled="savingPlan" @click="showPlan = false">取消</VBtn
         ><VBtn
           variant="tonal"
           color="primary"
           rounded="lg"
           prepend-icon="mdi-content-save-outline"
-          :disabled="!subjects.length"
+          :disabled="savingPlan || !scheduledSubjects.length"
+          :loading="savingPlan"
           @click="addPlan"
           >{{ planEditId ? "保存修改" : "保存计划" }}</VBtn
         >

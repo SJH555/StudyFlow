@@ -3,6 +3,7 @@ package review
 import (
 	"errors"
 	"exam_notify/internal/infrastructure/persistence"
+	"exam_notify/internal/modules/schedule"
 	"fmt"
 	"strings"
 	"time"
@@ -10,7 +11,15 @@ import (
 
 // History 返回最近的复习总结历史（含各项明细）。
 func (s *Service) History() ([]DailyReview, error) {
-	rows, err := s.db.Query(`SELECT day,mode,threshold,planned_seconds,actual_seconds,submitted_at FROM daily_reviews ORDER BY day DESC LIMIT 120`)
+	versioned, err := schedule.HasHistory(s.db)
+	if err != nil {
+		return nil, err
+	}
+	status, where := ", 'submitted'", ""
+	if versioned {
+		status, where = ", status", " WHERE status<>'pending'"
+	}
+	rows, err := s.db.Query(`SELECT ` + reviewColumns + status + ` FROM daily_reviews` + where + ` ORDER BY day DESC LIMIT 120`)
 	if err != nil {
 		return nil, err
 	}
@@ -19,41 +28,42 @@ func (s *Service) History() ([]DailyReview, error) {
 	out := []DailyReview{}
 	for rows.Next() {
 		var review DailyReview
-		if err = rows.Scan(&review.Day, &review.Mode, &review.Threshold, &review.PlannedSeconds, &review.ActualSeconds, &review.SubmittedAt); err != nil {
-			break
+		if err = rows.Scan(&review.Day, &review.Mode, &review.Threshold, &review.PlannedSeconds, &review.ActualSeconds, &review.SubmittedAt, &review.Status); err != nil {
+			return nil, err
 		}
-		review.Items = []ReviewItem{}
 		out = append(out, review)
 	}
-	if rowErr := rows.Err(); err == nil {
-		err = rowErr
+	if err := rows.Err(); err != nil {
+		return nil, err
 	}
-	rows.Close()
-	if err != nil {
+	if err := rows.Close(); err != nil {
 		return nil, err
 	}
 	for i := range out {
-		items, e := s.db.Query(`SELECT subject_id,subject_name,planned_seconds,actual_seconds,reason FROM daily_review_items WHERE day=? ORDER BY id`, out[i].Day)
-		if e != nil {
-			return nil, e
-		}
-		for items.Next() {
-			var item ReviewItem
-			if e = items.Scan(&item.SubjectID, &item.SubjectName, &item.PlannedSeconds, &item.ActualSeconds, &item.Reason); e != nil {
-				break
-			}
-			out[i].Items = append(out[i].Items, item)
-		}
-		if rowErr := items.Err(); e == nil {
-			e = rowErr
-		}
-		items.Close()
-		if e != nil {
-			return nil, e
+		out[i].Items, err = s.itemsForDay(out[i].Day)
+		if err != nil {
+			return nil, err
 		}
 	}
-
 	return out, nil
+}
+
+func (s *Service) itemsForDay(day string) ([]ReviewItem, error) {
+	items, err := s.db.Query(`SELECT subject_id,subject_name,planned_seconds,actual_seconds,reason
+		FROM daily_review_items WHERE day=? ORDER BY id`, day)
+	if err != nil {
+		return nil, err
+	}
+	defer items.Close()
+	out := []ReviewItem{}
+	for items.Next() {
+		var item ReviewItem
+		if err := items.Scan(&item.SubjectID, &item.SubjectName, &item.PlannedSeconds, &item.ActualSeconds, &item.Reason); err != nil {
+			return nil, err
+		}
+		out = append(out, item)
+	}
+	return out, items.Err()
 }
 
 // Submit 提交当天的复习总结及各项未达标理由。
@@ -72,6 +82,9 @@ func (s *Service) submit(day string, reasons []ReviewItem) error {
 		if pending.Items[i].SubjectID != reasons[i].SubjectID || strings.TrimSpace(reasons[i].Reason) == "" || len([]rune(reasons[i].Reason)) > 1000 {
 			return fmt.Errorf("第 %d 项理由需填写，且不超过 1000 字", i+1)
 		}
+	}
+	if pending.Status == reviewPending {
+		return s.submitStoredReview(day, reasons, time.Now())
 	}
 	_, err = s.db.Exec(`INSERT INTO daily_reviews(day,mode,threshold,planned_seconds,actual_seconds,submitted_at) VALUES(?,?,?,?,?,?)`, pending.Day, pending.Mode, pending.Threshold, pending.PlannedSeconds, pending.ActualSeconds, time.Now().Format(time.RFC3339))
 	if err != nil {

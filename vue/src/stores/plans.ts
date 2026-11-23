@@ -8,6 +8,19 @@ export const usePlansStore = defineStore("plans", () => {
   const appStore = useAppStore();
 
   const plans = ref<Plan[]>([]);
+  const managedPlans = ref<Plan[]>([]);
+  const managedPlansBySubject = computed(() => {
+    const bySubject = new Map<number, Plan[]>();
+    for (const plan of managedPlans.value) {
+      let group = bySubject.get(plan.subjectId);
+      if (!group) {
+        group = [];
+        bySubject.set(plan.subjectId, group);
+      }
+      group.push(plan);
+    }
+    return bySubject;
+  });
 
   // 今日计划（按开始时间排序）。
   const todayPlans = computed(() => {
@@ -80,5 +93,5 @@ export const usePlansStore = defineStore("plans", () => {
     plans.value = list;
   }
 
-  return { plans, todayPlans, currentPlans, currentPlan, fetch, hasPlanEnded, setPlans };
+  return { plans, managedPlans, managedPlansBySubject, todayPlans, currentPlans, currentPlan, fetch, hasPlanEnded, setPlans };
 });

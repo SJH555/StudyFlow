@@ -23,9 +23,19 @@ export type ResetTable = {
 // 学习计划：subjectId 关联科目，weekdays 为逗号分隔的星期（1-7），active 控制是否参与当天排程。
 export type Plan = {
   id: number
+  versionId?: number
+  effectiveDay?: string
+  unchanged?: boolean
+  status?: 'active' | 'stopped' | 'deleted'
+  managedActive?: boolean
+  pending?: boolean
+  pendingStatus?: boolean
+  pendingLabel?: string
+  pendingDay?: string
   subjectId: number
   subject: string
   color: string
+  colorOverride?: string
   startTime: string
   duration: number
   breakMinutes: number
@@ -37,6 +47,8 @@ export type Plan = {
 // 学习会话：记录一次开始/暂停/结束的计时过程及其归属与来源。
 export type Session = {
   id: number
+  planVersionId?: number
+  breakMinutes?: number
   planId: number | null
   subjectId: number
   subject: string
@@ -76,6 +88,13 @@ export type ReviewItem = {
   reason: string
 }
 
+export type DailyPlanHistory = {
+  kind: 'complete' | 'legacy' | 'unknown'
+  adoptionDay?: boolean
+  plans: Plan[]
+  targets?: ReviewItem[]
+}
+
 // 每日复盘：按天汇总的计划/实际学习情况与逐项原因。
 export type DailyReview = {
   day: string
@@ -84,6 +103,7 @@ export type DailyReview = {
   plannedSeconds: number
   actualSeconds: number
   submittedAt?: string
+  status?: 'passed' | 'pending' | 'submitted'
   items: ReviewItem[]
 }
 
@@ -137,6 +157,14 @@ export const resetTables = () => request<ResetTable[]>('reset-tables')
 export const resetTable = (name: string) =>
   request<{ ok: boolean }>('reset-tables?name=' + encodeURIComponent(name), 'DELETE')
 
+type EffectiveDayChanged = { needsConfirmation: true; effectiveDay: string }
+
+function confirmEffectiveDay(path: string, expectedDay?: string) {
+  if (!expectedDay) return path
+  const separator = path.includes('?') ? '&' : '?'
+  return path + separator + 'expectedEffectiveDay=' + encodeURIComponent(expectedDay)
+}
+
 // —— 聚合 API：Wails Binding 直连 + JSON 路由 ——
 export const api = {
   homeReady: () => request<{ ok: boolean }>("startup/home-ready", "POST"),
@@ -147,21 +175,34 @@ export const api = {
   saveHtml: (filename: string, content: string) => APIService.SaveHTML(filename, content),
   setDataDirectory: (dir: string) => APIService.SetDataDirectory(dir),
 
-  subjects: (includeArchived = false, includeDeleted = false) => {
+  subjects: (includeArchived = false, includeDeleted = false, management = false) => {
     const q = new URLSearchParams()
     if (includeArchived) q.set('includeArchived', 'true')
     if (includeDeleted) q.set('includeDeleted', 'true')
+    if (management) q.set('management', 'true')
     return request<Subject[]>('subjects' + (q.size ? '?' + q.toString() : ''))
   },
+  subjectsForManualDate: (day: string) =>
+    request<Subject[]>('subjects?manualDate=' + encodeURIComponent(day)),
   addSubject: (name: string, color: string, sortOrder: number | null) =>
     request<Subject>('subjects', 'POST', { name, color, sortOrder }),
   updateSubject: (subject: Subject) => request<Subject>('subjects', 'PUT', subject),
-  deleteSubject: (id: number) => request('subjects?id=' + id, 'DELETE'),
+  deleteSubject: (id: number, expectedDay: string) =>
+    request<{ ok: boolean } | EffectiveDayChanged>(confirmEffectiveDay('subjects?id=' + id, expectedDay), 'DELETE'),
 
   plans: () => request<Plan[]>('plans'),
+  managedPlans: () => request<Plan[]>('plans?management=true'),
+  planVersions: (id: number) => request<Plan[]>(`plans?versions=${id}`),
+  planDays: (dates: string[]) => {
+    const query = new URLSearchParams(dates.map(day => ['date', day]))
+    return request<Record<string, DailyPlanHistory>>('plans?' + query.toString())
+  },
+  changePlanStatus: (id: number, status: 'active' | 'stopped') =>
+    request<{ effectiveDay: string }>('plans?id=' + id + '&status=' + status, 'PATCH'),
   addPlan: (p: Partial<Plan>) => request<Plan>('plans', 'POST', p),
   updatePlan: (p: Plan) => request<Plan>('plans', 'PUT', p),
-  deletePlan: (id: number) => request('plans?id=' + id, 'DELETE'),
+  deletePlan: (id: number, expectedDay: string) =>
+    request<{ effectiveDay: string } | EffectiveDayChanged>(confirmEffectiveDay('plans?id=' + id, expectedDay), 'DELETE'),
 
   sessions: (date: string) => request<Session[]>('sessions?date=' + date),
   // 批量返回按本地自然日分组的记录，无记录日期仍保留空数组。

@@ -11,6 +11,7 @@ const subjectSortInput = ref("");
 const showSubjectColors = ref(false);
 const showSubject = ref(false);
 const deleteSubjectTarget = ref<Subject | null>(null);
+const deleteSubjectDay = ref("");
 const subjectTab = ref<"enabled" | "hidden">("enabled");
 const subjectPlanTarget = ref<Subject | null>(null);
 const showSubjectPlans = ref(false);
@@ -26,6 +27,7 @@ export function useSubjectDraft() {
     showSubjectColors,
     showSubject,
     deleteSubjectTarget,
+    deleteSubjectDay,
     subjectTab,
     subjectPlanTarget,
     showSubjectPlans,

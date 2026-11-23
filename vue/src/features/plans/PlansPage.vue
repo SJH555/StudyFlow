@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import DirectoryStatusButton from "../../shared/DirectoryStatusButton.vue";
+import RecordBadge from "../../shared/RecordBadge.vue";
+import PlanHistoryDialog from "./PlanHistoryDialog.vue";
 import ListActionButton from "../../shared/ListActionButton.vue";
-import { ref } from "vue";
-import { storeToRefs } from "pinia";
-import { usePlansStore } from "../../stores/plans";
+import DirectorySwitch from "../../shared/DirectorySwitch.vue";
+import { computed, ref, watch } from "vue";
+import { api, type Plan } from "../../api";
+import { useAppStore } from "../../stores/app";
+import { useSubjectsStore } from "../../stores/subjects";
 import { usePlanDraft } from "./usePlanDraft";
 import { usePlansForm } from "./usePlans";
-import { usePlansView } from "./usePlansView";
+import { usePlansView, type PlanTab } from "./usePlansView";
 import { weekNames } from "../../shared/constants";
 import {
   plannedStudyMinutes,
@@ -13,18 +18,59 @@ import {
   formatPlanClock,
   planEnd,
   previewPlanNote,
+  formatDateChinese,
 } from "../../shared/format";
-const { plans } = storeToRefs(usePlansStore());
 const { planProjectFilter, openPlanNoteId, togglePlanNote } = usePlanDraft();
+const appStore = useAppStore();
+const subjectsStore = useSubjectsStore();
+const planTab = ref<PlanTab>("active");
+const stopped = computed(() => planTab.value === "stopped");
+const historyPlan = ref<Plan | null>(null);
+const showHistory = ref(false);
+let historyTrigger: HTMLElement | null = null;
+
+watch(planTab, () => { planProjectFilter.value = 0; });
+
+function openHistory(plan: Plan, event: MouseEvent) {
+  historyTrigger = event.currentTarget as HTMLElement;
+  historyPlan.value = plan;
+  showHistory.value = true;
+}
+
+function restoreHistoryFocus() {
+  if (showHistory.value) return;
+  historyTrigger?.focus();
+  historyTrigger = null;
+  historyPlan.value = null;
+}
+
+async function changeStatus(plan: Plan) {
+  const status = plan.pendingStatus
+    ? (plan.status === "active" ? "stopped" : "active")
+    : (stopped.value ? "active" : "stopped");
+  try {
+    const { effectiveDay } = await api.changePlanStatus(plan.id, status);
+    await subjectsStore.refreshProjectAndPlan();
+    const cancelled = plan.pendingStatus && plan.pendingDay === effectiveDay;
+    appStore.notifyTop(cancelled
+      ? (status === "active" ? "已撤销停用" : "已撤销启用")
+      : `计划于${formatDateChinese(effectiveDay)}${status === "active" ? "启用" : "停用"}`);
+  } catch (error) {
+    appStore.setError(error);
+  }
+}
+
 const { beginAddPlan, beginEditPlan, deletePlan } = usePlansForm();
 const {
   managedPlans,
+  activePlans,
+  stoppedPlans,
   planFilterOptions,
   todayPlannedMinutes,
   planBreakdown,
   planPieSegments,
   todayPlanSummary,
-} = usePlansView();
+} = usePlansView(planTab);
 // 饼图悬停项仅计划页使用，作为组件内状态。
 const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
 </script>
@@ -45,8 +91,17 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
     >
   </div>
   <section class="panel plan-manager">
-    <div class="plan-filter-row">
-      <VMenu location="bottom start"
+    <div class="plan-toolbar">
+      <DirectorySwitch
+        class="plan-view-switch"
+        v-model="planTab"
+        label="学习计划视图"
+        :options="[
+          { value: 'active', label: '循环计划', count: activePlans.length },
+          { value: 'stopped', label: '停用计划', count: stoppedPlans.length },
+        ]"
+      />
+      <VMenu location="bottom end"
         ><template #activator="{ props }"
           ><VBtn
             v-bind="props"
@@ -72,14 +127,21 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
             color="primary"
             rounded="lg"
             @click="planProjectFilter = option.value" /></VList></VMenu
-      ><span>{{ managedPlans.length }} 个计划</span>
+      >
     </div>
     <div v-for="p in managedPlans" :key="p.id" class="managed-plan">
-      <span class="manager-color" :style="{ background: p.color }"></span>
+      <span class="manager-color" :style="{ background: p.color }" aria-hidden="true"></span>
       <div class="manager-main">
         <div class="manager-title-line">
-          <b>{{ p.subject }}</b
-          ><VBtn
+          <b>{{ p.subject }}</b>
+          <RecordBadge
+            v-if="p.pendingLabel"
+            class="plan-title-badge"
+            icon="mdi-clock-outline"
+          >
+            {{ p.pendingLabel }} · {{ p.pendingDay }}
+          </RecordBadge>
+          <VBtn
             v-if="p.note"
             class="plan-note-chip"
             variant="flat"
@@ -119,17 +181,42 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
           }}</small
         >
       </div>
-      <span v-if="!p.active" class="plan-inactive">已停用</span
-      ><ListActionButton
-        action="edit"
-        @click="beginEditPlan(p)"
-      /><ListActionButton action="delete" @click="deletePlan(p.id)" />
+      <div class="managed-buttons">
+        <template v-if="p.status !== 'deleted'">
+          <ListActionButton v-if="!stopped" action="edit" @click="beginEditPlan(p)" />
+          <DirectoryStatusButton
+            class="plan-list-action plan-status-action"
+            :enabled="!stopped"
+            :undo="p.pendingStatus"
+            :disabled="!p.pendingStatus && (stopped ? p.active : p.pendingLabel === '明日起停用')"
+            :aria-label="`${p.pendingStatus ? '撤销' : stopped ? '启用' : '停用'} ${p.subject} ${p.startTime}`"
+            @click="changeStatus(p)"
+          />
+          <ListActionButton action="delete" :aria-label="`删除 ${p.subject} ${p.startTime}`" @click="deletePlan(p)" />
+        </template>
+        <VBtn
+          class="plan-list-action"
+          prepend-icon="mdi-history"
+          variant="flat"
+          color="version-history"
+          size="small"
+          rounded="lg"
+          aria-haspopup="dialog"
+          :aria-label="`查看 ${p.subject} ${p.startTime} 的版本记录`"
+          @click="openHistory(p, $event)"
+        >版本记录</VBtn>
+      </div>
     </div>
     <div v-if="!managedPlans.length" class="subtle-empty">
-      {{ plans.length ? "该项目还没有学习计划" : "还没有学习计划" }}
+      {{ stopped ? "没有停用计划" : "没有循环计划" }}
     </div>
   </section>
-  <section class="panel plan-distribution">
+  <PlanHistoryDialog
+    v-model="showHistory"
+    :plan="historyPlan"
+    @after-leave="restoreHistoryFocus"
+  />
+  <section v-if="planTab === 'active'" class="panel plan-distribution">
     <div class="panel-heading">
       <div>
         <h2>今日学习分配</h2>
@@ -223,6 +310,20 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
 </template>
 
 <style scoped>
+.managed-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+.plan-list-action.v-btn {
+  block-size: var(--size-list-action);
+}
+
+.plan-status-action.v-btn {
+  inline-size: var(--size-list-action-width);
+}
+
 .managed-plan {
   display: flex;
   align-items: center;
@@ -467,36 +568,17 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
   }
 }
 
-.plan-filter-row {
+.plan-toolbar {
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 2px 0 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--outline-card);
 }
 
-.plan-filter-row label {
-  display: grid;
-  gap: 6px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.plan-filter-row select {
-  min-width: 220px;
-  height: 38px;
-  padding: 0 11px;
-  border: 1px solid var(--outline-card);
-  border-radius: 9px;
-  background: var(--surface-card);
-  color: var(--ink);
-  font-size: 14px;
-}
-
-.plan-filter-row > span {
-  color: var(--muted);
-  font-size: 13px;
-  white-space: nowrap;
+.plan-toolbar .plan-view-switch {
+  margin-bottom: 0;
 }
 
 .managed-plan {
@@ -523,6 +605,7 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
 }
 
 .plan-project-select.v-btn {
+  margin-inline-start: auto;
   width: 260px;
   max-width: 100%;
   justify-content: space-between;
@@ -543,7 +626,12 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
   margin: 2px 0;
 }
 
+.manager-title-line .plan-title-badge {
+  min-block-size: 23px;
+}
+
 .managed-plan .plan-note-chip.v-btn {
+  margin-block-start: 0;
   max-width: 320px;
   min-width: 0;
   height: 23px;
@@ -579,14 +667,6 @@ const hoveredPlanItem = ref<{ name: string; minutes: number } | null>(null);
 
 .plan-project-select :deep(.v-field) {
   background: #fff;
-}
-
-.plan-filter-row {
-  align-items: center;
-}
-
-.plan-filter-row > span {
-  margin-left: auto;
 }
 
 .plan-manager {

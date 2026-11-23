@@ -1,10 +1,11 @@
+import { computed } from "vue";
 import { api, type Plan } from "../../api";
-import { conflictingPlan } from "./conflicts";
 import { usePlanDraft } from "./usePlanDraft";
 import { useSubjectsStore } from "../../stores/subjects";
 import { usePlansStore } from "../../stores/plans";
 import { useAppStore } from "../../stores/app";
-import { colorPalette, weekNames } from "../../shared/constants";
+import { formatDateChinese, nextEffectiveDay } from "../../shared/format";
+import { colorPalette } from "../../shared/constants";
 
 // 学习计划表单：负责计划表单初始值、校验、冲突检测与增删改提交。
 // 提交后的项目+计划联合刷新通过 subjects store 的公开能力完成。
@@ -13,12 +14,16 @@ export function usePlansForm() {
   const subjectsStore = useSubjectsStore();
   const plansStore = usePlansStore();
   const appStore = useAppStore();
+  const chosenSubject = computed(() =>
+    subjectsStore.scheduledSubjects.find((subject) => subject.id === draft.planSubject.value),
+  );
+  const planDisplayColor = computed(() => draft.planColor.value || chosenSubject.value?.color || colorPalette[0]);
 
   function beginAddPlan() {
     draft.planEditId.value = 0;
     draft.repeatMode.value = "daily";
     draft.selectedWeekdays.value = [1, 2, 3, 4, 5];
-    draft.planSubject.value = subjectsStore.subjects[0]?.id || 0;
+    draft.planSubject.value = subjectsStore.scheduledSubjects[0]?.id || 0;
     draft.planHour.value = String(new Date().getHours()).padStart(2, "0");
     draft.planMinute.value = String(new Date().getMinutes()).padStart(2, "0");
     draft.planTime.value = draft.planHour.value + ":" + draft.planMinute.value;
@@ -34,14 +39,16 @@ export function usePlansForm() {
 
   function beginEditPlan(p: Plan) {
     draft.planEditId.value = p.id;
-    draft.planSubject.value = p.subjectId;
+    draft.planSubject.value = subjectsStore.scheduledSubjects.some((subject) => subject.id === p.subjectId)
+      ? p.subjectId
+      : 0;
     draft.planHour.value = p.startTime.slice(0, 2);
     draft.planMinute.value = p.startTime.slice(3, 5);
     draft.planDuration.value = String(p.duration);
     draft.planBreakEnabled.value = (p.breakMinutes || 0) > 0;
     draft.planBreakMinutes.value = String(p.breakMinutes || 20);
     draft.planNote.value = p.note || "";
-    draft.planColor.value = p.color;
+    draft.planColor.value = p.colorOverride ?? p.color;
     draft.selectedWeekdays.value = p.weekdays.split(",").map(Number);
     // 根据所选星期反推重复模式：全 7 天=每天，仅工作日=工作日，其余=自定义。
     draft.repeatMode.value =
@@ -60,7 +67,13 @@ export function usePlansForm() {
       : [...draft.selectedWeekdays.value, day].sort((a, b) => a - b);
   }
 
-  function addPlan() {
+  async function addPlan() {
+    if (draft.savingPlan.value) return;
+    const subject = chosenSubject.value;
+    if (!subject) {
+      appStore.setError("请选择计划生效日可用的学习项目");
+      return;
+    }
     draft.planTime.value = draft.planHour.value + ":" + draft.planMinute.value;
     const duration = Number(draft.planDuration.value);
     const breakMinutes = draft.planBreakEnabled.value
@@ -122,67 +135,75 @@ export function usePlansForm() {
       startTime: draft.planTime.value,
       duration,
       breakMinutes,
-      color: draft.planColor.value,
+      color: planDisplayColor.value,
+      colorOverride: draft.planColor.value,
       weekdays,
       active: true,
-      subject:
-        subjectsStore.subjects.find(
-          (s) => s.id === draft.planSubject.value,
-        )?.name || "",
+      subject: subject.name,
       note,
     };
-    const conflict = conflictingPlan(p, plansStore.plans, weekNames);
-    if (conflict) {
-      appStore.notifyTop(conflict);
-      return;
-    }
-    draft.pendingPlan.value = p;
-    draft.pendingPlanAction.value = draft.planEditId.value ? "edit" : "create";
-    draft.showPlan.value = false;
-  }
-
-  function cancelPlanAction() {
-    if (
-      draft.pendingPlanAction.value === "create" ||
-      draft.pendingPlanAction.value === "edit"
-    )
-      draft.showPlan.value = true;
-    draft.pendingPlanAction.value = null;
-    draft.pendingPlan.value = null;
-  }
-
-  function deletePlan(id: number) {
-    const p = plansStore.plans.find((x) => x.id === id);
-    if (p) {
-      draft.pendingPlan.value = p;
-      draft.pendingPlanAction.value = "delete";
-    }
-  }
-
-  async function confirmPlanAction() {
-    const p = draft.pendingPlan.value,
-      action = draft.pendingPlanAction.value;
-    if (!p || !action) return;
+    draft.savingPlan.value = true;
     try {
-      if (action === "create") await api.addPlan(p);
-      else if (action === "edit") await api.updatePlan(p);
-      else await api.deletePlan(p.id);
-      await subjectsStore.refreshProjectAndPlan();
-      draft.pendingPlanAction.value = null;
-      draft.pendingPlan.value = null;
+      const saved = p.id ? await api.updatePlan(p) : await api.addPlan(p);
       draft.showPlan.value = false;
+      appStore.notifyTop(saved.unchanged
+        ? "计划内容没有变化"
+        : `已保存，${formatDateChinese(saved.effectiveDay ?? nextEffectiveDay())}起生效。`);
+      await refreshAfterPlanWrite();
     } catch (e) {
       appStore.setError(e);
+    } finally {
+      draft.savingPlan.value = false;
+    }
+  }
+
+  function cancelDeletePlan() {
+    if (!draft.savingPlan.value) draft.deletePlanTarget.value = null;
+  }
+
+  function deletePlan(plan: Plan) {
+    if (draft.savingPlan.value) return;
+    draft.deletePlanDay.value = nextEffectiveDay();
+    draft.deletePlanTarget.value = plan;
+  }
+
+  async function confirmDeletePlan() {
+    const plan = draft.deletePlanTarget.value;
+    if (!plan || draft.savingPlan.value) return;
+    draft.savingPlan.value = true;
+    try {
+      const result = await api.deletePlan(plan.id, draft.deletePlanDay.value);
+      if ("needsConfirmation" in result) {
+        draft.deletePlanDay.value = result.effectiveDay;
+        appStore.notifyTop("生效日期已更新，请确认新的日期");
+        return;
+      }
+      draft.deletePlanTarget.value = null;
+      appStore.notifyTop(`已安排删除，${formatDateChinese(result.effectiveDay)}起停止排程。历史记录保留。`);
+      await refreshAfterPlanWrite();
+    } catch (e) {
+      appStore.setError(e);
+    } finally {
+      draft.savingPlan.value = false;
+    }
+  }
+
+  async function refreshAfterPlanWrite() {
+    try {
+      await subjectsStore.refreshProjectAndPlan();
+    } catch (e) {
+      appStore.setError(`操作已完成，列表刷新失败。${e instanceof Error ? e.message : String(e)}`);
     }
   }
 
   return {
+    planDisplayColor,
     beginAddPlan,
     beginEditPlan,
     toggleWeekday,
     addPlan,
-    cancelPlanAction,
+    cancelDeletePlan,
     deletePlan,
-    confirmPlanAction,
+    confirmDeletePlan,
   };
 }

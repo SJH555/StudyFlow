@@ -1,6 +1,11 @@
 import { computed, ref } from "vue";
+import type { Subject } from "../../api";
 
 // 手动记录草稿：表单字段，弹窗与页面共享，应用生命周期内保留，由业务模块封装。
+const manualDate = ref("");
+const manualSubjects = ref<Subject[]>([]);
+const manualSubjectsLoading = ref(false);
+const manualSaving = ref(false);
 const manualSubject = ref(0);
 const manualStartHour = ref("09");
 const manualStartMinute = ref("00");
@@ -19,6 +24,10 @@ const manualTimeError = computed(() => {
 
 export function useManualDraft() {
   return {
+    manualDate,
+    manualSubjects,
+    manualSubjectsLoading,
+    manualSaving,
     manualSubject,
     manualStartHour,
     manualStartMinute,

@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"strconv"
 	"strings"
+	"time"
 
 	"exam_notify/internal/infrastructure/persistence"
 	"github.com/pressly/goose/v3"
@@ -15,8 +16,9 @@ import (
 )
 
 type Manager struct {
-	source fs.FS
-	target int64
+	source          fs.FS
+	target          int64
+	validateVersion func(context.Context, persistence.Executor, int64) error
 }
 type State struct {
 	Version, Target  int64
@@ -159,7 +161,76 @@ func (m *Manager) inspect(ctx context.Context, db persistence.Executor) (State, 
 			return state, err
 		}
 	}
+	if m.validateVersion != nil {
+		if err := m.validateVersion(ctx, db, state.Version); err != nil {
+			return state, fmt.Errorf("%w: %w", ErrUnknownSchema, err)
+		}
+	}
 	return state, nil
+}
+
+func validateScheduleHistory(ctx context.Context, db persistence.Executor, version int64) error {
+	if version < 2 {
+		return nil
+	}
+	for _, query := range []string{
+		`SELECT id,subject_id,effective_day,name,color,sort_order,created_at,status FROM subject_versions LIMIT 0`,
+		`SELECT id,kind,plan_id,subject_id,effective_day,start_time,duration_minutes,break_minutes,weekdays,color,note,status,legacy_targets_json,adoption_day FROM plan_versions LIMIT 0`,
+		`SELECT plan_version_id FROM sessions LIMIT 0`,
+	} {
+		rows, err := db.QueryContext(ctx, query)
+		if err != nil {
+			return err
+		}
+		if err := closeRows(rows); err != nil {
+			return err
+		}
+	}
+	var reviewStatus bool
+	if err := db.QueryRowContext(ctx, `SELECT EXISTS(SELECT 1 FROM pragma_table_info('daily_reviews') WHERE name='status')`).Scan(&reviewStatus); err != nil {
+		return err
+	}
+	if !reviewStatus {
+		return errors.New("版本 2 缺少每日追因结果字段，请使用保留的版本 1 备份进行升级")
+	}
+	var staleTables bool
+	if err := db.QueryRowContext(ctx, `SELECT EXISTS(SELECT 1 FROM main.sqlite_schema WHERE type='table'
+		AND name IN ('subjects','plans','daily_plan_targets','schedule_history'))`).Scan(&staleTables); err != nil {
+		return err
+	}
+	if staleTables {
+		return errors.New("database still contains superseded schedule tables")
+	}
+	var orphaned bool
+	if err := db.QueryRowContext(ctx, `SELECT EXISTS(
+		SELECT 1 FROM plan_versions p WHERE p.kind='recurring'
+		AND NOT EXISTS(SELECT 1 FROM subject_versions s WHERE s.subject_id=p.subject_id)
+		UNION ALL
+		SELECT 1 FROM sessions t WHERE
+		NOT EXISTS(SELECT 1 FROM subject_versions s WHERE s.subject_id=t.subject_id)
+		OR (t.plan_version_id IS NOT NULL AND NOT EXISTS(
+			SELECT 1 FROM plan_versions p WHERE p.id=t.plan_version_id AND p.kind='recurring'
+			AND p.plan_id=t.plan_id))
+	)`).Scan(&orphaned); err != nil {
+		return err
+	}
+	if orphaned {
+		return errors.New("database has invalid references to schedule history")
+	}
+	var day string
+	var adoption sql.NullString
+	if err := db.QueryRowContext(ctx, `SELECT effective_day,adoption_day FROM plan_versions WHERE kind='history_boundary'`).Scan(&day, &adoption); err != nil {
+		return err
+	}
+	first, err := time.Parse(time.DateOnly, day)
+	if err != nil || !adoption.Valid {
+		return err
+	}
+	imported, err := time.Parse(time.DateOnly, adoption.String)
+	if err == nil && !imported.AddDate(0, 0, 1).Equal(first) {
+		return errors.New("schedule history starts on an invalid date")
+	}
+	return err
 }
 
 // Apply requires the caller to obtain upgrade consent and a verified backup

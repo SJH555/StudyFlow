@@ -5,6 +5,7 @@ import (
 	"exam_notify/internal/infrastructure/persistence"
 
 	"encoding/json"
+	"exam_notify/internal/modules/review"
 	"exam_notify/internal/modules/settings"
 	"github.com/wailsapp/wails/v3/pkg/application"
 	"log"
@@ -60,6 +61,9 @@ func (a *App) settings(db *persistence.Queries, w http.ResponseWriter, r *http.R
 				}
 			},
 			ReviewDisabled: func() { queueAfterDatabase(r, actions.ReviewDisabled) },
+			BeforeReviewRulesChange: func(tx *persistence.Queries, values map[string]string) error {
+				return review.New(tx).SettleBeforeRuleChange(values, time.Now())
+			},
 			BackupEnabled:  func() { queueAfterDatabase(r, actions.BackupEnabled) },
 			GeneralChanged: func() { queueAfterDatabase(r, actions.GeneralChanged) },
 		})

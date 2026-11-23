@@ -8,7 +8,7 @@ import (
 )
 
 // TargetVersion is maintained manually, independently of the APP release.
-const TargetVersion int64 = 1
+const TargetVersion int64 = 2
 const versionTable = "goose_db_version"
 
 var (
@@ -25,5 +25,10 @@ func New() (*Manager, error) {
 	if err != nil {
 		return nil, err
 	}
-	return newManager(source, TargetVersion)
+	manager, err := newManager(source, TargetVersion)
+	if err != nil {
+		return nil, err
+	}
+	manager.validateVersion = validateScheduleHistory
+	return manager, nil
 }

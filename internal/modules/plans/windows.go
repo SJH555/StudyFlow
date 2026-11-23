@@ -4,6 +4,7 @@ import (
 	"exam_notify/internal/infrastructure/persistence"
 
 	"exam_notify/internal/modules/schedule"
+	"exam_notify/internal/shared/studycalendar"
 	"time"
 )
 
@@ -12,6 +13,30 @@ type Window struct{ Start, End time.Time }
 
 // EffectiveWindows 返回指定日期当天所有有效计划的时段。
 func EffectiveWindows(db *persistence.Queries, now time.Time) ([]Window, error) {
+	history, err := schedule.HasHistory(db)
+	if err != nil {
+		return nil, err
+	}
+	if history {
+		now = now.In(studycalendar.Location)
+		items, err := AsOf(db, studycalendar.Day(now))
+		if err != nil {
+			return nil, err
+		}
+		windows := make([]Window, 0)
+		for _, p := range items {
+			if !schedule.ContainsWeekday(p.Weekdays, int(now.Weekday())) {
+				continue
+			}
+			clock, err := schedule.StartMinute(p.StartTime)
+			if err != nil {
+				return nil, err
+			}
+			start := time.Date(now.Year(), now.Month(), now.Day(), clock/60, clock%60, 0, 0, now.Location())
+			windows = append(windows, Window{Start: start, End: start.Add(time.Duration(p.Duration) * time.Minute)})
+		}
+		return windows, nil
+	}
 	rows, err := db.Query(`SELECT p.start_time,p.duration_minutes,p.weekdays FROM plans p JOIN subjects s ON s.id=p.subject_id WHERE p.active=1 AND p.deleted=0 AND s.deleted=0 AND s.archived=0`)
 	if err != nil {
 		return nil, err

@@ -19,8 +19,9 @@ const repeatMode = ref("daily");
 const selectedWeekdays = ref<number[]>([1, 2, 3, 4, 5]);
 const showPlanColors = ref(false);
 const showPlan = ref(false);
-const pendingPlanAction = ref<"create" | "edit" | "delete" | null>(null);
-const pendingPlan = ref<Plan | null>(null);
+const deletePlanTarget = ref<Plan | null>(null);
+const deletePlanDay = ref("");
+const savingPlan = ref(false);
 const planProjectFilter = ref(0);
 const openPlanNoteId = ref(0);
 const openScheduleNoteId = ref(0);
@@ -60,8 +61,9 @@ export function usePlanDraft() {
     selectedWeekdays,
     showPlanColors,
     showPlan,
-    pendingPlanAction,
-    pendingPlan,
+    deletePlanTarget,
+    deletePlanDay,
+    savingPlan,
     planProjectFilter,
     openPlanNoteId,
     openScheduleNoteId,

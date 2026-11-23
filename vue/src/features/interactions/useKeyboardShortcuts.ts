@@ -17,8 +17,7 @@ type KeyboardDeps = {
   openPlanNoteId: Ref<number>;
   reminderActive: Ref<boolean>;
   addActivity: () => Promise<unknown> | void;
-  pendingPlanAction: Ref<"create" | "edit" | "delete" | null>;
-  confirmPlanAction: () => Promise<unknown> | void;
+  deletePlanTarget: Ref<unknown>;
   resetTarget: Ref<ResetTable | null>;
   deleteSubjectTarget: Ref<Subject | null>;
   deleteSessionTarget: Ref<Session | null>;
@@ -45,8 +44,7 @@ export function useKeyboardShortcuts({
   openPlanNoteId,
   reminderActive,
   addActivity,
-  pendingPlanAction,
-  confirmPlanAction,
+  deletePlanTarget,
   resetTarget,
   deleteSubjectTarget,
   deleteSessionTarget,
@@ -130,21 +128,13 @@ export function useKeyboardShortcuts({
       submitWithEnter(event, addActivity);
       return;
     }
-    if (pendingPlanAction.value) {
-      if (pendingPlanAction.value === "delete") {
-        event.preventDefault();
-        return;
-      }
-      if (
-        target instanceof HTMLButtonElement &&
-        target.closest(".plan-confirm")
-      )
-        return;
-      submitWithEnter(event, confirmPlanAction);
-      return;
-    }
+    if (
+      target instanceof HTMLButtonElement &&
+      target.closest(".plan-dialog-card, .subject-form-dialog")
+    ) return;
     if (
       resetTarget.value ||
+      deletePlanTarget.value ||
       deleteSubjectTarget.value ||
       deleteSessionTarget.value ||
       showFinishConfirm.value

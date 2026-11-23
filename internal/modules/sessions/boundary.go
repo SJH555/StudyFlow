@@ -31,8 +31,13 @@ func FinishExpired(db *persistence.Queries, now time.Time) (*Completion, error) 
 }
 
 func finishExpired(db *persistence.Queries, now time.Time) (*Completion, error) {
-	rows, err := db.Query(`SELECT t.id,s.name,t.start_at,t.planned_end_at,t.resumed_at,t.paused_at,t.duration_seconds,t.break_started_at,t.break_used_seconds,p.start_time,p.duration_minutes,p.weekdays
-		FROM sessions t JOIN subjects s ON s.id=t.subject_id LEFT JOIN plans p ON p.id=t.plan_id
+	join, modifier, err := timerPlanSources(db, true)
+	if err != nil {
+		return nil, err
+	}
+	name := timerSubjectLabel(modifier)
+	rows, err := db.Query(`SELECT t.id,` + name + `,t.start_at,t.planned_end_at,t.resumed_at,t.paused_at,t.duration_seconds,t.break_started_at,t.break_used_seconds,p.start_time,p.duration_minutes,p.weekdays
+		FROM sessions t` + timerSubjectJoin(modifier) + join + `
 		WHERE t.end_at IS NULL AND t.deleted=0 AND t.plan_id IS NOT NULL ORDER BY t.id`)
 	if err != nil {
 		return nil, err

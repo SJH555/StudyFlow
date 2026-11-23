@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
+import { api, type DailyPlanHistory } from "../../api";
+import { dateKey } from "../../shared/format";
 import { useAppStore } from "../../stores/app";
 import { usePlansStore } from "../../stores/plans";
 import { useSessionsStore } from "../../stores/sessions";
@@ -22,6 +24,24 @@ const reminderCurrentPlan = computed(() =>
   todayPaused.value ? undefined : plansStore.currentPlan,
 );
 
+const futurePlans = ref<Record<string, DailyPlanHistory>>({});
+watch(showTaskReminder, async (open, _, onCleanup) => {
+  if (!open) return;
+  let cancelled = false;
+  onCleanup(() => { cancelled = true; });
+  futurePlans.value = {};
+  const now = new Date(appStore.now);
+  const days = Array.from({ length: 7 }, (_, index) =>
+    dateKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() + index + 1, 12)),
+  );
+  try {
+    const result = await api.planDays(days);
+    if (!cancelled) futurePlans.value = result;
+  } catch (error) {
+    if (!cancelled) appStore.setError(error);
+  }
+});
+
 const nextReminderPlan = computed(() => {
   const current = new Date(appStore.now);
   // 向后最多找 7 天（含今天共 8 天），足以覆盖任意每周重复计划的下一次开始。
@@ -33,7 +53,7 @@ const nextReminderPlan = computed(() => {
       current.getDate() + offset,
     );
     const weekday = day.getDay();
-    const candidates = plansStore.plans
+    const candidates = (offset === 0 ? plansStore.plans : futurePlans.value[dateKey(day)]?.plans ?? [])
       .filter(
         (p) => p.active && p.weekdays.split(",").map(Number).includes(weekday),
       )

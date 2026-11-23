@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useId } from "vue";
 import { storeToRefs } from "pinia";
 import { useSubjectDraft } from "./useSubjectDraft";
 import { useSubjectsStore } from "../../stores/subjects";
 import { colorPalette } from "../../shared/constants";
+const titleId = useId();
+const noticeId = useId();
 const {
   subjectEditId,
   subjectName,
@@ -14,7 +16,7 @@ const {
   showSubject,
 } = useSubjectDraft();
 const subjectsStore = useSubjectsStore();
-const { nextSubjectSortOrder } = storeToRefs(subjectsStore);
+const { nextSubjectSortOrder, savingSubject } = storeToRefs(subjectsStore);
 const { addSubject } = subjectsStore;
 const subjectSortNumber = computed({
   get: () => Number(subjectSortInput.value) || null,
@@ -29,16 +31,22 @@ const subjectSortNumber = computed({
     v-model="showSubject"
     max-width="480"
     :retain-focus="true"
-    @keydown.enter.exact.prevent="addSubject"
+    :aria-labelledby="titleId"
+    :aria-describedby="noticeId"
+    :persistent="savingSubject"
   >
     <VCard
       class="subject-form-dialog"
       rounded="xl"
-      @keydown.enter.exact.prevent="addSubject"
     >
-      <VCardTitle class="subject-form-title">{{
+      <VCardTitle :id="titleId" class="subject-form-title">{{
         subjectEditId ? "编辑学习项目" : "添加学习项目"
       }}</VCardTitle>
+      <p :id="noticeId" class="form-effective-notice">
+        {{ subjectEditId
+          ? "修改从明天起生效，今天的安排和历史记录保留。"
+          : "添加后今天就能选这个项目补充学习记录。为它新建的循环计划从明天起生效。" }}
+      </p>
       <VCardText class="subject-form-content">
         <VTextField
           v-model="subjectName"
@@ -52,7 +60,6 @@ const subjectSortNumber = computed({
           maxlength="50"
           autofocus
           hide-details="auto"
-          @keydown.enter.prevent="addSubject"
         />
         <div class="subject-color-field">
           <div class="subject-form-label">项目颜色</div>
@@ -140,13 +147,15 @@ const subjectSortNumber = computed({
         </div>
       </VCardText>
       <div class="subject-form-actions">
-        <VBtn variant="text" rounded="lg" @click="showSubject = false"
+        <VBtn variant="text" rounded="lg" :disabled="savingSubject" @click="showSubject = false"
           >取消</VBtn
         ><VBtn
           variant="tonal"
           color="primary"
           rounded="lg"
           prepend-icon="mdi-content-save-outline"
+          :loading="savingSubject"
+          :disabled="savingSubject"
           @click="addSubject"
           >保存</VBtn
         >

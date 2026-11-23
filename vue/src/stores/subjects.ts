@@ -2,10 +2,15 @@ import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 import { api, type Subject } from "../api";
 import { colorPalette } from "../shared/constants";
+import { nextEffectiveDay } from "../shared/format";
 import { useAppStore } from "./app";
 import { usePlansStore } from "./plans";
 import { useSubjectDraft } from "../features/subjects/useSubjectDraft";
 import { usePlanDraft } from "../features/plans/usePlanDraft";
+
+export function sameSubjectContent(left: Subject, right: Subject) {
+  return left.name === right.name && left.color === right.color && left.sortOrder === right.sortOrder;
+}
 
 // 学习科目：科目数据的所有者，负责增删改、归档/恢复、排序号与科目计划联合刷新。
 export const useSubjectsStore = defineStore("subjects", () => {
@@ -15,8 +20,14 @@ export const useSubjectsStore = defineStore("subjects", () => {
   const planDraft = usePlanDraft();
 
   const allSubjects = ref<Subject[]>([]);
+  const managedSubjects = ref<Subject[]>([]);
+  const savingSubject = ref(false);
   const subjects = computed(() =>
     allSubjects.value.filter((subject) => !subject.archived && !subject.deleted),
+  );
+
+  const scheduledSubjects = computed(() =>
+    managedSubjects.value.filter((subject) => !subject.archived && !subject.deleted),
   );
 
   // 下一个可用科目排序号（新增科目默认排最后）。
@@ -31,18 +42,19 @@ export const useSubjectsStore = defineStore("subjects", () => {
   // 科目与计划的联合刷新：并行请求，全部成功后才一起更新（不出现部分列表提前更新），
   // 并校正失效的项目筛选。计划的写入通过 plans store 的公开能力完成。
   async function refreshProjectAndPlan() {
-    const [all, currentPlans] = await Promise.all([
+    const [all, currentPlans, projectList, planList] = await Promise.all([
       api.subjects(true, true),
       api.plans(),
+      api.subjects(true, true, true),
+      api.managedPlans(),
     ]);
     allSubjects.value = all;
+    managedSubjects.value = projectList;
+    plansStore.managedPlans = planList;
     plansStore.setPlans(currentPlans);
     if (
       planDraft.planProjectFilter.value &&
-      !all.some(
-        (subject) =>
-          subject.id === planDraft.planProjectFilter.value && !subject.deleted,
-      )
+      !planList.some((plan) => plan.subjectId === planDraft.planProjectFilter.value)
     )
       planDraft.planProjectFilter.value = 0;
   }
@@ -76,6 +88,12 @@ export const useSubjectsStore = defineStore("subjects", () => {
   }
 
   async function addSubject() {
+    if (savingSubject.value) return;
+    const name = draft.subjectName.value.trim();
+    if (!name || Array.from(name).length > 50) {
+      appStore.notifyTop("学习项目名称需为 1 到 50 字");
+      return;
+    }
     const sortText = draft.subjectSortInput.value.trim();
     if (draft.subjectSortEnabled.value && !/^[1-9]\d*$/.test(sortText)) {
       appStore.notifyTop("排序号请输入正整数");
@@ -86,29 +104,38 @@ export const useSubjectsStore = defineStore("subjects", () => {
       appStore.notifyTop("排序号需为正整数");
       return;
     }
+
+    const id = draft.subjectEditId.value;
+    const color = draft.subjectColor.value;
+    const scheduled = managedSubjects.value.find((subject) => subject.id === id);
+    if (id && (!scheduled || scheduled.deleted)) {
+      appStore.notifyTop("学习项目不存在或已删除");
+      return;
+    }
+
+    const updated = scheduled ? { ...scheduled, name, color, sortOrder } : null;
+    if (updated && scheduled && sameSubjectContent(scheduled, updated)) {
+      draft.showSubject.value = false;
+      draft.subjectEditId.value = 0;
+      return;
+    }
+
+    savingSubject.value = true;
     try {
-      if (draft.subjectEditId.value) {
-        await api.updateSubject({
-          id: draft.subjectEditId.value,
-          name: draft.subjectName.value,
-          color: draft.subjectColor.value,
-          sortOrder,
-          archived: false,
-          deleted: false,
-        });
-      } else {
-        await api.addSubject(
-          draft.subjectName.value,
-          draft.subjectColor.value,
-          sortOrder,
-        );
-      }
+      if (updated) await api.updateSubject(updated);
+      else await api.addSubject(name, color, sortOrder);
+      draft.showSubject.value = false;
       draft.subjectName.value = "";
       draft.subjectEditId.value = 0;
-      draft.showSubject.value = false;
-      await fetchAll();
+      try {
+        await refreshProjectAndPlan();
+      } catch (e) {
+        appStore.setError(`项目已保存，列表刷新失败。${e instanceof Error ? e.message : String(e)}`);
+      }
     } catch (e) {
       appStore.setError(e);
+    } finally {
+      savingSubject.value = false;
     }
   }
 
@@ -116,19 +143,40 @@ export const useSubjectsStore = defineStore("subjects", () => {
     try {
       await api.updateSubject({ ...subject, archived: true, deleted: false });
       await refreshProjectAndPlan();
+      const today = allSubjects.value.find((item) => item.id === subject.id);
+      appStore.notifyTop(today?.archived ? "已撤销启用" : "项目明日起停用，今天的安排保持原样");
     } catch (e) {
       appStore.setError(e);
     }
   }
 
+  function beginDeleteSubject(subject: Subject) {
+    if (savingSubject.value) return;
+    draft.deleteSubjectDay.value = nextEffectiveDay();
+    draft.deleteSubjectTarget.value = subject;
+  }
+
+  function cancelDeleteSubject() {
+    if (!savingSubject.value) draft.deleteSubjectTarget.value = null;
+  }
+
   async function deleteSubject() {
-    if (!draft.deleteSubjectTarget.value) return;
+    const target = draft.deleteSubjectTarget.value;
+    if (!target || savingSubject.value) return;
+    savingSubject.value = true;
     try {
-      await api.deleteSubject(draft.deleteSubjectTarget.value.id);
+      const result = await api.deleteSubject(target.id, draft.deleteSubjectDay.value);
+      if ("needsConfirmation" in result) {
+        draft.deleteSubjectDay.value = result.effectiveDay;
+        appStore.notifyTop("生效日期已更新，请确认新的日期");
+        return;
+      }
       draft.deleteSubjectTarget.value = null;
       await refreshProjectAndPlan();
     } catch (e) {
       appStore.setError(e);
+    } finally {
+      savingSubject.value = false;
     }
   }
 
@@ -136,6 +184,8 @@ export const useSubjectsStore = defineStore("subjects", () => {
     try {
       await api.updateSubject({ ...subject, archived: false, deleted: false });
       await refreshProjectAndPlan();
+      const today = allSubjects.value.find((item) => item.id === subject.id);
+      appStore.notifyTop(today && !today.archived ? "已撤销停用" : "项目明日起启用");
     } catch (e) {
       appStore.setError(e);
     }
@@ -144,6 +194,9 @@ export const useSubjectsStore = defineStore("subjects", () => {
   return {
     subjects,
     allSubjects,
+    managedSubjects,
+    scheduledSubjects,
+    savingSubject,
     nextSubjectSortOrder,
     fetchAll,
     refreshProjectAndPlan,
@@ -152,6 +205,8 @@ export const useSubjectsStore = defineStore("subjects", () => {
     toggleSubjectSort,
     addSubject,
     archiveSubject,
+    beginDeleteSubject,
+    cancelDeleteSubject,
     deleteSubject,
     restoreSubject,
   };

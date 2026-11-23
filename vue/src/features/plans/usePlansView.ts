@@ -1,33 +1,41 @@
-import { computed } from "vue";
+import { computed, type Ref } from "vue";
 import { usePlansStore } from "../../stores/plans";
 import { useSubjectsStore } from "../../stores/subjects";
 import { usePlanDraft } from "./usePlanDraft";
 import { plannedStudyMinutes } from "../../shared/format";
 
 // 计划页视图派生：项目筛选列表/选项与今日学习分配（饼图与日程摘要）。
-export function usePlansView() {
+export type PlanTab = "active" | "stopped";
+
+export function usePlansView(tab: Ref<PlanTab>) {
   const plansStore = usePlansStore();
   const subjectsStore = useSubjectsStore();
   const draft = usePlanDraft();
 
-  // 按项目筛选后的列表。
+  const activePlans = computed(() => plansStore.managedPlans.filter((p) => p.managedActive));
+  const stoppedPlans = computed(() => plansStore.managedPlans.filter((p) => !p.managedActive));
+
+  const tabPlans = computed(() => tab.value === "stopped" ? stoppedPlans.value : activePlans.value);
+
   const managedPlans = computed(() =>
-    plansStore.plans.filter(
-      (p) =>
-        !draft.planProjectFilter.value ||
-        p.subjectId === draft.planProjectFilter.value,
+    tabPlans.value.filter(
+      (p) => !draft.planProjectFilter.value || p.subjectId === draft.planProjectFilter.value,
     ),
   );
 
-  const planFilterOptions = computed(() => [
-    { title: "全部项目", value: 0 },
-    ...subjectsStore.allSubjects
-      .filter((item) => !item.deleted)
-      .map((item) => ({
-        title: `${item.name}（${plansStore.plans.filter((plan) => plan.subjectId === item.id).length} 段）`,
-        value: item.id,
-      })),
-  ]);
+  const planFilterOptions = computed(() => {
+    const projects = new Map<number, string>();
+    for (const plan of tabPlans.value) {
+      if (!projects.has(plan.subjectId)) projects.set(plan.subjectId, plan.subject);
+    }
+    for (const subject of subjectsStore.managedSubjects) {
+      if (projects.has(subject.id) && !subject.deleted) projects.set(subject.id, subject.name);
+    }
+    return [
+      { title: "全部项目", value: 0 },
+      ...Array.from(projects, ([value, title]) => ({ title, value })),
+    ];
+  });
 
   // 今日计划按科目聚合（饼图）与今日日程摘要（起始/结束/学习/休息/空档）。
   const planBreakdown = computed(() => {
@@ -99,6 +107,8 @@ export function usePlansView() {
 
   return {
     managedPlans,
+    activePlans,
+    stoppedPlans,
     planFilterOptions,
     todayPlannedMinutes,
     planBreakdown,

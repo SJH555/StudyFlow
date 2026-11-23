@@ -8,6 +8,7 @@ import (
 	"exam_notify/internal/infrastructure/persistence"
 	"exam_notify/internal/infrastructure/reminder"
 	"exam_notify/internal/modules/review"
+	"exam_notify/internal/modules/schedule"
 	"exam_notify/internal/modules/subjects"
 	"log"
 	"net/http"
@@ -172,6 +173,15 @@ func (a *App) handleAPI(db *persistence.Queries, w http.ResponseWriter, r *http.
 
 func (a *App) withScheduleSnapshot(db *persistence.Queries, w http.ResponseWriter, r *http.Request, handle func(*persistence.Queries, http.ResponseWriter, *http.Request)) {
 	if r.Method == http.MethodGet {
+		handle(db, w, r)
+		return
+	}
+	history, err := schedule.HasHistory(db)
+	if err != nil {
+		fail(w, err)
+		return
+	}
+	if history {
 		handle(db, w, r)
 		return
 	}

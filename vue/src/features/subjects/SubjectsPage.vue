@@ -1,19 +1,38 @@
 <script setup lang="ts">
+import DirectoryStatusButton from "../../shared/DirectoryStatusButton.vue";
+import DirectorySwitch from "../../shared/DirectorySwitch.vue";
+import RecordBadge from "../../shared/RecordBadge.vue";
 import ListActionButton from "../../shared/ListActionButton.vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
-import { useSubjectsStore } from "../../stores/subjects";
+import { sameSubjectContent, useSubjectsStore } from "../../stores/subjects";
 import { usePlansStore } from "../../stores/plans";
 import { useSubjectDraft } from "./useSubjectDraft";
-const { subjects, allSubjects } = storeToRefs(useSubjectsStore());
-const { plans } = storeToRefs(usePlansStore());
+const { allSubjects, managedSubjects } = storeToRefs(useSubjectsStore());
+const directorySubjects = computed(() => {
+  const plannedById = new Map(managedSubjects.value.map((subject) => [subject.id, subject]));
+  return allSubjects.value.flatMap((today) => {
+    const planned = plannedById.get(today.id);
+    if (!planned || today.deleted) return [];
+    return [{
+      ...(planned.deleted ? today : planned),
+      archivedToday: today.archived,
+      pendingDeletion: planned.deleted,
+      pending: planned.archived !== today.archived,
+      pendingEdit: !sameSubjectContent(today, planned),
+    }];
+  });
+});
+const enabledSubjects = computed(() => directorySubjects.value.filter((subject) => !subject.archivedToday));
+const stoppedSubjects = computed(() => directorySubjects.value.filter((subject) => subject.archivedToday));
+const { managedPlansBySubject } = storeToRefs(usePlansStore());
 const {
   subjectTab,
   subjectPlanTarget,
   showSubjectPlans,
   openSubjectPlanNoteId,
-  deleteSubjectTarget,
 } = useSubjectDraft();
-const { beginAddSubject, beginEditSubject, archiveSubject, restoreSubject } =
+const { beginAddSubject, beginEditSubject, archiveSubject, restoreSubject, beginDeleteSubject } =
   useSubjectsStore();
 </script>
 
@@ -30,42 +49,34 @@ const { beginAddSubject, beginEditSubject, archiveSubject, restoreSubject } =
     >
   </div>
   <section class="panel subject-directory">
-    <div class="subject-directory-tabs">
-      <VBtnToggle
-        v-model="subjectTab"
-        mandatory
-        color="primary"
-        variant="tonal"
-        density="comfortable"
-        aria-label="学习项目状态"
-        ><VBtn value="enabled"
-          >启用
-          <span class="subject-tab-count">{{ subjects.length }}</span></VBtn
-        ><VBtn value="hidden"
-          >隐藏
-          <span class="subject-tab-count">{{
-            allSubjects.filter((s) => s.archived && !s.deleted).length
-          }}</span></VBtn
-        ></VBtnToggle
-      >
-    </div>
+    <DirectorySwitch
+      v-model="subjectTab"
+      label="学习项目状态"
+      :options="[
+        { value: 'enabled', label: '启用', count: enabledSubjects.length },
+        { value: 'hidden', label: '停用', count: stoppedSubjects.length },
+      ]"
+    />
     <div class="subject-directory-head">
       <span>项目名称</span><span>关联计划</span><span>操作</span>
     </div>
     <div
-      v-for="s in subjectTab === 'enabled'
-        ? subjects
-        : allSubjects.filter((x) => x.archived && !x.deleted)"
+      v-for="s in subjectTab === 'enabled' ? enabledSubjects : stoppedSubjects"
       :key="s.id"
       class="subject-directory-row"
     >
       <div class="subject-directory-name">
-        <span class="subject-dot" :style="{ background: s.color }"></span
-        ><b>{{ s.name }}</b>
+        <span class="subject-dot" :style="{ background: s.color }"></span>
+        <b>{{ s.name }}</b>
+        <RecordBadge v-if="s.pendingDeletion" icon="mdi-clock-outline">明日起删除</RecordBadge>
+        <RecordBadge v-else-if="s.pending" icon="mdi-clock-outline">
+          {{ s.archived ? "明日起停用" : "明日生效" }}
+        </RecordBadge>
+        <RecordBadge v-else-if="s.pendingEdit" icon="mdi-clock-outline">明日起变更</RecordBadge>
       </div>
       <div class="subject-directory-plans">
         <VBtn
-          v-if="plans.some((p) => p.subjectId === s.id)"
+          v-if="managedPlansBySubject.get(s.id)?.length"
           class="subject-plan-trigger"
           variant="tonal"
           color="primary"
@@ -78,56 +89,34 @@ const { beginAddSubject, beginEditSubject, archiveSubject, restoreSubject } =
             openSubjectPlanNoteId = 0;
             showSubjectPlans = true;
           "
-          >{{ plans.filter((p) => p.subjectId === s.id).length }} 个计划</VBtn
+          >{{ managedPlansBySubject.get(s.id)?.length }} 个计划</VBtn
         ><span v-else class="subject-no-plans" aria-label="无关联计划">—</span>
       </div>
-      <div class="subject-directory-actions">
+      <div v-if="!s.pendingDeletion" class="subject-directory-actions">
         <ListActionButton
           action="edit"
           v-if="subjectTab === 'enabled'"
           @click="beginEditSubject(s)"
         /><span v-else class="subject-action-spacer" aria-hidden="true"></span
-        ><VBtn
-          :prepend-icon="
-            subjectTab === 'enabled' ? 'mdi-eye-off-outline' : 'mdi-eye-outline'
-          "
-          variant="tonal"
-          color="primary"
-          size="small"
-          rounded="lg"
-          @click="
-            subjectTab === 'enabled' ? archiveSubject(s) : restoreSubject(s)
-          "
-          >{{ subjectTab === "enabled" ? "隐藏" : "启用" }}</VBtn
-        ><span class="subject-delete-wrap"
-          ><ListActionButton
-            action="delete"
-            :disabled="s.hasData"
-            @click="deleteSubjectTarget = s"
-          /><VTooltip
-            v-if="s.hasData"
-            activator="parent"
-            location="top"
-            content-class="subject-tooltip"
-            >存在关联数据，无法删除</VTooltip
-          ></span
-        >
+        ><DirectoryStatusButton
+          :enabled="!s.archivedToday"
+          :undo="s.pending"
+          :aria-label="`${s.pending ? '撤销' : s.archivedToday ? '启用' : '停用'} ${s.name}`"
+          @click="s.archived ? restoreSubject(s) : archiveSubject(s)"
+        /><ListActionButton action="delete" @click="beginDeleteSubject(s)" />
       </div>
     </div>
     <div
-      v-if="subjectTab === 'enabled' && !subjects.length"
+      v-if="subjectTab === 'enabled' && !enabledSubjects.length"
       class="subtle-empty"
     >
       没有启用的学习项目
     </div>
     <div
-      v-if="
-        subjectTab === 'hidden' &&
-        !allSubjects.some((s) => s.archived && !s.deleted)
-      "
+      v-if="subjectTab === 'hidden' && !stoppedSubjects.length"
       class="subtle-empty"
     >
-      没有隐藏的学习项目
+      没有停用的学习项目
     </div>
   </section>
 </template>
@@ -141,29 +130,6 @@ const { beginAddSubject, beginEditSubject, archiveSubject, restoreSubject } =
   width: 100%;
   padding: 22px 24px;
   background: #fff;
-}
-.subject-directory-tabs {
-  margin-bottom: 20px;
-}
-.subject-directory-tabs :deep(.v-btn-toggle) {
-  border: 1px solid var(--outline-card);
-  border-radius: 9px;
-  overflow: hidden;
-}
-.subject-directory-tabs :deep(.v-btn) {
-  min-width: 110px;
-  text-transform: none;
-}
-.subject-tab-count {
-  display: inline-grid;
-  place-items: center;
-  min-width: 21px;
-  height: 21px;
-  margin-left: 8px;
-  padding: 0 5px;
-  border-radius: 11px;
-  background: var(--surface-card);
-  font-size: 12px;
 }
 .subject-directory-head {
   position: relative;

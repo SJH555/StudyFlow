@@ -1,6 +1,6 @@
 import { computed, nextTick, ref, shallowRef, watch } from "vue";
 import { defineStore } from "pinia";
-import { api, type Session } from "../api";
+import { api, type DailyPlanHistory, type Session, type Subject } from "../api";
 import {
   dateKey,
   formatDateChinese,
@@ -8,8 +8,6 @@ import {
   plannedStudyMinutes,
 } from "../shared/format";
 import { useAppStore } from "./app";
-import { usePlansStore } from "./plans";
-import { useSubjectsStore } from "./subjects";
 import { useSessionsStore } from "./sessions";
 import type { useCharts } from "../features/stats/useCharts";
 
@@ -17,12 +15,12 @@ import type { useCharts } from "../features/stats/useCharts";
 // 图表实例由页面层创建后通过 attachCharts 注入，store 不直接持有 DOM。
 export const useStatsStore = defineStore("stats", () => {
   const appStore = useAppStore();
-  const plansStore = usePlansStore();
-  const subjectsStore = useSubjectsStore();
   const sessionsStore = useSessionsStore();
 
   const statsPeriod = ref<"week" | "month">("week");
   const overviewPeriod = ref<"day" | "week" | "month">("day");
+  const dailyHistory = ref<Record<string, DailyPlanHistory>>({});
+  const selectedHistory = computed(() => dailyHistory.value[appStore.selectedDate]);
   const trendSessions = ref<Record<string, Session[]>>({});
   const comparisonSessions = ref<Record<string, Session[]>>({});
   // 趋势的周/月范围始终包含所选日期，明细复用同一批学习记录。
@@ -109,23 +107,38 @@ export const useStatsStore = defineStore("stats", () => {
 
   const periodDates = computed(() => datesForPeriod(statsPeriod.value));
 
-  const comparisonDates = computed(() =>
+  const overviewDates = computed(() =>
     overviewPeriod.value === "day"
       ? [new Date(appStore.selectedDate + "T12:00:00")]
       : datesForPeriod(overviewPeriod.value),
   );
+  const comparisonDates = computed(() =>
+    overviewPeriod.value === "day"
+      ? overviewDates.value
+      : overviewDates.value.filter((date) => dateKey(date) <= appStore.todayKey),
+  );
+
+  function historyKind(date: Date) {
+    return dailyHistory.value[dateKey(date)]?.kind ?? "unknown";
+  }
 
   function plannedForDate(date: Date, subjectId?: number) {
-    const wd = date.getDay();
-    return plansStore.plans
-      .filter(
-        (p) =>
-          p.active &&
-          p.weekdays.split(",").map(Number).includes(wd) &&
-          (subjectId === undefined || p.subjectId === subjectId),
-      )
-      .reduce((n, p) => n + plannedStudyMinutes(p), 0);
+    const entry = dailyHistory.value[dateKey(date)];
+    if (entry?.kind === "legacy") {
+      return (entry.targets ?? [])
+        .filter((item) => subjectId === undefined || item.subjectId === subjectId)
+        .reduce((total, item) => total + item.plannedSeconds / 60, 0);
+    }
+    return (entry?.plans ?? [])
+      .filter((p) => subjectId === undefined || p.subjectId === subjectId)
+      .reduce((total, p) => total + plannedStudyMinutes(p), 0);
   }
+
+  const overviewHistoryKind = computed(() => {
+    const kinds = comparisonDates.value.map(historyKind);
+    if (kinds.includes("unknown")) return "unknown";
+    return kinds.includes("legacy") ? "legacy" : "complete";
+  });
 
   function dailyActualSeconds(date: Date) {
     return (trendSessions.value[dateKey(date)] || []).reduce(
@@ -162,13 +175,15 @@ export const useStatsStore = defineStore("stats", () => {
     );
   }
 
-  const overviewRangeLabel = computed(() =>
-    overviewPeriod.value === "day"
-      ? formatDateChinese(appStore.selectedDate)
-      : overviewPeriod.value === "month"
-        ? `${appStore.selectedDate.slice(0, 4)}年${Number(appStore.selectedDate.slice(5, 7))}月`
-        : `${formatDateChinese(dateKey(comparisonDates.value[0]))}—${formatDateChinese(dateKey(comparisonDates.value[6]))}`,
-  );
+  const overviewRangeLabel = computed(() => {
+    if (overviewPeriod.value === "day") return formatDateChinese(appStore.selectedDate);
+    const dates = overviewDates.value;
+    const range = overviewPeriod.value === "month"
+      ? `${appStore.selectedDate.slice(0, 4)}年${Number(appStore.selectedDate.slice(5, 7))}月`
+      : `${formatDateChinese(dateKey(dates[0]))}—${formatDateChinese(dateKey(dates[6]))}`;
+    if (!comparisonDates.value.length) return `${range} · 尚未开始`;
+    return comparisonDates.value.length < dates.length ? `${range} · 截至今天` : range;
+  });
 
   const trendRangeLabel = computed(() =>
     statsPeriod.value === "month"
@@ -182,14 +197,7 @@ export const useStatsStore = defineStore("stats", () => {
 
   const overviewPlanCount = computed(() =>
     comparisonDates.value.reduce(
-      (count, date) =>
-        count +
-        plansStore.plans.filter(
-          (p) =>
-            p.active &&
-            p.weekdays.split(",").map(Number).includes(date.getDay()),
-        ).length,
-      0,
+      (count, date) => count + (dailyHistory.value[dateKey(date)]?.plans.length ?? 0), 0,
     ),
   );
 
@@ -201,11 +209,21 @@ export const useStatsStore = defineStore("stats", () => {
     ),
   );
 
-  const comparisonSubjects = computed(() =>
-    subjectsStore.allSubjects.filter(
-      (s) => plannedForPeriod(s.id) > 0 || actualForPeriod(s.id) > 0,
-    ),
-  );
+  const comparisonSubjects = computed(() => {
+    const subjects = new Map<number, Subject>();
+    const add = (id: number, name: string, color = "") =>
+      subjects.set(id, { id, name, color, sortOrder: null, archived: false, deleted: false });
+    for (const date of comparisonDates.value) {
+      const day = dateKey(date);
+      const entry = dailyHistory.value[day];
+      for (const session of comparisonSessions.value[day] ?? []) {
+        add(session.subjectId, session.subject, session.color);
+      }
+      for (const item of entry?.targets ?? []) add(item.subjectId, item.subjectName);
+      for (const plan of entry?.plans ?? []) add(plan.subjectId, plan.subject, plan.color);
+    }
+    return [...subjects.values()];
+  });
 
   let statsLoadSequence = 0,
     trendLoadSequence = 0,
@@ -217,7 +235,9 @@ export const useStatsStore = defineStore("stats", () => {
     const trendDays = periodDates.value.map(dateKey),
       overviewDays = comparisonDates.value.map(dateKey);
     const dates = [...new Set([...trendDays, ...overviewDays])];
-    const all = await measureStage("queries", () => api.sessionsForDates(dates));
+    const [all, history] = await measureStage("queries", () =>
+      Promise.all([api.sessionsForDates(dates), api.planDays(dates)]),
+    );
     // 用递增序号判断结果是否已被更新的请求取代，避免异步竞态覆盖新数据。
     if (sequence !== statsLoadSequence || appStore.page !== "stats") return;
     if (
@@ -225,6 +245,7 @@ export const useStatsStore = defineStore("stats", () => {
       overviewDays.join() !== comparisonDates.value.map(dateKey).join()
     )
       return loadStats();
+    dailyHistory.value = history;
     trendSessions.value = Object.fromEntries(
       trendDays.map((day) => [day, all[day]]),
     );
@@ -251,11 +272,6 @@ export const useStatsStore = defineStore("stats", () => {
     try {
       await afterPaint();
       if (sequence !== refreshSequence || appStore.page !== "stats") return;
-      const [, currentPlans] = await measureStage("base-queries", () =>
-        Promise.all([subjectsStore.fetchAll(), api.plans()]),
-      );
-      if (sequence !== refreshSequence || appStore.page !== "stats") return;
-      plansStore.setPlans(currentPlans);
       await loadStats();
     } finally {
       if (sequence === refreshSequence && appStore.page === "stats")
@@ -267,13 +283,14 @@ export const useStatsStore = defineStore("stats", () => {
     const sequence = ++trendLoadSequence,
       refresh = refreshSequence,
       days = periodDates.value.map(dateKey);
-    const entries = await api.sessionsForDates(days);
+    const [entries, history] = await Promise.all([api.sessionsForDates(days), api.planDays(days)]);
     if (
       sequence !== trendLoadSequence ||
       refresh !== refreshSequence ||
       appStore.page !== "stats"
     )
       return;
+    dailyHistory.value = { ...dailyHistory.value, ...history };
     trendSessions.value = entries;
     await afterPaint();
     if (
@@ -289,13 +306,16 @@ export const useStatsStore = defineStore("stats", () => {
     const sequence = ++overviewLoadSequence,
       refresh = refreshSequence,
       days = comparisonDates.value.map(dateKey);
-    const entries = await api.sessionsForDates(days);
+    const [entries, history] = days.length
+      ? await Promise.all([api.sessionsForDates(days), api.planDays(days)])
+      : [{}, {}];
     if (
       sequence !== overviewLoadSequence ||
       refresh !== refreshSequence ||
       appStore.page !== "stats"
     )
       return;
+    dailyHistory.value = { ...dailyHistory.value, ...history };
     comparisonSessions.value = entries;
     await afterPaint();
     if (
@@ -339,6 +359,7 @@ export const useStatsStore = defineStore("stats", () => {
     statsLoading.value = false;
     disposeCharts();
     charts.value = null;
+    dailyHistory.value = {};
     trendSessions.value = {};
     comparisonSessions.value = {};
     statsReady.value = false;
@@ -358,6 +379,9 @@ export const useStatsStore = defineStore("stats", () => {
     trendSessions,
     comparisonSessions,
     selectedSessions,
+    selectedHistory,
+    historyKind,
+    overviewHistoryKind,
     statsLoading,
     statsReady,
     statsDateMenu,

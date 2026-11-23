@@ -111,8 +111,14 @@ func TestBaselineAdoptionPreservesBusinessData(t *testing.T) {
 	if got := scalar(t, d, `SELECT count(*) FROM sqlite_schema WHERE name='goose_db_version'`); got != "0" {
 		t.Fatal("inspection modified database")
 	}
+	execTest(t, d, `INSERT INTO daily_reviews VALUES('2026-01-01','total',70,3600,1800,'2026-01-02');
+		INSERT INTO daily_review_items(day,subject_id,subject_name,planned_seconds,actual_seconds,reason)
+		VALUES('2026-01-01',0,'全部学习项目',3600,1800,'休息')`)
 	if err := apply(t, d, m); err != nil {
 		t.Fatal(err)
+	}
+	if got := scalar(t, d, `SELECT status || ':' || threshold || ':' || reason FROM daily_reviews JOIN daily_review_items USING(day)`); got != "submitted:70:休息" {
+		t.Fatal("review changed during upgrade", got)
 	}
 	if got := scalar(t, d, `SELECT deleted FROM sessions WHERE id=1`); got != "0" {
 		t.Fatal("repeated old cleanup")
@@ -123,7 +129,7 @@ func TestBaselineAdoptionPreservesBusinessData(t *testing.T) {
 	if err := apply(t, d, m); err != nil {
 		t.Fatal(err)
 	}
-	if got := scalar(t, d, `SELECT group_concat(version_id) FROM goose_db_version`); got != "0,1" {
+	if got := scalar(t, d, `SELECT group_concat(version_id) FROM goose_db_version`); got != "0,1,2" {
 		t.Fatal(got)
 	}
 	if got := scalar(t, d, `PRAGMA user_version`); got != "0" {
@@ -137,7 +143,7 @@ func TestFreshDatabaseCreatesBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	s, err := inspect(t, d, m)
-	if err != nil || s.NeedsUpgrade() || s.Version != 1 {
+	if err != nil || s.NeedsUpgrade() || s.Version != TargetVersion {
 		t.Fatalf("%+v %v", s, err)
 	}
 }
@@ -257,7 +263,7 @@ func TestTargetIsolationAndNewerDatabaseRefusal(t *testing.T) {
 	if err := apply(t, d, testManager(t, 2, extra)); err != nil {
 		t.Fatal(err)
 	}
-	m, _ := New()
+	m := testManager(t, 1, extra)
 	_, err := inspect(t, d, m)
 	if !errors.Is(err, ErrNewerDatabase) {
 		t.Fatal(err)
@@ -402,5 +408,21 @@ INSERT INTO settings(key,value) VALUES('upgrade_probe','yes');`
 	}
 	if got := scalar(t, d, `SELECT count(*) FROM activity_logs WHERE content='upgraded setting'`); got != "1" {
 		t.Fatal(got)
+	}
+}
+
+func TestInspectRejectsDevelopmentVersionTwoWithoutReviewResults(t *testing.T) {
+	d, _ := testDatabase(t, true)
+	m, err := New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := apply(t, d, m); err != nil {
+		t.Fatal(err)
+	}
+	execTest(t, d, `ALTER TABLE daily_reviews DROP COLUMN status`)
+	state, err := inspect(t, d, m)
+	if state.Version != 2 || !errors.Is(err, ErrUnknownSchema) || !strings.Contains(err.Error(), "缺少每日追因结果字段") {
+		t.Fatalf("unexpected state: %+v, %v", state, err)
 	}
 }
