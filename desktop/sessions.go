@@ -4,6 +4,7 @@ import (
 	"exam_notify/internal/infrastructure/persistence"
 
 	"encoding/json"
+	"errors"
 	"net/http"
 	"time"
 
@@ -29,6 +30,11 @@ func (a *App) sessions(db *persistence.Queries, w http.ResponseWriter, r *http.R
 			return
 		}
 		id, duration, err := sessions.AddManual(db, input)
+		var warning *sessions.ManualPlanConflict
+		if errors.As(err, &warning) {
+			writeJSON(w, map[string]any{"planConflict": warning})
+			return
+		}
 		if err != nil {
 			fail(w, err)
 			return

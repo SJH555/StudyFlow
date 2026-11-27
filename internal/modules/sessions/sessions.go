@@ -43,6 +43,8 @@ type ManualInput struct {
 	StartAt   string `json:"startAt"`
 	EndAt     string `json:"endAt"`
 	Note      string `json:"note"`
+	// PlanConflictToken 对应用户刚确认的补录区间和冲突计划，不写入数据库。
+	PlanConflictToken string `json:"planConflictToken,omitempty"`
 }
 
 // TimerInput 表示计时器操作的输入。
@@ -55,10 +57,14 @@ type TimerInput struct {
 
 // AddManual 手动新增一条学习记录，并返回其 ID 与时长（秒）。
 func AddManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
+	return addManualAt(db, in, time.Now())
+}
+
+func addManualAt(db *persistence.Queries, in ManualInput, now time.Time) (int64, int64, error) {
 	var id, seconds int64
 	var err error
 	err = db.WithTx(func(tx *persistence.Queries) error {
-		id, seconds, err = addManual(tx, in)
+		id, seconds, err = addManual(tx, in, now)
 		return err
 	})
 	if err != nil {
@@ -67,7 +73,7 @@ func AddManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
 	return id, seconds, nil
 }
 
-func addManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
+func addManual(db *persistence.Queries, in ManualInput, now time.Time) (int64, int64, error) {
 	start, e := time.Parse(time.RFC3339, in.StartAt)
 	if e != nil {
 		return 0, 0, e
@@ -82,6 +88,9 @@ func addManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
 	if end.Sub(start) < 10*time.Minute {
 		return 0, 0, errors.New("学习记录不能少于 10 分钟，请调整时间")
 	}
+	sec := int64(end.Sub(start).Seconds())
+	// 写入按秒存储，冲突检查使用同样的边界。
+	start, end = start.Truncate(time.Second), end.Truncate(time.Second)
 	modifier, e := dayModifier(db)
 	if e != nil {
 		return 0, 0, e
@@ -100,65 +109,16 @@ func addManual(db *persistence.Queries, in ManualInput) (int64, int64, error) {
 	if !available {
 		return 0, 0, fmt.Errorf("所选学习项目在 %s 不可用于补录", day)
 	}
-	rows, e := db.Query(`SELECT ` + timerSubjectLabel(modifier) + `,t.start_at,t.end_at,t.paused_at,t.planned_end_at
-		FROM sessions t` + timerSubjectJoin(modifier) + `WHERE t.deleted=0`)
-	if e != nil {
-		return 0, 0, e
+	if err := checkRecordOverlap(db, start, end, ""); err != nil {
+		return 0, 0, err
 	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var subject, existingStartRaw string
-		var existingEndRaw, existingPausedRaw, existingPlannedEndRaw sql.NullString
-		if e = rows.Scan(&subject, &existingStartRaw, &existingEndRaw, &existingPausedRaw, &existingPlannedEndRaw); e != nil {
-			break
-		}
-		existingStart, parseErr := time.Parse(time.RFC3339Nano, existingStartRaw)
-		if parseErr != nil {
-			e = parseErr
-			break
-		}
-		// 保留运行中计划已安排时段的剩余时间。否则未来手动记录可能被接受，
-		// 之后又与该计时时段重叠。
-		existingEnd := time.Now()
-		if existingEndRaw.Valid {
-			existingEnd, parseErr = time.Parse(time.RFC3339Nano, existingEndRaw.String)
-			if parseErr != nil {
-				e = parseErr
-				break
-			}
-		} else if existingPlannedEndRaw.Valid {
-			existingEnd, parseErr = time.Parse(time.RFC3339Nano, existingPlannedEndRaw.String)
-			if parseErr != nil {
-				e = parseErr
-				break
-			}
-		} else if existingPausedRaw.Valid {
-			existingEnd, parseErr = time.Parse(time.RFC3339Nano, existingPausedRaw.String)
-			if parseErr != nil {
-				e = parseErr
-				break
-			}
-		}
-		if start.Before(existingEnd) && end.After(existingStart) {
-			rows.Close()
-			endLabel := existingEnd.Local().Format("15:04")
-			if !existingEndRaw.Valid && !existingPausedRaw.Valid {
-				endLabel += "（进行中）"
-			} else if existingPausedRaw.Valid {
-				endLabel += "（已暂停）"
-			}
-			return 0, 0, fmt.Errorf("与“%s”在 %s–%s 的学习记录时间冲突", subject, existingStart.Local().Format("15:04"), endLabel)
-		}
+	warning, err := manualPlanConflict(db, in.SubjectID, start, end, now)
+	if err != nil {
+		return 0, 0, err
 	}
-	if e == nil {
-		e = rows.Err()
+	if warning != nil && warning.Token != in.PlanConflictToken {
+		return 0, 0, warning
 	}
-	rows.Close()
-	if e != nil {
-		return 0, 0, e
-	}
-	sec := int64(end.Sub(start).Seconds())
 	res, e := db.Exec(`INSERT INTO sessions(subject_id,start_at,end_at,duration_seconds,source,note) VALUES(?,?,?,?,?,?)`, in.SubjectID, start.Format(time.RFC3339), end.Format(time.RFC3339), sec, "manual", in.Note)
 	if e != nil {
 		return 0, 0, e
@@ -249,6 +209,9 @@ func start(db *persistence.Queries, in TimerInput, now time.Time) (int64, error)
 			return 0, e
 		}
 	}
+	if err := checkRecordOverlap(db, now.Truncate(time.Second), plannedEnd, ""); err != nil {
+		return 0, err
+	}
 	var plannedEndValue any
 	if !plannedEnd.IsZero() {
 		plannedEndValue = plannedEnd.Format(time.RFC3339)
@@ -307,8 +270,10 @@ func changeTimer(db *persistence.Queries, id, action string, now time.Time) (boo
 		return false, err
 	}
 	effectiveNow := now
+	var boundary time.Time
 	if plannedEnd.Valid {
-		boundary, parseErr := time.Parse(time.RFC3339Nano, plannedEnd.String)
+		var parseErr error
+		boundary, parseErr = time.Parse(time.RFC3339Nano, plannedEnd.String)
 		if parseErr != nil {
 			return false, parseErr
 		}
@@ -347,6 +312,9 @@ func changeTimer(db *persistence.Queries, id, action string, now time.Time) (boo
 		}
 	case "resume":
 		if paused.Valid {
+			if err := checkRecordOverlap(db, now.Truncate(time.Second), boundary, id); err != nil {
+				return false, err
+			}
 			used := breakUsed + studytime.BreakElapsedSeconds(nullableTimestamp(breakStarted), now)
 			e = updateActiveTimer(db, `UPDATE sessions SET paused_at=NULL,resumed_at=?,break_started_at=NULL,break_used_seconds=?,break_notified=0 WHERE id=? AND end_at IS NULL AND deleted=0`, now.Format(time.RFC3339), used, id)
 		}

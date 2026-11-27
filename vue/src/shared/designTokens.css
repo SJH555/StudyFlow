@@ -23,10 +23,12 @@
   --nav-resize-handle-active: #9bb4f4;
   --nav-resize-handle-focus: #2863f4;
   --canvas-study: rgb(247 249 254);
+  --outline-notice: #dfe1e5;
   --outline-note: #a4afb8;
   --surface-version-tag: rgb(232 232 232);
   --color-plan-learning: #5484e0;
   --color-actual-learning: #c48233;
+  --elevation-notice: 0 8px 24px color-mix(in srgb, var(--ink) 12%, transparent);
   --elevation-panel: 0 8px 26px color-mix(in srgb, var(--ink) 4%, transparent);
   --elevation-panel-raised: 0 4px 14px color-mix(in srgb, var(--ink) 6%, transparent);
   --elevation-item: 0 4px 16px color-mix(in srgb, var(--ink) 4%, transparent);

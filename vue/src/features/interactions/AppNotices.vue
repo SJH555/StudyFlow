@@ -4,63 +4,71 @@ import { storeToRefs } from "pinia";
 import { useAppStore } from "../../stores/app";
 import { useWindowFrame } from "../window/useWindowFrame";
 
-// 应用级提示：顶部通知 snackbar 与全局错误 toast。
 const appStore = useAppStore();
-const { topNotice, error, focusMode } = storeToRefs(appStore);
-const { windowsTitlebar, windowsMaximised } = useWindowFrame(
-  appStore.setError,
-);
+const { topNotice, noticeId, noticeTone, focusMode } = storeToRefs(appStore);
+const { windowsTitlebar, windowsMaximised } = useWindowFrame(appStore.setError);
 
-const topNoticeVisible = computed({
-  get: () => !!topNotice.value,
-  set: (visible: boolean) => {
-    if (!visible) appStore.clearTopNotice();
-  },
+const icons = {
+  info: "mdi-information-outline",
+  success: "mdi-check-circle-outline",
+  error: "mdi-alert-circle-outline",
+} as const;
+
+const dismiss = computed(() => {
+  const id = noticeId.value;
+  return (visible: boolean) => {
+    if (!visible) appStore.clearTopNotice(id);
+  };
 });
 </script>
 
 <template>
   <VSnackbar
-    v-model="topNoticeVisible"
+    :key="noticeId"
+    :model-value="!!topNotice"
     :class="[
-      'review-save-snackbar is-success app-top-snackbar',
+      'app-top-snackbar',
       windowsTitlebar && !focusMode ? 'windows-top-snackbar' : '',
       windowsMaximised ? 'windows-top-snackbar-maximised' : '',
     ]"
     location="top"
     transition="slide-y-transition"
-    :timeout="4500"
-    role="status"
-    ><VIcon
-      icon="mdi-information-outline"
-      size="small"
-      class="review-save-snackbar-icon"
-    />{{ topNotice }}</VSnackbar
+    :timeout="noticeTone === 'error' ? 5000 : 4500"
+    @update:model-value="dismiss"
   >
-  <div v-if="error" class="toast">{{ error }}</div>
+    <VIcon :icon="icons[noticeTone]" size="small" class="app-top-snackbar-icon" aria-hidden="true" />
+    <span>{{ topNotice }}</span>
+  </VSnackbar>
 </template>
 
 <style scoped>
-.toast {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  background: #393746;
-  color: white;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 11px;
-  z-index: 10;
-  box-shadow: 0 8px 25px #0002;
-  max-width: 400px;
+:global(.app-top-snackbar .v-snackbar__wrapper) {
+  min-width: 0;
+  max-width: min(420px, calc(100vw - var(--space-4) * 2));
+  background: var(--surface-app);
+  color: var(--ink);
+  border: 1px solid var(--outline-notice);
+  border-radius: var(--shape-medium);
+  box-shadow: var(--elevation-notice);
 }
-.toast {
-  font-size: 13px;
-  padding: 14px 18px;
-  border-radius: 10px;
-  max-width: 520px;
+
+:global(.app-top-snackbar .v-snackbar__content) {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--weight-medium);
+  overflow-wrap: anywhere;
 }
-.toast {
-  z-index: 120;
+
+:global(.app-top-snackbar-icon) {
+  flex: none;
+  color: color-mix(in srgb, var(--ink) 80%, var(--surface-app));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.app-top-snackbar .v-snackbar__wrapper) {
+    transition: none;
+  }
 }
 </style>

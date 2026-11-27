@@ -1,5 +1,5 @@
-import { computed, ref } from "vue";
-import type { Subject } from "../../api";
+import { computed, ref, watch } from "vue";
+import type { ManualPlanConflict, Subject } from "../../api";
 
 // 手动记录草稿：表单字段，弹窗与页面共享，应用生命周期内保留，由业务模块封装。
 const manualDate = ref("");
@@ -12,6 +12,12 @@ const manualStartMinute = ref("00");
 const manualEndHour = ref("10");
 const manualEndMinute = ref("00");
 const showManual = ref(false);
+const manualPlanConflict = ref<ManualPlanConflict | null>(null);
+
+watch([
+  showManual, manualDate, manualSubject, manualStartHour, manualStartMinute,
+  manualEndHour, manualEndMinute,
+], () => { manualPlanConflict.value = null; }, { flush: "sync" });
 const manualDurationMinutes = computed(() =>
   Number(manualEndHour.value) * 60 + Number(manualEndMinute.value) -
   Number(manualStartHour.value) * 60 - Number(manualStartMinute.value),
@@ -28,6 +34,7 @@ export function useManualDraft() {
     manualSubjects,
     manualSubjectsLoading,
     manualSaving,
+    manualPlanConflict,
     manualSubject,
     manualStartHour,
     manualStartMinute,

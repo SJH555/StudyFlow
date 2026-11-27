@@ -30,11 +30,6 @@ export const useReviewStore = defineStore("review", () => {
   const reviewEnabledDraft = ref(false);
   const reviewSaving = ref(false);
 
-  // 复习保存结果提示：开关、文案与成功/失败色调。
-  const reviewSaveNotice = ref(false);
-  const reviewSaveMessage = ref("");
-  const reviewSaveTone = ref<"success" | "error">("success");
-
   // 复习设置的保存中标记（活动设置的已迁入 activity store）。
   const reviewSettingsSaving = ref(false);
 
@@ -82,12 +77,6 @@ export const useReviewStore = defineStore("review", () => {
 
   let reviewCheckSequence = 0;
 
-  function showReviewSaveNotice(message: string, tone: "success" | "error") {
-    reviewSaveMessage.value = message;
-    reviewSaveTone.value = tone;
-    reviewSaveNotice.value = true;
-  }
-
   // 用序号丢弃过期的并发请求结果，避免旧数据覆盖新状态。
   async function checkDailyReview() {
     const sequence = ++reviewCheckSequence;
@@ -133,7 +122,7 @@ export const useReviewStore = defineStore("review", () => {
       threshold < 1 ||
       threshold > 100
     ) {
-      showReviewSaveNotice("目标比例请输入 1–100 的整数", "error");
+      appStore.notifyTop("目标比例请输入 1–100 的整数", "error");
       return;
     }
     const checkHour = reviewCheckHour.value;
@@ -143,7 +132,7 @@ export const useReviewStore = defineStore("review", () => {
       checkHour < 0 ||
       checkHour > 23
     ) {
-      showReviewSaveNotice("检查时间请输入 0–23 的小时", "error");
+      appStore.notifyTop("检查时间请输入 0–23 的小时", "error");
       return;
     }
     const checkMinute = reviewCheckMinute.value;
@@ -153,7 +142,7 @@ export const useReviewStore = defineStore("review", () => {
       checkMinute < 0 ||
       checkMinute > 59
     ) {
-      showReviewSaveNotice("检查分钟请输入 0–59 的整数", "error");
+      appStore.notifyTop("检查分钟请输入 0–59 的整数", "error");
       return;
     }
     reviewSettingsSaving.value = true;
@@ -167,12 +156,12 @@ export const useReviewStore = defineStore("review", () => {
     try {
       await api.saveSettings(saved);
       Object.assign(settingsStore.settings, saved);
-      showReviewSaveNotice("进度追因设置保存成功", "success");
+      appStore.notifyTop("进度追因设置保存成功", "success");
       await checkDailyReview();
     } catch (e) {
       const message = e instanceof Error ? e.message : String(e);
       recordClientError(message || "保存进度追因设置失败").catch(() => {});
-      showReviewSaveNotice(
+      appStore.notifyTop(
         message ? `保存失败：${message}` : "保存失败，请稍后重试",
         "error",
       );
@@ -238,9 +227,6 @@ export const useReviewStore = defineStore("review", () => {
     reviewCheckMinute,
     reviewEnabledDraft,
     reviewSaving,
-    reviewSaveNotice,
-    reviewSaveMessage,
-    reviewSaveTone,
     reviewSettingsSaving,
     reviewBulkOffer,
     reviewBulkChoice,
@@ -248,7 +234,6 @@ export const useReviewStore = defineStore("review", () => {
     reviewPageHeading,
     reviewSettingsDirty,
     applySettings,
-    showReviewSaveNotice,
     checkDailyReview,
     refreshReviewHistory,
     saveReviewSettings,

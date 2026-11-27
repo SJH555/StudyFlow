@@ -14,10 +14,17 @@ Module._extensions['.ts'] = (mod, file) => {
 };
 let requests = 0;
 let conflict = false;
+let warnings = false;
+const submitted = [];
 const api = {
-  addSession: async () => {
+  addSession: async (data) => {
     requests++;
+    submitted.push(data);
     if (conflict) throw new Error('与已有学习记录时间冲突');
+    if (warnings && !data.planConflictToken) {
+      return { planConflict: { message: '占用数学计划', token: 'confirm-span' } };
+    }
+    return { id: requests, duration: 600 };
   },
   sessions: async () => [],
 };
@@ -34,6 +41,8 @@ const { useManualDraft } = require(path.join(root, 'vue/src/features/sessions/us
 
 (async () => {
   const app = useAppStore(), sessions = useSessionsStore(), draft = useManualDraft();
+  draft.manualDate.value = app.todayKey;
+  draft.manualSubjects.value = [{ id: 1, name: '数学' }];
   draft.manualSubject.value = 1;
   draft.manualStartHour.value = '09';
   draft.manualStartMinute.value = '00';
@@ -60,5 +69,21 @@ const { useManualDraft } = require(path.join(root, 'vue/src/features/sessions/us
   assert.equal(requests, 2);
   assert.equal(draft.showManual.value, true);
   assert.match(app.topNotice, /时间冲突/);
-  console.log('PASS: invalid intervals never submitted; exactly 10 minutes accepted; conflict keeps form open');
+  conflict = false;
+  warnings = true;
+  await sessions.addManual();
+  assert.equal(requests, 3);
+  assert.equal(draft.manualPlanConflict.value.token, 'confirm-span');
+  await sessions.addManual();
+  assert.equal(requests, 3, 'plain Enter must not silently confirm');
+  draft.manualEndMinute.value = '40';
+  assert.equal(draft.manualPlanConflict.value, null, 'editing clears previous confirmation');
+  await sessions.confirmManualPlanConflict();
+  assert.equal(requests, 3);
+  await sessions.addManual();
+  await sessions.confirmManualPlanConflict();
+  assert.equal(requests, 5);
+  assert.equal(submitted[4].planConflictToken, 'confirm-span');
+  assert.equal(draft.showManual.value, false);
+  console.log('PASS: minimum duration, hard conflict, explicit confirmation and edit invalidation');
 })().catch(error => { console.error(error); process.exitCode = 1; });

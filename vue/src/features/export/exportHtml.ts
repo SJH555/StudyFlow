@@ -19,7 +19,7 @@ type ExportDeps = {
   comparisonSubjects: ComputedRef<Subject[]>;
   plannedForPeriod: (subjectId?: number) => number;
   actualForPeriod: (subjectId?: number) => number;
-  error: Ref<string>;
+  notifySuccess: (message: string) => void;
   setError: (error: unknown) => void;
 };
 
@@ -41,7 +41,7 @@ export async function exportHtmlReport(
     comparisonSubjects,
     plannedForPeriod,
     actualForPeriod,
-    error,
+    notifySuccess,
     setError,
   } = deps;
   const title = kind === "study" ? "学习统计" : "活动提醒";
@@ -175,10 +175,7 @@ export async function exportHtmlReport(
       `${title}-${selectedDate.value}.html`,
       html,
     );
-    if (path) {
-      error.value = `已导出到：${path}`;
-      setTimeout(() => (error.value = ""), 4500);
-    }
+    if (path) notifySuccess(`已导出到：${path}`);
   } catch (e) {
     setError(e);
   }
@@ -188,7 +185,7 @@ export async function exportHtmlReport(
 export async function exportHtml(kind: "study" | "activity") {
   const appStore = useAppStore();
   const statsStore = useStatsStore();
-  const { selectedDate, error } = storeToRefs(appStore);
+  const { selectedDate } = storeToRefs(appStore);
   const { periodDates, comparisonSubjects, overviewHistoryKind } = storeToRefs(statsStore);
   return exportHtmlReport(kind, {
     selectedDate,
@@ -203,7 +200,7 @@ export async function exportHtml(kind: "study" | "activity") {
     comparisonSubjects,
     plannedForPeriod: statsStore.plannedForPeriod,
     actualForPeriod: statsStore.actualForPeriod,
-    error,
+    notifySuccess: (message) => appStore.notifyTop(message, "success"),
     setError: appStore.setError,
   });
 }

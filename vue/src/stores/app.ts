@@ -3,14 +3,17 @@ import { defineStore } from "pinia";
 import { acknowledgeReminder, recordClientError } from "../api";
 import { dateKey } from "../shared/format";
 
+type NoticeTone = "info" | "success" | "error";
+
 // 应用级共享状态：页面路由、共享时钟与日期、启动加载、全局错误与提示、专注模式。
 export const useAppStore = defineStore("app", () => {
   const page = ref("today");
   const now = ref(Date.now());
   const selectedDate = ref(dateKey(new Date()));
   const loading = ref(true);
-  const error = ref("");
   const topNotice = ref("");
+  const noticeTone = ref<NoticeTone>("info");
+  const noticeId = ref(0);
   const focusMode = ref(false);
 
   // 由共享时钟派生，避免维护两份日期状态。
@@ -25,18 +28,19 @@ export const useAppStore = defineStore("app", () => {
   }
 
   function setError(e: unknown) {
-    error.value = e instanceof Error ? e.message : String(e);
-    recordClientError(error.value).catch(() => {});
-    // 错误提示 5 秒后自动清除。
-    setTimeout(() => (error.value = ""), 5000);
+    const message = e instanceof Error ? e.message : String(e);
+    recordClientError(message).catch(() => {});
+    notifyTop(message, "error");
   }
 
-  function notifyTop(message: string) {
+  function notifyTop(message: string, tone: NoticeTone = "info") {
+    noticeId.value++;
+    noticeTone.value = tone;
     topNotice.value = message;
   }
 
-  function clearTopNotice() {
-    topNotice.value = "";
+  function clearTopNotice(id = noticeId.value) {
+    if (id === noticeId.value) topNotice.value = "";
   }
 
   // 停止提醒提示音（任务提醒/活动提醒/休息提醒共用）。
@@ -72,8 +76,9 @@ export const useAppStore = defineStore("app", () => {
     now,
     selectedDate,
     loading,
-    error,
     topNotice,
+    noticeTone,
+    noticeId,
     focusMode,
     todayKey,
     tick,

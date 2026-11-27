@@ -2,8 +2,6 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useReviewStore } from "../../stores/review";
-import { useAppStore } from "../../stores/app";
-import { useWindowFrame } from "../window/useWindowFrame";
 import { fmt, formatDateChinese } from "../../shared/format";
 import { hourOptions, minuteOptions } from "../../shared/constants";
 import GoalsPanel from "../goals/GoalsPanel.vue";
@@ -17,16 +15,10 @@ const {
   reviewCheckMinute,
   reviewEnabledDraft,
   reviewPageHeading,
-  reviewSaveNotice,
-  reviewSaveMessage,
-  reviewSaveTone,
   reviewSettingsSaving,
   reviewSettingsDirty,
 } = storeToRefs(useReviewStore());
 const { saveReviewSettings } = useReviewStore();
-const appStore = useAppStore();
-const { focusMode } = storeToRefs(appStore);
-const { windowsTitlebar, windowsMaximised } = useWindowFrame(appStore.setError);
 
 // 检查时间以“小时 + 分钟”存储，VSelect 使用字符串选项，这里做 number ↔ string 转换。
 const reviewCheckHourModel = computed({
@@ -236,28 +228,7 @@ function selectSection(key: string) {
         </VCard>
       </div>
     </div>
-    <VSnackbar
-      v-model="reviewSaveNotice"
-      :class="[
-        'review-save-snackbar',
-        reviewSaveTone === 'error' ? 'is-error' : 'is-success',
-        windowsTitlebar && !focusMode ? 'windows-top-snackbar' : '',
-        windowsMaximised ? 'windows-top-snackbar-maximised' : '',
-      ]"
-      location="top"
-      transition="slide-y-transition"
-      :timeout="3600"
-      role="status"
-      ><VIcon
-        :icon="
-          reviewSaveTone === 'error'
-            ? 'mdi-alert-circle-outline'
-            : 'mdi-check-circle-outline'
-        "
-        size="small"
-        class="review-save-snackbar-icon"
-      />{{ reviewSaveMessage }}</VSnackbar
-    >
+
   </VApp>
 </template>
 
@@ -949,34 +920,6 @@ function selectSection(key: string) {
   padding-top: 12px;
 }
 
-:global(.review-save-snackbar .v-snackbar__wrapper) {
-  min-width: 0;
-  max-width: min(420px, calc(100vw - 32px));
-  background: #4b61cf !important;
-  color: #fff !important;
-  border: 1px solid #4057c1;
-  border-radius: 10px !important;
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--ink) 12%, transparent) !important;
-}
-
-:global(.review-save-snackbar .v-snackbar__content) {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-:global(.review-save-snackbar.is-error .v-snackbar__wrapper) {
-  background: #fff7f7 !important;
-  color: #b54747 !important;
-  border-color: #f0d6d6;
-}
-
-:global(.review-save-snackbar-icon) {
-  flex: none;
-}
 :where(.section-setting-row) .v-number-input {
   flex: none;
 }

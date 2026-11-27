@@ -149,7 +149,10 @@ export function useKeyboardShortcuts({
       showBreakExhausted.value
     )
       return;
-    if (target instanceof HTMLButtonElement && target.closest(".modal")) return;
+    if (
+      target instanceof HTMLButtonElement &&
+      target.closest(".modal, .manual-dialog-card")
+    ) return;
     if (
       target instanceof HTMLTextAreaElement &&
       showPlan.value &&

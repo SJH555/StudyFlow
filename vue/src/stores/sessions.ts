@@ -295,6 +295,16 @@ export const useSessionsStore = defineStore("sessions", () => {
   }
 
   async function addManual() {
+    if (manual.manualPlanConflict.value) return;
+    await saveManual();
+  }
+
+  async function confirmManualPlanConflict() {
+    const token = manual.manualPlanConflict.value?.token;
+    if (token) await saveManual(token);
+  }
+
+  async function saveManual(planConflictToken?: string) {
     if (manual.manualSaving.value || manual.manualSubjectsLoading.value) return;
     const day = manual.manualDate.value;
     if (!day) return;
@@ -317,15 +327,21 @@ export const useSessionsStore = defineStore("sessions", () => {
         appStore.notifyTop("结束时间必须晚于开始时间");
         return;
       }
-      await api.addSession({
+      const result = await api.addSession({
         subjectId: manual.manualSubject.value,
         startAt: start.toISOString(),
         endAt: end.toISOString(),
+        planConflictToken,
       });
+      if ("planConflict" in result) {
+        manual.manualPlanConflict.value = result.planConflict;
+        return;
+      }
       manual.showManual.value = false;
       appStore.notifyTop(`已补录 ${formatDateChinese(day)} 的学习记录`);
       if (day === appStore.selectedDate) await fetchForDate(day).catch(appStore.setError);
     } catch (e) {
+      manual.manualPlanConflict.value = null;
       appStore.notifyTop(e instanceof Error ? e.message : String(e));
     } finally {
       manual.manualSaving.value = false;
@@ -386,6 +402,7 @@ export const useSessionsStore = defineStore("sessions", () => {
     finishBreakReminder,
     dismissTaskReminder,
     addManual,
+    confirmManualPlanConflict,
     deleteSession,
     sessionSeconds,
   };

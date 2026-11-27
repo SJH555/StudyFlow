@@ -71,7 +71,8 @@ func TestManualRecordChecksActiveSessionAndIgnoresDeleted(t *testing.T) {
 		t.Fatal(err)
 	}
 	now := time.Now().Truncate(time.Second)
-	if _, err := testExec(store, `INSERT INTO sessions(subject_id,start_at,source) VALUES(1,?,'timer')`, now.Add(-time.Hour).Format(time.RFC3339)); err != nil {
+	if _, err := testExec(store, `INSERT INTO sessions(subject_id,start_at,planned_end_at,source) VALUES(1,?,?,'timer')`,
+		now.Add(-time.Hour).Format(time.RFC3339), now.Add(time.Hour).Format(time.RFC3339)); err != nil {
 		t.Fatal(err)
 	}
 	if response := postManualRecordAt(store, now.Add(-30*time.Minute), now.Add(-20*time.Minute)); response.Code == http.StatusOK {

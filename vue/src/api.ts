@@ -157,6 +157,8 @@ export const resetTables = () => request<ResetTable[]>('reset-tables')
 export const resetTable = (name: string) =>
   request<{ ok: boolean }>('reset-tables?name=' + encodeURIComponent(name), 'DELETE')
 
+export type ManualPlanConflict = { message: string; token: string }
+
 type EffectiveDayChanged = { needsConfirmation: true; effectiveDay: string }
 
 function confirmEffectiveDay(path: string, expectedDay?: string) {
@@ -215,7 +217,7 @@ export const api = {
   finish: (id: number, action = 'stop') =>
     request<{ ok: boolean; saved: boolean }>('sessions/' + id, 'POST', { action }),
   deleteSession: (id: number) => request('sessions/' + id, 'DELETE'),
-  addSession: (data: unknown) => request('sessions', 'POST', data),
+  addSession: (data: unknown) => request<{ id: number; duration: number } | { planConflict: ManualPlanConflict }>('sessions', 'POST', data),
 
   activities: (date: string) => request<Activity[]>('activities?date=' + date),
   addActivity: (content: string) =>
