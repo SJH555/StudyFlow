@@ -125,8 +125,20 @@ func prepare(root string) error {
 		},
 		{
 			path:    "build/windows/info.json",
+			pattern: `"product_version": "[^"]+"`,
+			value:   `"product_version": "` + windows + `"`,
+			count:   1,
+		},
+		{
+			path:    "build/windows/info.json",
 			pattern: `"ProductVersion": "[^"]+"`,
 			value:   `"ProductVersion": "` + full + `"`,
+			count:   1,
+		},
+		{
+			path:    "build/windows/info.json",
+			pattern: `"FileVersion": "[^"]+"`,
+			value:   `"FileVersion": "` + full + `"`,
 			count:   1,
 		},
 		{

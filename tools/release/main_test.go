@@ -28,9 +28,12 @@ func TestPrepareKeepsVersionSourcesSynchronized(t *testing.T) {
 				"": {"version": "1.2.3-7"},
 				"node_modules/example": {"version": "1.2.3-7"}
 			}}`,
-		"build/config.yml":               "info:\n  version: \"1.2.3-7\"\n",
-		"build/linux/nfpm/nfpm.yaml":     "version: \"1.2.3\"\nrelease: \"7\"\n",
-		"build/windows/info.json":        `{"fixed":{"file_version": "1.2.3.7"},"info":{"0409":{"ProductVersion": "1.2.3-7"}}}`,
+		"build/config.yml":           "info:\n  version: \"1.2.3-7\"\n",
+		"build/linux/nfpm/nfpm.yaml": "version: \"1.2.3\"\nrelease: \"7\"\n",
+		"build/windows/info.json": `{
+			"fixed": {"file_version": "1.2.3.7", "product_version": "1.2.3.7"},
+			"info": {"0409": {"FileVersion": "1.2.3-7", "ProductVersion": "1.2.3-7"}}
+		}`,
 		"build/windows/nsis/project.nsi": "!define INFO_PRODUCTVERSION \"1.2.3-7\"\n!define INFO_WINDOWS_VERSION \"1.2.3.7\"\n",
 	}
 	for path, data := range fixtures {
@@ -57,12 +60,23 @@ func TestPrepareKeepsVersionSourcesSynchronized(t *testing.T) {
 	for path, want := range map[string]string{
 		"build/config.yml":               "1.2.3-8",
 		"build/linux/nfpm/nfpm.yaml":     "release: \"8\"",
-		"build/windows/info.json":        "1.2.3.8",
 		"build/windows/nsis/project.nsi": "1.2.3.8",
 	} {
 		data, _ := os.ReadFile(filepath.Join(root, path))
 		if !strings.Contains(string(data), want) {
 			t.Errorf("配置未同步: %s", path)
+		}
+	}
+	windows, err := os.ReadFile(filepath.Join(root, "build/windows/info.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, entry := range []string{
+		`"file_version": "1.2.3.8"`, `"product_version": "1.2.3.8"`,
+		`"FileVersion": "1.2.3-8"`, `"ProductVersion": "1.2.3-8"`,
+	} {
+		if !strings.Contains(string(windows), entry) {
+			t.Errorf("Windows 版本未同步: %s", entry)
 		}
 	}
 	if err := prepare(root); err != nil {

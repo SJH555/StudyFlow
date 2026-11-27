@@ -33,8 +33,8 @@ Unicode true
 ####
 ## Include the wails tools
 ####
-!define INFO_PRODUCTVERSION "0.5.1-1"
-!define INFO_WINDOWS_VERSION "0.5.1.1"
+!define INFO_PRODUCTVERSION "0.5.3-1"
+!define INFO_WINDOWS_VERSION "0.5.3.1"
 !include "wails_tools.nsh"
 
 # The version information for this two must consist of 4 parts

@@ -1,10 +1,12 @@
 {
 	"fixed": {
-		"file_version": "0.5.1.1"
+		"file_version": "0.5.3.1",
+		"product_version": "0.5.3.1"
 	},
 	"info": {
 		"0409": {
-			"ProductVersion": "0.5.1-1",
+			"ProductVersion": "0.5.3-1",
+			"FileVersion": "0.5.3-1",
 			"CompanyName": "StudyFlow",
 			"FileDescription": "StudyFlow",
 			"LegalCopyright": "© 2026 StudyFlow",
